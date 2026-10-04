@@ -341,6 +341,51 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 .cert h2{margin:4px 0 8px;font-size:2rem}
 .cert input{font:500 1.5rem var(--font);text-align:center;border:0;border-bottom:2px solid var(--outline);background:transparent;color:var(--on-surface);width:min(100%,420px);padding:6px;margin:6px 0 10px}
 .cert p{max-width:52ch;margin:0 auto 8px}
+
+/* Profile: Willkommen, Anmelden, Demo, Dialog */
+.topactions{display:flex;align-items:center;gap:4px}
+.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--primary);color:var(--on-primary);font:600 .95rem var(--font);letter-spacing:.02em;flex:0 0 auto}
+.avatar.lg{width:44px;height:44px;font-size:1.05rem}
+.gate{position:fixed;inset:0;z-index:60;background:var(--surface);overflow:auto;padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.gatebox{max-width:520px;margin:4vh auto 0}
+.gatelogo{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;background:var(--primary-container);color:var(--on-primary-container);margin-bottom:16px}
+.gatelogo .ms{font-size:36px;font-variation-settings:"FILL" 1,"wght" 500,"GRAD" 0,"opsz" 40}
+.gate h1{font-size:2rem;margin:0 0 8px}
+.plist{display:grid;gap:8px;margin:16px 0}
+.pitem{display:grid;gap:8px;background:var(--surface-low);border-radius:var(--sh-m);padding:12px 14px}
+.pbtn{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;text-align:left;cursor:pointer;padding:0;color:var(--on-surface)}
+.pbtn .t{flex:1;min-width:0}.pbtn b{display:block;font-weight:500}
+.pinrow{display:flex;gap:8px}
+.pinrow input{flex:1;min-width:0;font:inherit;height:48px;padding:0 14px;border-radius:4px;border:1px solid var(--outline);background:transparent;color:var(--on-surface);letter-spacing:.3em}
+.gatecard{background:var(--surface-low);border-radius:var(--sh-l);padding:20px;margin:12px 0}
+.gatecard h3{margin-bottom:12px}
+.orline{display:flex;align-items:center;gap:12px;color:var(--on-surface-variant);font-size:.875rem;margin:16px 0}
+.orline::before,.orline::after{content:"";flex:1;height:1px;background:var(--outline-variant)}
+.wide{width:100%;justify-content:center}
+.demobar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 68px);z-index:8;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;background:var(--tertiary-container);color:var(--on-tertiary-container);border-radius:var(--sh-m);padding:10px 14px;margin:8px 0}
+.demobar .ms{font-size:20px;vertical-align:-4px;margin-right:4px}
+.scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.32);display:grid;place-items:center;padding:24px 16px}
+.dialog{width:min(100%,460px);max-height:calc(100vh - 48px);overflow:auto;background:var(--surface-high);color:var(--on-surface);border-radius:var(--sh-l);padding:24px;box-shadow:var(--elev2);animation:dlg .25s cubic-bezier(.2,0,0,1)}
+@keyframes dlg{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
+.dialog h2{font-size:1.5rem;margin:0 0 4px}
+.dhead{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.field{display:grid;gap:4px;margin-bottom:14px}
+.field label{font:500 .8125rem var(--font);color:var(--on-surface-variant)}
+.field input{font:inherit;height:56px;padding:0 16px;border-radius:4px;border:1px solid var(--outline);background:transparent;color:var(--on-surface)}
+.field input:focus{outline:none;border:2px solid var(--primary);padding:0 15px}
+.field.err input{border:2px solid var(--error);padding:0 15px}
+.field .hint{font-size:.75rem;color:var(--on-surface-variant);padding-left:16px}
+.field.err .hint{color:var(--error)}
+.dactions{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px;margin-top:8px}
+.textbtn{position:relative;overflow:hidden;height:40px;padding:0 12px;border:0;border-radius:20px;background:transparent;color:var(--primary);font:500 .875rem var(--font);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.textbtn .ms{font-size:18px}
+.textbtn.danger-text{color:var(--error)}
+.filled{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 24px;border:0;border-radius:20px;background:var(--primary);color:var(--on-primary);font:500 .875rem var(--font);cursor:pointer}
+.textbtn::before,.filled::before,.pbtn::before{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .15s}
+.textbtn:hover::before,.filled:hover::before{opacity:.08}
+.privacy{display:flex;gap:10px;align-items:flex-start;font-size:.8125rem;color:var(--on-surface-variant);background:var(--surface-c);border-radius:var(--sh-s);padding:10px 12px;margin:12px 0}
+.privacy .ms{font-size:20px;color:var(--success)}
+.dsep{height:1px;background:var(--outline-variant);margin:8px 0 12px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media (min-width:700px){h1{font-size:2.75rem}.card,.hero{padding:24px}}
 </style>
@@ -348,10 +393,11 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 </head>
 <body>
 <div class="wrap">
-<div class="topbar"><span class="brand"><span class="ms fill">school</span>KI-Lernpfad</span><button class="iconbtn" id="themeBtn" aria-label="Dunkelmodus einschalten" title="Hell oder Dunkel"><span class="ms" id="themeIcon">dark_mode</span></button></div>
+<div class="topbar"><span class="brand"><span class="ms fill">school</span>KI-Lernpfad</span><span class="topactions"><button class="iconbtn" id="profileBtn" aria-label="Profil" title="Profil"><span id="profileIcon" class="ms">account_circle</span></button><button class="iconbtn" id="themeBtn" aria-label="Dunkelmodus einschalten" title="Hell oder Dunkel"><span class="ms" id="themeIcon">dark_mode</span></button></span></div>
+<div class="demobar" id="demoBar" hidden><span><span class="ms">visibility</span>Demo-Modus: Beispiel-Fortschritt, nichts wird gespeichert.</span><button class="filled" id="demoCreate">Eigenes Profil erstellen</button></div>
 <header>
   
-  <h1>Hallo, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.</h1>
+  <h1 id="greet">Hallo, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.</h1>
   <p class="lead">Sechs Stufen, von ganz einfach bis zur eigenen kleinen App. Jeder Schritt ist kurz, alles ist kostenlos und auf Deutsch. Programmieren musst du nie, versprochen.</p>
 </header>
 
@@ -541,6 +587,43 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
   <button data-v="wissen"><span class="ind"><span class="ms">menu_book</span></span>Wissen</button>
   <button data-v="medien"><span class="ind"><span class="ms">play_circle</span></span>Medien</button>
 </nav>
+<div class="gate" id="gate" hidden>
+  <div class="gatebox">
+    <div class="gatelogo"><span class="ms">school</span></div>
+    <h1>Willkommen beim KI-Lernpfad</h1>
+    <p class="lead">Sechs Stufen vom ersten Prompt bis zur eigenen App, spielerisch und auf Deutsch. Erstell zuerst dein Profil, damit Punkte, Abzeichen und Fortschritt dir gehören.</p>
+    <div id="gateLogin" hidden>
+      <h3>Anmelden</h3>
+      <div class="plist" id="gateList"></div>
+      <div class="orline">oder</div>
+    </div>
+    <form class="gatecard" id="gateForm" novalidate>
+      <h3 id="gateFormTitle">Profil erstellen</h3>
+      <div class="field" id="g-user"><label for="gUser">Benutzername</label><input id="gUser" autocomplete="username" maxlength="20" placeholder="z. B. ki_entdecker"><span class="hint">3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich</span></div>
+      <div class="field" id="g-first"><label for="gFirst">Vorname</label><input id="gFirst" autocomplete="given-name" maxlength="40"><span class="hint">So begrüsst dich die Seite</span></div>
+      <div class="field" id="g-last"><label for="gLast">Name</label><input id="gLast" autocomplete="family-name" maxlength="40"><span class="hint">Erscheint auf deiner Urkunde</span></div>
+      <div class="field" id="g-pin"><label for="gPin">PIN, freiwillig</label><input id="gPin" inputmode="numeric" maxlength="6" placeholder="4 bis 6 Ziffern"><span class="hint">Schützt dein Profil vor neugierigen Mitbenutzern, nicht vor Profis</span></div>
+      <button type="submit" class="filled wide"><span class="ms">rocket_launch</span>Profil erstellen und loslegen</button>
+    </form>
+    <button class="tonal wide" id="demoBtn" style="width:100%"><span class="ms">visibility</span>Erst mal die Demo ansehen</button>
+    <div class="privacy"><span class="ms">lock</span><span>Profile und Fortschritt bleiben nur auf diesem Gerät gespeichert und werden nirgends hingeschickt. Teilst du den Link, legt jede Person auf ihrem eigenen Gerät ihr eigenes Profil an.</span></div>
+  </div>
+</div>
+<div class="scrim" id="profileDlg" hidden>
+  <form class="dialog" id="profileForm" role="dialog" aria-modal="true" aria-labelledby="dlgTitle" novalidate>
+    <div class="dhead"><span class="avatar lg" id="dlgAvatar"></span><div><h2 id="dlgTitle">Dein Profil</h2><span class="meta" id="dlgSub"></span></div></div>
+    <div class="field" id="f-user"><label for="pUser">Benutzername</label><input id="pUser" autocomplete="username" maxlength="20"><span class="hint">3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich</span></div>
+    <div class="field" id="f-first"><label for="pFirst">Vorname</label><input id="pFirst" autocomplete="given-name" maxlength="40"><span class="hint">So begrüsst dich die Seite</span></div>
+    <div class="field" id="f-last"><label for="pLast">Name</label><input id="pLast" autocomplete="family-name" maxlength="40"><span class="hint">Erscheint auf deiner Urkunde</span></div>
+    <div class="field" id="f-pin"><label for="pPin">Neue PIN, freiwillig</label><input id="pPin" inputmode="numeric" maxlength="6" placeholder="leer lassen = unverändert"><span class="hint" id="pinHint">4 bis 6 Ziffern</span></div>
+    <div class="dactions"><button type="button" class="textbtn" id="pCancel">Abbrechen</button><button type="submit" class="filled">Speichern</button></div>
+    <div class="dsep"></div>
+    <div class="dactions" style="justify-content:space-between">
+      <button type="button" class="textbtn" id="pLogout"><span class="ms">logout</span>Abmelden oder Profil wechseln</button>
+      <button type="button" class="textbtn danger-text" id="pDelete"><span class="ms">delete</span>Profil löschen</button>
+    </div>
+  </form>
+</div>
 <div class="toast" id="toast" role="status"></div>
 <canvas id="confetti" aria-hidden="true"></canvas>
 
@@ -787,10 +870,13 @@ const dstr=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+Str
 const today=()=>dstr(new Date());
 
 /* ===== Speicher: localStorage, Rückfall sessionStorage ===== */
-const KEY="ki-lernpfad-alfredo-v1";
-function load(){for(const s of ["localStorage","sessionStorage"]){try{const v=window[s].getItem(KEY);if(v)return JSON.parse(v)||{}}catch(e){}}return{}}
-let done=load();
-function save(){const v=JSON.stringify(done);for(const s of ["localStorage","sessionStorage"]){try{window[s].setItem(KEY,v)}catch(e){}}}
+const ST={get(k){for(const t of ["localStorage","sessionStorage"]){try{const v=window[t].getItem(k);if(v!=null)return JSON.parse(v)}catch(e){}}return null},set(k,v){const j=JSON.stringify(v);for(const t of ["localStorage","sessionStorage"]){try{window[t].setItem(k,j)}catch(e){}}},del(k){for(const t of ["localStorage","sessionStorage"]){try{window[t].removeItem(k)}catch(e){}}}};
+const PKEY="ki-lernpfad-profile-v2",LEGACY="ki-lernpfad-alfredo-v1",progKey=id=>"ki-lernpfad-p-"+id;
+let reg=ST.get(PKEY)||{profiles:{},active:null};if(!reg.profiles)reg={profiles:{},active:null};
+let DEMO=false;
+let done=reg.active&&reg.profiles[reg.active]?(ST.get(progKey(reg.active))||{}):{};
+function save(){if(DEMO||!reg.active)return;ST.set(progKey(reg.active),done)}
+function saveReg(){ST.set(PKEY,reg)}
 
 /* ===== Helfer ===== */
 const $=s=>document.querySelector(s);
@@ -851,7 +937,7 @@ function renderPlan(){
 }
 function renderCert(xp){
   const all=STAGES.every(stageDone),c=$("#cert");c.hidden=!all;if(!all)return;
-  const inp=$("#certName");if(document.activeElement!==inp)inp.value=done._name||"";
+  const inp=$("#certName"),pr=curProfile();if(document.activeElement!==inp)inp.value=done._name||(pr?`${pr.first} ${pr.last}`.trim():"");
   inp.oninput=()=>{done._name=inp.value;save()};
   $("#certMeta").textContent=`${new Date().toLocaleDateString("de-CH",{day:"numeric",month:"long",year:"numeric"})} · ${xp} Punkte · ${STAGES.length} von ${STAGES.length} Stufen`;
 }
@@ -1007,7 +1093,94 @@ try{const t=localStorage.getItem("ki-lernpfad-theme");if(t)applyTheme(t)}catch(e
 applyTheme();
 $("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;const t=dark?"light":"dark";applyTheme(t);try{localStorage.setItem("ki-lernpfad-theme",t)}catch(e){}};
 
-renderTerms();renderMedia();renderStages();
+/* ===== Profile, Anmelden, Demo ===== */
+const DEFAULT_GREET="Hallo, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.";
+const USER_RE=/^[A-Za-z0-9ÄÖÜäöüéèàç._-]{3,20}$/,PIN_RE=/^\d{4,6}$/;
+const hsh=(id,pin)=>{let x=5381;for(const c of id+"|"+pin)x=((x<<5)+x+c.charCodeAt(0))|0;return(x>>>0).toString(36)};
+const initials=p=>(((p.first||"")[0]||"")+((p.last||"")[0]||"")||(p.user||"?")[0]).toUpperCase();
+function curProfile(){return DEMO?{user:"demo",first:"Demo",last:"Gast"}:reg.profiles[reg.active]||null}
+function demoState(){const d={};STAGES.slice(0,2).forEach(s=>items(s).forEach(i=>{d[i.id]=true}));STAGES[2].tasks.slice(0,2).forEach(t=>{d[t.id]=true});d.d1a=true;d.d2b=true;d._streak=3;d._last=today();d["_ch"+today()]=true;return d}
+function setErr(id,bad,msg,ok){const f=$("#"+id);f.classList.toggle("err",bad);if(msg!==undefined)f.querySelector(".hint").textContent=bad?msg:ok}
+function validate(pre,user,first,last,pin,selfId){
+  const taken=Object.entries(reg.profiles).some(([id,p])=>id!==selfId&&p.user.toLowerCase()===user.toLowerCase());
+  const bu=!USER_RE.test(user)||taken,bf=!first,bl=!last,bp=pin!==""&&!PIN_RE.test(pin);
+  setErr(pre+"-user",bu,taken?"Diesen Benutzernamen gibt es auf diesem Gerät schon":"Bitte 3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich","3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich");
+  setErr(pre+"-first",bf,"Bitte gib deinen Vornamen ein","So begrüsst dich die Seite");
+  setErr(pre+"-last",bl,"Bitte gib deinen Namen ein","Erscheint auf deiner Urkunde");
+  setErr(pre+"-pin",bp,"Die PIN hat 4 bis 6 Ziffern",pre==="g"?"Schützt dein Profil vor neugierigen Mitbenutzern, nicht vor Profis":"4 bis 6 Ziffern");
+  const first_bad=[[bu,"user"],[bf,"first"],[bl,"last"],[bp,"pin"]].find(x=>x[0]);
+  if(first_bad){$("#"+pre+"-"+first_bad[1]+" input").focus();return false}
+  return true;
+}
+function renderProfile(){
+  const pr=curProfile();
+  $("#greet").textContent=pr&&!DEMO?`Hallo ${pr.first}, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.`:DEFAULT_GREET;
+  const pi=$("#profileIcon");
+  if(pr){pi.className="avatar";pi.textContent=initials(pr);$("#profileBtn").title=DEMO?"Demo beenden":"@"+pr.user;$("#profileBtn").setAttribute("aria-label",DEMO?"Demo beenden":`Profil von ${pr.user}`)}
+  else{pi.className="ms";pi.textContent="account_circle"}
+  $("#demoBar").hidden=!DEMO;
+}
+function renderGate(){
+  const ids=Object.keys(reg.profiles);
+  $("#gateLogin").hidden=!ids.length;
+  $("#gateFormTitle").textContent=ids.length?"Neues Profil erstellen":"Profil erstellen";
+  $("#gateList").innerHTML=ids.map(id=>{const p=reg.profiles[id],d=ST.get(progKey(id))||{};let n=0;STAGES.forEach(s=>items(s).forEach(i=>{if(d[i.id])n++}));const all=STAGES.flatMap(items).length;
+    return `<div class="pitem" data-id="${id}"><button class="pbtn" type="button"><span class="avatar lg">${esc(initials(p))}</span><span class="t"><b>${esc(p.first)} ${esc(p.last)}</b><span class="meta">@${esc(p.user)} · ${Math.round(n/all*100)}% geschafft${p.pin?" · mit PIN":""}</span></span><span class="ms">${p.pin?"lock":"arrow_forward"}</span></button><div class="pinrow" hidden><input type="password" inputmode="numeric" maxlength="6" placeholder="PIN" aria-label="PIN für ${esc(p.user)}"><button type="button" class="filled">Anmelden</button></div></div>`}).join("");
+  document.querySelectorAll("#gateList .pitem").forEach(it=>{
+    const id=it.dataset.id,p=reg.profiles[id],row=it.querySelector(".pinrow"),inp=row.querySelector("input");
+    const tryLogin=()=>{if(hsh(id,inp.value)===p.pin)login(id);else{inp.value="";inp.focus();toast("Falsche PIN. Tief durchatmen und nochmals.")}};
+    it.querySelector(".pbtn").onclick=()=>{if(!p.pin)return login(id);row.hidden=false;inp.focus()};
+    row.querySelector("button").onclick=tryLogin;inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();tryLogin()}};
+  });
+}
+function showGate(){DEMO=false;renderGate();$("#gate").hidden=false;$("#demoBar").hidden=true;window.scrollTo({top:0})}
+function afterLogin(){
+  $("#gate").hidden=true;$("#stages").innerHTML="";
+  renderStages();renderProfile();show("lernpfad");
+}
+function login(id){DEMO=false;reg.active=id;saveReg();done=ST.get(progKey(id))||{};afterLogin();toast(`Willkommen zurück, ${reg.profiles[id].first}! Die KI hat dich vermisst. Behauptet sie jedenfalls.`)}
+function logout(){reg.active=null;saveReg();done={};closeProfile();showGate()}
+$("#gateForm").onsubmit=e=>{
+  e.preventDefault();
+  const user=$("#gUser").value.trim(),first=$("#gFirst").value.trim(),last=$("#gLast").value.trim(),pin=$("#gPin").value.trim();
+  if(!validate("g",user,first,last,pin,null))return;
+  const id="p"+Date.now().toString(36);
+  reg.profiles[id]={user,first,last,pin:pin?hsh(id,pin):null,created:today()};
+  const legacy=Object.keys(reg.profiles).length===1?ST.get(LEGACY):null;
+  reg.active=id;saveReg();DEMO=false;done=legacy||{};save();if(legacy)ST.del(LEGACY);
+  ["gUser","gFirst","gLast","gPin"].forEach(f=>{$("#"+f).value=""});
+  afterLogin();confetti();toast(`Willkommen an Bord, ${first}! Die Roboter haben dich jetzt auf dem Radar. Im guten Sinn.`);
+};
+$("#demoBtn").onclick=()=>{DEMO=true;done=demoState();afterLogin();toast("Demo-Modus: Schau dich um. Hier geht nichts kaputt, und nichts wird gespeichert.")};
+$("#demoCreate").onclick=()=>showGate();
+function openProfile(){
+  if(DEMO)return showGate();
+  const pr=curProfile();if(!pr)return showGate();
+  $("#pUser").value=pr.user;$("#pFirst").value=pr.first;$("#pLast").value=pr.last;$("#pPin").value="";
+  ["f-user","f-first","f-last","f-pin"].forEach(id=>$("#"+id).classList.remove("err"));
+  $("#dlgAvatar").textContent=initials(pr);$("#dlgTitle").textContent=`${pr.first} ${pr.last}`;$("#dlgSub").textContent="@"+pr.user+(pr.pin?" · mit PIN geschützt":"");
+  $("#pDelete").dataset.confirm="";$("#pDelete").lastChild.textContent="Profil löschen";
+  $("#profileDlg").hidden=false;setTimeout(()=>$("#pFirst").focus(),50);
+}
+function closeProfile(){$("#profileDlg").hidden=true}
+$("#profileBtn").onclick=openProfile;
+$("#pCancel").onclick=closeProfile;
+$("#pLogout").onclick=logout;
+$("#profileDlg").addEventListener("click",e=>{if(e.target.id==="profileDlg")closeProfile()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#profileDlg").hidden)closeProfile()});
+$("#profileForm").onsubmit=e=>{
+  e.preventDefault();
+  const user=$("#pUser").value.trim(),first=$("#pFirst").value.trim(),last=$("#pLast").value.trim(),pin=$("#pPin").value.trim();
+  if(!validate("f",user,first,last,pin,reg.active))return;
+  const p=reg.profiles[reg.active];Object.assign(p,{user,first,last});if(pin)p.pin=hsh(reg.active,pin);saveReg();
+  closeProfile();renderProfile();renderStages();toast("Profil gespeichert. Sieht gut aus!");
+};
+$("#pDelete").onclick=()=>{
+  const b=$("#pDelete");
+  if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.lastChild.textContent="Wirklich? Fortschritt geht verloren";return}
+  const id=reg.active;ST.del(progKey(id));delete reg.profiles[id];reg.active=null;saveReg();done={};closeProfile();showGate();toast("Profil gelöscht.");
+};
+renderTerms();renderMedia();renderStages();renderProfile();if(!reg.active||!reg.profiles[reg.active])showGate();
 const start=(location.hash||"").slice(1);
 if(VIEWS.includes(start))show(start,false);
 </script>
