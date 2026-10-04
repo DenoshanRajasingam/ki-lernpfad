@@ -304,6 +304,43 @@ nav.tabs button.on .ms{font-variation-settings:"FILL" 1,"wght" 500,"GRAD" 0,"ops
   #practice,#builds,#media,#terms{grid-template-columns:repeat(4,minmax(0,1fr))}
   .badges{grid-template-columns:repeat(5,1fr)}
 }
+
+/* Missionen, Vertiefungen, Tagesplan, Hilfe, Urkunde */
+.mission{display:grid;gap:6px;background:var(--tertiary-container);color:var(--on-tertiary-container);border-radius:var(--sh-m);padding:14px 16px;margin-top:16px}
+.mission .eyebrow{color:var(--on-tertiary-container);display:inline-flex;align-items:center;gap:6px}
+.mission .task{border-top:0;padding:4px 0 0}
+.mission .task input{border-color:var(--on-tertiary-container)}
+.mission .task.checked label{color:var(--on-tertiary-container);text-decoration:none;font-weight:500}
+details.deepbox{margin-top:8px;border-top:1px solid var(--outline-variant)}
+details.deepbox>summary{list-style:none;cursor:pointer;margin:12px 0 4px}
+details.deepbox>summary::-webkit-details-marker{display:none}
+details.deepbox>summary .tog{margin-left:6px;font-size:20px;transition:transform .2s;color:var(--on-surface-variant)}
+details.deepbox[open]>summary .tog{transform:rotate(180deg)}
+.planner{display:grid;gap:8px;background:color-mix(in srgb,var(--surface-lowest) 55%,transparent);border-radius:var(--sh-m);padding:12px 14px}
+.planner .chiprow{margin:0}
+.hero .chip{border-color:color-mix(in srgb,var(--on-primary-container) 40%,transparent);color:var(--on-primary-container)}
+.hero .chip.on{background:var(--primary);color:var(--on-primary)}
+.planrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:var(--surface-lowest);color:var(--on-surface);border-radius:var(--sh-s);padding:10px 12px;cursor:pointer;margin-top:6px;position:relative;overflow:hidden}
+.planrow::before{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .15s}
+.planrow:hover::before{opacity:.06}
+.planrow .ms{color:var(--primary);font-size:20px}
+.planrow span.t{flex:1;min-width:0}
+.helpgrid{display:grid;gap:10px;margin-top:8px}
+.helpitem{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start;background:var(--surface-lowest);border-radius:var(--sh-m);padding:12px 14px}
+.helpitem .mico{width:40px;height:40px}
+.helpitem>div{min-width:0}
+@media (min-width:960px){.helpgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1500px){.helpgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.stuck{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
+.tonal{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 20px 0 16px;border:0;border-radius:20px;background:var(--secondary-container);color:var(--on-secondary-container);font:500 .875rem var(--font);cursor:pointer}
+.tonal .ms{font-size:18px}
+.cert{position:relative;overflow:hidden;text-align:center;background:var(--surface-lowest);border:2px solid var(--primary);padding:32px 20px}
+.cert::before{content:"";position:absolute;inset:8px;border:1px dashed var(--outline-variant);border-radius:22px;pointer-events:none}
+.cert .seal{width:72px;height:72px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;background:var(--primary-container);color:var(--on-primary-container)}
+.cert .seal .ms{font-size:40px;font-variation-settings:"FILL" 1,"wght" 500,"GRAD" 0,"opsz" 48}
+.cert h2{margin:4px 0 8px;font-size:2rem}
+.cert input{font:500 1.5rem var(--font);text-align:center;border:0;border-bottom:2px solid var(--outline);background:transparent;color:var(--on-surface);width:min(100%,420px);padding:6px;margin:6px 0 10px}
+.cert p{max-width:52ch;margin:0 auto 8px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media (min-width:700px){h1{font-size:2.75rem}.card,.hero{padding:24px}}
 </style>
@@ -327,6 +364,11 @@ nav.tabs button.on .ms{font-variation-settings:"FILL" 1,"wght" 500,"GRAD" 0,"ops
       <div class="hero-msg"><b id="heroTitle"></b><span class="meta" id="heroSub"></span></div>
     </div>
     <div><div class="xpbar"><i id="xpFill"></i></div><span class="meta" id="xpNext"></span></div>
+    <div class="planner">
+      <span class="meta">Heute habe ich Zeit für:</span>
+      <div class="chiprow" id="budget"></div>
+      <div id="plan"></div>
+    </div>
     <div class="howto" id="howto">
       <div><b>1</b>Tippe unten auf «Nächster Schritt».</div>
       <div><b>2</b>Erledigt? Abhaken bringt Punkte.</div>
@@ -361,6 +403,17 @@ nav.tabs button.on .ms{font-variation-settings:"FILL" 1,"wght" 500,"GRAD" 0,"ops
   <h2>Dein Lernpfad</h2>
   <p class="lead">Öffne eine Stufe, mach die kurzen Schritte und hake sie ab. Am Ende jeder Stufe wartet ein Mini-Quiz. Dein Stand bleibt auf diesem Gerät gespeichert, auch nach dem Neuladen.</p>
   <div id="stages"></div>
+  <div class="card stuck"><div><h3>Steckst du fest?</h3><p class="meta" style="margin:0">Kein Problem, das gehört dazu. Hier findest du fünf Wege weiter.</p></div><button class="tonal" data-go="hilfe"><span class="ms">support</span>Hilfe öffnen</button></div>
+  <div class="card cert" id="cert" hidden>
+    <div class="seal"><span class="ms">workspace_premium</span></div>
+    <span class="eyebrow">Urkunde</span>
+    <h2>KI-Macher</h2>
+    <p>Hiermit wird feierlich bestätigt, dass</p>
+    <input id="certName" placeholder="Dein Name" aria-label="Dein Name für die Urkunde" maxlength="40">
+    <p>alle sechs Stufen gemeistert hat: KI verstehen, gut prompten, mitreden, eigene Apps bauen und veröffentlichen.</p>
+    <p class="meta" id="certMeta"></p>
+    <p class="meta">Tipp: Mach einen Screenshot und zeig ihn stolz herum.</p>
+  </div>
   <div class="resetbox"><button class="reset" id="resetBtn">Fortschritt zurücksetzen</button><span id="resetConfirm" hidden><button class="danger" id="resetYes">Ja, alles zurücksetzen</button> <button class="reset" id="resetNo">Abbrechen</button></span></div>
 </section>
 
@@ -394,40 +447,46 @@ nav.tabs button.on .ms{font-variation-settings:"FILL" 1,"wght" 500,"GRAD" 0,"ops
     <div class="flow">
       <div class="fs"><b class="n">1</b><div><b>Idee in einem Satz.</b> «Ich möchte eine Packliste für Ferien zum Abhaken.»</div></div>
       <div class="fs"><b class="n">2</b><div><b>Lass dich interviewen.</b> «Stell mir zuerst alle Fragen, die du brauchst, eine nach der anderen.» So entsteht eine klare Beschreibung.</div></div>
-      <div class="fs"><b class="n">3</b><div><b>Erste Version bauen lassen.</b> Claude, ChatGPT oder Gemini zeigen die App direkt neben dem Chat an.</div></div>
+      <div class="fs"><b class="n">3</b><div><b>Erste Version bauen lassen.</b> ChatGPT, Claude oder Gemini zeigen die App direkt neben dem Chat an.</div></div>
       <div class="fs"><b class="n">4</b><div><b>Ausprobieren und konkret zurückmelden.</b> Was siehst du, was erwartest du? «Der Knopf ist zu klein. Die Liste soll nach Kategorien sortiert sein.»</div></div>
       <div class="fs"><b class="n">5</b><div><b>Schritt für Schritt erweitern.</b> Eine Änderung aufs Mal. Klappt etwas nicht: «Geh zurück zur letzten Version, die funktioniert hat.»</div></div>
       <div class="fs"><b class="n">6</b><div><b>Veröffentlichen und teilen.</b> Ein Klick ergibt einen Link, den jeder ohne Anmeldung öffnen kann, zum Beispiel per WhatsApp.</div></div>
     </div>
   </div>
   <div class="card" id="a-erste">
-    <h3>Deine erste App mit Claude, Klick für Klick</h3>
-    <p class="meta">So sieht es konkret aus. Am einfachsten am Computer oder Tablet, auf dem Handy geht es auch, ist aber enger.</p>
+    <h3>Deine erste App, Klick für Klick</h3>
+    <p class="meta">Funktioniert gleich in ChatGPT, Claude und Gemini. Am angenehmsten am Computer oder Tablet, auf dem Handy geht es auch.</p>
     <div class="flow">
-      <div class="fs"><b class="n">1</b><div><b>claude.ai öffnen und anmelden.</b> Ein Gratiskonto reicht. Nimm ein privates Konto, Firmenkonten sperren das öffentliche Teilen oft.</div></div>
-      <div class="fs"><b class="n">2</b><div><b>Neuen Chat starten und den Prompt einfügen,</b> zum Beispiel aus Bauprojekt 1. Wichtig ist das Wort «App» oder «interaktive Seite», dann baut Claude statt nur zu erklären.</div></div>
-      <div class="fs"><b class="n">3</b><div><b>Die App erscheint als Artefakt.</b> Am Computer rechts neben dem Chat, auf dem Handy als Karte zum Antippen. Gleich ausprobieren.</div></div>
-      <div class="fs"><b class="n">4</b><div><b>Im Chat Änderungen verlangen.</b> Jede Änderung ergibt eine neue Version. Über die Versionsauswahl beim Artefakt kommst du zu einer früheren zurück.</div></div>
-      <div class="fs"><b class="n">5</b><div><b>Veröffentlichen.</b> Beim Artefakt auf «Veröffentlichen» tippen, Link kopieren, in einem privaten Browserfenster testen und dann teilen.</div></div>
+      <div class="fs"><b class="n">1</b><div><b>Werkzeug öffnen und anmelden.</b> chatgpt.com, claude.ai oder gemini.google.com. Ein privates Gratiskonto reicht, Firmenkonten sperren das öffentliche Teilen oft.</div></div>
+      <div class="fs"><b class="n">2</b><div><b>Neuen Chat starten und den Prompt einfügen,</b> zum Beispiel aus dem Start-Projekt. Wichtig ist das Wort «App» oder «interaktive Seite», dann baut die KI, statt nur zu erklären.</div></div>
+      <div class="fs"><b class="n">3</b><div><b>Die App erscheint als Vorschau.</b> Am Computer neben dem Chat, auf dem Handy als Karte zum Antippen. Sie heisst je nach Werkzeug «Artefakt» oder «Canvas». Erscheint keine Vorschau, schreib: «Zeig mir das Ergebnis als Vorschau.»</div></div>
+      <div class="fs"><b class="n">4</b><div><b>Im Chat Änderungen verlangen.</b> Jede Änderung ergibt eine neue Version. Frühere Versionen findest du in der Vorschau oder im Chatverlauf.</div></div>
+      <div class="fs"><b class="n">5</b><div><b>Teilen.</b> Je nach Werkzeug heisst der Knopf «Veröffentlichen» oder «Teilen». Link kopieren, in einem privaten Browserfenster testen, dann verschicken.</div></div>
     </div>
-    <div class="note" style="margin-bottom:0"><span><b>Gut zu wissen.</b> Die Gratisversion hat ein Nachrichtenlimit. Ist es erreicht, später weitermachen oder ein neues Gespräch mit einer Zusammenfassung starten. Soll sich die App Einträge dauerhaft merken, klappt das bei Claude erst mit einem Bezahl-Abo und nach dem Veröffentlichen. Für eine kleine Sammlung mit gespeicherten Daten eignet sich Lovable (Werkzeug D).</span></div>
+    <div class="note" style="margin-bottom:0"><span><b>Gut zu wissen.</b> Die Gratisversionen haben ein Nachrichtenlimit. Ist es erreicht, später weitermachen oder ein neues Gespräch mit einer Zusammenfassung starten. Soll sich die App Einträge dauerhaft merken, klappt das in den Chat-Werkzeugen nicht zuverlässig. Dafür eignet sich Lovable oder Bolt (Werkzeug D).</span></div>
   </div>
   <div class="card" id="a-werkzeuge">
     <h3>Werkzeuge, von einfach bis gross</h3>
     <div class="ladder">
-      <div class="rung"><span class="rl">A · Im Chat</span><div><b>Claude, ChatGPT oder Gemini.</b> Schreib «Baue mir als kleine App …». Die Vorschau erscheint sofort (bei Claude «Artefakt», bei ChatGPT und Gemini «Canvas»). Gratis. Für die Bauprojekte empfehlen wir Claude, weil dort auch das Veröffentlichen am einfachsten ist.</div></div>
-      <div class="rung"><span class="rl">B · Teilen</span><div><b>Veröffentlichen per Klick.</b> In Claude beim Artefakt auf «Veröffentlichen» tippen. Daraus wird eine öffentliche Seite, die jeder mit dem Link ohne Login öffnen kann. <a href="https://support.anthropic.com/de/articles/9547008-veroffentlichen-remixen-und-teilen-von-artefakten" target="_blank" rel="noopener">Anleitung</a></div></div>
+      <div class="rung"><span class="rl">A · Im Chat</span><div><b>Claude, ChatGPT oder Gemini.</b> Schreib «Baue mir als kleine App …». Die Vorschau erscheint sofort (bei Claude «Artefakt», bei ChatGPT und Gemini «Canvas»). Gratis. Nimm das Werkzeug, das dir am besten gefällt.</div></div>
+      <div class="rung"><span class="rl">B · Teilen</span><div><b>Teilen per Klick.</b> Je nach Werkzeug heisst der Knopf «Veröffentlichen» oder «Teilen». Daraus wird ein Link, den andere ohne eigenes Konto öffnen können. Teste ihn vorher in einem privaten Browserfenster.</div></div>
       <div class="rung"><span class="rl">C · Eigene Seite</span><div><b>Netlify Drop.</b> Nur am Computer: die App als HTML-Datei herunterladen und auf <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">app.netlify.com/drop</a> ziehen. Ohne Konto ist die Seite nach einer Stunde wieder weg, mit Gratiskonto bleibt sie dauerhaft.</div></div>
       <div class="rung"><span class="rl">D · Ganze App</span><div><b><a href="https://lovable.dev/" target="_blank" rel="noopener">Lovable</a> oder <a href="https://bolt.new/" target="_blank" rel="noopener">Bolt</a>.</b> Für Apps mit Anmeldung und gespeicherten Daten. Du beschreibst, die App entsteht, ein Klick veröffentlicht sie. Gratis mit Tageslimit.</div></div>
     </div>
   </div>
   <div class="note"><b>Öffentlich heisst öffentlich.</b> Wer den Link hat, sieht die App. Keine Adressen, Passwörter oder privaten Daten einbauen.</div>
   <h2>Bauprojekte</h2>
-  <p class="lead">Von der Packliste bis zur eigenen App. Kopiere den Prompt und pass die Klammern an.</p>
+  <p class="lead">Vom Trinkgeld-Rechner bis zur eigenen App. Kopiere den Prompt und pass die Klammern an.</p>
   <div id="builds"></div>
-  <div class="card">
-    <h3>Wenn etwas nicht klappt</h3>
-    <p style="margin:0">Beschreibe genau, was du siehst und was du erwartest. Kopiere eine Fehlermeldung oder füge einen Screenshot ein. Wird das Gespräch sehr lang, lass dir den Stand zusammenfassen und starte damit ein neues Gespräch.</p>
+  <div class="card" id="a-hilfe">
+    <h3>Wenn du feststeckst: fünf Wege weiter</h3>
+    <div class="helpgrid">
+      <div class="helpitem"><span class="mico"><span class="ms">psychology_alt</span></span><div><b>Frag die KI selbst.</b> Sie erklärt dir geduldig jeden Schritt.<div class="prompt"><span>Ich bin Anfänger und stecke fest: [beschreiben, was du tun wolltest und was passiert ist]. Erkläre mir den nächsten Schritt ganz einfach, einen nach dem anderen.</span><button class="copy"><span class="ms">content_copy</span><span>Kopieren</span></button></div></div></div>
+      <div class="helpitem"><span class="mico"><span class="ms">screenshot_monitor</span></span><div><b>Zeig, was du siehst.</b> Mach einen Screenshot und füge ihn im Chat ein. Ein Bild sagt der KI mehr als drei Sätze.</div></div>
+      <div class="helpitem"><span class="mico"><span class="ms">history</span></span><div><b>Zurück zur letzten guten Version.</b> «Geh zurück zur Version, die funktioniert hat.» Oder über die Versionsauswahl in der Vorschau.</div></div>
+      <div class="helpitem"><span class="mico"><span class="ms">restart_alt</span></span><div><b>Neu anfangen ist erlaubt.</b> «Fasse unser Gespräch als kurze Beschreibung zusammen.» Den Text in einen neuen Chat kopieren und weitermachen.</div></div>
+      <div class="helpitem"><span class="mico"><span class="ms">waving_hand</span></span><div><b>Frag einen Menschen.</b> Die Person, die dir diesen Link geschickt hat, hilft dir gern weiter.</div></div>
+    </div>
   </div>
 </section>
 
@@ -527,6 +586,7 @@ const STAGES=[
   tasks:[{id:"s1a",txt:"Das Mindset oben lesen",dur:"2 Min",go:"mindset"},
    {id:"s1b",txt:"Video: So funktioniert ChatGPT",dur:"4 Min",go:"studyflix"},
    {id:"s1c",txt:"Gratiskonto bei ChatGPT, Claude oder Gemini anlegen und die Übung «Erklär mir» machen",dur:"15 Min",go:"e1"},
+   {id:"s1g",txt:"Deine erste Mini-App bauen lassen: Trinkgeld-Rechner",dur:"10 Min",go:"b0"},
    {id:"s1d",txt:"Übung: Eine Alltagsaufgabe abgeben, einmal per Sprache",dur:"15 Min",go:"e2"},
    {id:"s1e",txt:"Begriffe der Stufe 1",dur:"5 Min",go:"terms:1"}],
   deep:[{id:"d1a",txt:"Eine Folge «Der KI-Podcast» der ARD hören",dur:"40 Min",go:"kipodcast"},{id:"d1b",txt:"heise KI-Update abonnieren",dur:"2 Min",go:"kiupdate"}],
@@ -567,19 +627,19 @@ const STAGES=[
   done:"Stufe 4 geschafft! Du redest bei KI-Themen mit, ohne heimlich unter dem Tisch zu googeln."},
  {t:"Erste eigene Lösung bauen",lvlName:"anspruchsvoll",h:"ca. 1.5 h",
   why:"Jetzt wirst du vom Nutzer zum Macher. Du beschreibst, die KI baut, du siehst sofort das Ergebnis.",goal:"Du hast drei kleine Apps gebaut, ganz ohne Programmieren.",
-  ex:{title:"Beispiel: Packliste in drei Sätzen",text:"«Baue mir eine Packliste für Ferien als kleine App, mit Kategorien und Häkchen.» Die App erscheint neben dem Chat. Dann: «Füge die Kategorie Elektronik hinzu und mach die Häkchen grösser.» Fertig.",links:[["Erste App Klick für Klick","erste",1],["Artikel Claude-Artefakte","hundertmark",0]]},
+  ex:{title:"Beispiel: Packliste in drei Sätzen",text:"«Baue mir eine Packliste für Ferien als kleine App, mit Kategorien und Häkchen.» Die App erscheint neben dem Chat. Dann: «Füge die Kategorie Elektronik hinzu und mach die Häkchen grösser.» Fertig.",links:[["Erste App Klick für Klick","erste",1],["Artikel: KI-Tools ohne Programmieren","hundertmark",0]]},
   tasks:[{id:"s5a",txt:"Bauen: Den Ablauf in sechs Schritten lesen",dur:"3 Min",go:"ablauf"},
-   {id:"s5f",txt:"Bauen: Deine erste App mit Claude, Klick für Klick",dur:"3 Min",go:"erste"},
+   {id:"s5f",txt:"Bauen: Deine erste App, Klick für Klick",dur:"3 Min",go:"erste"},
    {id:"s5b",txt:"Bauprojekt 1: Packliste",dur:"15 Min",go:"b1"},
    {id:"s5c",txt:"Bauprojekt 2: Quiz zu KI-Begriffen",dur:"15 Min",go:"b2"},
    {id:"s5d",txt:"Bauprojekt 3: Entscheidungshilfe",dur:"25 Min",go:"b3"},
    {id:"s5e",txt:"Begriffe der Stufe 5",dur:"5 Min",go:"terms:5"}],
-  deep:[{id:"d5a",txt:"Artikel: Eigene KI-Tools mit Claude-Artefakten",dur:"5 Min",go:"hundertmark"}],
+  deep:[{id:"d5a",txt:"Artikel: Eigene KI-Tools ohne Programmieren (Beispiel Claude)",dur:"5 Min",go:"hundertmark"}],
   checks:[{id:"c5a",txt:"Ich beschreibe eine App so, dass die KI sie bauen kann."},{id:"c5b",txt:"Ich melde konkret zurück, was ich sehe und was ich erwarte."},{id:"c5c",txt:"Ich ändere eins aufs Mal und gehe bei Problemen zur letzten guten Version zurück."}],
   done:"Stufe 5 geschafft! Du baust Apps ohne eine Zeile Code. Irgendwo wird gerade ein Programmierer nervös."},
  {t:"Veröffentlichen und eigenes Projekt",lvlName:"anspruchsvoll",h:"ca. 2 h",
   why:"Zum Schluss stellst du deine Lösung online und setzt ein eigenes Vorhaben um. Alles Gelernte kommt zusammen.",goal:"Du hast eine eigene Lösung gebaut, veröffentlicht und per Link geteilt.",
-  ex:{title:"Beispiel: vom Fest zur Webseite",text:"«Baue eine einfache, schöne Webseite für mein Gartenfest am 12. Juni: Programm, Anfahrt, Kontakt. Gut lesbar auf dem Handy.» In Claude auf «Veröffentlichen» tippen und den Link per WhatsApp an die Gäste schicken.",links:[["Werkzeuge A bis D","werkzeuge",1],["Lovable in 7 Minuten","lovable7",0]]},
+  ex:{title:"Beispiel: vom Fest zur Webseite",text:"«Baue eine einfache, schöne Webseite für mein Gartenfest am 12. Juni: Programm, Anfahrt, Kontakt. Gut lesbar auf dem Handy.» Auf «Teilen» oder «Veröffentlichen» tippen und den Link per WhatsApp an die Gäste schicken.",links:[["Werkzeuge A bis D","werkzeuge",1],["Lovable in 7 Minuten","lovable7",0]]},
   tasks:[{id:"s6a",txt:"Bauen: Werkzeuge A bis D lesen",dur:"5 Min",go:"werkzeuge"},
    {id:"s6b",txt:"Bauprojekt 4: Eine Webseite bauen und veröffentlichen",dur:"30 Min",go:"b4"},
    {id:"s6c",txt:"Den Link jemandem schicken und Rückmeldung einholen",dur:"5 Min",go:"b4"},
@@ -609,10 +669,11 @@ const PRACTICE=[
 ];
 
 const BUILDS=[
+ {id:"b0",lvl:1,title:"Deine erste Mini-App",tool:"A · Im Chat",text:"Dein erstes Erfolgserlebnis, in zwei Minuten. Funktioniert in ChatGPT, Claude und Gemini, auch auf dem Handy.",prompt:"Baue mir einen Trinkgeld-Rechner als kleine App: Betrag eingeben, Trinkgeld 5, 10 oder 15 Prozent wählen und auf mehrere Personen aufteilen. Grosse Knöpfe, gut lesbar auf dem Handy."},
  {id:"b1",lvl:5,title:"Packliste",tool:"A · Im Chat",text:"Deine erste App. Nach zwei Minuten siehst du sie und kannst sie benutzen.",prompt:"Baue mir eine Packliste für Ferien als kleine App. Kategorien: Kleidung, Hygiene, Dokumente, Elektronik. Ich will Dinge abhaken, hinzufügen und löschen. Gross und gut lesbar auf dem Handy."},
  {id:"b2",lvl:5,title:"Quiz zu KI-Begriffen",tool:"A · Im Chat",text:"Ein Lernspiel, das du gleich selbst spielen kannst.",prompt:"Baue mir ein Quiz mit zehn Fragen zu KI-Begriffen wie Prompt, Token, Halluzination und Agent. Mit Auswahlantworten, sofortiger Rückmeldung, einer kurzen Erklärung pro Frage und meiner Punktzahl am Schluss."},
  {id:"b3",lvl:5,title:"Entscheidungshilfe",tool:"A · Im Chat",text:"Ein Werkzeug für echte Entscheide, etwa zwischen drei Ferienorten oder Autos.",prompt:"Baue mir eine Entscheidungshilfe: Ich gebe Optionen und Kriterien selbst ein, gewichte die Kriterien und vergebe Punkte. Zeige das Ergebnis als Rangliste und Balkendiagramm."},
- {id:"b4",lvl:6,title:"Eine Webseite veröffentlichen",tool:"B · Teilen",text:"Bau eine Seite für einen echten Anlass und teile sie per Link. In Claude beim Artefakt auf «Veröffentlichen» tippen, Link kopieren, im privaten Fenster testen, per WhatsApp schicken.",prompt:"Baue eine einfache, moderne Webseite für [Anlass, z. B. Gartenfest am 12. Juni]: Programm, Anfahrt, Kontakt. Gut lesbar auf dem Handy, freundliche Farben."},
+ {id:"b4",lvl:6,title:"Eine Webseite veröffentlichen",tool:"B · Teilen",text:"Bau eine Seite für einen echten Anlass und teile sie per Link. Auf «Veröffentlichen» oder «Teilen» tippen, Link kopieren, im privaten Fenster testen, per WhatsApp schicken.",prompt:"Baue eine einfache, moderne Webseite für [Anlass, z. B. Gartenfest am 12. Juni]: Programm, Anfahrt, Kontakt. Gut lesbar auf dem Handy, freundliche Farben."},
  {id:"b5",lvl:6,title:"App mit gespeicherten Daten",tool:"D · Ganze App",text:"Für Daten, die bleiben sollen, etwa eine Wein- oder Rezeptsammlung. Mit Lovable oder Bolt, beide haben eine Gratisstufe.",prompt:"Baue eine App für meine [Weinsammlung]. Ich will Einträge mit Name, Jahrgang, Region, Preis und Notiz erfassen, suchen und filtern. Mit Anmeldung, damit nur ich meine Daten sehe. Modern und gut auf dem Handy."},
  {id:"b6",lvl:6,title:"Dein eigenes Projekt",tool:"A bis D",text:"Such dir ein echtes Problem aus deinem Alltag und löse es mit allem, was du gelernt hast: interviewen lassen, bauen, nachbessern, veröffentlichen.",prompt:"Ich möchte [Ziel] mit einer kleinen App lösen. Interviewe mich zuerst, eine Frage nach der anderen. Fasse dann alles als kurze Beschreibung zusammen und baue die erste Version."}
 ];
@@ -652,7 +713,7 @@ const TERMS=[
  [5,"HTML","Die Sprache, aus der Webseiten bestehen. Die KI schreibt sie für dich.","Eine .html-Datei öffnet sich im Browser."],
  [5,"Version","Ein gespeicherter Zwischenstand deiner App.","«Geh zurück zur Version von vorhin.»"],
  [6,"Veröffentlichen","Die App bekommt eine öffentliche Adresse, die jeder mit dem Link öffnen kann.","Link per WhatsApp an die Familie schicken."],
- [6,"Hosting","Ein Dienst, der deine Seite rund um die Uhr im Internet bereitstellt.","Claude, Netlify, Lovable."],
+ [6,"Hosting","Ein Dienst, der deine Seite rund um die Uhr im Internet bereitstellt.","Netlify, Lovable oder die Teilen-Funktion der KI-Werkzeuge."],
  [6,"Domain / Adresse","Die Internetadresse deiner Seite.","gartenfest.netlify.app"],
  [6,"Datenbank","Speicher, in dem eine App Einträge dauerhaft ablegt.","Alle Weine deiner Sammlung."],
  [6,"Login / Anmeldung","Schützt Daten, damit nur Berechtigte sie sehen.","Nur du siehst deine Weinsammlung."],
@@ -662,6 +723,15 @@ const TERMS=[
 const CHAIN=[["4","Apps","ChatGPT, Claude, Gemini und unzählige Apps, die KI für bestimmte Aufgaben nutzen."],["3","Modelle","Die Labore, die Sprachmodelle trainieren: OpenAI, Anthropic, Google, Meta, Mistral, DeepSeek."],["2","Rechenzentren","Vermieten Rechenleistung: Microsoft, Amazon, Google. Engpass ist zunehmend der Strom."],["1","Chips","Nvidia (Grafikchips), AMD, TSMC (Fertigung), ASML (Maschinen für die Chipherstellung)."]];
 const QUESTIONS=["Was kann das System konkret, und wer hat es unabhängig getestet?","Wie oft liegt es falsch, und wer bemerkt die Fehler?","Woher stammen die Daten, mit denen es gelernt hat?","Braucht es dafür wirklich KI, oder ist es ein Schlagwort?","Was passiert mit meinen Daten?","Wer profitiert davon, dass ich diese Schlagzeile glaube?"];
 
+const MISSIONS=[
+ {id:"m1",txt:"Lass dir von der KI eine echte Nachricht schreiben, etwa eine Mail oder einen Glückwunsch, und schick sie wirklich ab."},
+ {id:"m2",txt:"Erwisch die KI bei einer Halluzination und lass sie den Fehler selbst korrigieren."},
+ {id:"m3",txt:"Löse eine echte Aufgabe aus deinem Alltag mit einem Prompt mit allen Zutaten, ohne grosse Nacharbeit."},
+ {id:"m4",txt:"Erkläre jemandem in einer Minute, was Training und Inferenz sind. Ohne Spickzettel."},
+ {id:"m5",txt:"Bau eine kleine App, die du in der nächsten Woche wirklich benutzt."},
+ {id:"m6",txt:"Jemand anderes hat deine veröffentlichte App über den Link geöffnet und benutzt."}
+];
+STAGES.forEach((s,i)=>{s.mission=MISSIONS[i]});
 /* ===== Spiel: Quiz pro Stufe, Abzeichen, Tages-Challenges, Level ===== */
 const QUIZ={
  c1a:{q:"Was macht ein KI-Assistent wie ChatGPT im Kern?",o:["Er sucht fertige Antworten in einer Datenbank","Er formuliert Text Wort für Wort aus dem, was er gelernt hat","Er fragt im Hintergrund einen Menschen"],a:1,x:"Genau. Er bildet Text Wort für Wort, wie ein extrem belesenes Autovervollständigen."},
@@ -711,8 +781,8 @@ const CHALLENGES=[
 ];
 const BICON={st0:"rocket_launch",st1:"lightbulb",st2:"forum",st3:"record_voice_over",st4:"construction",st5:"public",cur:"explore",day:"bolt",str:"local_fire_department",quiz:"emoji_events"};
 const BCC={st0:"--c1",st1:"--c2",st2:"--c3",st3:"--c4",st4:"--c5",st5:"--c6",cur:"--primary-container",day:"--tertiary-container",str:"--c3",quiz:"--success-container"};
-const LEVELS=[[0,"KI-Neuling"],[50,"KI-Entdecker"],[140,"Prompt-Lehrling"],[250,"Prompt-Profi"],[370,"KI-Kenner"],[500,"App-Bauer"],[640,"KI-Macher"]];
-const XPV={task:10,deep:15,check:20,ch:10};
+const LEVELS=[[0,"KI-Neuling"],[60,"KI-Entdecker"],[180,"Prompt-Lehrling"],[330,"Prompt-Profi"],[500,"KI-Kenner"],[680,"App-Bauer"],[860,"KI-Macher"]];
+const XPV={task:10,deep:15,check:20,ch:10,mission:30};
 const dstr=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const today=()=>dstr(new Date());
 
@@ -727,7 +797,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const lc=n=>`--lc:var(--l${n});--lcc:var(--c${n})`;
 const dots=n=>`<span class="lvl" style="${lc(n)}">${[1,2,3,4,5,6].map(i=>`<i class="${i<=n?"f":""}"></i>`).join("")} Stufe ${n}</span>`;
-const items=s=>[...s.tasks,...s.checks];
+const items=s=>[...s.tasks,...(s.mission?[s.mission]:[]),...s.checks];
 const stageDone=s=>items(s).every(i=>done[i.id]);
 const REC=new Set(STAGES.flatMap(s=>s.tasks.map(t=>t.go)));
 const VIEWS=["lernpfad","prompten","bauen","wissen","medien"];
@@ -752,7 +822,7 @@ function go(t){
   if(t==="mindset"){show("lernpfad");flash("mindset");return}
   if(t.startsWith("terms:")){termLvl=+t.split(":")[1];$("#termSearch").value="";renderTerms();setWissen("terms");show("wissen");return}
   if(t==="big"){setWissen("big");show("wissen");return}
-  if(t==="ablauf"||t==="werkzeuge"||t==="erste"){show("bauen");flash("a-"+t);return}
+  if(t==="ablauf"||t==="werkzeuge"||t==="erste"||t==="hilfe"){show("bauen");flash("a-"+t);return}
   if(VIEWS.includes(t)){show(t);return}
   if(PRACTICE.some(p=>p.id===t)){show("prompten");flash("x-"+t);return}
   if(BUILDS.some(b=>b.id===t)){show("bauen");flash("x-"+t);return}
@@ -764,9 +834,27 @@ let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("sh
 /* ===== Fortschritt ===== */
 function nextStep(){for(const[i,s]of STAGES.entries()){const t=s.tasks.find(x=>!done[x.id]);if(t)return{i,item:t,kind:"task"};const c=s.checks.find(x=>!done[x.id]);if(c)return{i,item:c,kind:"check"}}return null}
 const MSG=["Guter Start! Rom wurde auch nicht an einem Tag gebaut, aber die hatten keine KI.","Weiter so! Bald verstehst du mehr als dein Smartphone.","Prompt-Training läuft. Bald macht die KI, was du willst. Meistens.","Du redest bald mit. Fachleute, nehmt euch in Acht.","Du baust Apps. Das Silicon Valley hat angerufen, du warst gerade beschäftigt.","Letzte Stufe! Das rote Band zum Durchschneiden liegt schon bereit."];
-function xpTotal(){let n=0;STAGES.forEach(s=>{s.tasks.forEach(t=>{if(done[t.id])n+=XPV.task});s.deep.forEach(t=>{if(done[t.id])n+=XPV.deep});s.checks.forEach(t=>{if(done[t.id])n+=XPV.check})});Object.keys(done).forEach(k=>{if(k.startsWith("_ch")&&done[k])n+=XPV.ch});return n}
+function xpTotal(){let n=0;STAGES.forEach(s=>{s.tasks.forEach(t=>{if(done[t.id])n+=XPV.task});s.deep.forEach(t=>{if(done[t.id])n+=XPV.deep});s.checks.forEach(t=>{if(done[t.id])n+=XPV.check});if(s.mission&&done[s.mission.id])n+=XPV.mission});Object.keys(done).forEach(k=>{if(k.startsWith("_ch")&&done[k])n+=XPV.ch});return n}
 function earned(){return BADGES.filter(b=>b.t()).map(b=>b.id)}
 function streakNow(){if(!done._last)return 0;const y=new Date();y.setDate(y.getDate()-1);return(done._last===today()||done._last===dstr(y))?(done._streak||0):0}
+const mins=d=>{const m=/^(\d+)\s*Min$/.exec(d||"");return m?+m[1]:null};
+function renderPlan(){
+  const budget=done._budget||15;
+  $("#budget").innerHTML=[5,15,30,60].map(m=>`<button class="chip${m===budget?" on":""}" data-m="${m}">${m} Min</button>`).join("");
+  document.querySelectorAll("#budget .chip").forEach(b=>b.onclick=()=>{done._budget=+b.dataset.m;save();renderPlan()});
+  const open=[];STAGES.forEach((s,i)=>s.tasks.forEach(t=>{if(!done[t.id]&&mins(t.dur)!==null)open.push({...t,st:i+1})}));
+  let sum=0;const pl=[];
+  for(const t of open){const d=mins(t.dur);if(sum+d>budget)break;pl.push(t);sum+=d}
+  if(!pl.length&&open.length){pl.push(open[0]);sum=mins(open[0].dur)}
+  $("#plan").innerHTML=pl.length?pl.map(t=>`<button class="planrow" data-go="${esc(t.go)}"><span class="ms">play_circle</span><span class="t">${esc(t.txt)}</span><span class="dur">${esc(t.dur)}</span></button>`).join("")+`<div class="meta" style="margin-top:6px">Zusammen ca. ${sum} Minuten. Los geht's!</div>`:`<div class="meta">Alle Pflichtschritte erledigt. Zeit für die Missionen, das Quiz oder eine Vertiefung.</div>`;
+  document.querySelectorAll("#plan [data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+}
+function renderCert(xp){
+  const all=STAGES.every(stageDone),c=$("#cert");c.hidden=!all;if(!all)return;
+  const inp=$("#certName");if(document.activeElement!==inp)inp.value=done._name||"";
+  inp.oninput=()=>{done._name=inp.value;save()};
+  $("#certMeta").textContent=`${new Date().toLocaleDateString("de-CH",{day:"numeric",month:"long",year:"numeric"})} · ${xp} Punkte · ${STAGES.length} von ${STAGES.length} Stufen`;
+}
 function renderGame(){
   const xp=xpTotal();let li=0;LEVELS.forEach((l,i)=>{if(xp>=l[0])li=i});
   const cur=LEVELS[li],nxt=LEVELS[li+1],st=streakNow();
@@ -782,6 +870,7 @@ function renderGame(){
   const db=$("#dailyBtn");db.disabled=!!done[key];db.innerHTML=done[key]?'<span class="ms">check</span>Heute geschafft. Morgen gibt es Nachschub':'<span class="ms">add_task</span>Geschafft, +10 Punkte';
   db.onclick=()=>{if(done[key])return;floatXp(db,XPV.ch);mark(key,true)};
   $("#howto").hidden=xp>=60;
+  renderPlan();renderCert(xp);
 }
 function renderHero(){
   renderGame();
@@ -794,7 +883,7 @@ function renderHero(){
   $("#stairlbl").innerHTML=STAGES.map((s,i)=>`<span>${i+1}</span>`).join("");
   document.querySelectorAll("#stairs button").forEach(b=>b.onclick=()=>flash("stage-"+b.dataset.s));
   const btn=$("#nextBtn");
-  if(!nx){btn.className="next finished";btn.innerHTML=`<span><small>Alles geschafft</small>Weiter mit den Vertiefungen</span><span class="arr ms">arrow_forward</span>`;btn.onclick=()=>go("medien");return}
+  if(!nx){btn.className="next finished";btn.innerHTML=`<span><small>Alles geschafft</small>Deine Urkunde ansehen</span><span class="arr ms">arrow_forward</span>`;btn.onclick=()=>flash("cert");return}
   btn.className="next";
   btn.innerHTML=nx.kind==="task"?`<span><small>Nächster Schritt · Stufe ${nx.i+1} · ${esc(nx.item.dur)}</small>${esc(nx.item.txt)}</span><span class="arr ms">arrow_forward</span>`:`<span><small>Selbstcheck · Stufe ${nx.i+1}</small>Prüfe kurz, ob du es verstanden hast</span><span class="arr ms">arrow_forward</span>`;
   btn.onclick=()=>nx.kind==="task"?go(nx.item.go):flash("stage-"+nx.i);
@@ -817,7 +906,8 @@ function renderStages(){
       <div class="example"><span class="eyebrow"><span class="ms">lightbulb</span>${esc(s.ex.title)}</span><p>${esc(s.ex.text)}</p>
        <div class="links">${s.ex.links.map(l=>`<button class="pill${l[2]?" rec":""}" data-go="${l[1]}"><span class="ms">${l[2]?"recommend":"explore"}</span>${esc(l[0])}</button>`).join("")}</div></div>
       <div class="sub"><span class="ms">task_alt</span>Das machst du <span class="xp">je 10 Punkte</span></div>${s.tasks.map(t=>row(t)).join("")}
-      <div class="sub"><span class="ms">explore</span>Vertiefung, freiwillig <span class="xp">je 15 Punkte</span></div>${s.deep.map(t=>row(t,"optional")).join("")}
+      <details class="deepbox"><summary class="sub"><span class="ms">explore</span>Vertiefung, freiwillig (${s.deep.length})<span class="ms tog">expand_more</span><span class="xp">je 15 Punkte</span></summary>${s.deep.map(t=>row(t,"optional")).join("")}</details>
+      <div class="mission"><span class="eyebrow"><span class="ms">flag</span>Praxis-Mission · 30 Punkte</span>${row(s.mission)}</div>
       <div class="sub"><span class="ms">quiz</span>Mini-Quiz: Das verstehst du danach <span class="xp">je 20 Punkte</span></div>
       <p class="meta" style="margin:0 0 2px">Tippe auf die richtige Antwort.</p>
       ${s.checks.map(quizRow).join("")}
@@ -831,6 +921,7 @@ function renderStages(){
   });
 
   document.querySelectorAll("#stages [data-go]").forEach(b=>b.onclick=e=>{e.preventDefault();go(b.dataset.go)});
+  document.querySelectorAll("#stages .deepbox>summary").forEach(sm=>sm.addEventListener("click",e=>e.stopPropagation()));
   renderHero();
 }
 const CHEERS=["Abgehakt! Dein Gehirn macht gerade Liegestütze.","Zack, erledigt. Die KI ist beeindruckt, sagt sie jedenfalls.","Läuft bei dir. Sogar der Toaster schaut neidisch.","Haken dran. Die Roboter notieren sich deinen Namen. Positiv.","Stark! Wenn das so weitergeht, fragt ChatGPT bald dich um Rat.","Erledigt. Ein Kaffee ist verdient. Ein kleiner.","Wieder einer weniger. Du bist schneller als jedes Software-Update."];
@@ -848,11 +939,11 @@ function mark(id,val){
   const newB=earned().filter(b=>!before.includes(b));
   if(s&&!was&&stageDone(s)){toast(s.done);confetti()}
   else if(newB.length){toast("Neues Abzeichen: "+BADGES.find(b=>b.id===newB[0]).n+". Glänzt fast so schön wie du.");confetti()}
-  else if(val)toast(id.startsWith("d")?"Vertiefung erledigt. Streber! Aber von der guten Sorte.":id.startsWith("c")?pick(RIGHT):id.startsWith("_ch")?"Tages-Challenge geschafft. Heute bist du der Boss.":pick(CHEERS));
+  else if(val)toast(id.startsWith("d")?"Vertiefung erledigt. Streber! Aber von der guten Sorte.":id.startsWith("c")?pick(RIGHT):id.startsWith("_ch")?"Tages-Challenge geschafft. Heute bist du der Boss.":id.startsWith("m")?"Mission erfüllt! +30 Punkte. James Bond wäre stolz.":pick(CHEERS));
   renderStages();
   newB.forEach(b=>{const el=document.querySelector(`.badge[data-b="${b}"]`);if(el)el.classList.add("new")});
 }
-function onCheck(cb){if(cb.checked)floatXp(cb,cb.id.startsWith("d")?XPV.deep:XPV.task);mark(cb.id,cb.checked)}
+function onCheck(cb){if(cb.checked)floatXp(cb,cb.id.startsWith("d")?XPV.deep:cb.id.startsWith("m")?XPV.mission:XPV.task);mark(cb.id,cb.checked)}
 function floatXp(el,n){const r=el.getBoundingClientRect(),f=document.createElement("div");f.className="floatxp";f.textContent="+"+n;f.style.left=(r.left+r.width/2-14)+"px";f.style.top=(r.top-8)+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),1000)}
 function confetti(){
   if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
@@ -874,8 +965,9 @@ $("#treppe").innerHTML=TREPPE.map((s,i)=>`<div class="step" style="${lc(i+1)}"><
 $("#fixes").innerHTML=FIXES.map(f=>`<button class="chip">${esc(f)}</button>`).join("");
 document.querySelectorAll("#fixes .chip").forEach(b=>b.onclick=async()=>{const t=b.textContent;try{await navigator.clipboard.writeText(t);toast("Kopiert: "+t)}catch(e){toast(t)}});
 $("#practice").innerHTML=PRACTICE.map(p=>`<div class="card" id="x-${p.id}">${dots(p.lvl)}<h3 style="margin-top:6px">${esc(p.title)}</h3><p style="margin:0">${esc(p.text)}</p>${promptBox(p.prompt)}</div>`).join("");
-$("#builds").innerHTML=BUILDS.map((b,i)=>`<div class="card" id="x-${b.id}">${dots(b.lvl)} <span class="tag">${esc(b.tool)}</span><h3 style="margin-top:6px">Bauprojekt ${i+1}: ${esc(b.title)}</h3><p style="margin:0">${esc(b.text)}</p>${promptBox(b.prompt)}</div>`).join("");
+$("#builds").innerHTML=BUILDS.map((b,i)=>`<div class="card" id="x-${b.id}">${dots(b.lvl)} <span class="tag">${esc(b.tool)}</span><h3 style="margin-top:6px">${b.id==="b0"?"Start-Projekt":"Bauprojekt "+b.id.slice(1)}: ${esc(b.title)}</h3><p style="margin:0">${esc(b.text)}</p>${promptBox(b.prompt)}</div>`).join("");
 document.querySelectorAll(".copy").forEach(b=>b.onclick=()=>copyText(b.previousElementSibling.textContent,b));
+document.querySelectorAll(".stuck [data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
 
 /* ===== Begriffe ===== */
 let termLvl=0;
