@@ -245,6 +245,37 @@ nav.tabs button.on .ms{font-variation-settings:"FILL" 1,"wght" 500,"GRAD" 0,"ops
 .reset{background:none;border:0;color:var(--on-surface-variant);font:500 .875rem var(--font);text-decoration:underline;cursor:pointer;padding:8px 0}
 .resetbox{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .danger{background:var(--error);color:var(--surface-lowest);border:0;border-radius:20px;height:40px;padding:0 20px;cursor:pointer;font:500 .875rem var(--font)}
+
+/* Responsiv: Tablet zweispaltige Listen, Desktop mit Navigationsschiene links */
+@media (min-width:720px){
+  #practice,#builds,#media,#terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+  #practice>.card,#builds>.card,#media>.card,#terms>.card{margin:0}
+  .badges{grid-template-columns:repeat(5,1fr)}
+}
+@media (min-width:960px){
+  body{padding-inline:24px;padding-block:0 40px;padding-left:120px}
+  .wrap{max-width:1120px}
+  .topbar{margin-inline:-24px;padding-inline:24px}
+  nav.tabs{top:0;bottom:0;right:auto;width:96px;flex-direction:column;justify-content:flex-start;align-items:center;gap:14px;padding:92px 0 24px;background:var(--surface-low)}
+  nav.tabs button{flex:0 0 auto;width:96px;max-width:none}
+  nav.tabs .ind{width:56px;height:32px}
+  .toast{bottom:24px;left:calc(50% + 48px)}
+  #v-lernpfad.active{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:16px;align-items:start}
+  #v-lernpfad.active>*{grid-column:1/-1}
+  #v-lernpfad.active>.hero{grid-column:1;grid-row:1/span 2;margin:12px 0}
+  #v-lernpfad.active>#daily{grid-column:2;grid-row:1}
+  #v-lernpfad.active>#badgeCard{grid-column:2;grid-row:2}
+  .badges{grid-template-columns:repeat(4,1fr)}
+  h1{font-size:3rem;max-width:22ch}
+  .lead{max-width:70ch}
+  .sbody{padding:0 24px 24px}
+  details.stage>summary{padding:18px 24px}
+}
+@media (min-width:1280px){
+  #practice,#builds,#media{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #terms{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .badges{grid-template-columns:repeat(5,1fr)}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media (min-width:700px){h1{font-size:2.75rem}.card,.hero{padding:24px}}
 </style>
@@ -285,7 +316,7 @@ nav.tabs button.on .ms{font-variation-settings:"FILL" 1,"wght" 500,"GRAD" 0,"ops
     <button class="dbtn" id="dailyBtn"><span class="ms">add_task</span>Geschafft, +10 Punkte</button>
   </div>
 
-  <div class="card">
+  <div class="card" id="badgeCard">
     <span class="eyebrow">Deine Abzeichen</span>
     <div class="badges" id="badges"></div>
   </div>
