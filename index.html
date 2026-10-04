@@ -419,6 +419,12 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 @keyframes wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(6deg)}60%{transform:rotate(-4deg)}80%{transform:rotate(2deg)}}
 .tamil{font-size:1.15rem;color:var(--tertiary);margin:-2px 0 10px}
 .tamil span{font-family:var(--font);font-weight:400;font-size:.95rem;color:var(--on-surface-variant)}
+
+/* Mitnahme-Link */
+.importcard{border:2px solid var(--primary)}
+.importcard .pbtn{cursor:default}
+.linkbox{max-height:120px;overflow:auto;font-size:.8125rem}
+.steps3{margin:0 0 12px;padding-left:20px}.steps3 li{margin:4px 0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media (min-width:700px){h1{font-size:2.75rem}.card,.hero{padding:24px}}
 </style>
@@ -430,7 +436,7 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 <div class="demobar" id="demoBar" hidden><span><span class="ms">visibility</span>Demo: Stufe 1 ohne Profil. Ab Stufe 2 brauchst du ein Profil, dein Fortschritt wird übernommen.</span><button class="filled" id="demoCreate">Eigenes Profil erstellen</button></div>
 <header>
   
-  <h1 id="greet">Hallo, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.</h1>
+  <h1 id="greet">Hallo, zukünftiges KI-Genie. Keine Angst, der Affe beisst nicht.</h1>
   <p class="lead">Sechs Stufen, von ganz einfach bis zur eigenen kleinen App. Jeder Schritt ist kurz, alles ist kostenlos und auf Deutsch. Programmieren musst du nie, versprochen.</p>
 </header>
 
@@ -627,6 +633,12 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
     <h1>Willkommen beim KI-Lernpfad</h1>
     <p class="tamil"><span lang="ta">கற்போம்!</span> <span>Lass uns lernen.</span></p>
     <p class="lead">Sechs Stufen vom ersten Prompt bis zur eigenen App, spielerisch und auf Deutsch. Erstell zuerst dein Profil mit Benutzername und PIN. Dein Fortschritt wird darin automatisch gespeichert.</p>
+    <div class="gatecard importcard" id="importCard" hidden>
+      <h3>Fortschritt übernehmen</h3>
+      <div class="pbtn" style="margin:8px 0 12px"><span class="avatar lg img" id="impAvatar"></span><span class="t"><b id="impUser"></b><span class="meta" id="impInfo">Gib deine PIN ein, um hier weiterzumachen.</span></span></div>
+      <div class="pinrow"><input type="password" id="impPin" maxlength="64" placeholder="PIN" autocomplete="current-password" aria-label="PIN"><button type="button" class="filled" id="impBtn">Übernehmen</button></div>
+      <button type="button" class="textbtn" id="impCancel" style="margin-top:8px">Abbrechen</button>
+    </div>
     <div id="gateLogin" hidden>
       <h3>Anmelden</h3>
       <div class="plist" id="gateList"></div>
@@ -641,7 +653,7 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
       <button type="submit" class="filled wide"><span class="ms">rocket_launch</span>Profil erstellen und loslegen</button>
     </form>
     <button class="tonal wide" id="demoBtn" style="width:100%"><span class="ms">visibility</span>Ohne Profil Stufe 1 ausprobieren</button>
-    <div class="privacy"><span class="ms">lock</span><span>Dein Fortschritt wird mit deiner PIN verschlüsselt (AES-256) und bleibt nur auf diesem Gerät. Ohne PIN kann ihn niemand lesen. PIN vergessen heisst Fortschritt weg. Teilst du den Link, legt jede Person auf ihrem Gerät ihr eigenes Profil an.</span></div>
+    <div class="privacy"><span class="ms">lock</span><span>Dein Fortschritt wird mit deiner PIN verschlüsselt (AES-256) und bleibt nur auf diesem Gerät. Ohne PIN kann ihn niemand lesen. PIN vergessen heisst Fortschritt weg. Teilst du den Link, legt jede Person ihr eigenes Profil an. Schon ein Profil in einem anderen Browser? Öffne dort dein Profil und wähle «Auf anderem Gerät weitermachen».</span></div>
   </div>
 </div>
 <div class="scrim" id="profileDlg" hidden>
@@ -653,10 +665,20 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
     <div class="dactions"><button type="button" class="textbtn" id="pCancel">Abbrechen</button><button type="submit" class="filled">Speichern</button></div>
     <div class="dsep"></div>
     <div class="dactions" style="justify-content:space-between">
+      <button type="button" class="textbtn" id="pTransfer"><span class="ms">devices</span>Auf anderem Gerät weitermachen</button>
       <button type="button" class="textbtn" id="pLogout"><span class="ms">logout</span>Abmelden oder Profil wechseln</button>
       <button type="button" class="textbtn danger-text" id="pDelete"><span class="ms">delete</span>Profil löschen</button>
     </div>
   </form>
+</div>
+<div class="scrim" id="shareDlg" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+    <div class="dhead"><span class="mico"><span class="ms">devices</span></span><div><h2 id="shareTitle">Auf anderem Gerät weitermachen</h2><span class="meta">Stand von jetzt, verschlüsselt</span></div></div>
+    <ol class="steps3"><li>Link kopieren.</li><li>An dich selbst schicken, zum Beispiel per WhatsApp oder Mail.</li><li>Im anderen Browser öffnen und deine PIN eingeben.</li></ol>
+    <div class="prompt linkbox"><span id="shareLink"></span><button class="copy" id="shareCopy"><span class="ms">content_copy</span><span>Kopieren</span></button></div>
+    <div class="privacy"><span class="ms">lock</span><span>Der Link enthält deinen Fortschritt verschlüsselt. Ohne deine PIN kann niemand etwas damit anfangen. Machst du hier weiter, erstell später einfach einen neuen Link.</span></div>
+    <div class="dactions"><button type="button" class="filled" id="shareDone">Fertig</button></div>
+  </div>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <canvas id="confetti" aria-hidden="true"></canvas>
@@ -1172,7 +1194,7 @@ function monkeySVG(key){
 const avatarKey=p=>p.avatar||p.user||"gast";
 
 /* ===== Profile, Anmelden, Demo, Verschlüsselung ===== */
-const DEFAULT_GREET="Hallo, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.";
+const DEFAULT_GREET="Hallo, zukünftiges KI-Genie. Keine Angst, der Affe beisst nicht.";
 const USER_RE=/^[A-Za-z0-9ÄÖÜäöüéèàç._-]{3,20}$/,PIN_MIN=8,KDF_ITER=310000,SKEY="ki-lernpfad-session";
 const hsh=(id,pin)=>{let x=5381;for(const c of id+"|"+pin)x=((x<<5)+x+c.charCodeAt(0))|0;return(x>>>0).toString(36)};
 /* Krypto: PBKDF2-SHA-256 leitet aus der PIN einen AES-256-GCM-Schlüssel ab. Die PIN wird nie gespeichert. */
@@ -1219,7 +1241,7 @@ function validate(pre,user,pin,pin2,selfId,pinRequired){
 }
 function renderProfile(){
   const pr=curProfile();
-  $("#greet").textContent=pr&&!DEMO?`Hallo ${pr.user}, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.`:DEFAULT_GREET;
+  $("#greet").textContent=pr&&!DEMO?`Hallo ${pr.user}, zukünftiges KI-Genie. Keine Angst, der Affe beisst nicht.`:DEFAULT_GREET;
   const pi=$("#profileIcon");
   if(pr){pi.className="avatar img";pi.innerHTML=monkeySVG(avatarKey(pr));$("#profileBtn").title=DEMO?"Demo beenden":"@"+pr.user;$("#profileBtn").setAttribute("aria-label",DEMO?"Demo beenden":`Profil von ${pr.user}`)}
   else{pi.className="ms";pi.textContent="account_circle"}
@@ -1314,7 +1336,48 @@ const LOGO_SVG='<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" role
 const FAV_SVG='<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo KI-Lernpfad: lachender Affe mit Doktorhut"><defs><linearGradient id="lgf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4355b9"/><stop offset="1" stop-color="#b0457f"/></linearGradient></defs><rect width="96" height="96" rx="26" fill="url(#lgf)"/><circle cx="19" cy="56" r="11" fill="#8d5524"/><circle cx="77" cy="56" r="11" fill="#8d5524"/><circle cx="19" cy="56" r="6" fill="#f3c89b"/><circle cx="77" cy="56" r="6" fill="#f3c89b"/><circle cx="48" cy="57" r="27" fill="#8d5524"/><path d="M48 48 C41 37 25 42 29 56 C31 64 36 66 39 68 C32 75 37 86 48 86 C59 86 64 75 57 68 C60 66 65 64 67 56 C71 42 55 37 48 48 Z" fill="#f3c89b"/><path d="M35 55 q5 -6 10 0 M51 55 q5 -6 10 0" fill="none" stroke="#2b1b17" stroke-width="3" stroke-linecap="round"/><circle cx="33" cy="64" r="3.5" fill="#ff8a80" opacity=".8"/><circle cx="63" cy="64" r="3.5" fill="#ff8a80" opacity=".8"/><ellipse cx="45" cy="64" rx="1.6" ry="1.2" fill="#2b1b17"/><ellipse cx="51" cy="64" rx="1.6" ry="1.2" fill="#2b1b17"/><path d="M38 70 q10 12 20 0 z" fill="#2b1b17"/><path d="M44 75 q4 4 8 0" fill="#ff6e8a"/><path d="M48 12 L82 25 L48 38 L14 25 Z" fill="#1b1b21"/><path d="M33 30 v8 q15 7 30 0 v-8 l-15 6 z" fill="#2c2c34"/><path d="M48 25 L74 30 V42" fill="none" stroke="#ffb21e" stroke-width="2.5" stroke-linecap="round"/><circle cx="74" cy="44" r="3.5" fill="#ffb21e"/></svg>';
 $("#brandLogo").innerHTML=LOGO_SVG.replace(/lgb/g,"lgb1");$("#gateLogo").innerHTML=LOGO_SVG.replace(/lgb/g,"lgb2");
 (()=>{try{document.querySelectorAll('link[rel~="icon"]').forEach(l=>l.remove());const l=document.createElement("link");l.rel="icon";l.type="image/svg+xml";l.href="data:image/svg+xml,"+encodeURIComponent(FAV_SVG);document.head.appendChild(l)}catch(e){}})();
-renderTerms();renderMedia();renderStages();renderProfile();showGate();if(CRYPTO_OK)resumeSession().then(ok=>{if(ok)afterLogin()});
+renderTerms();renderMedia();renderStages();renderProfile();
+/* ===== Mitnahme-Link: verschlüsselter Fortschritt für einen anderen Browser ===== */
+const PUBLIC_URL="https://denoshanrajasingam.github.io/ki-lernpfad/";
+const toB64u=t=>btoa(unescape(encodeURIComponent(t))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+const fromB64u=t=>{t=t.replace(/-/g,"+").replace(/_/g,"/");while(t.length%4)t+="=";return decodeURIComponent(escape(atob(t)))};
+async function makeTransferLink(){await saving;const p=reg.profiles[reg.active];if(!p||!p.salt||!p.data)return null;return PUBLIC_URL+"#import="+toB64u(JSON.stringify({v:1,u:p.user,a:p.avatar,s:p.salt,i:p.iv,d:p.data}))}
+let IMPORT=null;
+function readImport(){
+  const h=location.hash||"";if(!h.startsWith("#import="))return false;
+  try{IMPORT=JSON.parse(fromB64u(h.slice(8)));if(!IMPORT||IMPORT.v!==1||!IMPORT.u||!IMPORT.s||!IMPORT.i||!IMPORT.d)throw 0}catch(e){IMPORT=null;setTimeout(()=>toast("Der Mitnahme-Link ist unvollständig. Bitte auf dem anderen Gerät neu erstellen."),300)}
+  try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
+  return !!IMPORT;
+}
+function showImport(){
+  const exists=Object.values(reg.profiles).some(p=>p.user.toLowerCase()===IMPORT.u.toLowerCase());
+  $("#impAvatar").innerHTML=monkeySVG(IMPORT.a||IMPORT.u);$("#impUser").textContent="@"+IMPORT.u;
+  $("#impInfo").textContent=exists?"Gibt es hier schon. Der Stand aus dem Link ersetzt ihn.":"Gib deine PIN ein, um hier weiterzumachen.";
+  $("#importCard").hidden=false;setTimeout(()=>$("#impPin").focus(),80);
+}
+async function doImport(){
+  const btn=$("#impBtn");btn.disabled=true;btn.textContent="Prüfe…";
+  try{
+    const key=await deriveKey($("#impPin").value,unb64(IMPORT.s));const d=await decryptObj(key,IMPORT.i,IMPORT.d);
+    let id=Object.keys(reg.profiles).find(k=>reg.profiles[k].user.toLowerCase()===IMPORT.u.toLowerCase());
+    if(!id){id="p"+Date.now().toString(36);reg.profiles[id]={user:IMPORT.u,created:today()}}
+    const pr=reg.profiles[id];Object.assign(pr,{avatar:IMPORT.a||IMPORT.u,salt:IMPORT.s,iv:IMPORT.i,data:IMPORT.d});delete pr.pin;delete pr.progress;
+    reg.active=id;SESSION_KEY=key;DEMO=false;done=d;saveReg();await rememberSession(id,key);
+    IMPORT=null;$("#importCard").hidden=true;$("#impPin").value="";afterLogin();confetti();toast(`Willkommen auf dem neuen Gerät, ${pr.user}! Dein Fortschritt ist da. Die Affen haben ihn sicher hergetragen.`);
+  }catch(e){$("#impPin").value="";$("#impPin").focus();toast("Falsche PIN. Tief durchatmen und nochmals.")}
+  finally{btn.disabled=false;btn.textContent="Übernehmen"}
+}
+$("#impBtn").onclick=doImport;
+$("#impPin").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();doImport()}};
+$("#impCancel").onclick=()=>{IMPORT=null;$("#importCard").hidden=true};
+$("#pTransfer").onclick=async()=>{
+  const link=await makeTransferLink();
+  if(!link){toast("Zuerst ein Profil mit PIN anlegen, dann klappt es.");return}
+  $("#profileDlg").hidden=true;$("#shareLink").textContent=link;$("#shareDlg").hidden=false;
+};
+$("#shareDone").onclick=()=>{$("#shareDlg").hidden=true};
+$("#shareDlg").addEventListener("click",e=>{if(e.target.id==="shareDlg")$("#shareDlg").hidden=true});
+showGate();if(readImport()&&CRYPTO_OK)showImport();else if(CRYPTO_OK)resumeSession().then(ok=>{if(ok)afterLogin()});
 const start=(location.hash||"").slice(1);
 if(VIEWS.includes(start))show(start,false);
 </script>
