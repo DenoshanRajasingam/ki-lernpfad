@@ -440,7 +440,7 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 .lvlcard h2{font-size:2rem;margin:4px 0}
 .lvlcard p{margin:6px 0 16px;color:var(--on-surface-variant)}
 .hud b.count{font-weight:600;font-variant-numeric:tabular-nums}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
 @media (min-width:700px){h1{font-size:2.75rem}.card,.hero{padding:24px}}
 </style>
 
@@ -1013,7 +1013,7 @@ function renderCert(xp){
   $("#certAvatar").innerHTML=monkeySVG(avatarKey(pr||{user:"gast"}));
   $("#certMeta").textContent=`${new Date().toLocaleDateString("de-CH",{day:"numeric",month:"long",year:"numeric"})} · ${xp} Punkte · ${STAGES.length} von ${STAGES.length} Stufen`;
 }
-function countUp(to){const el=document.querySelector("#hudXp .count");const from=window._xpShown??to;window._xpShown=to;if(!el||from===to||matchMedia("(prefers-reduced-motion: reduce)").matches){if(el)el.textContent=to;return}const t0=performance.now(),d=700;(function f(t){const k=Math.min(1,(t-t0)/d),v=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));el.textContent=v;if(k<1)requestAnimationFrame(f)})(t0)}
+function countUp(to){const el=document.querySelector("#hudXp .count");const from=window._xpShown??to;window._xpShown=to;if(!el||from===to){if(el)el.textContent=to;return}const t0=performance.now(),d=700;(function f(t){const k=Math.min(1,(t-t0)/d),v=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));el.textContent=v;if(k<1)requestAnimationFrame(f)})(t0)}
 function renderGame(){
   const xp=xpTotal();let li=0;LEVELS.forEach((l,i)=>{if(xp>=l[0])li=i});
   const cur=LEVELS[li],nxt=LEVELS[li+1],st=streakNow();
@@ -1118,7 +1118,6 @@ function onCheck(cb){if(cb.checked)floatXp(cb,cb.id.startsWith("d")?XPV.deep:cb.
 function hop(){const a=document.querySelector("#heroUser .avatar");if(!a)return;a.classList.remove("jump");void a.offsetWidth;a.classList.add("jump")}
 function floatXp(el,n){hop();const r=el.getBoundingClientRect(),f=document.createElement("div");f.className="floatxp";f.textContent="+"+n;f.style.left=(r.left+r.width/2-14)+"px";f.style.top=(r.top-8)+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),1000)}
 function confetti(bananas){
-  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
   const c=$("#confetti"),x=c.getContext("2d");c.width=innerWidth;c.height=innerHeight;
   const cs=getComputedStyle(document.documentElement),cols=["--l1","--l2","--l3","--l4","--l5","--l6","--primary"].map(v=>cs.getPropertyValue(v).trim());
   const P=Array.from({length:140},()=>({x:innerWidth/2,y:innerHeight*.35,vx:(Math.random()-.5)*14,vy:Math.random()*-14-4,r:Math.random()*6+4,c:cols[Math.floor(Math.random()*cols.length)],a:Math.random()*6,b:false}));
