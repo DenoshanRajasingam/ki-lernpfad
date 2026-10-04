@@ -425,6 +425,21 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 .importcard .pbtn{cursor:default}
 .linkbox{max-height:120px;overflow:auto;font-size:.8125rem}
 .steps3{margin:0 0 12px;padding-left:20px}.steps3 li{margin:4px 0}
+
+/* Effekte */
+.avatar.jump{animation:jump .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes jump{0%{transform:translateY(0) rotate(0)}35%{transform:translateY(-14px) rotate(-10deg)}70%{transform:translateY(0) rotate(6deg)}100%{transform:none}}
+.herouser .avatar:hover,.brand .logo:hover{animation:wiggle .8s ease-in-out}
+.badge.new .coin{animation:pop .6s,shine 1.6s .2s}
+@keyframes shine{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--bc) 70%,transparent)}100%{box-shadow:0 0 0 22px transparent}}
+.lvlup{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:rgba(0,0,0,.35);padding:24px}
+.lvlcard{background:var(--surface-high);color:var(--on-surface);border-radius:var(--sh-l);padding:28px 24px;text-align:center;width:min(100%,360px);box-shadow:var(--elev2);animation:lvlin .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes lvlin{from{transform:scale(.6) rotate(-6deg);opacity:0}to{transform:none;opacity:1}}
+.lvlcard .avatar{width:110px;height:110px;margin:0 auto 12px;animation:jump .8s .3s cubic-bezier(.3,1.6,.5,1) 2}
+.lvlcard .eyebrow{color:var(--primary)}
+.lvlcard h2{font-size:2rem;margin:4px 0}
+.lvlcard p{margin:6px 0 16px;color:var(--on-surface-variant)}
+.hud b.count{font-weight:600;font-variant-numeric:tabular-nums}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media (min-width:700px){h1{font-size:2.75rem}.card,.hero{padding:24px}}
 </style>
@@ -680,6 +695,7 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
     <div class="dactions"><button type="button" class="filled" id="shareDone">Fertig</button></div>
   </div>
 </div>
+<div class="lvlup" id="lvlup" hidden><div class="lvlcard" role="dialog" aria-modal="true" aria-labelledby="lvlTitle"><span class="avatar img" id="lvlAvatar"></span><span class="eyebrow">Level up!</span><h2 id="lvlTitle"></h2><p id="lvlText"></p><button class="filled" id="lvlOk">Weiter so</button></div></div>
 <div class="toast" id="toast" role="status"></div>
 <canvas id="confetti" aria-hidden="true"></canvas>
 
@@ -997,11 +1013,12 @@ function renderCert(xp){
   $("#certAvatar").innerHTML=monkeySVG(avatarKey(pr||{user:"gast"}));
   $("#certMeta").textContent=`${new Date().toLocaleDateString("de-CH",{day:"numeric",month:"long",year:"numeric"})} · ${xp} Punkte · ${STAGES.length} von ${STAGES.length} Stufen`;
 }
+function countUp(to){const el=document.querySelector("#hudXp .count");const from=window._xpShown??to;window._xpShown=to;if(!el||from===to||matchMedia("(prefers-reduced-motion: reduce)").matches){if(el)el.textContent=to;return}const t0=performance.now(),d=700;(function f(t){const k=Math.min(1,(t-t0)/d),v=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));el.textContent=v;if(k<1)requestAnimationFrame(f)})(t0)}
 function renderGame(){
   const xp=xpTotal();let li=0;LEVELS.forEach((l,i)=>{if(xp>=l[0])li=i});
   const cur=LEVELS[li],nxt=LEVELS[li+1],st=streakNow();
   $("#hudLevel").innerHTML=`<span class="ms fill">military_tech</span>Level ${li+1} · ${esc(cur[1])}`;
-  $("#hudXp").innerHTML=`<span class="ms fill">stars</span>${xp} Punkte`;
+  $("#hudXp").innerHTML=`<span class="ms fill">stars</span><b class="count">${window._xpShown??xp}</b> Punkte`;countUp(xp);
   $("#hudStreak").innerHTML=`<span class="ms fill">local_fire_department</span>${st} ${st===1?"Tag":"Tage"} in Folge`;
   $("#xpFill").style.width=(nxt?(xp-cur[0])/(nxt[0]-cur[0])*100:100)+"%";
   $("#xpNext").textContent=nxt?`Noch ${nxt[0]-xp} Punkte bis Level ${li+2} «${nxt[1]}»`:"Höchstes Level erreicht!";
@@ -1079,24 +1096,35 @@ function bumpStreak(){
   const y=new Date();y.setDate(y.getDate()-1);
   done._streak=done._last===dstr(y)?(done._streak||0)+1:1;done._last=t;
 }
+const levelOf=xp=>{let li=0;LEVELS.forEach((l,i)=>{if(xp>=l[0])li=i});return li};
+const LVL_LINES=["Die Affen applaudieren. Laut.","Dein Gehirn hat gerade ein Update installiert.","Wenn das so weitergeht, brauchst du bald einen Fanclub.","Die KI überlegt, ob sie dich um ein Autogramm bitten soll.","Bananen für alle! Du hast sie dir verdient.","Offiziell eine Legende im Lernpfad."];
+function levelUp(li){
+  const pr=curProfile();$("#lvlAvatar").innerHTML=monkeySVG(pr?avatarKey(pr):"gast");$("#lvlTitle").textContent=`Level ${li+1}: ${LEVELS[li][1]}`;$("#lvlText").textContent=LVL_LINES[(li-1)%LVL_LINES.length];
+  $("#lvlup").hidden=false;confetti(true);clearTimeout(window._lvlT);window._lvlT=setTimeout(()=>{$("#lvlup").hidden=true},5000);
+}
 function mark(id,val){
-  const s=STAGES.find(s=>items(s).some(i=>i.id===id)),was=s&&stageDone(s),before=earned();
+  const s=STAGES.find(s=>items(s).some(i=>i.id===id)),was=s&&stageDone(s),before=earned(),lvBefore=levelOf(xpTotal());
   done[id]=val;if(val)bumpStreak();save();
   const newB=earned().filter(b=>!before.includes(b));
-  if(s&&!was&&stageDone(s)){toast(s.done);confetti()}
+  const lvAfter=levelOf(xpTotal());
+  if(val&&lvAfter>lvBefore)setTimeout(()=>levelUp(lvAfter),500);
+  if(s&&!was&&stageDone(s)){toast(s.done);confetti(true)}
   else if(newB.length){toast("Neues Abzeichen: "+BADGES.find(b=>b.id===newB[0]).n+". Glänzt fast so schön wie du.");confetti()}
   else if(val)toast(id.startsWith("d")?"Vertiefung erledigt. Streber! Aber von der guten Sorte.":id.startsWith("c")?pick(RIGHT):id.startsWith("_ch")?"Tages-Challenge geschafft. Heute bist du der Boss.":id.startsWith("m")?"Mission erfüllt! +30 Punkte. James Bond wäre stolz.":pick(CHEERS));
   renderStages();
   newB.forEach(b=>{const el=document.querySelector(`.badge[data-b="${b}"]`);if(el)el.classList.add("new")});
 }
 function onCheck(cb){if(cb.checked)floatXp(cb,cb.id.startsWith("d")?XPV.deep:cb.id.startsWith("m")?XPV.mission:XPV.task);mark(cb.id,cb.checked)}
-function floatXp(el,n){const r=el.getBoundingClientRect(),f=document.createElement("div");f.className="floatxp";f.textContent="+"+n;f.style.left=(r.left+r.width/2-14)+"px";f.style.top=(r.top-8)+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),1000)}
-function confetti(){
+function hop(){const a=document.querySelector("#heroUser .avatar");if(!a)return;a.classList.remove("jump");void a.offsetWidth;a.classList.add("jump")}
+function floatXp(el,n){hop();const r=el.getBoundingClientRect(),f=document.createElement("div");f.className="floatxp";f.textContent="+"+n;f.style.left=(r.left+r.width/2-14)+"px";f.style.top=(r.top-8)+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),1000)}
+function confetti(bananas){
   if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
   const c=$("#confetti"),x=c.getContext("2d");c.width=innerWidth;c.height=innerHeight;
   const cs=getComputedStyle(document.documentElement),cols=["--l1","--l2","--l3","--l4","--l5","--l6","--primary"].map(v=>cs.getPropertyValue(v).trim());
-  const P=Array.from({length:140},()=>({x:innerWidth/2,y:innerHeight*.35,vx:(Math.random()-.5)*14,vy:Math.random()*-14-4,r:Math.random()*6+4,c:cols[Math.floor(Math.random()*cols.length)],a:Math.random()*6}));
-  let f=0;(function tick(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.vy+=.45;p.x+=p.vx;p.y+=p.vy;p.a+=.2;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);x.restore()});if(++f<110)requestAnimationFrame(tick);else x.clearRect(0,0,c.width,c.height)})();
+  const P=Array.from({length:140},()=>({x:innerWidth/2,y:innerHeight*.35,vx:(Math.random()-.5)*14,vy:Math.random()*-14-4,r:Math.random()*6+4,c:cols[Math.floor(Math.random()*cols.length)],a:Math.random()*6,b:false}));
+  if(bananas)for(let i=0;i<26;i++)P.push({x:Math.random()*innerWidth,y:-30-Math.random()*innerHeight*.6,vx:(Math.random()-.5)*2,vy:Math.random()*2+1,r:14+Math.random()*8,a:Math.random()*6,b:true});
+  const banana=(r)=>{x.beginPath();x.moveTo(-r,0);x.quadraticCurveTo(0,r*1.1,r,0);x.quadraticCurveTo(0,r*.45,-r,0);x.fillStyle="#ffd600";x.fill();x.strokeStyle="#b58900";x.lineWidth=1.5;x.stroke();x.fillStyle="#6d4c41";x.fillRect(r-2,-3,4,4)};
+  let f=0;(function tick(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.vy+=p.b?.12:.45;p.x+=p.vx;p.y+=p.vy;p.a+=p.b?.05:.2;x.save();x.translate(p.x,p.y);x.rotate(p.a);if(p.b)banana(p.r);else{x.fillStyle=p.c;x.fillRect(-p.r/2,-p.r/4,p.r,p.r/2)}x.restore()});if(++f<(bananas?170:110))requestAnimationFrame(tick);else x.clearRect(0,0,c.width,c.height)})();
 }
 $("#resetBtn").onclick=()=>{$("#resetConfirm").hidden=false};
 $("#resetNo").onclick=()=>{$("#resetConfirm").hidden=true};
@@ -1265,7 +1293,7 @@ function renderGate(){
 }
 let DEMO_DONE=null;
 function showGate(){if(DEMO&&Object.keys(done).length)DEMO_DONE=done;DEMO=false;renderGate();$("#gate").hidden=false;$("#demoBar").hidden=true;window.scrollTo({top:0})}
-function afterLogin(){$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();show("lernpfad")}
+function afterLogin(){window._xpShown=undefined;$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();show("lernpfad")}
 let MUST_SET_PIN=false;
 async function login(id,pin){
   const p=reg.profiles[id];if(!p)return false;
@@ -1368,6 +1396,9 @@ async function doImport(){
   finally{btn.disabled=false;btn.textContent="Übernehmen"}
 }
 $("#impBtn").onclick=doImport;
+$("#lvlOk").onclick=()=>{$("#lvlup").hidden=true};
+$("#lvlup").addEventListener("click",e=>{if(e.target.id==="lvlup")$("#lvlup").hidden=true});
+let logoTaps=0,logoT;$("#brandLogo").addEventListener("click",()=>{logoTaps++;clearTimeout(logoT);logoT=setTimeout(()=>{logoTaps=0},1500);if(logoTaps>=5){logoTaps=0;confetti(true);toast("Affentheater! Du hast das Geheimnis entdeckt. Die Bananen gehen auf uns.")}});
 $("#impPin").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();doImport()}};
 $("#impCancel").onclick=()=>{IMPORT=null;$("#importCard").hidden=true};
 $("#pTransfer").onclick=async()=>{
