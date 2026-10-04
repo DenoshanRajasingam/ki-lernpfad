@@ -372,12 +372,24 @@ nav.tabs button.on .ms{font-variation-settings:"FILL" 1,"wght" 500,"GRAD" 0,"ops
       <div class="fs"><b class="n">6</b><div><b>Veröffentlichen und teilen.</b> Ein Klick ergibt einen Link, den jeder ohne Anmeldung öffnen kann, zum Beispiel per WhatsApp.</div></div>
     </div>
   </div>
+  <div class="card" id="a-erste">
+    <h3>Deine erste App mit Claude, Klick für Klick</h3>
+    <p class="meta">So sieht es konkret aus. Am einfachsten am Computer oder Tablet, auf dem Handy geht es auch, ist aber enger.</p>
+    <div class="flow">
+      <div class="fs"><b class="n">1</b><div><b>claude.ai öffnen und anmelden.</b> Ein Gratiskonto reicht. Nimm ein privates Konto, Firmenkonten sperren das öffentliche Teilen oft.</div></div>
+      <div class="fs"><b class="n">2</b><div><b>Neuen Chat starten und den Prompt einfügen,</b> zum Beispiel aus Bauprojekt 1. Wichtig ist das Wort «App» oder «interaktive Seite», dann baut Claude statt nur zu erklären.</div></div>
+      <div class="fs"><b class="n">3</b><div><b>Die App erscheint als Artefakt.</b> Am Computer rechts neben dem Chat, auf dem Handy als Karte zum Antippen. Gleich ausprobieren.</div></div>
+      <div class="fs"><b class="n">4</b><div><b>Im Chat Änderungen verlangen.</b> Jede Änderung ergibt eine neue Version. Über die Versionsauswahl beim Artefakt kommst du zu einer früheren zurück.</div></div>
+      <div class="fs"><b class="n">5</b><div><b>Veröffentlichen.</b> Beim Artefakt auf «Veröffentlichen» tippen, Link kopieren, in einem privaten Browserfenster testen und dann teilen.</div></div>
+    </div>
+    <div class="note" style="margin-bottom:0"><span><b>Gut zu wissen.</b> Die Gratisversion hat ein Nachrichtenlimit. Ist es erreicht, später weitermachen oder ein neues Gespräch mit einer Zusammenfassung starten. Soll sich die App Einträge dauerhaft merken, klappt das bei Claude erst mit einem Bezahl-Abo und nach dem Veröffentlichen. Für eine kleine Sammlung mit gespeicherten Daten eignet sich Lovable (Werkzeug D).</span></div>
+  </div>
   <div class="card" id="a-werkzeuge">
     <h3>Werkzeuge, von einfach bis gross</h3>
     <div class="ladder">
-      <div class="rung"><span class="rl">A · Im Chat</span><div><b>Claude, ChatGPT oder Gemini.</b> Schreib «Baue mir als kleine App …». Die Vorschau erscheint sofort (bei Claude «Artefakt», bei ChatGPT und Gemini «Canvas»). Gratis.</div></div>
+      <div class="rung"><span class="rl">A · Im Chat</span><div><b>Claude, ChatGPT oder Gemini.</b> Schreib «Baue mir als kleine App …». Die Vorschau erscheint sofort (bei Claude «Artefakt», bei ChatGPT und Gemini «Canvas»). Gratis. Für die Bauprojekte empfehlen wir Claude, weil dort auch das Veröffentlichen am einfachsten ist.</div></div>
       <div class="rung"><span class="rl">B · Teilen</span><div><b>Veröffentlichen per Klick.</b> In Claude beim Artefakt auf «Veröffentlichen» tippen. Daraus wird eine öffentliche Seite, die jeder mit dem Link ohne Login öffnen kann. <a href="https://support.anthropic.com/de/articles/9547008-veroffentlichen-remixen-und-teilen-von-artefakten" target="_blank" rel="noopener">Anleitung</a></div></div>
-      <div class="rung"><span class="rl">C · Eigene Seite</span><div><b>Netlify Drop.</b> Die App als HTML-Datei herunterladen und auf <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">app.netlify.com/drop</a> ziehen. Nach einer Minute hast du eine eigene Adresse. Mit Gratiskonto bleibt sie dauerhaft.</div></div>
+      <div class="rung"><span class="rl">C · Eigene Seite</span><div><b>Netlify Drop.</b> Nur am Computer: die App als HTML-Datei herunterladen und auf <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">app.netlify.com/drop</a> ziehen. Ohne Konto ist die Seite nach einer Stunde wieder weg, mit Gratiskonto bleibt sie dauerhaft.</div></div>
       <div class="rung"><span class="rl">D · Ganze App</span><div><b><a href="https://lovable.dev/" target="_blank" rel="noopener">Lovable</a> oder <a href="https://bolt.new/" target="_blank" rel="noopener">Bolt</a>.</b> Für Apps mit Anmeldung und gespeicherten Daten. Du beschreibst, die App entsteht, ein Klick veröffentlicht sie. Gratis mit Tageslimit.</div></div>
     </div>
   </div>
@@ -527,8 +539,9 @@ const STAGES=[
   done:"Stufe 4 geschafft! Du redest bei KI-Themen mit, ohne heimlich unter dem Tisch zu googeln."},
  {t:"Erste eigene Lösung bauen",lvlName:"anspruchsvoll",h:"ca. 1.5 h",
   why:"Jetzt wirst du vom Nutzer zum Macher. Du beschreibst, die KI baut, du siehst sofort das Ergebnis.",goal:"Du hast drei kleine Apps gebaut, ganz ohne Programmieren.",
-  ex:{title:"Beispiel: Packliste in drei Sätzen",text:"«Baue mir eine Packliste für Ferien als kleine App, mit Kategorien und Häkchen.» Die App erscheint neben dem Chat. Dann: «Füge die Kategorie Elektronik hinzu und mach die Häkchen grösser.» Fertig.",links:[["Ablauf in sechs Schritten","ablauf",1],["Artikel Claude-Artefakte","hundertmark",0]]},
+  ex:{title:"Beispiel: Packliste in drei Sätzen",text:"«Baue mir eine Packliste für Ferien als kleine App, mit Kategorien und Häkchen.» Die App erscheint neben dem Chat. Dann: «Füge die Kategorie Elektronik hinzu und mach die Häkchen grösser.» Fertig.",links:[["Erste App Klick für Klick","erste",1],["Artikel Claude-Artefakte","hundertmark",0]]},
   tasks:[{id:"s5a",txt:"Bauen: Den Ablauf in sechs Schritten lesen",dur:"3 Min",go:"ablauf"},
+   {id:"s5f",txt:"Bauen: Deine erste App mit Claude, Klick für Klick",dur:"3 Min",go:"erste"},
    {id:"s5b",txt:"Bauprojekt 1: Packliste",dur:"15 Min",go:"b1"},
    {id:"s5c",txt:"Bauprojekt 2: Quiz zu KI-Begriffen",dur:"15 Min",go:"b2"},
    {id:"s5d",txt:"Bauprojekt 3: Entscheidungshilfe",dur:"25 Min",go:"b3"},
@@ -571,7 +584,7 @@ const BUILDS=[
  {id:"b1",lvl:5,title:"Packliste",tool:"A · Im Chat",text:"Deine erste App. Nach zwei Minuten siehst du sie und kannst sie benutzen.",prompt:"Baue mir eine Packliste für Ferien als kleine App. Kategorien: Kleidung, Hygiene, Dokumente, Elektronik. Ich will Dinge abhaken, hinzufügen und löschen. Gross und gut lesbar auf dem Handy."},
  {id:"b2",lvl:5,title:"Quiz zu KI-Begriffen",tool:"A · Im Chat",text:"Ein Lernspiel, das du gleich selbst spielen kannst.",prompt:"Baue mir ein Quiz mit zehn Fragen zu KI-Begriffen wie Prompt, Token, Halluzination und Agent. Mit Auswahlantworten, sofortiger Rückmeldung, einer kurzen Erklärung pro Frage und meiner Punktzahl am Schluss."},
  {id:"b3",lvl:5,title:"Entscheidungshilfe",tool:"A · Im Chat",text:"Ein Werkzeug für echte Entscheide, etwa zwischen drei Ferienorten oder Autos.",prompt:"Baue mir eine Entscheidungshilfe: Ich gebe Optionen und Kriterien selbst ein, gewichte die Kriterien und vergebe Punkte. Zeige das Ergebnis als Rangliste und Balkendiagramm."},
- {id:"b4",lvl:6,title:"Eine Webseite veröffentlichen",tool:"B · Teilen",text:"Bau eine Seite für einen echten Anlass und teile sie per Link. In Claude beim Artefakt auf «Veröffentlichen» tippen, Link kopieren, per WhatsApp schicken.",prompt:"Baue eine einfache, moderne Webseite für [Anlass, z. B. Gartenfest am 12. Juni]: Programm, Anfahrt, Kontakt. Gut lesbar auf dem Handy, freundliche Farben."},
+ {id:"b4",lvl:6,title:"Eine Webseite veröffentlichen",tool:"B · Teilen",text:"Bau eine Seite für einen echten Anlass und teile sie per Link. In Claude beim Artefakt auf «Veröffentlichen» tippen, Link kopieren, im privaten Fenster testen, per WhatsApp schicken.",prompt:"Baue eine einfache, moderne Webseite für [Anlass, z. B. Gartenfest am 12. Juni]: Programm, Anfahrt, Kontakt. Gut lesbar auf dem Handy, freundliche Farben."},
  {id:"b5",lvl:6,title:"App mit gespeicherten Daten",tool:"D · Ganze App",text:"Für Daten, die bleiben sollen, etwa eine Wein- oder Rezeptsammlung. Mit Lovable oder Bolt, beide haben eine Gratisstufe.",prompt:"Baue eine App für meine [Weinsammlung]. Ich will Einträge mit Name, Jahrgang, Region, Preis und Notiz erfassen, suchen und filtern. Mit Anmeldung, damit nur ich meine Daten sehe. Modern und gut auf dem Handy."},
  {id:"b6",lvl:6,title:"Dein eigenes Projekt",tool:"A bis D",text:"Such dir ein echtes Problem aus deinem Alltag und löse es mit allem, was du gelernt hast: interviewen lassen, bauen, nachbessern, veröffentlichen.",prompt:"Ich möchte [Ziel] mit einer kleinen App lösen. Interviewe mich zuerst, eine Frage nach der anderen. Fasse dann alles als kurze Beschreibung zusammen und baue die erste Version."}
 ];
@@ -711,7 +724,7 @@ function go(t){
   if(t==="mindset"){show("lernpfad");flash("mindset");return}
   if(t.startsWith("terms:")){termLvl=+t.split(":")[1];$("#termSearch").value="";renderTerms();setWissen("terms");show("wissen");return}
   if(t==="big"){setWissen("big");show("wissen");return}
-  if(t==="ablauf"||t==="werkzeuge"){show("bauen");flash("a-"+t);return}
+  if(t==="ablauf"||t==="werkzeuge"||t==="erste"){show("bauen");flash("a-"+t);return}
   if(VIEWS.includes(t)){show(t);return}
   if(PRACTICE.some(p=>p.id===t)){show("prompten");flash("x-"+t);return}
   if(BUILDS.some(b=>b.id===t)){show("bauen");flash("x-"+t);return}
