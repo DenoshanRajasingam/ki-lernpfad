@@ -402,6 +402,12 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 .gprev b{display:block;font-weight:500}
 .gprev .textbtn{padding-left:0}
 .cert .avatar{margin:0 auto 10px;width:96px;height:96px;box-shadow:var(--elev1)}
+
+/* Gesperrte Stufen im Demo-Modus */
+.stage-locked{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--surface-low);border-radius:var(--sh-l);padding:16px 18px;margin:12px 0}
+#stages .stage-locked{margin:0}
+.stage-locked .num{background:var(--surface-high);color:var(--on-surface-variant)}
+.stage-locked .sumtxt b{color:var(--on-surface-variant)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media (min-width:700px){h1{font-size:2.75rem}.card,.hero{padding:24px}}
 </style>
@@ -410,7 +416,7 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 <body>
 <div class="wrap">
 <div class="topbar"><span class="brand"><span class="ms fill">school</span>KI-Lernpfad</span><span class="topactions"><button class="iconbtn" id="profileBtn" aria-label="Profil" title="Profil"><span id="profileIcon" class="ms">account_circle</span></button><button class="iconbtn" id="themeBtn" aria-label="Dunkelmodus einschalten" title="Hell oder Dunkel"><span class="ms" id="themeIcon">dark_mode</span></button></span></div>
-<div class="demobar" id="demoBar" hidden><span><span class="ms">visibility</span>Demo-Modus: Beispiel-Fortschritt, nichts wird gespeichert.</span><button class="filled" id="demoCreate">Eigenes Profil erstellen</button></div>
+<div class="demobar" id="demoBar" hidden><span><span class="ms">visibility</span>Demo: Stufe 1 ohne Profil. Ab Stufe 2 brauchst du ein Profil, dein Fortschritt wird übernommen.</span><button class="filled" id="demoCreate">Eigenes Profil erstellen</button></div>
 <header>
   
   <h1 id="greet">Hallo, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.</h1>
@@ -622,7 +628,7 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
       <div class="field" id="g-pin2"><label for="gPin2">PIN bestätigen</label><input id="gPin2" type="password" autocomplete="new-password" maxlength="64"><span class="hint">Zur Sicherheit nochmals eingeben</span></div>
       <button type="submit" class="filled wide"><span class="ms">rocket_launch</span>Profil erstellen und loslegen</button>
     </form>
-    <button class="tonal wide" id="demoBtn" style="width:100%"><span class="ms">visibility</span>Erst mal die Demo ansehen</button>
+    <button class="tonal wide" id="demoBtn" style="width:100%"><span class="ms">visibility</span>Ohne Profil Stufe 1 ausprobieren</button>
     <div class="privacy"><span class="ms">lock</span><span>Dein Fortschritt wird mit deiner PIN verschlüsselt (AES-256) und bleibt nur auf diesem Gerät. Ohne PIN kann ihn niemand lesen. PIN vergessen heisst Fortschritt weg. Teilst du den Link, legt jede Person auf ihrem Gerät ihr eigenes Profil an.</span></div>
   </div>
 </div>
@@ -943,7 +949,7 @@ function renderPlan(){
   const budget=done._budget||15;
   $("#budget").innerHTML=[5,15,30,60].map(m=>`<button class="chip${m===budget?" on":""}" data-m="${m}">${m} Min</button>`).join("");
   document.querySelectorAll("#budget .chip").forEach(b=>b.onclick=()=>{done._budget=+b.dataset.m;save();renderPlan()});
-  const open=[];STAGES.forEach((s,i)=>s.tasks.forEach(t=>{if(!done[t.id]&&mins(t.dur)!==null)open.push({...t,st:i+1})}));
+  const open=[];STAGES.forEach((s,i)=>{if(DEMO&&i>0)return;s.tasks.forEach(t=>{if(!done[t.id]&&mins(t.dur)!==null)open.push({...t,st:i+1})})});
   let sum=0;const pl=[];
   for(const t of open){const d=mins(t.dur);if(sum+d>budget)break;pl.push(t);sum+=d}
   if(!pl.length&&open.length){pl.push(open[0]);sum=mins(open[0].dur)}
@@ -985,6 +991,7 @@ function renderHero(){
   $("#stairlbl").innerHTML=STAGES.map((s,i)=>`<span>${i+1}</span>`).join("");
   document.querySelectorAll("#stairs button").forEach(b=>b.onclick=()=>flash("stage-"+b.dataset.s));
   const btn=$("#nextBtn");
+  if(DEMO&&(!nx||nx.i>0)){btn.className="next";btn.innerHTML=`<span><small>Stufe 1 geschafft, stark!</small>Profil erstellen und Stufe 2 freischalten</span><span class="arr ms">lock_open</span>`;btn.onclick=()=>showGate();return}
   if(!nx){btn.className="next finished";btn.innerHTML=`<span><small>Alles geschafft</small>Deine Urkunde ansehen</span><span class="arr ms">arrow_forward</span>`;btn.onclick=()=>flash("cert");return}
   btn.className="next";
   btn.innerHTML=nx.kind==="task"?`<span><small>Nächster Schritt · Stufe ${nx.i+1} · ${esc(nx.item.dur)}</small>${esc(nx.item.txt)}</span><span class="arr ms">arrow_forward</span>`:`<span><small>Selbstcheck · Stufe ${nx.i+1}</small>Prüfe kurz, ob du es verstanden hast</span><span class="arr ms">arrow_forward</span>`;
@@ -997,9 +1004,11 @@ function quizRow(c){
   const z=QUIZ[c.id],ok=done[c.id];
   return `<div class="quiz${ok?" solved":""}" data-q="${c.id}"><div class="q">${esc(z.q)}</div><div class="opts">${z.o.map((o,k)=>`<button class="opt${ok&&k===z.a?" right":""}" data-k="${k}"${ok?" disabled":""}>${esc(o)}</button>`).join("")}</div><div class="fb">${ok?esc(z.x):""}</div></div>`;
 }
+function lockedStage(s,i){return `<div class="stage-locked" id="stage-${i}" style="${lc(i+1)}"><span class="num"><span class="ms">lock</span></span><span class="sumtxt"><b>${esc(s.t)}</b><span class="meta">Stufe ${i+1} · ${esc(s.lvlName)} · mit Profil freischalten</span></span><button class="tonal unlock"><span class="ms">lock_open</span>Freischalten</button></div>`}
 function renderStages(){
   const open=[...document.querySelectorAll("details.stage")].map(d=>d.open),nx=nextStep();
   $("#stages").innerHTML=STAGES.map((s,i)=>{
+    if(DEMO&&i>0)return lockedStage(s,i);
     const it=items(s),c=it.filter(x=>done[x.id]).length,all=c===it.length,isOpen=open.length?open[i]:(nx?nx.i===i:false);
     return`<details class="stage${all?" done":""}" id="stage-${i}" style="${lc(i+1)}"${isOpen?" open":""}>
      <summary><span class="num">${all?'<span class="ms">check</span>':i+1}</span><span class="sumtxt"><b>${esc(s.t)}</b><span class="meta">Stufe ${i+1} · ${esc(s.lvlName)} · ${esc(s.h)} · ${c}/${it.length}</span><span class="minibar"><i style="width:${c/it.length*100}%"></i></span></span><span class="chev ms">expand_more</span></summary>
@@ -1015,6 +1024,7 @@ function renderStages(){
       ${s.checks.map(quizRow).join("")}
       <div class="donebox"><span class="ms fill">celebration</span><span>${esc(s.done)}</span></div>
      </div></details>`}).join("");
+  document.querySelectorAll("#stages .unlock").forEach(b=>b.onclick=()=>showGate());
   document.querySelectorAll("#stages input").forEach(cb=>cb.onchange=()=>onCheck(cb));
   document.querySelectorAll("#stages .quiz:not(.solved) .opt").forEach(b=>b.onclick=()=>{
     const box=b.closest(".quiz"),id=box.dataset.q,z=QUIZ[id];
@@ -1181,7 +1191,7 @@ async function setPin(id,pin){
 }
 
 function curProfile(){return DEMO?{user:"Demo-Gast",avatar:"demo"}:reg.profiles[reg.active]||null}
-function demoState(){const d={};STAGES.slice(0,2).forEach(s=>items(s).forEach(i=>{d[i.id]=true}));STAGES[2].tasks.slice(0,2).forEach(t=>{d[t.id]=true});d.d1a=true;d.d2b=true;d._streak=3;d._last=today();d["_ch"+today()]=true;return d}
+function demoState(){return {}}
 function setErr(id,bad,msg,ok){const f=$("#"+id);if(!f)return;f.classList.toggle("err",bad);f.querySelector(".hint").textContent=bad?msg:ok}
 function validate(pre,user,pin,pin2,selfId,pinRequired){
   const taken=Object.entries(reg.profiles).some(([id,p])=>id!==selfId&&p.user.toLowerCase()===user.toLowerCase());
@@ -1202,7 +1212,7 @@ function renderProfile(){
   if(pr){pi.className="avatar img";pi.innerHTML=monkeySVG(avatarKey(pr));$("#profileBtn").title=DEMO?"Demo beenden":"@"+pr.user;$("#profileBtn").setAttribute("aria-label",DEMO?"Demo beenden":`Profil von ${pr.user}`)}
   else{pi.className="ms";pi.textContent="account_circle"}
   const hu=$("#heroUser");
-  hu.innerHTML=pr?`<span class="avatar lg img">${monkeySVG(avatarKey(pr))}</span><span class="t"><b>${DEMO?"Demo-Gast":"@"+esc(pr.user)}</b><span class="meta">${DEMO?"Nur zum Anschauen":"Fortschritt verschlüsselt gespeichert"}</span></span><button class="hbtn" id="heroEdit"><span class="ms">${DEMO?"person_add":"edit"}</span>${DEMO?"Eigenes Profil":"Profil bearbeiten"}</button>`:"";
+  hu.innerHTML=pr?`<span class="avatar lg img">${monkeySVG(avatarKey(pr))}</span><span class="t"><b>${DEMO?"Demo-Gast":"@"+esc(pr.user)}</b><span class="meta">${DEMO?"Demo · nur Stufe 1":"Fortschritt verschlüsselt gespeichert"}</span></span><button class="hbtn" id="heroEdit"><span class="ms">${DEMO?"person_add":"edit"}</span>${DEMO?"Eigenes Profil":"Profil bearbeiten"}</button>`:"";
   const he=$("#heroEdit");if(he)he.onclick=openProfile;
   $("#demoBar").hidden=!DEMO;
 }
@@ -1219,7 +1229,8 @@ function renderGate(){
     btn.onclick=tryLogin;inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();tryLogin()}};
   });
 }
-function showGate(){DEMO=false;renderGate();$("#gate").hidden=false;$("#demoBar").hidden=true;window.scrollTo({top:0})}
+let DEMO_DONE=null;
+function showGate(){if(DEMO&&Object.keys(done).length)DEMO_DONE=done;DEMO=false;renderGate();$("#gate").hidden=false;$("#demoBar").hidden=true;window.scrollTo({top:0})}
 function afterLogin(){$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();show("lernpfad")}
 let MUST_SET_PIN=false;
 async function login(id,pin){
@@ -1249,12 +1260,12 @@ $("#gateForm").onsubmit=async e=>{
   const id="p"+Date.now().toString(36);
   const legacy=Object.keys(reg.profiles).length===0?ST.get(LEGACY):null;
   reg.profiles[id]={user,avatar:gKey(),created:today()};
-  reg.active=id;DEMO=false;done=legacy||{};
+  reg.active=id;DEMO=false;done=DEMO_DONE||legacy||{};const carried=!!DEMO_DONE;DEMO_DONE=null;
   await setPin(id,pin);if(legacy)ST.del(LEGACY);
   sb.disabled=false;["gUser","gPin","gPin2"].forEach(f=>{$("#"+f).value=""});gExtra="";gPreview();
-  afterLogin();confetti();toast(`Willkommen an Bord, ${user}! Die Roboter haben dich jetzt auf dem Radar. Im guten Sinn.`);
+  afterLogin();confetti();toast(carried?`Willkommen an Bord, ${user}! Dein Fortschritt aus der Demo ist übernommen. Stufe 2 ist frei.`:`Willkommen an Bord, ${user}! Die Roboter haben dich jetzt auf dem Radar. Im guten Sinn.`);
 };
-$("#demoBtn").onclick=()=>{DEMO=true;SESSION_KEY=null;done=demoState();afterLogin();toast("Demo-Modus: Schau dich um. Hier geht nichts kaputt, und nichts wird gespeichert.")};
+$("#demoBtn").onclick=()=>{DEMO=true;SESSION_KEY=null;done=demoState();afterLogin();toast("Demo: Probier Stufe 1 aus. Für die Stufen 2 bis 6 brauchst du ein Profil.")};
 $("#demoCreate").onclick=()=>showGate();
 let dlgKey="";
 function openProfile(){
