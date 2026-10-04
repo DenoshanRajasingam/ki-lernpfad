@@ -604,11 +604,11 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
   <button data-v="wissen"><span class="ind"><span class="ms">menu_book</span></span>Wissen</button>
   <button data-v="medien"><span class="ind"><span class="ms">play_circle</span></span>Medien</button>
 </nav>
-<div class="gate" id="gate" hidden>
+<div class="gate" id="gate">
   <div class="gatebox">
     <div class="gatelogo"><span class="ms">school</span></div>
     <h1>Willkommen beim KI-Lernpfad</h1>
-    <p class="lead">Sechs Stufen vom ersten Prompt bis zur eigenen App, spielerisch und auf Deutsch. Erstell zuerst dein Profil, damit Punkte, Abzeichen und Fortschritt dir gehören.</p>
+    <p class="lead">Sechs Stufen vom ersten Prompt bis zur eigenen App, spielerisch und auf Deutsch. Erstell zuerst dein Profil mit Benutzername und PIN. Dein Fortschritt wird darin automatisch gespeichert.</p>
     <div id="gateLogin" hidden>
       <h3>Anmelden</h3>
       <div class="plist" id="gateList"></div>
@@ -616,15 +616,14 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
     </div>
     <form class="gatecard" id="gateForm" novalidate>
       <h3 id="gateFormTitle">Profil erstellen</h3>
-      <div class="gprev"><span class="avatar xl img" id="gAvatar"></span><div><b>Dein Roboter</b><span class="meta">Entsteht automatisch aus deinem Benutzernamen.</span><br><button type="button" class="textbtn" id="gReroll"><span class="ms">casino</span>Neu würfeln</button></div></div>
+      <div class="gprev"><span class="avatar xl img" id="gAvatar"></span><div><b>Dein Affe</b><span class="meta">Entsteht automatisch aus deinem Benutzernamen.</span><br><button type="button" class="textbtn" id="gReroll"><span class="ms">casino</span>Neu würfeln</button></div></div>
       <div class="field" id="g-user"><label for="gUser">Benutzername</label><input id="gUser" autocomplete="username" maxlength="20" placeholder="z. B. ki_entdecker"><span class="hint">3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich</span></div>
-      <div class="field" id="g-first"><label for="gFirst">Vorname</label><input id="gFirst" autocomplete="given-name" maxlength="40"><span class="hint">So begrüsst dich die Seite</span></div>
-      <div class="field" id="g-last"><label for="gLast">Name</label><input id="gLast" autocomplete="family-name" maxlength="40"><span class="hint">Erscheint auf deiner Urkunde</span></div>
-      <div class="field" id="g-pin"><label for="gPin">PIN, freiwillig</label><input id="gPin" inputmode="numeric" maxlength="6" placeholder="4 bis 6 Ziffern"><span class="hint">Schützt dein Profil vor neugierigen Mitbenutzern, nicht vor Profis</span></div>
+      <div class="field" id="g-pin"><label for="gPin">PIN</label><input id="gPin" type="password" autocomplete="new-password" maxlength="64"><span class="hint">Mindestens 8 Zeichen. Gut merken!</span></div>
+      <div class="field" id="g-pin2"><label for="gPin2">PIN bestätigen</label><input id="gPin2" type="password" autocomplete="new-password" maxlength="64"><span class="hint">Zur Sicherheit nochmals eingeben</span></div>
       <button type="submit" class="filled wide"><span class="ms">rocket_launch</span>Profil erstellen und loslegen</button>
     </form>
     <button class="tonal wide" id="demoBtn" style="width:100%"><span class="ms">visibility</span>Erst mal die Demo ansehen</button>
-    <div class="privacy"><span class="ms">lock</span><span>Profile und Fortschritt bleiben nur auf diesem Gerät gespeichert und werden nirgends hingeschickt. Teilst du den Link, legt jede Person auf ihrem eigenen Gerät ihr eigenes Profil an.</span></div>
+    <div class="privacy"><span class="ms">lock</span><span>Dein Fortschritt wird mit deiner PIN verschlüsselt (AES-256) und bleibt nur auf diesem Gerät. Ohne PIN kann ihn niemand lesen. PIN vergessen heisst Fortschritt weg. Teilst du den Link, legt jede Person auf ihrem Gerät ihr eigenes Profil an.</span></div>
   </div>
 </div>
 <div class="scrim" id="profileDlg" hidden>
@@ -632,9 +631,7 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
     <div class="dhead"><span class="avatar xl img" id="dlgAvatar"></span><div><h2 id="dlgTitle">Dein Profil</h2><span class="meta" id="dlgSub"></span></div></div>
     <div class="dactions" style="justify-content:flex-start;margin:-8px 0 10px"><button type="button" class="textbtn" id="pReroll"><span class="ms">casino</span>Neues Bild würfeln</button></div>
     <div class="field" id="f-user"><label for="pUser">Benutzername</label><input id="pUser" autocomplete="username" maxlength="20"><span class="hint">3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich</span></div>
-    <div class="field" id="f-first"><label for="pFirst">Vorname</label><input id="pFirst" autocomplete="given-name" maxlength="40"><span class="hint">So begrüsst dich die Seite</span></div>
-    <div class="field" id="f-last"><label for="pLast">Name</label><input id="pLast" autocomplete="family-name" maxlength="40"><span class="hint">Erscheint auf deiner Urkunde</span></div>
-    <div class="field" id="f-pin"><label for="pPin">Neue PIN, freiwillig</label><input id="pPin" inputmode="numeric" maxlength="6" placeholder="leer lassen = unverändert"><span class="hint" id="pinHint">4 bis 6 Ziffern</span></div>
+    <div class="field" id="f-pin"><label for="pPin">Neue PIN</label><input id="pPin" type="password" autocomplete="new-password" maxlength="64" placeholder="leer lassen = unverändert"><span class="hint">Mindestens 8 Zeichen, leer lassen = unverändert</span></div>
     <div class="dactions"><button type="button" class="textbtn" id="pCancel">Abbrechen</button><button type="submit" class="filled">Speichern</button></div>
     <div class="dsep"></div>
     <div class="dactions" style="justify-content:space-between">
@@ -893,8 +890,7 @@ const ST={get(k){for(const t of ["localStorage","sessionStorage"]){try{const v=w
 const PKEY="ki-lernpfad-profile-v2",LEGACY="ki-lernpfad-alfredo-v1",progKey=id=>"ki-lernpfad-p-"+id;
 let reg=ST.get(PKEY)||{profiles:{},active:null};if(!reg.profiles)reg={profiles:{},active:null};
 let DEMO=false;
-let done=reg.active&&reg.profiles[reg.active]?(ST.get(progKey(reg.active))||{}):{};
-function save(){if(DEMO||!reg.active)return;ST.set(progKey(reg.active),done)}
+let done={};
 function saveReg(){ST.set(PKEY,reg)}
 
 /* ===== Helfer ===== */
@@ -956,9 +952,9 @@ function renderPlan(){
 }
 function renderCert(xp){
   const all=STAGES.every(stageDone),c=$("#cert");c.hidden=!all;if(!all)return;
-  const inp=$("#certName"),pr=curProfile();if(document.activeElement!==inp)inp.value=done._name||(pr?`${pr.first} ${pr.last}`.trim():"");
+  const inp=$("#certName"),pr=curProfile();if(document.activeElement!==inp)inp.value=done._name||(pr&&!DEMO?pr.user:"");
   inp.oninput=()=>{done._name=inp.value;save()};
-  $("#certAvatar").innerHTML=robotSVG(avatarKey(pr||{user:"gast"}));
+  $("#certAvatar").innerHTML=monkeySVG(avatarKey(pr||{user:"gast"}));
   $("#certMeta").textContent=`${new Date().toLocaleDateString("de-CH",{day:"numeric",month:"long",year:"numeric"})} · ${xp} Punkte · ${STAGES.length} von ${STAGES.length} Stufen`;
 }
 function renderGame(){
@@ -1113,73 +1109,100 @@ try{const t=localStorage.getItem("ki-lernpfad-theme");if(t)applyTheme(t)}catch(e
 applyTheme();
 $("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;const t=dark?"light":"dark";applyTheme(t);try{localStorage.setItem("ki-lernpfad-theme",t)}catch(e){}};
 
-/* ===== Lustige Roboter-Avatare, aus dem Benutzernamen erzeugt ===== */
+/* ===== Lustige Affen-Avatare, aus dem Benutzernamen erzeugt ===== */
 function seedOf(str){let x=2166136261;for(const c of String(str)){x^=c.charCodeAt(0);x=Math.imul(x,16777619)}return x>>>0}
 function rng(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-function robotSVG(key){
+function monkeySVG(key){
   const r=rng(seedOf(key||"gast")),pick=a=>a[Math.floor(r()*a.length)];
   const bg=pick(["#ffd8e4","#d1e4ff","#c8f2e0","#ffe3b3","#e8ddff","#ffdbcf","#d9f2ff","#f1f8c8"]);
-  const body=pick(["#4355b9","#00897b","#e65100","#c2185b","#6a1b9a","#2e7d32","#f9a825","#0277bd","#5d4037","#d84315"]);
-  const rx=pick([10,16,24]),ink="#1b1b21";
-  const ant=pick([
-    `<line x1="48" y1="26" x2="48" y2="12" stroke="${ink}" stroke-width="3"/><circle cx="48" cy="11" r="5" fill="${pick(["#ff5252","#ffd600","#00e676","#40c4ff"])}"/>`,
-    `<path d="M50 8 L42 20 H50 L45 28" fill="none" stroke="#ffb300" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>`,
-    `<line x1="48" y1="26" x2="48" y2="16" stroke="${ink}" stroke-width="3"/><ellipse cx="38" cy="15" rx="10" ry="3.5" fill="#ff7043"/><ellipse cx="58" cy="15" rx="10" ry="3.5" fill="#29b6f6"/><circle cx="48" cy="15" r="3" fill="${ink}"/>`,
-    `<path d="M30 28 L48 10 L66 28 Z" fill="${pick(["#ff4081","#7c4dff","#00bfa5"])}"/><circle cx="48" cy="9" r="4" fill="#ffd600"/>`,
-    `<line x1="36" y1="27" x2="30" y2="15" stroke="${ink}" stroke-width="3"/><line x1="60" y1="27" x2="66" y2="15" stroke="${ink}" stroke-width="3"/><circle cx="30" cy="14" r="4" fill="#ff5252"/><circle cx="66" cy="14" r="4" fill="#ff5252"/>`
-  ]);
+  const fur=pick([["#8d5524","#5d3a1a"],["#a0522d","#6b3519"],["#c68642","#8a5a2b"],["#6d4c41","#3e2723"],["#9e9e9e","#616161"],["#e07a2e","#a34f12"],["#4e342e","#2b1b17"]]);
+  const face=pick(["#f6d5b0","#f3c89b","#ffe0c2","#eac39b"]),ink="#2b1b17";
+  const ears=`<circle cx="18" cy="50" r="12" fill="${fur[0]}"/><circle cx="78" cy="50" r="12" fill="${fur[0]}"/><circle cx="18" cy="50" r="7" fill="${face}"/><circle cx="78" cy="50" r="7" fill="${face}"/>`;
+  const head=`<circle cx="48" cy="50" r="30" fill="${fur[0]}"/><path d="M36 22 q4 -8 8 0 q4 -9 8 0" fill="${fur[1]}"/>`;
+  const mask=`<path d="M48 40 C40 28 22 34 26 50 C28 60 34 62 38 64 C30 72 36 84 48 84 C60 84 66 72 58 64 C62 62 68 60 70 50 C74 34 56 28 48 40 Z" fill="${face}"/>`;
   const eyes=pick([
-    `<circle cx="38" cy="48" r="4.5" fill="${ink}"/><circle cx="58" cy="48" r="4.5" fill="${ink}"/><circle cx="39.5" cy="46.5" r="1.5" fill="#fff"/><circle cx="59.5" cy="46.5" r="1.5" fill="#fff"/>`,
-    `<path d="M33 50 q5 -7 10 0 M53 50 q5 -7 10 0" fill="none" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`,
-    `<rect x="30" y="43" width="15" height="9" rx="3" fill="${ink}"/><rect x="51" y="43" width="15" height="9" rx="3" fill="${ink}"/><line x1="45" y1="46" x2="51" y2="46" stroke="${ink}" stroke-width="2"/><rect x="32" y="44.5" width="5" height="2" rx="1" fill="#fff" opacity=".7"/>`,
-    `<circle cx="48" cy="48" r="8" fill="#fff" stroke="${ink}" stroke-width="2"/><circle cx="49" cy="48" r="4" fill="${ink}"/><circle cx="50.5" cy="46.5" r="1.3" fill="#fff"/>`,
-    `<circle cx="38" cy="48" r="4.5" fill="${ink}"/><path d="M53 49 h10" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`,
-    `<circle cx="38" cy="48" r="6" fill="#fff" stroke="${ink}" stroke-width="2"/><circle cx="58" cy="48" r="6" fill="#fff" stroke="${ink}" stroke-width="2"/><circle cx="40" cy="49" r="2.5" fill="${ink}"/><circle cx="56" cy="47" r="2.5" fill="${ink}"/>`
+    `<circle cx="39" cy="48" r="4.5" fill="${ink}"/><circle cx="57" cy="48" r="4.5" fill="${ink}"/><circle cx="40.5" cy="46.5" r="1.6" fill="#fff"/><circle cx="58.5" cy="46.5" r="1.6" fill="#fff"/>`,
+    `<path d="M34 49 q5 -6 10 0 M52 49 q5 -6 10 0" fill="none" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`,
+    `<circle cx="39" cy="48" r="6" fill="#fff" stroke="${ink}" stroke-width="1.5"/><circle cx="57" cy="48" r="6" fill="#fff" stroke="${ink}" stroke-width="1.5"/><circle cx="41" cy="49" r="2.8" fill="${ink}"/><circle cx="55" cy="47" r="2.8" fill="${ink}"/>`,
+    `<circle cx="39" cy="48" r="4.5" fill="${ink}"/><path d="M52 48 h10" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`,
+    `<path d="M34 46 l10 4 M62 46 l-10 4" stroke="${ink}" stroke-width="2.5" stroke-linecap="round"/><circle cx="40" cy="51" r="3.5" fill="${ink}"/><circle cx="56" cy="51" r="3.5" fill="${ink}"/>`
   ]);
+  const nose=`<ellipse cx="45" cy="60" rx="1.8" ry="1.3" fill="${ink}"/><ellipse cx="51" cy="60" rx="1.8" ry="1.3" fill="${ink}"/>`;
   const mouth=pick([
-    `<path d="M39 58 q9 7 18 0" fill="none" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`,
-    `<rect x="38" y="56" width="20" height="7" rx="2" fill="#fff" stroke="${ink}" stroke-width="2"/><line x1="44.5" y1="56" x2="44.5" y2="63" stroke="${ink}" stroke-width="1.5"/><line x1="51.5" y1="56" x2="51.5" y2="63" stroke="${ink}" stroke-width="1.5"/>`,
-    `<ellipse cx="48" cy="59.5" rx="4" ry="4.5" fill="${ink}"/>`,
-    `<polyline points="38,58 42,61 46,58 50,61 54,58 58,61" fill="none" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>`,
-    `<path d="M39 57 q9 8 18 0 z" fill="${ink}"/><path d="M45 61 q3 4 6 0" fill="#ff6e8a"/>`
+    `<path d="M38 68 q10 10 20 0" fill="none" stroke="${ink}" stroke-width="2.8" stroke-linecap="round"/>`,
+    `<path d="M38 67 q10 13 20 0 z" fill="${ink}"/><path d="M44 72 q4 4 8 0" fill="#ff6e8a"/>`,
+    `<ellipse cx="48" cy="70" rx="4" ry="5" fill="${ink}"/>`,
+    `<path d="M38 69 q10 8 20 0" fill="none" stroke="${ink}" stroke-width="2.8" stroke-linecap="round"/><rect x="45" y="70.5" width="6" height="4" rx="1" fill="#fff" stroke="${ink}" stroke-width="1"/>`,
+    `<path d="M39 70 q4 -3 9 0 q5 3 9 0" fill="none" stroke="${ink}" stroke-width="2.8" stroke-linecap="round"/><path d="M52 71 q3 5 6 0" fill="#ff6e8a"/>`
   ]);
   const extra=pick([
     "",
-    `<path d="M40 82 L48 78 L56 82 L56 74 L48 78 L40 74 Z" fill="#ff4081"/>`,
-    `<path d="M16 52 q0 -30 32 -30 q32 0 32 30" fill="none" stroke="${ink}" stroke-width="3"/><rect x="11" y="46" width="9" height="16" rx="4" fill="${ink}"/><rect x="76" y="46" width="9" height="16" rx="4" fill="${ink}"/>`,
-    `<circle cx="31" cy="59" r="3.5" fill="#ff8a80" opacity=".8"/><circle cx="65" cy="59" r="3.5" fill="#ff8a80" opacity=".8"/>`
+    `<rect x="30" y="42" width="16" height="10" rx="4" fill="${ink}"/><rect x="50" y="42" width="16" height="10" rx="4" fill="${ink}"/><line x1="46" y1="45" x2="50" y2="45" stroke="${ink}" stroke-width="2"/><rect x="32" y="43.5" width="5" height="2" rx="1" fill="#fff" opacity=".7"/>`,
+    `<path d="M34 24 L48 2 L62 24 Z" fill="${pick(["#ff4081","#7c4dff","#00bfa5","#ffab00"])}"/><circle cx="48" cy="3" r="4" fill="#ffd600"/><path d="M38 18 h20" stroke="#fff" stroke-width="2" opacity=".7"/>`,
+    `<path d="M16 46 q0 -36 32 -36 q32 0 32 36" fill="none" stroke="${ink}" stroke-width="3.5"/><rect x="9" y="42" width="10" height="17" rx="4" fill="#e53935"/><rect x="77" y="42" width="10" height="17" rx="4" fill="#e53935"/>`,
+    `<path d="M70 86 q14 -6 18 -26 q2 -4 -2 -3 q-4 18 -18 24 z" fill="#ffd600" stroke="#c49000" stroke-width="1.5"/><path d="M86 57 l2 -4" stroke="#6d4c41" stroke-width="2.5" stroke-linecap="round"/>`,
+    `<path d="M38 86 L48 81 L58 86 L58 76 L48 81 L38 76 Z" fill="#ff4081"/>`,
+    `<circle cx="32" cy="62" r="4" fill="#ff8a80" opacity=".75"/><circle cx="64" cy="62" r="4" fill="#ff8a80" opacity=".75"/>`,
+    `<path d="M26 26 q22 -16 44 0 l-2 6 q-20 -10 -40 0 z" fill="${pick(["#1e88e5","#43a047","#e53935"])}"/><path d="M60 24 h18 v4 h-18 z" fill="${pick(["#1565c0","#2e7d32","#b71c1c"])}"/>`
   ]);
-  return `<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="96" height="96" fill="${bg}"/>${ant}<rect x="14" y="44" width="6" height="14" rx="3" fill="${ink}"/><rect x="76" y="44" width="6" height="14" rx="3" fill="${ink}"/><rect x="18" y="26" width="60" height="50" rx="${rx}" fill="${body}"/><rect x="25" y="35" width="46" height="34" rx="${Math.min(rx,14)}" fill="#f5f5f7"/>${eyes}${mouth}${extra}<rect x="34" y="76" width="28" height="20" rx="6" fill="${body}"/><circle cx="48" cy="85" r="3" fill="#ffd600"/></svg>`;
+  return `<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="96" height="96" fill="${bg}"/>${ears}${head}${mask}${eyes}${nose}${mouth}${extra}</svg>`;
 }
 const avatarKey=p=>p.avatar||p.user||"gast";
 
-/* ===== Profile, Anmelden, Demo ===== */
+/* ===== Profile, Anmelden, Demo, Verschlüsselung ===== */
 const DEFAULT_GREET="Hallo, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.";
-const USER_RE=/^[A-Za-z0-9ÄÖÜäöüéèàç._-]{3,20}$/,PIN_RE=/^\d{4,6}$/;
+const USER_RE=/^[A-Za-z0-9ÄÖÜäöüéèàç._-]{3,20}$/,PIN_MIN=8,KDF_ITER=310000,SKEY="ki-lernpfad-session";
 const hsh=(id,pin)=>{let x=5381;for(const c of id+"|"+pin)x=((x<<5)+x+c.charCodeAt(0))|0;return(x>>>0).toString(36)};
-const initials=p=>(((p.first||"")[0]||"")+((p.last||"")[0]||"")||(p.user||"?")[0]).toUpperCase();
-function curProfile(){return DEMO?{user:"demo",first:"Demo",last:"Gast"}:reg.profiles[reg.active]||null}
+/* Krypto: PBKDF2-SHA-256 leitet aus der PIN einen AES-256-GCM-Schlüssel ab. Die PIN wird nie gespeichert. */
+const enc8=new TextEncoder(),dec8=new TextDecoder();
+const b64=u=>{u=new Uint8Array(u);let s="";for(let i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s)};
+const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const CRYPTO_OK=!!(window.crypto&&crypto.subtle);
+async function deriveKey(pin,salt){const base=await crypto.subtle.importKey("raw",enc8.encode(pin),"PBKDF2",false,["deriveKey"]);return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:KDF_ITER,hash:"SHA-256"},base,{name:"AES-GCM",length:256},true,["encrypt","decrypt"])}
+async function encryptObj(key,obj){const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},key,enc8.encode(JSON.stringify(obj)));return{iv:b64(iv),data:b64(ct)}}
+async function decryptObj(key,iv,data){const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(iv)},key,unb64(data));return JSON.parse(dec8.decode(pt))}
+let SESSION_KEY=null,saving=Promise.resolve();
+async function rememberSession(id,key){try{const raw=await crypto.subtle.exportKey("raw",key);sessionStorage.setItem(SKEY,JSON.stringify({id,k:b64(raw)}))}catch(e){}}
+function forgetSession(){try{sessionStorage.removeItem(SKEY)}catch(e){}}
+async function resumeSession(){
+  try{const s=JSON.parse(sessionStorage.getItem(SKEY)||"null");if(!s||!reg.profiles[s.id]||!reg.profiles[s.id].salt)return false;
+    const key=await crypto.subtle.importKey("raw",unb64(s.k),{name:"AES-GCM"},true,["encrypt","decrypt"]);
+    const p=reg.profiles[s.id];done=await decryptObj(key,p.iv,p.data);SESSION_KEY=key;reg.active=s.id;saveReg();return true}catch(e){return false}
+}
+function save(){
+  if(DEMO||!reg.active||!SESSION_KEY)return;
+  const id=reg.active,key=SESSION_KEY,snap=JSON.parse(JSON.stringify(done));
+  saving=saving.then(async()=>{const e=await encryptObj(key,snap);if(reg.profiles[id]){Object.assign(reg.profiles[id],e);saveReg()}}).catch(()=>{});
+}
+async function setPin(id,pin){
+  const salt=crypto.getRandomValues(new Uint8Array(16)),key=await deriveKey(pin,salt);
+  const p=reg.profiles[id];p.salt=b64(salt);delete p.pin;delete p.progress;ST.del(progKey(id));
+  SESSION_KEY=key;Object.assign(p,await encryptObj(key,done));saveReg();await rememberSession(id,key);
+}
+
+function curProfile(){return DEMO?{user:"Demo-Gast",avatar:"demo"}:reg.profiles[reg.active]||null}
 function demoState(){const d={};STAGES.slice(0,2).forEach(s=>items(s).forEach(i=>{d[i.id]=true}));STAGES[2].tasks.slice(0,2).forEach(t=>{d[t.id]=true});d.d1a=true;d.d2b=true;d._streak=3;d._last=today();d["_ch"+today()]=true;return d}
-function setErr(id,bad,msg,ok){const f=$("#"+id);f.classList.toggle("err",bad);if(msg!==undefined)f.querySelector(".hint").textContent=bad?msg:ok}
-function validate(pre,user,first,last,pin,selfId){
+function setErr(id,bad,msg,ok){const f=$("#"+id);if(!f)return;f.classList.toggle("err",bad);f.querySelector(".hint").textContent=bad?msg:ok}
+function validate(pre,user,pin,pin2,selfId,pinRequired){
   const taken=Object.entries(reg.profiles).some(([id,p])=>id!==selfId&&p.user.toLowerCase()===user.toLowerCase());
-  const bu=!USER_RE.test(user)||taken,bf=!first,bl=!last,bp=pin!==""&&!PIN_RE.test(pin);
+  const bu=!USER_RE.test(user)||taken;
+  const bp=(pinRequired||pin!=="")&&pin.length<PIN_MIN;
+  const bp2=pre==="g"&&!bp&&pin!==pin2;
   setErr(pre+"-user",bu,taken?"Diesen Benutzernamen gibt es auf diesem Gerät schon":"Bitte 3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich","3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich");
-  setErr(pre+"-first",bf,"Bitte gib deinen Vornamen ein","So begrüsst dich die Seite");
-  setErr(pre+"-last",bl,"Bitte gib deinen Namen ein","Erscheint auf deiner Urkunde");
-  setErr(pre+"-pin",bp,"Die PIN hat 4 bis 6 Ziffern",pre==="g"?"Schützt dein Profil vor neugierigen Mitbenutzern, nicht vor Profis":"4 bis 6 Ziffern");
-  const first_bad=[[bu,"user"],[bf,"first"],[bl,"last"],[bp,"pin"]].find(x=>x[0]);
-  if(first_bad){$("#"+pre+"-"+first_bad[1]+" input").focus();return false}
+  setErr(pre+"-pin",bp,`Die PIN braucht mindestens ${PIN_MIN} Zeichen`,pre==="g"?`Mindestens ${PIN_MIN} Zeichen. Gut merken, ohne PIN ist der Fortschritt nicht lesbar.`:(pinRequired?`Bitte lege eine neue PIN mit mindestens ${PIN_MIN} Zeichen fest`:`Mindestens ${PIN_MIN} Zeichen, leer lassen = unverändert`));
+  setErr(pre+"-pin2",bp2,"Die beiden PINs stimmen nicht überein","Zur Sicherheit nochmals eingeben");
+  const fb=[[bu,"user"],[bp,"pin"],[bp2,"pin2"]].find(x=>x[0]);
+  if(fb){$("#"+pre+"-"+fb[1]+" input").focus();return false}
   return true;
 }
 function renderProfile(){
   const pr=curProfile();
-  $("#greet").textContent=pr&&!DEMO?`Hallo ${pr.first}, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.`:DEFAULT_GREET;
+  $("#greet").textContent=pr&&!DEMO?`Hallo ${pr.user}, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.`:DEFAULT_GREET;
   const pi=$("#profileIcon");
-  if(pr){pi.className="avatar img";pi.innerHTML=robotSVG(avatarKey(pr));$("#profileBtn").title=DEMO?"Demo beenden":"@"+pr.user;$("#profileBtn").setAttribute("aria-label",DEMO?"Demo beenden":`Profil von ${pr.user}`)}
+  if(pr){pi.className="avatar img";pi.innerHTML=monkeySVG(avatarKey(pr));$("#profileBtn").title=DEMO?"Demo beenden":"@"+pr.user;$("#profileBtn").setAttribute("aria-label",DEMO?"Demo beenden":`Profil von ${pr.user}`)}
   else{pi.className="ms";pi.textContent="account_circle"}
   const hu=$("#heroUser");
-  hu.innerHTML=pr?`<span class="avatar lg img">${robotSVG(avatarKey(pr))}</span><span class="t"><b>${esc(pr.first)} ${esc(pr.last)}</b><span class="meta">@${esc(pr.user)}</span></span><button class="hbtn" id="heroEdit"><span class="ms">${DEMO?"person_add":"edit"}</span>${DEMO?"Eigenes Profil":"Profil bearbeiten"}</button>`:"";
+  hu.innerHTML=pr?`<span class="avatar lg img">${monkeySVG(avatarKey(pr))}</span><span class="t"><b>${DEMO?"Demo-Gast":"@"+esc(pr.user)}</b><span class="meta">${DEMO?"Nur zum Anschauen":"Fortschritt verschlüsselt gespeichert"}</span></span><button class="hbtn" id="heroEdit"><span class="ms">${DEMO?"person_add":"edit"}</span>${DEMO?"Eigenes Profil":"Profil bearbeiten"}</button>`:"";
   const he=$("#heroEdit");if(he)he.onclick=openProfile;
   $("#demoBar").hidden=!DEMO;
 }
@@ -1187,71 +1210,84 @@ function renderGate(){
   const ids=Object.keys(reg.profiles);
   $("#gateLogin").hidden=!ids.length;
   $("#gateFormTitle").textContent=ids.length?"Neues Profil erstellen":"Profil erstellen";
-  $("#gateList").innerHTML=ids.map(id=>{const p=reg.profiles[id],d=ST.get(progKey(id))||{};let n=0;STAGES.forEach(s=>items(s).forEach(i=>{if(d[i.id])n++}));const all=STAGES.flatMap(items).length;
-    return `<div class="pitem" data-id="${id}"><button class="pbtn" type="button"><span class="avatar lg img">${robotSVG(avatarKey(p))}</span><span class="t"><b>${esc(p.first)} ${esc(p.last)}</b><span class="meta">@${esc(p.user)} · ${Math.round(n/all*100)}% geschafft${p.pin?" · mit PIN":""}</span></span><span class="ms">${p.pin?"lock":"arrow_forward"}</span></button><div class="pinrow" hidden><input type="password" inputmode="numeric" maxlength="6" placeholder="PIN" aria-label="PIN für ${esc(p.user)}"><button type="button" class="filled">Anmelden</button></div></div>`}).join("");
+  $("#gateList").innerHTML=ids.map(id=>{const p=reg.profiles[id];
+    return `<div class="pitem" data-id="${id}"><button class="pbtn" type="button"><span class="avatar lg img">${monkeySVG(avatarKey(p))}</span><span class="t"><b>@${esc(p.user)}</b><span class="meta">${p.salt?"Verschlüsselt, PIN nötig":"Ältere Version, PIN nötig"}</span></span><span class="ms">lock</span></button><div class="pinrow" hidden><input type="password" maxlength="64" placeholder="PIN" autocomplete="current-password" aria-label="PIN für ${esc(p.user)}"><button type="button" class="filled">Anmelden</button></div></div>`}).join("");
   document.querySelectorAll("#gateList .pitem").forEach(it=>{
-    const id=it.dataset.id,p=reg.profiles[id],row=it.querySelector(".pinrow"),inp=row.querySelector("input");
-    const tryLogin=()=>{if(hsh(id,inp.value)===p.pin)login(id);else{inp.value="";inp.focus();toast("Falsche PIN. Tief durchatmen und nochmals.")}};
-    it.querySelector(".pbtn").onclick=()=>{if(!p.pin)return login(id);row.hidden=false;inp.focus()};
-    row.querySelector("button").onclick=tryLogin;inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();tryLogin()}};
+    const id=it.dataset.id,row=it.querySelector(".pinrow"),inp=row.querySelector("input"),btn=row.querySelector("button");
+    const tryLogin=async()=>{btn.disabled=true;btn.textContent="Prüfe…";const ok=await login(id,inp.value);btn.disabled=false;btn.textContent="Anmelden";if(!ok){inp.value="";inp.focus();toast("Falsche PIN. Tief durchatmen und nochmals.")}};
+    it.querySelector(".pbtn").onclick=()=>{row.hidden=false;inp.focus()};
+    btn.onclick=tryLogin;inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();tryLogin()}};
   });
 }
 function showGate(){DEMO=false;renderGate();$("#gate").hidden=false;$("#demoBar").hidden=true;window.scrollTo({top:0})}
-function afterLogin(){
-  $("#gate").hidden=true;$("#stages").innerHTML="";
-  renderStages();renderProfile();show("lernpfad");
+function afterLogin(){$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();show("lernpfad")}
+let MUST_SET_PIN=false;
+async function login(id,pin){
+  const p=reg.profiles[id];if(!p)return false;
+  if(p.salt){
+    try{const key=await deriveKey(pin,unb64(p.salt));const d=await decryptObj(key,p.iv,p.data);DEMO=false;SESSION_KEY=key;reg.active=id;saveReg();done=d;await rememberSession(id,key)}catch(e){return false}
+    afterLogin();toast(`Willkommen zurück, ${p.user}! Die KI hat dich vermisst. Behauptet sie jedenfalls.`);return true;
+  }
+  /* Profil aus einer älteren Version: alte PIN prüfen, danach neue PIN festlegen und verschlüsseln */
+  if(p.pin&&hsh(id,pin)!==p.pin)return false;
+  DEMO=false;reg.active=id;saveReg();done=p.progress||ST.get(progKey(id))||{};SESSION_KEY=null;
+  if(pin.length>=PIN_MIN){await setPin(id,pin);afterLogin();toast("Dein Profil ist jetzt verschlüsselt. Willkommen zurück!");return true}
+  MUST_SET_PIN=true;afterLogin();openProfile();toast("Bitte lege eine neue PIN mit mindestens 8 Zeichen fest. Dann wird dein Fortschritt verschlüsselt.");return true;
 }
-function login(id){DEMO=false;reg.active=id;saveReg();done=ST.get(progKey(id))||{};afterLogin();toast(`Willkommen zurück, ${reg.profiles[id].first}! Die KI hat dich vermisst. Behauptet sie jedenfalls.`)}
-function logout(){reg.active=null;saveReg();done={};closeProfile();showGate()}
-$("#gateForm").onsubmit=e=>{
-  e.preventDefault();
-  const user=$("#gUser").value.trim(),first=$("#gFirst").value.trim(),last=$("#gLast").value.trim(),pin=$("#gPin").value.trim();
-  if(!validate("g",user,first,last,pin,null))return;
-  const id="p"+Date.now().toString(36);
-  reg.profiles[id]={user,first,last,pin:pin?hsh(id,pin):null,avatar:gKey(),created:today()};gExtra="";
-  const legacy=Object.keys(reg.profiles).length===1?ST.get(LEGACY):null;
-  reg.active=id;saveReg();DEMO=false;done=legacy||{};save();if(legacy)ST.del(LEGACY);
-  ["gUser","gFirst","gLast","gPin"].forEach(f=>{$("#"+f).value=""});
-  afterLogin();confetti();toast(`Willkommen an Bord, ${first}! Die Roboter haben dich jetzt auf dem Radar. Im guten Sinn.`);
-};
+function logout(){reg.active=null;saveReg();SESSION_KEY=null;MUST_SET_PIN=false;forgetSession();done={};closeProfile();showGate()}
 let gExtra="";const gKey=()=>($("#gUser").value.trim()||"gast")+gExtra;
-const gPreview=()=>{$("#gAvatar").innerHTML=robotSVG(gKey())};
+const gPreview=()=>{$("#gAvatar").innerHTML=monkeySVG(gKey())};
 $("#gUser").addEventListener("input",gPreview);
 $("#gReroll").onclick=()=>{gExtra="-"+Math.random().toString(36).slice(2,7);gPreview()};
 gPreview();
-$("#demoBtn").onclick=()=>{DEMO=true;done=demoState();afterLogin();toast("Demo-Modus: Schau dich um. Hier geht nichts kaputt, und nichts wird gespeichert.")};
+$("#gateForm").onsubmit=async e=>{
+  e.preventDefault();
+  if(!CRYPTO_OK){toast("Dein Browser unterstützt keine Verschlüsselung. Bitte einen aktuellen Browser verwenden.");return}
+  const user=$("#gUser").value.trim(),pin=$("#gPin").value,pin2=$("#gPin2").value;
+  if(!validate("g",user,pin,pin2,null,true))return;
+  const sb=$("#gateForm button[type=submit]");sb.disabled=true;
+  const id="p"+Date.now().toString(36);
+  const legacy=Object.keys(reg.profiles).length===0?ST.get(LEGACY):null;
+  reg.profiles[id]={user,avatar:gKey(),created:today()};
+  reg.active=id;DEMO=false;done=legacy||{};
+  await setPin(id,pin);if(legacy)ST.del(LEGACY);
+  sb.disabled=false;["gUser","gPin","gPin2"].forEach(f=>{$("#"+f).value=""});gExtra="";gPreview();
+  afterLogin();confetti();toast(`Willkommen an Bord, ${user}! Die Roboter haben dich jetzt auf dem Radar. Im guten Sinn.`);
+};
+$("#demoBtn").onclick=()=>{DEMO=true;SESSION_KEY=null;done=demoState();afterLogin();toast("Demo-Modus: Schau dich um. Hier geht nichts kaputt, und nichts wird gespeichert.")};
 $("#demoCreate").onclick=()=>showGate();
 let dlgKey="";
 function openProfile(){
   if(DEMO)return showGate();
   const pr=curProfile();if(!pr)return showGate();
-  $("#pUser").value=pr.user;$("#pFirst").value=pr.first;$("#pLast").value=pr.last;$("#pPin").value="";
-  ["f-user","f-first","f-last","f-pin"].forEach(id=>$("#"+id).classList.remove("err"));
-  dlgKey=avatarKey(pr);$("#dlgAvatar").innerHTML=robotSVG(dlgKey);$("#dlgTitle").textContent="Profil bearbeiten";$("#dlgSub").textContent="@"+pr.user+(pr.pin?" · mit PIN geschützt":"");
+  $("#pUser").value=pr.user;$("#pPin").value="";
+  ["f-user","f-pin"].forEach(id=>$("#"+id).classList.remove("err"));
+  $("#f-pin .hint").textContent=MUST_SET_PIN?"Bitte lege eine neue PIN mit mindestens 8 Zeichen fest":"Mindestens 8 Zeichen, leer lassen = unverändert";
+  dlgKey=avatarKey(pr);$("#dlgAvatar").innerHTML=monkeySVG(dlgKey);$("#dlgSub").textContent="@"+pr.user;
   $("#pDelete").dataset.confirm="";$("#pDelete").lastChild.textContent="Profil löschen";
-  $("#profileDlg").hidden=false;setTimeout(()=>$("#pFirst").focus(),50);
+  $("#profileDlg").hidden=false;setTimeout(()=>(MUST_SET_PIN?$("#pPin"):$("#pUser")).focus(),50);
 }
-function closeProfile(){$("#profileDlg").hidden=true}
+function closeProfile(){if(MUST_SET_PIN&&reg.active){toast("Ohne neue PIN geht es leider nicht weiter.");return}$("#profileDlg").hidden=true}
 $("#profileBtn").onclick=openProfile;
-$("#pCancel").onclick=closeProfile;
-$("#pReroll").onclick=()=>{const pr=curProfile();dlgKey=(pr?pr.user:"gast")+"-"+Math.random().toString(36).slice(2,7);$("#dlgAvatar").innerHTML=robotSVG(dlgKey)};
-$("#pLogout").onclick=logout;
+$("#pCancel").onclick=()=>{if(MUST_SET_PIN){MUST_SET_PIN=false;logout();return}closeProfile()};
+$("#pReroll").onclick=()=>{const pr=curProfile();dlgKey=(pr?pr.user:"gast")+"-"+Math.random().toString(36).slice(2,7);$("#dlgAvatar").innerHTML=monkeySVG(dlgKey)};
+$("#pLogout").onclick=()=>{MUST_SET_PIN=false;logout()};
 $("#profileDlg").addEventListener("click",e=>{if(e.target.id==="profileDlg")closeProfile()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#profileDlg").hidden)closeProfile()});
-$("#profileForm").onsubmit=e=>{
-  if(DEMO)return;
-  e.preventDefault();
-  const user=$("#pUser").value.trim(),first=$("#pFirst").value.trim(),last=$("#pLast").value.trim(),pin=$("#pPin").value.trim();
-  if(!validate("f",user,first,last,pin,reg.active))return;
-  const p=reg.profiles[reg.active];Object.assign(p,{user,first,last,avatar:dlgKey});if(pin)p.pin=hsh(reg.active,pin);saveReg();
-  closeProfile();renderProfile();renderStages();toast("Profil gespeichert. Sieht gut aus!");
+$("#profileForm").onsubmit=async e=>{
+  e.preventDefault();if(DEMO)return;
+  const p=reg.profiles[reg.active],user=$("#pUser").value.trim(),pin=$("#pPin").value;
+  if(!validate("f",user,pin,"",reg.active,MUST_SET_PIN))return;
+  Object.assign(p,{user,avatar:dlgKey});
+  if(pin){await setPin(reg.active,pin);MUST_SET_PIN=false}else{saveReg();save()}
+  $("#profileDlg").hidden=true;renderProfile();renderStages();toast(pin?"Gespeichert und mit der neuen PIN verschlüsselt.":"Profil gespeichert. Sieht gut aus!");
 };
 $("#pDelete").onclick=()=>{
   const b=$("#pDelete");
   if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.lastChild.textContent="Wirklich? Fortschritt geht verloren";return}
-  const id=reg.active;ST.del(progKey(id));delete reg.profiles[id];reg.active=null;saveReg();done={};closeProfile();showGate();toast("Profil gelöscht.");
+  const id=reg.active;ST.del(progKey(id));delete reg.profiles[id];MUST_SET_PIN=false;logout();toast("Profil gelöscht.");
 };
-renderTerms();renderMedia();renderStages();renderProfile();if(!reg.active||!reg.profiles[reg.active])showGate();
+renderTerms();renderMedia();renderStages();renderProfile();showGate();if(CRYPTO_OK)resumeSession().then(ok=>{if(ok)afterLogin()});
 const start=(location.hash||"").slice(1);
 if(VIEWS.includes(start))show(start,false);
 </script>
