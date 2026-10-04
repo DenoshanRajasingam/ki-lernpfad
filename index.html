@@ -386,6 +386,22 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 .privacy{display:flex;gap:10px;align-items:flex-start;font-size:.8125rem;color:var(--on-surface-variant);background:var(--surface-c);border-radius:var(--sh-s);padding:10px 12px;margin:12px 0}
 .privacy .ms{font-size:20px;color:var(--success)}
 .dsep{height:1px;background:var(--outline-variant);margin:8px 0 12px}
+
+/* Avatare und Profil-Kopf */
+.avatar.img{background:var(--surface-high);overflow:hidden;padding:0}
+.avatar svg{width:100%;height:100%;display:block}
+.avatar.xl{width:72px;height:72px}
+.herouser{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.herouser .t{flex:1;min-width:0}
+.herouser b{display:block;font:500 1.05rem var(--font)}
+.hbtn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px 0 10px;border:0;border-radius:18px;background:color-mix(in srgb,var(--surface-lowest) 70%,transparent);color:var(--on-primary-container);font:500 .875rem var(--font);cursor:pointer}
+.hbtn .ms{font-size:18px}
+.hbtn::before{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .15s}
+.hbtn:hover::before{opacity:.08}
+.gprev{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.gprev b{display:block;font-weight:500}
+.gprev .textbtn{padding-left:0}
+.cert .avatar{margin:0 auto 10px;width:96px;height:96px;box-shadow:var(--elev1)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media (min-width:700px){h1{font-size:2.75rem}.card,.hero{padding:24px}}
 </style>
@@ -404,6 +420,7 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 <main>
 <section class="view active" id="v-lernpfad">
   <div class="card hero" aria-live="polite">
+    <div class="herouser" id="heroUser"></div>
     <div class="hud"><span id="hudLevel">Level 1</span><span id="hudXp">0 Punkte</span><span id="hudStreak">Serie: 0 Tage</span></div>
     <div class="hero-top">
       <div class="ring" id="ring"><span id="ringTxt">0%</span></div>
@@ -451,7 +468,7 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
   <div id="stages"></div>
   <div class="card stuck"><div><h3>Steckst du fest?</h3><p class="meta" style="margin:0">Kein Problem, das gehört dazu. Hier findest du fünf Wege weiter.</p></div><button class="tonal" data-go="hilfe"><span class="ms">support</span>Hilfe öffnen</button></div>
   <div class="card cert" id="cert" hidden>
-    <div class="seal"><span class="ms">workspace_premium</span></div>
+    <span class="avatar img" id="certAvatar"></span>
     <span class="eyebrow">Urkunde</span>
     <h2>KI-Macher</h2>
     <p>Hiermit wird feierlich bestätigt, dass</p>
@@ -599,6 +616,7 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
     </div>
     <form class="gatecard" id="gateForm" novalidate>
       <h3 id="gateFormTitle">Profil erstellen</h3>
+      <div class="gprev"><span class="avatar xl img" id="gAvatar"></span><div><b>Dein Roboter</b><span class="meta">Entsteht automatisch aus deinem Benutzernamen.</span><br><button type="button" class="textbtn" id="gReroll"><span class="ms">casino</span>Neu würfeln</button></div></div>
       <div class="field" id="g-user"><label for="gUser">Benutzername</label><input id="gUser" autocomplete="username" maxlength="20" placeholder="z. B. ki_entdecker"><span class="hint">3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich</span></div>
       <div class="field" id="g-first"><label for="gFirst">Vorname</label><input id="gFirst" autocomplete="given-name" maxlength="40"><span class="hint">So begrüsst dich die Seite</span></div>
       <div class="field" id="g-last"><label for="gLast">Name</label><input id="gLast" autocomplete="family-name" maxlength="40"><span class="hint">Erscheint auf deiner Urkunde</span></div>
@@ -611,7 +629,8 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 </div>
 <div class="scrim" id="profileDlg" hidden>
   <form class="dialog" id="profileForm" role="dialog" aria-modal="true" aria-labelledby="dlgTitle" novalidate>
-    <div class="dhead"><span class="avatar lg" id="dlgAvatar"></span><div><h2 id="dlgTitle">Dein Profil</h2><span class="meta" id="dlgSub"></span></div></div>
+    <div class="dhead"><span class="avatar xl img" id="dlgAvatar"></span><div><h2 id="dlgTitle">Dein Profil</h2><span class="meta" id="dlgSub"></span></div></div>
+    <div class="dactions" style="justify-content:flex-start;margin:-8px 0 10px"><button type="button" class="textbtn" id="pReroll"><span class="ms">casino</span>Neues Bild würfeln</button></div>
     <div class="field" id="f-user"><label for="pUser">Benutzername</label><input id="pUser" autocomplete="username" maxlength="20"><span class="hint">3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich</span></div>
     <div class="field" id="f-first"><label for="pFirst">Vorname</label><input id="pFirst" autocomplete="given-name" maxlength="40"><span class="hint">So begrüsst dich die Seite</span></div>
     <div class="field" id="f-last"><label for="pLast">Name</label><input id="pLast" autocomplete="family-name" maxlength="40"><span class="hint">Erscheint auf deiner Urkunde</span></div>
@@ -939,6 +958,7 @@ function renderCert(xp){
   const all=STAGES.every(stageDone),c=$("#cert");c.hidden=!all;if(!all)return;
   const inp=$("#certName"),pr=curProfile();if(document.activeElement!==inp)inp.value=done._name||(pr?`${pr.first} ${pr.last}`.trim():"");
   inp.oninput=()=>{done._name=inp.value;save()};
+  $("#certAvatar").innerHTML=robotSVG(avatarKey(pr||{user:"gast"}));
   $("#certMeta").textContent=`${new Date().toLocaleDateString("de-CH",{day:"numeric",month:"long",year:"numeric"})} · ${xp} Punkte · ${STAGES.length} von ${STAGES.length} Stufen`;
 }
 function renderGame(){
@@ -1093,6 +1113,46 @@ try{const t=localStorage.getItem("ki-lernpfad-theme");if(t)applyTheme(t)}catch(e
 applyTheme();
 $("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;const t=dark?"light":"dark";applyTheme(t);try{localStorage.setItem("ki-lernpfad-theme",t)}catch(e){}};
 
+/* ===== Lustige Roboter-Avatare, aus dem Benutzernamen erzeugt ===== */
+function seedOf(str){let x=2166136261;for(const c of String(str)){x^=c.charCodeAt(0);x=Math.imul(x,16777619)}return x>>>0}
+function rng(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function robotSVG(key){
+  const r=rng(seedOf(key||"gast")),pick=a=>a[Math.floor(r()*a.length)];
+  const bg=pick(["#ffd8e4","#d1e4ff","#c8f2e0","#ffe3b3","#e8ddff","#ffdbcf","#d9f2ff","#f1f8c8"]);
+  const body=pick(["#4355b9","#00897b","#e65100","#c2185b","#6a1b9a","#2e7d32","#f9a825","#0277bd","#5d4037","#d84315"]);
+  const rx=pick([10,16,24]),ink="#1b1b21";
+  const ant=pick([
+    `<line x1="48" y1="26" x2="48" y2="12" stroke="${ink}" stroke-width="3"/><circle cx="48" cy="11" r="5" fill="${pick(["#ff5252","#ffd600","#00e676","#40c4ff"])}"/>`,
+    `<path d="M50 8 L42 20 H50 L45 28" fill="none" stroke="#ffb300" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>`,
+    `<line x1="48" y1="26" x2="48" y2="16" stroke="${ink}" stroke-width="3"/><ellipse cx="38" cy="15" rx="10" ry="3.5" fill="#ff7043"/><ellipse cx="58" cy="15" rx="10" ry="3.5" fill="#29b6f6"/><circle cx="48" cy="15" r="3" fill="${ink}"/>`,
+    `<path d="M30 28 L48 10 L66 28 Z" fill="${pick(["#ff4081","#7c4dff","#00bfa5"])}"/><circle cx="48" cy="9" r="4" fill="#ffd600"/>`,
+    `<line x1="36" y1="27" x2="30" y2="15" stroke="${ink}" stroke-width="3"/><line x1="60" y1="27" x2="66" y2="15" stroke="${ink}" stroke-width="3"/><circle cx="30" cy="14" r="4" fill="#ff5252"/><circle cx="66" cy="14" r="4" fill="#ff5252"/>`
+  ]);
+  const eyes=pick([
+    `<circle cx="38" cy="48" r="4.5" fill="${ink}"/><circle cx="58" cy="48" r="4.5" fill="${ink}"/><circle cx="39.5" cy="46.5" r="1.5" fill="#fff"/><circle cx="59.5" cy="46.5" r="1.5" fill="#fff"/>`,
+    `<path d="M33 50 q5 -7 10 0 M53 50 q5 -7 10 0" fill="none" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`,
+    `<rect x="30" y="43" width="15" height="9" rx="3" fill="${ink}"/><rect x="51" y="43" width="15" height="9" rx="3" fill="${ink}"/><line x1="45" y1="46" x2="51" y2="46" stroke="${ink}" stroke-width="2"/><rect x="32" y="44.5" width="5" height="2" rx="1" fill="#fff" opacity=".7"/>`,
+    `<circle cx="48" cy="48" r="8" fill="#fff" stroke="${ink}" stroke-width="2"/><circle cx="49" cy="48" r="4" fill="${ink}"/><circle cx="50.5" cy="46.5" r="1.3" fill="#fff"/>`,
+    `<circle cx="38" cy="48" r="4.5" fill="${ink}"/><path d="M53 49 h10" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`,
+    `<circle cx="38" cy="48" r="6" fill="#fff" stroke="${ink}" stroke-width="2"/><circle cx="58" cy="48" r="6" fill="#fff" stroke="${ink}" stroke-width="2"/><circle cx="40" cy="49" r="2.5" fill="${ink}"/><circle cx="56" cy="47" r="2.5" fill="${ink}"/>`
+  ]);
+  const mouth=pick([
+    `<path d="M39 58 q9 7 18 0" fill="none" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`,
+    `<rect x="38" y="56" width="20" height="7" rx="2" fill="#fff" stroke="${ink}" stroke-width="2"/><line x1="44.5" y1="56" x2="44.5" y2="63" stroke="${ink}" stroke-width="1.5"/><line x1="51.5" y1="56" x2="51.5" y2="63" stroke="${ink}" stroke-width="1.5"/>`,
+    `<ellipse cx="48" cy="59.5" rx="4" ry="4.5" fill="${ink}"/>`,
+    `<polyline points="38,58 42,61 46,58 50,61 54,58 58,61" fill="none" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>`,
+    `<path d="M39 57 q9 8 18 0 z" fill="${ink}"/><path d="M45 61 q3 4 6 0" fill="#ff6e8a"/>`
+  ]);
+  const extra=pick([
+    "",
+    `<path d="M40 82 L48 78 L56 82 L56 74 L48 78 L40 74 Z" fill="#ff4081"/>`,
+    `<path d="M16 52 q0 -30 32 -30 q32 0 32 30" fill="none" stroke="${ink}" stroke-width="3"/><rect x="11" y="46" width="9" height="16" rx="4" fill="${ink}"/><rect x="76" y="46" width="9" height="16" rx="4" fill="${ink}"/>`,
+    `<circle cx="31" cy="59" r="3.5" fill="#ff8a80" opacity=".8"/><circle cx="65" cy="59" r="3.5" fill="#ff8a80" opacity=".8"/>`
+  ]);
+  return `<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="96" height="96" fill="${bg}"/>${ant}<rect x="14" y="44" width="6" height="14" rx="3" fill="${ink}"/><rect x="76" y="44" width="6" height="14" rx="3" fill="${ink}"/><rect x="18" y="26" width="60" height="50" rx="${rx}" fill="${body}"/><rect x="25" y="35" width="46" height="34" rx="${Math.min(rx,14)}" fill="#f5f5f7"/>${eyes}${mouth}${extra}<rect x="34" y="76" width="28" height="20" rx="6" fill="${body}"/><circle cx="48" cy="85" r="3" fill="#ffd600"/></svg>`;
+}
+const avatarKey=p=>p.avatar||p.user||"gast";
+
 /* ===== Profile, Anmelden, Demo ===== */
 const DEFAULT_GREET="Hallo, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.";
 const USER_RE=/^[A-Za-z0-9ÄÖÜäöüéèàç._-]{3,20}$/,PIN_RE=/^\d{4,6}$/;
@@ -1116,8 +1176,11 @@ function renderProfile(){
   const pr=curProfile();
   $("#greet").textContent=pr&&!DEMO?`Hallo ${pr.first}, zukünftiges KI-Genie. Keine Angst, der Roboter beisst nicht.`:DEFAULT_GREET;
   const pi=$("#profileIcon");
-  if(pr){pi.className="avatar";pi.textContent=initials(pr);$("#profileBtn").title=DEMO?"Demo beenden":"@"+pr.user;$("#profileBtn").setAttribute("aria-label",DEMO?"Demo beenden":`Profil von ${pr.user}`)}
+  if(pr){pi.className="avatar img";pi.innerHTML=robotSVG(avatarKey(pr));$("#profileBtn").title=DEMO?"Demo beenden":"@"+pr.user;$("#profileBtn").setAttribute("aria-label",DEMO?"Demo beenden":`Profil von ${pr.user}`)}
   else{pi.className="ms";pi.textContent="account_circle"}
+  const hu=$("#heroUser");
+  hu.innerHTML=pr?`<span class="avatar lg img">${robotSVG(avatarKey(pr))}</span><span class="t"><b>${esc(pr.first)} ${esc(pr.last)}</b><span class="meta">@${esc(pr.user)}</span></span><button class="hbtn" id="heroEdit"><span class="ms">${DEMO?"person_add":"edit"}</span>${DEMO?"Eigenes Profil":"Profil bearbeiten"}</button>`:"";
+  const he=$("#heroEdit");if(he)he.onclick=openProfile;
   $("#demoBar").hidden=!DEMO;
 }
 function renderGate(){
@@ -1125,7 +1188,7 @@ function renderGate(){
   $("#gateLogin").hidden=!ids.length;
   $("#gateFormTitle").textContent=ids.length?"Neues Profil erstellen":"Profil erstellen";
   $("#gateList").innerHTML=ids.map(id=>{const p=reg.profiles[id],d=ST.get(progKey(id))||{};let n=0;STAGES.forEach(s=>items(s).forEach(i=>{if(d[i.id])n++}));const all=STAGES.flatMap(items).length;
-    return `<div class="pitem" data-id="${id}"><button class="pbtn" type="button"><span class="avatar lg">${esc(initials(p))}</span><span class="t"><b>${esc(p.first)} ${esc(p.last)}</b><span class="meta">@${esc(p.user)} · ${Math.round(n/all*100)}% geschafft${p.pin?" · mit PIN":""}</span></span><span class="ms">${p.pin?"lock":"arrow_forward"}</span></button><div class="pinrow" hidden><input type="password" inputmode="numeric" maxlength="6" placeholder="PIN" aria-label="PIN für ${esc(p.user)}"><button type="button" class="filled">Anmelden</button></div></div>`}).join("");
+    return `<div class="pitem" data-id="${id}"><button class="pbtn" type="button"><span class="avatar lg img">${robotSVG(avatarKey(p))}</span><span class="t"><b>${esc(p.first)} ${esc(p.last)}</b><span class="meta">@${esc(p.user)} · ${Math.round(n/all*100)}% geschafft${p.pin?" · mit PIN":""}</span></span><span class="ms">${p.pin?"lock":"arrow_forward"}</span></button><div class="pinrow" hidden><input type="password" inputmode="numeric" maxlength="6" placeholder="PIN" aria-label="PIN für ${esc(p.user)}"><button type="button" class="filled">Anmelden</button></div></div>`}).join("");
   document.querySelectorAll("#gateList .pitem").forEach(it=>{
     const id=it.dataset.id,p=reg.profiles[id],row=it.querySelector(".pinrow"),inp=row.querySelector("input");
     const tryLogin=()=>{if(hsh(id,inp.value)===p.pin)login(id);else{inp.value="";inp.focus();toast("Falsche PIN. Tief durchatmen und nochmals.")}};
@@ -1145,34 +1208,42 @@ $("#gateForm").onsubmit=e=>{
   const user=$("#gUser").value.trim(),first=$("#gFirst").value.trim(),last=$("#gLast").value.trim(),pin=$("#gPin").value.trim();
   if(!validate("g",user,first,last,pin,null))return;
   const id="p"+Date.now().toString(36);
-  reg.profiles[id]={user,first,last,pin:pin?hsh(id,pin):null,created:today()};
+  reg.profiles[id]={user,first,last,pin:pin?hsh(id,pin):null,avatar:gKey(),created:today()};gExtra="";
   const legacy=Object.keys(reg.profiles).length===1?ST.get(LEGACY):null;
   reg.active=id;saveReg();DEMO=false;done=legacy||{};save();if(legacy)ST.del(LEGACY);
   ["gUser","gFirst","gLast","gPin"].forEach(f=>{$("#"+f).value=""});
   afterLogin();confetti();toast(`Willkommen an Bord, ${first}! Die Roboter haben dich jetzt auf dem Radar. Im guten Sinn.`);
 };
+let gExtra="";const gKey=()=>($("#gUser").value.trim()||"gast")+gExtra;
+const gPreview=()=>{$("#gAvatar").innerHTML=robotSVG(gKey())};
+$("#gUser").addEventListener("input",gPreview);
+$("#gReroll").onclick=()=>{gExtra="-"+Math.random().toString(36).slice(2,7);gPreview()};
+gPreview();
 $("#demoBtn").onclick=()=>{DEMO=true;done=demoState();afterLogin();toast("Demo-Modus: Schau dich um. Hier geht nichts kaputt, und nichts wird gespeichert.")};
 $("#demoCreate").onclick=()=>showGate();
+let dlgKey="";
 function openProfile(){
   if(DEMO)return showGate();
   const pr=curProfile();if(!pr)return showGate();
   $("#pUser").value=pr.user;$("#pFirst").value=pr.first;$("#pLast").value=pr.last;$("#pPin").value="";
   ["f-user","f-first","f-last","f-pin"].forEach(id=>$("#"+id).classList.remove("err"));
-  $("#dlgAvatar").textContent=initials(pr);$("#dlgTitle").textContent=`${pr.first} ${pr.last}`;$("#dlgSub").textContent="@"+pr.user+(pr.pin?" · mit PIN geschützt":"");
+  dlgKey=avatarKey(pr);$("#dlgAvatar").innerHTML=robotSVG(dlgKey);$("#dlgTitle").textContent="Profil bearbeiten";$("#dlgSub").textContent="@"+pr.user+(pr.pin?" · mit PIN geschützt":"");
   $("#pDelete").dataset.confirm="";$("#pDelete").lastChild.textContent="Profil löschen";
   $("#profileDlg").hidden=false;setTimeout(()=>$("#pFirst").focus(),50);
 }
 function closeProfile(){$("#profileDlg").hidden=true}
 $("#profileBtn").onclick=openProfile;
 $("#pCancel").onclick=closeProfile;
+$("#pReroll").onclick=()=>{const pr=curProfile();dlgKey=(pr?pr.user:"gast")+"-"+Math.random().toString(36).slice(2,7);$("#dlgAvatar").innerHTML=robotSVG(dlgKey)};
 $("#pLogout").onclick=logout;
 $("#profileDlg").addEventListener("click",e=>{if(e.target.id==="profileDlg")closeProfile()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#profileDlg").hidden)closeProfile()});
 $("#profileForm").onsubmit=e=>{
+  if(DEMO)return;
   e.preventDefault();
   const user=$("#pUser").value.trim(),first=$("#pFirst").value.trim(),last=$("#pLast").value.trim(),pin=$("#pPin").value.trim();
   if(!validate("f",user,first,last,pin,reg.active))return;
-  const p=reg.profiles[reg.active];Object.assign(p,{user,first,last});if(pin)p.pin=hsh(reg.active,pin);saveReg();
+  const p=reg.profiles[reg.active];Object.assign(p,{user,first,last,avatar:dlgKey});if(pin)p.pin=hsh(reg.active,pin);saveReg();
   closeProfile();renderProfile();renderStages();toast("Profil gespeichert. Sieht gut aus!");
 };
 $("#pDelete").onclick=()=>{
