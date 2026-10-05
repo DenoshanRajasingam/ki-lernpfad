@@ -46,5 +46,288 @@
     "Was fehlt noch?",
     "Frag mich, wenn dir etwas unklar ist.",
     "Mach daraus eine Tabelle."
+  ],
+  "dosdonts": [
+    {
+      "do": "Sag, wer du bist und wofür du die Antwort brauchst.",
+      "dont": "Eine Frage ohne Hintergrund stellen und auf Glück hoffen."
+    },
+    {
+      "do": "Beschreib das gewünschte Ergebnis: Länge, Form, Ton.",
+      "dont": "Die KI raten lassen, ob du eine Liste, eine Mail oder einen Aufsatz willst."
+    },
+    {
+      "do": "Gib der KI eine Rolle, etwa «erfahrener Reiseplaner».",
+      "dont": "Erwarten, dass sie von selbst die passende Perspektive wählt."
+    },
+    {
+      "do": "Bei grossen Aufgaben: zuerst Fragen stellen lassen.",
+      "dont": "Alles in einen einzigen Satz packen."
+    },
+    {
+      "do": "Nachbessern im selben Gespräch: «kürzer», «mit Beispiel».",
+      "dont": "Bei jeder kleinen Änderung ein neues Gespräch starten."
+    },
+    {
+      "do": "Fakten, Zahlen und Quellen prüfen oder nachfragen.",
+      "dont": "Alles glauben, nur weil es überzeugend klingt."
+    },
+    {
+      "do": "Namen und vertrauliche Zahlen weglassen oder ersetzen.",
+      "dont": "Passwörter, Gesundheitsdaten oder Kundendaten eingeben."
+    },
+    {
+      "do": "Beim Bauen eine Änderung aufs Mal verlangen.",
+      "dont": "Zehn Wünsche gleichzeitig und dann den Überblick verlieren."
+    }
+  ],
+  "cards": [
+    {
+      "id": "t1",
+      "for": "stage:0",
+      "title": "Dein erster richtiger Prompt",
+      "dont": "Was soll ich kochen?",
+      "dontWhy": "Ohne Hintergrund liefert die KI eine allgemeine Liste, die dir kaum hilft.",
+      "do": "Ich habe Reis, Zucchetti und Feta zu Hause und 20 Minuten Zeit. Schlag mir zwei einfache Rezepte vor, mit Einkaufsliste für das, was noch fehlt.",
+      "expect": "Zwei konkrete Rezepte mit Schritten und einer kurzen Einkaufsliste.",
+      "fixes": [
+        "Mach es vegetarisch und ohne Backofen.",
+        "Erklär die Schritte so, als hätte ich noch nie gekocht."
+      ]
+    },
+    {
+      "id": "t2",
+      "for": "stage:1",
+      "title": "Lass dir KI von der KI erklären",
+      "dont": "Was ist ein LLM?",
+      "dontWhy": "Die Antwort ist korrekt, aber voller Fachbegriffe und schnell vergessen.",
+      "do": "Erkläre mir, was ein Sprachmodell ist, mit einem Vergleich aus dem Alltag. Ich habe keine Technikkenntnisse. Höchstens fünf Sätze, danach eine Frage an mich, ob ich es verstanden habe.",
+      "expect": "Ein anschaulicher Vergleich, kurz und verständlich, plus eine Kontrollfrage.",
+      "fixes": [
+        "Nimm ein anderes Beispiel, das mit Kochen zu tun hat.",
+        "Was kann so ein Modell nicht?"
+      ]
+    },
+    {
+      "id": "t3",
+      "for": "stage:2",
+      "title": "Von der Frage zum Auftrag",
+      "dont": "Plane Ferien.",
+      "dontWhy": "Zu vage. Die KI muss raten und liefert Allerweltstipps.",
+      "do": "Du bist ein erfahrener Reiseplaner. Plane drei Tage Lissabon für zwei Personen, die gutes Essen und Architektur mögen und nicht hetzen wollen. Als Tabelle pro Tag mit Morgen, Nachmittag und Abend.",
+      "expect": "Eine übersichtliche Tabelle mit konkreten Orten, Restaurants und Zeiten.",
+      "fixes": [
+        "Weniger Museen, dafür ein Ausflug ans Meer.",
+        "Füge ungefähre Kosten pro Tag in Franken hinzu."
+      ]
+    },
+    {
+      "id": "t4",
+      "for": "stage:3",
+      "title": "Kritisch nachfragen",
+      "dont": "Stimmt das?",
+      "dontWhy": "Die KI bestätigt oft einfach, was sie vorher gesagt hat.",
+      "do": "Prüfe deine letzte Antwort kritisch. Welche Aussagen sind unsicher, welche könnten veraltet sein, und wo sollte ich selbst nachschauen? Nenne mir dafür passende Quellen.",
+      "expect": "Eine ehrliche Einschätzung mit markierten Unsicherheiten und Hinweisen zum Nachprüfen.",
+      "fixes": [
+        "Was würde eine Kritikerin dazu sagen?",
+        "Fasse die gesicherten Fakten in drei Punkten zusammen."
+      ]
+    },
+    {
+      "id": "t5",
+      "for": "stage:4",
+      "title": "Eine App richtig beschreiben",
+      "dont": "Mach mir eine App.",
+      "dontWhy": "Die KI weiss nicht, wofür, für wen und wie sie aussehen soll. Das Ergebnis ist Zufall.",
+      "do": "Baue mir eine kleine App, mit der ich meine Ausgaben für Ferien festhalte: Betrag, Kategorie und Datum eingeben, Summe pro Kategorie anzeigen. Einfach, gut lesbar auf dem Handy, freundliche Farben.",
+      "expect": "Eine funktionierende App in der Vorschau, die du sofort ausprobieren kannst.",
+      "fixes": [
+        "Füge ein Kuchendiagramm der Kategorien hinzu.",
+        "Die Knöpfe sind zu klein, mach sie grösser."
+      ]
+    },
+    {
+      "id": "t6",
+      "for": "stage:5",
+      "title": "Fürs Veröffentlichen vorbereiten",
+      "dont": "Mach es fertig.",
+      "dontWhy": "Unklar, was «fertig» heisst. Die KI ändert womöglich Dinge, die schon gut waren.",
+      "do": "Prüfe meine App vor dem Veröffentlichen: Funktioniert alles auf dem Handy? Sind Texte verständlich? Enthält sie private Daten, die nicht öffentlich sein sollten? Liste zuerst die Punkte auf, ändere noch nichts.",
+      "expect": "Eine Checkliste mit Verbesserungen, ohne dass etwas ungefragt umgebaut wird.",
+      "fixes": [
+        "Setze die ersten zwei Punkte um.",
+        "Schreib mir einen kurzen Text, mit dem ich den Link verschicken kann."
+      ]
+    },
+    {
+      "id": "te1",
+      "for": "practice:e1",
+      "title": "So klappt «Erklär mir»",
+      "dont": "Erkläre Inferenzkosten.",
+      "dontWhy": "Du bekommst eine Definition, aber kein Verständnis.",
+      "do": "Erkläre mir den Begriff «Inferenzkosten» mit einem Beispiel aus dem Alltag, als hätte ich keine Technikkenntnisse. Stell mir danach drei Fragen, ob ich es verstanden habe.",
+      "expect": "Ein Alltagsbeispiel und drei Fragen, die du beantworten kannst.",
+      "fixes": [
+        "Erkläre es nochmals mit einem Beispiel aus dem Restaurant.",
+        "Gib mir die Lösungen zu den Fragen."
+      ]
+    },
+    {
+      "id": "te2",
+      "for": "practice:e2",
+      "title": "Eine Alltagsaufgabe abgeben",
+      "dont": "Schreib eine Mail an den Vermieter.",
+      "dontWhy": "Worum geht es, welcher Ton, was soll passieren? Die KI erfindet es.",
+      "do": "Schreib eine freundliche, kurze Mail an meinen Vermieter: Die Heizung im Wohnzimmer wird seit drei Tagen nicht mehr warm. Ich bitte um einen Termin diese Woche, ich bin abends ab 17 Uhr zu Hause.",
+      "expect": "Eine fertige Mail, die du nur noch kopieren musst.",
+      "fixes": [
+        "Etwas bestimmter im Ton, aber höflich.",
+        "Mach sie noch kürzer, drei Sätze reichen."
+      ]
+    },
+    {
+      "id": "te3",
+      "for": "practice:e3",
+      "title": "Halluzinationen aufspüren",
+      "dont": "Erzähl mir alles über mein Dorf.",
+      "dontWhy": "Viel Text, und du merkst nicht, was erfunden ist.",
+      "do": "Was weisst du über [Ort, den ich gut kenne]? Gib bei jeder Aussage an, wie sicher du dir bist, und kennzeichne, was du nicht überprüfen kannst.",
+      "expect": "Aussagen mit Sicherheitsangabe. Prüf zwei davon selbst nach.",
+      "fixes": [
+        "Such im Web nach Quellen und vergleiche.",
+        "Welche deiner Aussagen war falsch?"
+      ]
+    },
+    {
+      "id": "te4",
+      "for": "practice:e4",
+      "title": "Ein Dokument auswerten",
+      "dont": "Fass zusammen.",
+      "dontWhy": "Wie lang, für wen, mit welchem Fokus? Du bekommst irgendetwas.",
+      "do": "Fasse dieses Dokument auf einer halben Seite zusammen. Was sind die drei wichtigsten Punkte für mich, und was steht nur im Kleingedruckten? Nenne die Seitenzahlen.",
+      "expect": "Eine kurze Zusammenfassung mit drei Kernpunkten und Seitenangaben.",
+      "fixes": [
+        "Welche Fristen oder Kosten muss ich beachten?",
+        "Erkläre den schwierigsten Abschnitt in einfacher Sprache."
+      ]
+    },
+    {
+      "id": "te5",
+      "for": "practice:e5",
+      "title": "Interviewen lassen",
+      "dont": "Plane mein Fest.",
+      "dontWhy": "Ohne Angaben zu Gästen, Budget und Ort plant die KI ins Blaue.",
+      "do": "Ich möchte ein Gartenfest planen. Interviewe mich: Stell mir eine Frage nach der anderen, bis du genug weisst. Fasse danach alles als klaren Plan mit Checkliste zusammen.",
+      "expect": "Eine Frage nach der anderen, am Schluss ein Plan, der wirklich zu dir passt.",
+      "fixes": [
+        "Mach aus dem Plan eine Einladung zum Verschicken.",
+        "Erstelle eine Einkaufsliste für 20 Personen."
+      ]
+    },
+    {
+      "id": "te6",
+      "for": "practice:e6",
+      "title": "Eine zweite Meinung einholen",
+      "dont": "Ist das richtig?",
+      "dontWhy": "Ohne den Text des anderen Assistenten kann die KI nichts prüfen.",
+      "do": "Hier ist die Antwort eines anderen KI-Assistenten auf meine Frage: [Antwort einfügen]. Prüfe sie kritisch. Was stimmt, was ist fraglich, was fehlt?",
+      "expect": "Eine Gegenüberstellung mit Stärken, Schwächen und Lücken.",
+      "fixes": [
+        "Welche Antwort würdest du mir empfehlen und warum?",
+        "Formuliere die beste Antwort aus beiden."
+      ]
+    },
+    {
+      "id": "tb0",
+      "for": "build:b0",
+      "title": "Deine erste Mini-App",
+      "dont": "Trinkgeld-App",
+      "dontWhy": "Ein Stichwort reicht nicht. Die KI weiss nicht, was die App können soll.",
+      "do": "Baue mir einen Trinkgeld-Rechner als kleine App: Betrag eingeben, Trinkgeld 5, 10 oder 15 Prozent wählen und auf mehrere Personen aufteilen. Grosse Knöpfe, gut lesbar auf dem Handy.",
+      "expect": "Ein Rechner in der Vorschau, den du sofort benutzen kannst.",
+      "fixes": [
+        "Runde den Betrag pro Person auf 50 Rappen auf.",
+        "Füge einen dunklen Modus hinzu."
+      ]
+    },
+    {
+      "id": "tb1",
+      "for": "build:b1",
+      "title": "Packliste bauen",
+      "dont": "Packliste",
+      "dontWhy": "Welche Kategorien, abhaken oder nur lesen? Das bleibt offen.",
+      "do": "Baue mir eine Packliste für Ferien als kleine App. Kategorien: Kleidung, Hygiene, Dokumente, Elektronik. Ich will Dinge abhaken, hinzufügen und löschen. Gross und gut lesbar auf dem Handy.",
+      "expect": "Eine Liste zum Abhaken, nach Kategorien geordnet.",
+      "fixes": [
+        "Zeig oben an, wie viel schon gepackt ist.",
+        "Füge eine Kategorie «Apotheke» hinzu."
+      ]
+    },
+    {
+      "id": "tb2",
+      "for": "build:b2",
+      "title": "Quiz bauen",
+      "dont": "Mach ein Quiz.",
+      "dontWhy": "Worüber, wie viele Fragen, welches Format? Alles Zufall.",
+      "do": "Baue mir ein Quiz mit zehn Fragen zu KI-Begriffen wie Prompt, Token, Halluzination und Agent. Mit Auswahlantworten, sofortiger Rückmeldung, einer kurzen Erklärung pro Frage und meiner Punktzahl am Schluss.",
+      "expect": "Ein spielbares Quiz mit Erklärungen und Punktzahl.",
+      "fixes": [
+        "Mische die Reihenfolge der Fragen bei jedem Start.",
+        "Füge einen Zeitbalken von 20 Sekunden pro Frage hinzu."
+      ]
+    },
+    {
+      "id": "tb3",
+      "for": "build:b3",
+      "title": "Entscheidungshilfe bauen",
+      "dont": "Hilf mir entscheiden.",
+      "dontWhy": "Die KI entscheidet dann für dich, statt dir ein Werkzeug zu geben.",
+      "do": "Baue mir eine Entscheidungshilfe: Ich gebe Optionen und Kriterien selbst ein, gewichte die Kriterien und vergebe Punkte. Zeige das Ergebnis als Rangliste und Balkendiagramm.",
+      "expect": "Ein Werkzeug, das du für jede Entscheidung wiederverwenden kannst.",
+      "fixes": [
+        "Speichere zwei Beispiele vorab, damit ich sehe, wie es funktioniert.",
+        "Erkläre unter dem Ergebnis, warum die Erste gewonnen hat."
+      ]
+    },
+    {
+      "id": "tb4",
+      "for": "build:b4",
+      "title": "Webseite veröffentlichen",
+      "dont": "Mach eine Webseite.",
+      "dontWhy": "Wofür, mit welchen Inhalten, für wen? Die Seite wird beliebig.",
+      "do": "Baue eine einfache, moderne Webseite für mein Gartenfest am 12. Juni: Programm, Anfahrt, Kontakt. Gut lesbar auf dem Handy, freundliche Farben.",
+      "expect": "Eine fertige Seite, die du mit «Teilen» oder «Veröffentlichen» als Link verschickst.",
+      "fixes": [
+        "Füge einen Countdown bis zum Fest hinzu.",
+        "Mach die Farben sommerlicher."
+      ]
+    },
+    {
+      "id": "tb5",
+      "for": "build:b5",
+      "title": "App mit gespeicherten Daten",
+      "dont": "Mach eine Datenbank für meine Weine.",
+      "dontWhy": "Welche Angaben, wer darf sie sehen, wie soll man suchen? Unklar.",
+      "do": "Baue eine App für meine Weinsammlung. Ich will Einträge mit Name, Jahrgang, Region, Preis und Notiz erfassen, suchen und filtern. Mit Anmeldung, damit nur ich meine Daten sehe. Modern und gut auf dem Handy.",
+      "expect": "Eine App mit Anmeldung und gespeicherten Einträgen, zum Beispiel in Lovable.",
+      "fixes": [
+        "Füge eine Sortierung nach Jahrgang hinzu.",
+        "Zeige, welche Weine bald getrunken werden sollten."
+      ]
+    },
+    {
+      "id": "tb6",
+      "for": "build:b6",
+      "title": "Dein eigenes Projekt",
+      "dont": "Bau mir was Cooles.",
+      "dontWhy": "Ohne Ziel kommt etwas heraus, das du nie benutzt.",
+      "do": "Ich möchte [Ziel] mit einer kleinen App lösen. Interviewe mich zuerst, eine Frage nach der anderen. Fasse dann alles als kurze Beschreibung zusammen und baue die erste Version.",
+      "expect": "Erst Fragen, dann eine Beschreibung, dann eine erste Version deiner eigenen Lösung.",
+      "fixes": [
+        "Was wäre die einfachste Version, die schon nützt?",
+        "Welche drei Verbesserungen würdest du als Nächstes machen?"
+      ]
+    }
   ]
 }

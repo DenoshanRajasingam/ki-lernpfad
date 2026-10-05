@@ -26,37 +26,61 @@
         "id": "s1a",
         "txt": "Das Mindset oben lesen",
         "dur": "2 Min",
-        "go": "mindset"
+        "go": "mindset",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 2
       },
       {
         "id": "s1b",
         "txt": "Video: So funktioniert ChatGPT",
         "dur": "4 Min",
-        "go": "studyflix"
+        "go": "studyflix",
+        "depth": "core",
+        "place": "any",
+        "media": "video",
+        "min": 4
       },
       {
         "id": "s1c",
         "txt": "Gratiskonto bei ChatGPT, Claude oder Gemini anlegen und die Übung «Erklär mir» machen",
         "dur": "15 Min",
-        "go": "e1"
+        "go": "e1",
+        "depth": "core",
+        "place": "any",
+        "media": "practice",
+        "min": 15
       },
       {
         "id": "s1g",
         "txt": "Deine erste Mini-App bauen lassen: Trinkgeld-Rechner",
         "dur": "10 Min",
-        "go": "b0"
+        "go": "b0",
+        "depth": "core",
+        "place": "any",
+        "media": "practice",
+        "min": 10
       },
       {
         "id": "s1d",
         "txt": "Übung: Eine Alltagsaufgabe abgeben, einmal per Sprache",
         "dur": "15 Min",
-        "go": "e2"
+        "go": "e2",
+        "depth": "standard",
+        "place": "mobile",
+        "media": "practice",
+        "min": 15
       },
       {
         "id": "s1e",
         "txt": "Begriffe der Stufe 1",
         "dur": "5 Min",
-        "go": "terms:1"
+        "go": "terms:1",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 5
       }
     ],
     "deep": [
@@ -64,13 +88,21 @@
         "id": "d1a",
         "txt": "Eine Folge «Der KI-Podcast» der ARD hören",
         "dur": "40 Min",
-        "go": "kipodcast"
+        "go": "kipodcast",
+        "depth": "deep",
+        "place": "mobile",
+        "media": "podcast",
+        "min": 40
       },
       {
         "id": "d1b",
         "txt": "heise KI-Update abonnieren",
         "dur": "2 Min",
-        "go": "kiupdate"
+        "go": "kiupdate",
+        "depth": "deep",
+        "place": "mobile",
+        "media": "podcast",
+        "min": 2
       }
     ],
     "checks": [
@@ -121,25 +153,72 @@
         "id": "s2a",
         "txt": "Video: Terra X «Wie Maschinen Sprache verstehen»",
         "dur": "22 Min",
-        "go": "terrax"
+        "go": "terrax",
+        "depth": "core",
+        "place": "any",
+        "media": "video",
+        "min": 22,
+        "variants": [
+          {
+            "media": "podcast",
+            "go": "kiverstehen",
+            "txt": "Podcast: eine Folge «KI verstehen» zu Sprachmodellen",
+            "dur": "25 Min",
+            "min": 25
+          },
+          {
+            "media": "read",
+            "go": "fraunhofer",
+            "txt": "Lesen: Zusammenfassung «Wie funktionieren LLMs?»",
+            "dur": "3 Min",
+            "min": 3
+          },
+          {
+            "media": "video",
+            "go": "dalwigk",
+            "txt": "Video: Florian Dalwigk erklärt ChatGPT",
+            "dur": "14 Min",
+            "min": 14
+          }
+        ]
       },
       {
         "id": "s2b",
         "txt": "Kurs Elements of AI, Kapitel 1",
         "dur": "60 Min",
-        "go": "elements"
+        "go": "elements",
+        "depth": "core",
+        "place": "any",
+        "media": "course",
+        "min": 60,
+        "parts": 3,
+        "compact": {
+          "media": "video",
+          "go": "dalwigk",
+          "txt": "Video: Florian Dalwigk erklärt ChatGPT (statt Kurs)",
+          "dur": "14 Min",
+          "min": 14
+        }
       },
       {
         "id": "s2c",
         "txt": "Begriffe der Stufe 2",
         "dur": "5 Min",
-        "go": "terms:2"
+        "go": "terms:2",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 5
       },
       {
         "id": "s2d",
         "txt": "Übung: Halluzination testen",
         "dur": "10 Min",
-        "go": "e3"
+        "go": "e3",
+        "depth": "core",
+        "place": "any",
+        "media": "practice",
+        "min": 10
       }
     ],
     "deep": [
@@ -147,19 +226,32 @@
         "id": "d2a",
         "txt": "Elements of AI, Kapitel 2",
         "dur": "60 Min",
-        "go": "elements"
+        "go": "elements",
+        "depth": "deep",
+        "place": "any",
+        "media": "course",
+        "min": 60,
+        "parts": 3
       },
       {
         "id": "d2b",
         "txt": "Video: Florian Dalwigk erklärt ChatGPT",
         "dur": "14 Min",
-        "go": "dalwigk"
+        "go": "dalwigk",
+        "depth": "deep",
+        "place": "any",
+        "media": "video",
+        "min": 14
       },
       {
         "id": "d2c",
         "txt": "Podcast «KI verstehen» vom Deutschlandfunk",
         "dur": "25 Min",
-        "go": "kiverstehen"
+        "go": "kiverstehen",
+        "depth": "deep",
+        "place": "mobile",
+        "media": "podcast",
+        "min": 25
       }
     ],
     "checks": [
@@ -210,31 +302,67 @@
         "id": "s3a",
         "txt": "Die Prompt-Treppe durchgehen und jede Stufe einmal ausprobieren",
         "dur": "20 Min",
-        "go": "prompten"
+        "go": "prompten",
+        "depth": "core",
+        "place": "any",
+        "media": "practice",
+        "min": 20
       },
       {
         "id": "s3b",
         "txt": "Video: Acht sinnvolle Anwendungen für ChatGPT",
         "dur": "15 Min",
-        "go": "ct3003"
+        "go": "ct3003",
+        "depth": "standard",
+        "place": "any",
+        "media": "video",
+        "min": 15,
+        "variants": [
+          {
+            "media": "read",
+            "go": "mollick",
+            "txt": "Lesen: Die vier Regeln aus «Co-Intelligenz»",
+            "dur": "2 Min",
+            "min": 2
+          },
+          {
+            "media": "podcast",
+            "go": "srfdigital",
+            "txt": "Podcast: eine Folge SRF Digital zu KI im Alltag",
+            "dur": "30 Min",
+            "min": 30
+          }
+        ]
       },
       {
         "id": "s3c",
         "txt": "Übung: Ein Dokument auswerten lassen",
         "dur": "15 Min",
-        "go": "e4"
+        "go": "e4",
+        "depth": "core",
+        "place": "computer",
+        "media": "practice",
+        "min": 15
       },
       {
         "id": "s3d",
         "txt": "Übung: Lass dich von der KI interviewen",
         "dur": "15 Min",
-        "go": "e5"
+        "go": "e5",
+        "depth": "core",
+        "place": "any",
+        "media": "practice",
+        "min": 15
       },
       {
         "id": "s3e",
         "txt": "Begriffe der Stufe 3",
         "dur": "5 Min",
-        "go": "terms:3"
+        "go": "terms:3",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 5
       }
     ],
     "deep": [
@@ -242,19 +370,30 @@
         "id": "d3a",
         "txt": "Buch: Co-Intelligenz von Ethan Mollick (Zusammenfassung lesen)",
         "dur": "2 Min",
-        "go": "mollick"
+        "go": "mollick",
+        "depth": "deep",
+        "place": "any",
+        "media": "read",
+        "min": 2
       },
       {
         "id": "d3b",
         "txt": "SRF Einstein: Machen uns ChatGPT und Co. dumm?",
         "dur": "37 Min",
-        "go": "einstein"
+        "go": "einstein",
+        "depth": "deep",
+        "place": "any",
+        "media": "video",
+        "min": 37
       },
       {
         "id": "d3c",
         "txt": "Kurs openHPI zu generativer KI",
         "dur": "4 Wochen",
-        "go": "openhpi"
+        "go": "openhpi",
+        "depth": "deep",
+        "place": "computer",
+        "media": "course"
       }
     ],
     "checks": [
@@ -309,37 +448,70 @@
         "id": "s4a",
         "txt": "Video: Wie werden Sprachmodelle trainiert?",
         "dur": "2 Min",
-        "go": "kicampusvid"
+        "go": "kicampusvid",
+        "depth": "core",
+        "place": "any",
+        "media": "video",
+        "min": 2
       },
       {
         "id": "s4b",
         "txt": "Zusammenfassung: Fraunhofer «Wie funktionieren LLMs?»",
         "dur": "3 Min",
-        "go": "fraunhofer"
+        "go": "fraunhofer",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 3
       },
       {
         "id": "s4c",
         "txt": "Begriffe der Stufe 4",
         "dur": "10 Min",
-        "go": "terms:4"
+        "go": "terms:4",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 10
       },
       {
         "id": "s4d",
         "txt": "Wissen: Das grosse Bild lesen",
         "dur": "10 Min",
-        "go": "big"
+        "go": "big",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 10
       },
       {
         "id": "s4e",
         "txt": "Video: Wird KI dich ersetzen?",
         "dur": "15 Min",
-        "go": "simplicissimus"
+        "go": "simplicissimus",
+        "depth": "standard",
+        "place": "any",
+        "media": "video",
+        "min": 15,
+        "variants": [
+          {
+            "media": "read",
+            "go": "big",
+            "txt": "Lesen: Chancen und Risiken im grossen Bild",
+            "dur": "5 Min",
+            "min": 5
+          }
+        ]
       },
       {
         "id": "s4f",
         "txt": "Übung: Zweite Meinung einholen",
         "dur": "10 Min",
-        "go": "e6"
+        "go": "e6",
+        "depth": "core",
+        "place": "any",
+        "media": "practice",
+        "min": 10
       }
     ],
     "deep": [
@@ -347,25 +519,41 @@
         "id": "d4a",
         "txt": "Scobel mit Katharina Zweig: Weiss die KI, dass sie nichts weiss?",
         "dur": "67 Min",
-        "go": "scobel"
+        "go": "scobel",
+        "depth": "deep",
+        "place": "any",
+        "media": "video",
+        "min": 67,
+        "parts": 3
       },
       {
         "id": "d4b",
         "txt": "Terra X: Achtung KI-Fake",
         "dur": "30 Min",
-        "go": "kifake"
+        "go": "kifake",
+        "depth": "deep",
+        "place": "any",
+        "media": "video",
+        "min": 30
       },
       {
         "id": "d4c",
         "txt": "c't uplink: GPT & Co. im Test",
         "dur": "40 Min",
-        "go": "ctuplink"
+        "go": "ctuplink",
+        "depth": "deep",
+        "place": "any",
+        "media": "video",
+        "min": 40
       },
       {
         "id": "d4d",
         "txt": "Kurs KI für Alle (KI-Campus)",
         "dur": "ca. 40 h",
-        "go": "kifueralle"
+        "go": "kifueralle",
+        "depth": "deep",
+        "place": "computer",
+        "media": "course"
       }
     ],
     "checks": [
@@ -415,37 +603,61 @@
         "id": "s5a",
         "txt": "Bauen: Den Ablauf in sechs Schritten lesen",
         "dur": "3 Min",
-        "go": "ablauf"
+        "go": "ablauf",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 3
       },
       {
         "id": "s5f",
         "txt": "Bauen: Deine erste App, Klick für Klick",
         "dur": "3 Min",
-        "go": "erste"
+        "go": "erste",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 3
       },
       {
         "id": "s5b",
         "txt": "Bauprojekt 1: Packliste",
         "dur": "15 Min",
-        "go": "b1"
+        "go": "b1",
+        "depth": "core",
+        "place": "computer",
+        "media": "practice",
+        "min": 15
       },
       {
         "id": "s5c",
         "txt": "Bauprojekt 2: Quiz zu KI-Begriffen",
         "dur": "15 Min",
-        "go": "b2"
+        "go": "b2",
+        "depth": "core",
+        "place": "computer",
+        "media": "practice",
+        "min": 15
       },
       {
         "id": "s5d",
         "txt": "Bauprojekt 3: Entscheidungshilfe",
         "dur": "25 Min",
-        "go": "b3"
+        "go": "b3",
+        "depth": "core",
+        "place": "computer",
+        "media": "practice",
+        "min": 25
       },
       {
         "id": "s5e",
         "txt": "Begriffe der Stufe 5",
         "dur": "5 Min",
-        "go": "terms:5"
+        "go": "terms:5",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 5
       }
     ],
     "deep": [
@@ -453,7 +665,11 @@
         "id": "d5a",
         "txt": "Artikel: Eigene KI-Tools ohne Programmieren (Beispiel Claude)",
         "dur": "5 Min",
-        "go": "hundertmark"
+        "go": "hundertmark",
+        "depth": "deep",
+        "place": "any",
+        "media": "read",
+        "min": 5
       }
     ],
     "checks": [
@@ -499,25 +715,42 @@
         "id": "s6a",
         "txt": "Bauen: Werkzeuge A bis D lesen",
         "dur": "5 Min",
-        "go": "werkzeuge"
+        "go": "werkzeuge",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 5
       },
       {
         "id": "s6b",
         "txt": "Bauprojekt 4: Eine Webseite bauen und veröffentlichen",
         "dur": "30 Min",
-        "go": "b4"
+        "go": "b4",
+        "depth": "core",
+        "place": "computer",
+        "media": "practice",
+        "min": 30
       },
       {
         "id": "s6c",
         "txt": "Den Link jemandem schicken und Rückmeldung einholen",
         "dur": "5 Min",
-        "go": "b4"
+        "go": "b4",
+        "depth": "core",
+        "place": "mobile",
+        "media": "practice",
+        "min": 5
       },
       {
         "id": "s6d",
         "txt": "Bauprojekt 6: Dein eigenes Projekt",
         "dur": "60 Min",
-        "go": "b6"
+        "go": "b6",
+        "depth": "core",
+        "place": "computer",
+        "media": "practice",
+        "min": 60,
+        "parts": 2
       }
     ],
     "deep": [
@@ -525,13 +758,21 @@
         "id": "d6a",
         "txt": "Bauprojekt 5: App mit gespeicherten Daten in Lovable",
         "dur": "45 Min",
-        "go": "b5"
+        "go": "b5",
+        "depth": "deep",
+        "place": "computer",
+        "media": "practice",
+        "min": 45
       },
       {
         "id": "d6b",
         "txt": "Video: Lovable Tutorial (Julian Weber)",
         "dur": "20 Min",
-        "go": "lovable20"
+        "go": "lovable20",
+        "depth": "deep",
+        "place": "any",
+        "media": "video",
+        "min": 20
       }
     ],
     "checks": [
