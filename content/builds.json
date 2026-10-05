@@ -1,0 +1,58 @@
+[
+  {
+    "id": "b0",
+    "lvl": 1,
+    "title": "Deine erste Mini-App",
+    "tool": "A · Im Chat",
+    "text": "Dein erstes Erfolgserlebnis, in zwei Minuten. Funktioniert in ChatGPT, Claude und Gemini, auch auf dem Handy.",
+    "prompt": "Baue mir einen Trinkgeld-Rechner als kleine App: Betrag eingeben, Trinkgeld 5, 10 oder 15 Prozent wählen und auf mehrere Personen aufteilen. Grosse Knöpfe, gut lesbar auf dem Handy."
+  },
+  {
+    "id": "b1",
+    "lvl": 5,
+    "title": "Packliste",
+    "tool": "A · Im Chat",
+    "text": "Deine erste App. Nach zwei Minuten siehst du sie und kannst sie benutzen.",
+    "prompt": "Baue mir eine Packliste für Ferien als kleine App. Kategorien: Kleidung, Hygiene, Dokumente, Elektronik. Ich will Dinge abhaken, hinzufügen und löschen. Gross und gut lesbar auf dem Handy."
+  },
+  {
+    "id": "b2",
+    "lvl": 5,
+    "title": "Quiz zu KI-Begriffen",
+    "tool": "A · Im Chat",
+    "text": "Ein Lernspiel, das du gleich selbst spielen kannst.",
+    "prompt": "Baue mir ein Quiz mit zehn Fragen zu KI-Begriffen wie Prompt, Token, Halluzination und Agent. Mit Auswahlantworten, sofortiger Rückmeldung, einer kurzen Erklärung pro Frage und meiner Punktzahl am Schluss."
+  },
+  {
+    "id": "b3",
+    "lvl": 5,
+    "title": "Entscheidungshilfe",
+    "tool": "A · Im Chat",
+    "text": "Ein Werkzeug für echte Entscheide, etwa zwischen drei Ferienorten oder Autos.",
+    "prompt": "Baue mir eine Entscheidungshilfe: Ich gebe Optionen und Kriterien selbst ein, gewichte die Kriterien und vergebe Punkte. Zeige das Ergebnis als Rangliste und Balkendiagramm."
+  },
+  {
+    "id": "b4",
+    "lvl": 6,
+    "title": "Eine Webseite veröffentlichen",
+    "tool": "B · Teilen",
+    "text": "Bau eine Seite für einen echten Anlass und teile sie per Link. Auf «Veröffentlichen» oder «Teilen» tippen, Link kopieren, im privaten Fenster testen, per WhatsApp schicken.",
+    "prompt": "Baue eine einfache, moderne Webseite für [Anlass, z. B. Gartenfest am 12. Juni]: Programm, Anfahrt, Kontakt. Gut lesbar auf dem Handy, freundliche Farben."
+  },
+  {
+    "id": "b5",
+    "lvl": 6,
+    "title": "App mit gespeicherten Daten",
+    "tool": "D · Ganze App",
+    "text": "Für Daten, die bleiben sollen, etwa eine Wein- oder Rezeptsammlung. Mit Lovable oder Bolt, beide haben eine Gratisstufe.",
+    "prompt": "Baue eine App für meine [Weinsammlung]. Ich will Einträge mit Name, Jahrgang, Region, Preis und Notiz erfassen, suchen und filtern. Mit Anmeldung, damit nur ich meine Daten sehe. Modern und gut auf dem Handy."
+  },
+  {
+    "id": "b6",
+    "lvl": 6,
+    "title": "Dein eigenes Projekt",
+    "tool": "A bis D",
+    "text": "Such dir ein echtes Problem aus deinem Alltag und löse es mit allem, was du gelernt hast: interviewen lassen, bauen, nachbessern, veröffentlichen.",
+    "prompt": "Ich möchte [Ziel] mit einer kleinen App lösen. Interviewe mich zuerst, eine Frage nach der anderen. Fasse dann alles als kurze Beschreibung zusammen und baue die erste Version."
+  }
+]

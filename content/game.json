@@ -1,0 +1,76 @@
+{
+  "levels": [
+    [
+      0,
+      "KI-Neuling"
+    ],
+    [
+      60,
+      "KI-Entdecker"
+    ],
+    [
+      180,
+      "Prompt-Lehrling"
+    ],
+    [
+      330,
+      "Prompt-Profi"
+    ],
+    [
+      500,
+      "KI-Kenner"
+    ],
+    [
+      680,
+      "App-Bauer"
+    ],
+    [
+      860,
+      "KI-Macher"
+    ]
+  ],
+  "xpv": {
+    "task": 10,
+    "deep": 15,
+    "check": 20,
+    "ch": 10,
+    "mission": 30
+  },
+  "cheers": [
+    "Abgehakt! Dein Gehirn macht gerade Liegestütze.",
+    "Zack, erledigt. Die KI ist beeindruckt, sagt sie jedenfalls.",
+    "Läuft bei dir. Sogar der Toaster schaut neidisch.",
+    "Haken dran. Die Roboter notieren sich deinen Namen. Positiv.",
+    "Stark! Wenn das so weitergeht, fragt ChatGPT bald dich um Rat.",
+    "Erledigt. Ein Kaffee ist verdient. Ein kleiner.",
+    "Wieder einer weniger. Du bist schneller als jedes Software-Update."
+  ],
+  "right": [
+    "Richtig! Der Quizmaster ist sprachlos.",
+    "Treffer! +20 Punkte fürs Hirn.",
+    "Korrekt. Du warst schneller als die KI beim Nachdenken.",
+    "Bingo! Dein innerer Professor nickt anerkennend."
+  ],
+  "wrong": [
+    "Knapp daneben ist auch vorbei. Nochmals!",
+    "Hoppla, das war wohl eine Halluzination. Versuch es nochmals.",
+    "Fast! Die richtige Antwort versteckt sich noch.",
+    "Nicht ganz. Sogar die KI liegt manchmal daneben."
+  ],
+  "lvlLines": [
+    "Die Affen applaudieren. Laut.",
+    "Dein Gehirn hat gerade ein Update installiert.",
+    "Wenn das so weitergeht, brauchst du bald einen Fanclub.",
+    "Die KI überlegt, ob sie dich um ein Autogramm bitten soll.",
+    "Bananen für alle! Du hast sie dir verdient.",
+    "Offiziell eine Legende im Lernpfad."
+  ],
+  "msg": [
+    "Guter Start! Rom wurde auch nicht an einem Tag gebaut, aber die hatten keine KI.",
+    "Weiter so! Bald verstehst du mehr als dein Smartphone.",
+    "Prompt-Training läuft. Bald macht die KI, was du willst. Meistens.",
+    "Du redest bald mit. Fachleute, nehmt euch in Acht.",
+    "Du baust Apps. Das Silicon Valley hat angerufen, du warst gerade beschäftigt.",
+    "Letzte Stufe! Das rote Band zum Durchschneiden liegt schon bereit."
+  ]
+}

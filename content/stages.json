@@ -1,0 +1,553 @@
+[
+  {
+    "t": "Erste Schritte",
+    "lvlName": "ganz einfach",
+    "h": "ca. 1 h",
+    "why": "Nur loslegen und erleben. Danach weisst du, wie sich KI anfühlt.",
+    "goal": "Du hast selbst mit einer KI geschrieben und gesprochen.",
+    "ex": {
+      "title": "Beispiel: der Unterschied, den ein Satz macht",
+      "text": "«Was soll ich heute kochen?» ergibt eine allgemeine Liste. «Ich habe Reis, Zucchetti und Feta und 20 Minuten Zeit. Schlag mir zwei Rezepte vor.» ergibt genau das, was du brauchst.",
+      "links": [
+        [
+          "Prompt-Treppe Stufe 1 und 2",
+          "prompten",
+          1
+        ],
+        [
+          "Video Studyflix",
+          "studyflix",
+          1
+        ]
+      ]
+    },
+    "tasks": [
+      {
+        "id": "s1a",
+        "txt": "Das Mindset oben lesen",
+        "dur": "2 Min",
+        "go": "mindset"
+      },
+      {
+        "id": "s1b",
+        "txt": "Video: So funktioniert ChatGPT",
+        "dur": "4 Min",
+        "go": "studyflix"
+      },
+      {
+        "id": "s1c",
+        "txt": "Gratiskonto bei ChatGPT, Claude oder Gemini anlegen und die Übung «Erklär mir» machen",
+        "dur": "15 Min",
+        "go": "e1"
+      },
+      {
+        "id": "s1g",
+        "txt": "Deine erste Mini-App bauen lassen: Trinkgeld-Rechner",
+        "dur": "10 Min",
+        "go": "b0"
+      },
+      {
+        "id": "s1d",
+        "txt": "Übung: Eine Alltagsaufgabe abgeben, einmal per Sprache",
+        "dur": "15 Min",
+        "go": "e2"
+      },
+      {
+        "id": "s1e",
+        "txt": "Begriffe der Stufe 1",
+        "dur": "5 Min",
+        "go": "terms:1"
+      }
+    ],
+    "deep": [
+      {
+        "id": "d1a",
+        "txt": "Eine Folge «Der KI-Podcast» der ARD hören",
+        "dur": "40 Min",
+        "go": "kipodcast"
+      },
+      {
+        "id": "d1b",
+        "txt": "heise KI-Update abonnieren",
+        "dur": "2 Min",
+        "go": "kiupdate"
+      }
+    ],
+    "checks": [
+      {
+        "id": "c1a",
+        "txt": "Ich kann in zwei Sätzen sagen, was ein KI-Assistent wie ChatGPT tut."
+      },
+      {
+        "id": "c1b",
+        "txt": "Ich weiss, was ein Prompt ist, und habe geschrieben und gesprochen."
+      },
+      {
+        "id": "c1c",
+        "txt": "Ich probiere aus, sage klar, was ich will, und bessere nach."
+      }
+    ],
+    "done": "Stufe 1 geschafft! Du hast angefangen. Das ist mehr, als die meisten Neujahrsvorsätze je schaffen."
+  },
+  {
+    "t": "Verstehen, wie KI funktioniert",
+    "lvlName": "einfach",
+    "h": "ca. 1.5 h",
+    "why": "Ein Blick unter die Motorhaube, ganz ohne Technik. Danach verstehst du, warum KI so gut klingt und trotzdem Fehler macht.",
+    "goal": "Du kannst erklären, wie ein Sprachmodell grob funktioniert.",
+    "ex": {
+      "title": "Beispiel: «Der Himmel ist …»",
+      "text": "Die KI schätzt, welches Wort folgt: «blau» sehr wahrscheinlich, «grau» möglich, «Käse» kaum. Sie wählt Wort für Wort. Darum klingt alles flüssig, ist aber nicht immer wahr.",
+      "links": [
+        [
+          "Video Terra X",
+          "terrax",
+          1
+        ],
+        [
+          "Kurs Elements of AI",
+          "elements",
+          1
+        ],
+        [
+          "Video Florian Dalwigk",
+          "dalwigk",
+          0
+        ]
+      ]
+    },
+    "tasks": [
+      {
+        "id": "s2a",
+        "txt": "Video: Terra X «Wie Maschinen Sprache verstehen»",
+        "dur": "22 Min",
+        "go": "terrax"
+      },
+      {
+        "id": "s2b",
+        "txt": "Kurs Elements of AI, Kapitel 1",
+        "dur": "60 Min",
+        "go": "elements"
+      },
+      {
+        "id": "s2c",
+        "txt": "Begriffe der Stufe 2",
+        "dur": "5 Min",
+        "go": "terms:2"
+      },
+      {
+        "id": "s2d",
+        "txt": "Übung: Halluzination testen",
+        "dur": "10 Min",
+        "go": "e3"
+      }
+    ],
+    "deep": [
+      {
+        "id": "d2a",
+        "txt": "Elements of AI, Kapitel 2",
+        "dur": "60 Min",
+        "go": "elements"
+      },
+      {
+        "id": "d2b",
+        "txt": "Video: Florian Dalwigk erklärt ChatGPT",
+        "dur": "14 Min",
+        "go": "dalwigk"
+      },
+      {
+        "id": "d2c",
+        "txt": "Podcast «KI verstehen» vom Deutschlandfunk",
+        "dur": "25 Min",
+        "go": "kiverstehen"
+      }
+    ],
+    "checks": [
+      {
+        "id": "c2a",
+        "txt": "Ich weiss, dass ein Sprachmodell aus riesigen Textmengen gelernt hat und Wort für Wort die wahrscheinliche Fortsetzung bildet."
+      },
+      {
+        "id": "c2b",
+        "txt": "Ich kenne den Unterschied zwischen KI, maschinellem Lernen und generativer KI."
+      },
+      {
+        "id": "c2c",
+        "txt": "Ich weiss, warum KI manchmal Fakten erfindet, und wie ich das erkenne."
+      }
+    ],
+    "done": "Stufe 2 geschafft! Du weisst jetzt, wie KI tickt. Erklär es beim nächsten Abendessen und geniess die staunenden Blicke."
+  },
+  {
+    "t": "Gut prompten",
+    "lvlName": "mittel",
+    "h": "ca. 1.5 h",
+    "why": "Diese Stufe zahlt sich sofort aus. Mit ein paar Zutaten bekommst du verlässlich gute Ergebnisse.",
+    "goal": "Du gibst der KI klare Anweisungen und holst durch Nachbessern das Beste heraus.",
+    "ex": {
+      "title": "Beispiel: von der Frage zum Auftrag",
+      "text": "Aus «Plane mir Lissabon» wird: «Du bist ein erfahrener Reiseplaner. Plane drei Tage Lissabon für zwei Personen, die gutes Essen und Architektur mögen und nicht hetzen wollen. Als Tabelle pro Tag.» Danach: «Weniger Museen, dafür ein Ausflug ans Meer.»",
+      "links": [
+        [
+          "Prompt-Treppe",
+          "prompten",
+          1
+        ],
+        [
+          "c't 3003: acht Anwendungen",
+          "ct3003",
+          1
+        ],
+        [
+          "Buch Co-Intelligenz",
+          "mollick",
+          0
+        ]
+      ]
+    },
+    "tasks": [
+      {
+        "id": "s3a",
+        "txt": "Die Prompt-Treppe durchgehen und jede Stufe einmal ausprobieren",
+        "dur": "20 Min",
+        "go": "prompten"
+      },
+      {
+        "id": "s3b",
+        "txt": "Video: Acht sinnvolle Anwendungen für ChatGPT",
+        "dur": "15 Min",
+        "go": "ct3003"
+      },
+      {
+        "id": "s3c",
+        "txt": "Übung: Ein Dokument auswerten lassen",
+        "dur": "15 Min",
+        "go": "e4"
+      },
+      {
+        "id": "s3d",
+        "txt": "Übung: Lass dich von der KI interviewen",
+        "dur": "15 Min",
+        "go": "e5"
+      },
+      {
+        "id": "s3e",
+        "txt": "Begriffe der Stufe 3",
+        "dur": "5 Min",
+        "go": "terms:3"
+      }
+    ],
+    "deep": [
+      {
+        "id": "d3a",
+        "txt": "Buch: Co-Intelligenz von Ethan Mollick (Zusammenfassung lesen)",
+        "dur": "2 Min",
+        "go": "mollick"
+      },
+      {
+        "id": "d3b",
+        "txt": "SRF Einstein: Machen uns ChatGPT und Co. dumm?",
+        "dur": "37 Min",
+        "go": "einstein"
+      },
+      {
+        "id": "d3c",
+        "txt": "Kurs openHPI zu generativer KI",
+        "dur": "4 Wochen",
+        "go": "openhpi"
+      }
+    ],
+    "checks": [
+      {
+        "id": "c3a",
+        "txt": "Ich gebe Rolle, Aufgabe, Kontext und Format mit."
+      },
+      {
+        "id": "c3b",
+        "txt": "Ich bessere Antworten im Gespräch nach, statt neu zu fragen."
+      },
+      {
+        "id": "c3c",
+        "txt": "Ich lasse mir bei grossen Aufgaben zuerst Fragen stellen."
+      },
+      {
+        "id": "c3d",
+        "txt": "Ich prüfe Fakten und gebe keine vertraulichen Daten ein."
+      }
+    ],
+    "done": "Stufe 3 geschafft! Du sprichst jetzt fliessend Prompt. Steht noch in keinem Lebenslauf, sollte es aber."
+  },
+  {
+    "t": "Mitreden: tiefer verstehen",
+    "lvlName": "mittel",
+    "h": "ca. 1.5 h",
+    "why": "Jetzt kommen die Begriffe aus Fachgesprächen und das grosse Bild. Danach redest du bei KI-Themen mit.",
+    "goal": "Du verstehst Training, Kosten und Agenten und kannst Chancen und Risiken einordnen.",
+    "ex": {
+      "title": "Beispiel: Training und Inferenz",
+      "text": "Training ist wie die Kochausbildung: jahrelang, teuer, einmal. Inferenz ist wie das Kochen eines Gerichts: passiert bei jeder Bestellung und kostet jedes Mal Zeit und Strom. Jede Antwort der KI ist so ein Gericht.",
+      "links": [
+        [
+          "Video KI-Campus",
+          "kicampusvid",
+          1
+        ],
+        [
+          "Artikel Fraunhofer",
+          "fraunhofer",
+          1
+        ],
+        [
+          "Gespräch mit Katharina Zweig",
+          "scobel",
+          0
+        ]
+      ]
+    },
+    "tasks": [
+      {
+        "id": "s4a",
+        "txt": "Video: Wie werden Sprachmodelle trainiert?",
+        "dur": "2 Min",
+        "go": "kicampusvid"
+      },
+      {
+        "id": "s4b",
+        "txt": "Zusammenfassung: Fraunhofer «Wie funktionieren LLMs?»",
+        "dur": "3 Min",
+        "go": "fraunhofer"
+      },
+      {
+        "id": "s4c",
+        "txt": "Begriffe der Stufe 4",
+        "dur": "10 Min",
+        "go": "terms:4"
+      },
+      {
+        "id": "s4d",
+        "txt": "Wissen: Das grosse Bild lesen",
+        "dur": "10 Min",
+        "go": "big"
+      },
+      {
+        "id": "s4e",
+        "txt": "Video: Wird KI dich ersetzen?",
+        "dur": "15 Min",
+        "go": "simplicissimus"
+      },
+      {
+        "id": "s4f",
+        "txt": "Übung: Zweite Meinung einholen",
+        "dur": "10 Min",
+        "go": "e6"
+      }
+    ],
+    "deep": [
+      {
+        "id": "d4a",
+        "txt": "Scobel mit Katharina Zweig: Weiss die KI, dass sie nichts weiss?",
+        "dur": "67 Min",
+        "go": "scobel"
+      },
+      {
+        "id": "d4b",
+        "txt": "Terra X: Achtung KI-Fake",
+        "dur": "30 Min",
+        "go": "kifake"
+      },
+      {
+        "id": "d4c",
+        "txt": "c't uplink: GPT & Co. im Test",
+        "dur": "40 Min",
+        "go": "ctuplink"
+      },
+      {
+        "id": "d4d",
+        "txt": "Kurs KI für Alle (KI-Campus)",
+        "dur": "ca. 40 h",
+        "go": "kifueralle"
+      }
+    ],
+    "checks": [
+      {
+        "id": "c4a",
+        "txt": "Ich kann Training und Inferenz unterscheiden."
+      },
+      {
+        "id": "c4b",
+        "txt": "Ich weiss, was Tokens, Kontextfenster und Agenten sind."
+      },
+      {
+        "id": "c4c",
+        "txt": "Ich kann erklären, wer hinter KI steckt: Chips, Rechenzentren, Modelle, Apps."
+      },
+      {
+        "id": "c4d",
+        "txt": "Ich prüfe KI-Schlagzeilen mit kritischen Fragen."
+      }
+    ],
+    "done": "Stufe 4 geschafft! Du redest bei KI-Themen mit, ohne heimlich unter dem Tisch zu googeln."
+  },
+  {
+    "t": "Erste eigene Lösung bauen",
+    "lvlName": "anspruchsvoll",
+    "h": "ca. 1.5 h",
+    "why": "Jetzt wirst du vom Nutzer zum Macher. Du beschreibst, die KI baut, du siehst sofort das Ergebnis.",
+    "goal": "Du hast drei kleine Apps gebaut, ganz ohne Programmieren.",
+    "ex": {
+      "title": "Beispiel: Packliste in drei Sätzen",
+      "text": "«Baue mir eine Packliste für Ferien als kleine App, mit Kategorien und Häkchen.» Die App erscheint neben dem Chat. Dann: «Füge die Kategorie Elektronik hinzu und mach die Häkchen grösser.» Fertig.",
+      "links": [
+        [
+          "Erste App Klick für Klick",
+          "erste",
+          1
+        ],
+        [
+          "Artikel: KI-Tools ohne Programmieren",
+          "hundertmark",
+          0
+        ]
+      ]
+    },
+    "tasks": [
+      {
+        "id": "s5a",
+        "txt": "Bauen: Den Ablauf in sechs Schritten lesen",
+        "dur": "3 Min",
+        "go": "ablauf"
+      },
+      {
+        "id": "s5f",
+        "txt": "Bauen: Deine erste App, Klick für Klick",
+        "dur": "3 Min",
+        "go": "erste"
+      },
+      {
+        "id": "s5b",
+        "txt": "Bauprojekt 1: Packliste",
+        "dur": "15 Min",
+        "go": "b1"
+      },
+      {
+        "id": "s5c",
+        "txt": "Bauprojekt 2: Quiz zu KI-Begriffen",
+        "dur": "15 Min",
+        "go": "b2"
+      },
+      {
+        "id": "s5d",
+        "txt": "Bauprojekt 3: Entscheidungshilfe",
+        "dur": "25 Min",
+        "go": "b3"
+      },
+      {
+        "id": "s5e",
+        "txt": "Begriffe der Stufe 5",
+        "dur": "5 Min",
+        "go": "terms:5"
+      }
+    ],
+    "deep": [
+      {
+        "id": "d5a",
+        "txt": "Artikel: Eigene KI-Tools ohne Programmieren (Beispiel Claude)",
+        "dur": "5 Min",
+        "go": "hundertmark"
+      }
+    ],
+    "checks": [
+      {
+        "id": "c5a",
+        "txt": "Ich beschreibe eine App so, dass die KI sie bauen kann."
+      },
+      {
+        "id": "c5b",
+        "txt": "Ich melde konkret zurück, was ich sehe und was ich erwarte."
+      },
+      {
+        "id": "c5c",
+        "txt": "Ich ändere eins aufs Mal und gehe bei Problemen zur letzten guten Version zurück."
+      }
+    ],
+    "done": "Stufe 5 geschafft! Du baust Apps ohne eine Zeile Code. Irgendwo wird gerade ein Programmierer nervös."
+  },
+  {
+    "t": "Veröffentlichen und eigenes Projekt",
+    "lvlName": "anspruchsvoll",
+    "h": "ca. 2 h",
+    "why": "Zum Schluss stellst du deine Lösung online und setzt ein eigenes Vorhaben um. Alles Gelernte kommt zusammen.",
+    "goal": "Du hast eine eigene Lösung gebaut, veröffentlicht und per Link geteilt.",
+    "ex": {
+      "title": "Beispiel: vom Fest zur Webseite",
+      "text": "«Baue eine einfache, schöne Webseite für mein Gartenfest am 12. Juni: Programm, Anfahrt, Kontakt. Gut lesbar auf dem Handy.» Auf «Teilen» oder «Veröffentlichen» tippen und den Link per WhatsApp an die Gäste schicken.",
+      "links": [
+        [
+          "Werkzeuge A bis D",
+          "werkzeuge",
+          1
+        ],
+        [
+          "Lovable in 7 Minuten",
+          "lovable7",
+          0
+        ]
+      ]
+    },
+    "tasks": [
+      {
+        "id": "s6a",
+        "txt": "Bauen: Werkzeuge A bis D lesen",
+        "dur": "5 Min",
+        "go": "werkzeuge"
+      },
+      {
+        "id": "s6b",
+        "txt": "Bauprojekt 4: Eine Webseite bauen und veröffentlichen",
+        "dur": "30 Min",
+        "go": "b4"
+      },
+      {
+        "id": "s6c",
+        "txt": "Den Link jemandem schicken und Rückmeldung einholen",
+        "dur": "5 Min",
+        "go": "b4"
+      },
+      {
+        "id": "s6d",
+        "txt": "Bauprojekt 6: Dein eigenes Projekt",
+        "dur": "60 Min",
+        "go": "b6"
+      }
+    ],
+    "deep": [
+      {
+        "id": "d6a",
+        "txt": "Bauprojekt 5: App mit gespeicherten Daten in Lovable",
+        "dur": "45 Min",
+        "go": "b5"
+      },
+      {
+        "id": "d6b",
+        "txt": "Video: Lovable Tutorial (Julian Weber)",
+        "dur": "20 Min",
+        "go": "lovable20"
+      }
+    ],
+    "checks": [
+      {
+        "id": "c6a",
+        "txt": "Ich kann eine App veröffentlichen und den Link teilen."
+      },
+      {
+        "id": "c6b",
+        "txt": "Ich weiss, was ich öffentlich teilen darf und was nicht."
+      },
+      {
+        "id": "c6c",
+        "txt": "Ich habe eine eigene Idee mit KI von Anfang bis Ende umgesetzt."
+      }
+    ],
+    "done": "Ziel erreicht! Du verstehst KI, nutzt sie im Alltag und baust eigene Apps. Die Roboter haben jetzt offiziell Respekt vor dir."
+  }
+]

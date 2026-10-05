@@ -1,0 +1,26 @@
+[
+  {
+    "id": "m1",
+    "txt": "Lass dir von der KI eine echte Nachricht schreiben, etwa eine Mail oder einen Glückwunsch, und schick sie wirklich ab."
+  },
+  {
+    "id": "m2",
+    "txt": "Erwisch die KI bei einer Halluzination und lass sie den Fehler selbst korrigieren."
+  },
+  {
+    "id": "m3",
+    "txt": "Löse eine echte Aufgabe aus deinem Alltag mit einem Prompt mit allen Zutaten, ohne grosse Nacharbeit."
+  },
+  {
+    "id": "m4",
+    "txt": "Erkläre jemandem in einer Minute, was Training und Inferenz sind. Ohne Spickzettel."
+  },
+  {
+    "id": "m5",
+    "txt": "Bau eine kleine App, die du in der nächsten Woche wirklich benutzt."
+  },
+  {
+    "id": "m6",
+    "txt": "Jemand anderes hat deine veröffentlichte App über den Link geöffnet und benutzt."
+  }
+]

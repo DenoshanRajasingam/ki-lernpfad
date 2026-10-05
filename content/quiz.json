@@ -1,0 +1,201 @@
+{
+  "c1a": {
+    "q": "Was macht ein KI-Assistent wie ChatGPT im Kern?",
+    "o": [
+      "Er sucht fertige Antworten in einer Datenbank",
+      "Er formuliert Text Wort für Wort aus dem, was er gelernt hat",
+      "Er fragt im Hintergrund einen Menschen"
+    ],
+    "a": 1,
+    "x": "Genau. Er bildet Text Wort für Wort, wie ein extrem belesenes Autovervollständigen."
+  },
+  "c1b": {
+    "q": "Welcher Prompt bringt das bessere Ergebnis?",
+    "o": [
+      "«Rezept?»",
+      "«Ich habe Reis, Zucchetti und Feta und 20 Minuten. Schlag mir zwei Rezepte vor.»"
+    ],
+    "a": 1,
+    "x": "Richtig. Kontext macht die Antwort passend."
+  },
+  "c1c": {
+    "q": "Die erste Antwort passt nicht ganz. Was tust du?",
+    "o": [
+      "Aufgeben, KI kann das nicht",
+      "Sagen, was fehlt, zum Beispiel «kürzer» oder «mit Beispiel»",
+      "Exakt dieselbe Frage nochmals stellen"
+    ],
+    "a": 1,
+    "x": "Genau. Nachbessern ist der Normalfall."
+  },
+  "c2a": {
+    "q": "Wie setzt ein Sprachmodell «Der Himmel ist …» fort?",
+    "o": [
+      "Es wählt ein wahrscheinliches nächstes Wort",
+      "Es schaut aus dem Fenster",
+      "Es nimmt das erste Wort im Wörterbuch"
+    ],
+    "a": 0,
+    "x": "Richtig. Wahrscheinlichkeiten, Wort für Wort."
+  },
+  "c2b": {
+    "q": "Was ist eine Halluzination?",
+    "o": [
+      "Ein Bild, das die KI malt",
+      "Eine überzeugend klingende, aber falsche Aussage",
+      "Ein Absturz des Programms"
+    ],
+    "a": 1,
+    "x": "Genau. Darum Fakten immer prüfen."
+  },
+  "c2c": {
+    "q": "Was ist generative KI?",
+    "o": [
+      "KI, die neue Inhalte wie Texte oder Bilder erzeugt",
+      "KI, die nur Zahlen sortiert",
+      "Ein anderes Wort für Roboter"
+    ],
+    "a": 0,
+    "x": "Richtig. ChatGPT ist generative KI."
+  },
+  "c3a": {
+    "q": "Welche Zutaten gehören in einen guten Prompt?",
+    "o": [
+      "Rolle, Aufgabe, Kontext, Format",
+      "Möglichst nur ein Wort",
+      "Viele Ausrufezeichen"
+    ],
+    "a": 0,
+    "x": "Genau, das Rezept aus der Prompt-Treppe."
+  },
+  "c3b": {
+    "q": "Du willst etwas Grösseres angehen. Bester Start?",
+    "o": [
+      "Sofort alles bauen lassen",
+      "Die KI zuerst Fragen stellen lassen",
+      "Alles in einen einzigen Satz packen"
+    ],
+    "a": 1,
+    "x": "Richtig. So baut die KI, was du wirklich willst."
+  },
+  "c3c": {
+    "q": "Was gibst du der KI besser nicht ein?",
+    "o": [
+      "Ein Rezept",
+      "Passwörter und fremde Personendaten",
+      "Eine Reiseidee"
+    ],
+    "a": 1,
+    "x": "Genau. Vertrauliches bleibt draussen."
+  },
+  "c3d": {
+    "q": "Was bewirkt der Satz «Sei kritischer»?",
+    "o": [
+      "Er schärft die Antwort",
+      "Er beleidigt die KI",
+      "Gar nichts"
+    ],
+    "a": 0,
+    "x": "Richtig. Ein typischer Satz zum Nachbessern."
+  },
+  "c4a": {
+    "q": "Was passiert bei jeder einzelnen Antwort der KI?",
+    "o": [
+      "Training",
+      "Inferenz",
+      "Beides"
+    ],
+    "a": 1,
+    "x": "Genau. Training passiert einmal, Inferenz bei jeder Antwort."
+  },
+  "c4b": {
+    "q": "Was ist ein Token?",
+    "o": [
+      "Ein Wortstück, in dem die KI Text liest",
+      "Eine Kryptowährung",
+      "Ein Passwort"
+    ],
+    "a": 0,
+    "x": "Richtig. Abgerechnet wird pro Token."
+  },
+  "c4c": {
+    "q": "Was macht ein Agent?",
+    "o": [
+      "Er beantwortet genau eine Frage",
+      "Er erledigt selbständig mehrere Schritte mit Werkzeugen",
+      "Er überwacht dein Handy"
+    ],
+    "a": 1,
+    "x": "Genau. Recherchieren, vergleichen, ausfüllen."
+  },
+  "c4d": {
+    "q": "Welche Ebene liegt ganz unten in der KI-Kette?",
+    "o": [
+      "Apps",
+      "Modelle",
+      "Chips"
+    ],
+    "a": 2,
+    "x": "Richtig. Alles läuft auf Chips, etwa von Nvidia."
+  },
+  "c5a": {
+    "q": "Wie startest du ein Bauprojekt am besten?",
+    "o": [
+      "Idee in einem Satz, dann interviewen lassen",
+      "Code aus dem Internet kopieren",
+      "Zuerst Programmieren lernen"
+    ],
+    "a": 0,
+    "x": "Genau. Schritt 1 und 2 des Ablaufs."
+  },
+  "c5b": {
+    "q": "Die App sieht anders aus als gewünscht. Beste Rückmeldung?",
+    "o": [
+      "«Gefällt mir nicht.»",
+      "«Der Knopf ist zu klein, sortiere die Liste nach Kategorien.»",
+      "«Mach es besser.»"
+    ],
+    "a": 1,
+    "x": "Richtig. Konkret sagen, was du siehst und erwartest."
+  },
+  "c5c": {
+    "q": "Nach einer Änderung geht nichts mehr. Was tust du?",
+    "o": [
+      "Alles löschen",
+      "«Geh zurück zur letzten Version, die funktioniert hat.»",
+      "Den Computer neu starten"
+    ],
+    "a": 1,
+    "x": "Genau. Zurück zur letzten guten Version."
+  },
+  "c6a": {
+    "q": "Wie wird deine App für andere aufrufbar?",
+    "o": [
+      "Veröffentlichen und den Link teilen",
+      "Einen Screenshot schicken",
+      "Das geht nicht"
+    ],
+    "a": 0,
+    "x": "Richtig. Ein Klick, ein Link."
+  },
+  "c6b": {
+    "q": "Was gehört nicht in eine öffentliche App?",
+    "o": [
+      "Das Programm eines Fests",
+      "Adressen und Passwörter",
+      "Ein Quiz"
+    ],
+    "a": 1,
+    "x": "Genau. Öffentlich heisst öffentlich."
+  },
+  "c6c": {
+    "q": "Wofür brauchst du ein Werkzeug wie Lovable?",
+    "o": [
+      "Für Apps mit Anmeldung und gespeicherten Daten",
+      "Für eine einfache Frage",
+      "Zum Musikhören"
+    ],
+    "a": 0,
+    "x": "Richtig. Für grössere Apps."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "treppe": [
+    {
+      "t": "Einfach fragen",
+      "d": "Für einen ersten Eindruck. Die Antwort bleibt allgemein.",
+      "p": "Was ist künstliche Intelligenz?",
+      "g": "Schnell, aber nicht auf dich zugeschnitten."
+    },
+    {
+      "t": "Kontext geben",
+      "d": "Sag, wer du bist und wofür du die Antwort brauchst.",
+      "p": "Erkläre mir künstliche Intelligenz. Ich habe keine Technikkenntnisse und möchte in Gesprächen mitreden können.",
+      "g": "Die Antwort passt zu deinem Wissensstand."
+    },
+    {
+      "t": "Ziel und Format festlegen",
+      "d": "Sag, wie das Ergebnis aussehen soll.",
+      "p": "Erkläre mir künstliche Intelligenz. Ich habe keine Technikkenntnisse. Antworte in fünf kurzen Punkten, jeder mit einem Beispiel aus dem Alltag.",
+      "g": "Kurz, übersichtlich, sofort brauchbar."
+    },
+    {
+      "t": "Rolle geben",
+      "d": "Lass die KI eine passende Rolle einnehmen.",
+      "p": "Du bist ein geduldiger Lehrer für Erwachsene. Erkläre mir künstliche Intelligenz in fünf kurzen Punkten mit Alltagsbeispielen. Stell mir danach zwei Fragen, ob ich es verstanden habe.",
+      "g": "Ton und Tiefe stimmen, und du lernst aktiv."
+    },
+    {
+      "t": "Rückfragen zulassen",
+      "d": "Bei grösseren Aufgaben weiss die KI zu wenig. Lass sie fragen.",
+      "p": "Ich möchte eine kleine App, um meine Weinsammlung zu verwalten. Stell mir zuerst alle Fragen, die du brauchst, eine nach der anderen. Fang erst an, wenn ich «los» sage.",
+      "g": "Die KI baut, was du wirklich willst, statt zu raten."
+    },
+    {
+      "t": "In Schritten arbeiten und prüfen lassen",
+      "d": "Zerlege Grosses in Schritte und lass die KI ihr Ergebnis selbst prüfen.",
+      "p": "Fasse zusammen, was wir besprochen haben, als kurze Beschreibung. Baue dann die erste Version. Prüfe am Schluss selbst, ob alles umgesetzt ist, und nenne, was noch fehlt.",
+      "g": "Weniger Fehler, und du behältst den Überblick."
+    }
+  ],
+  "fixes": [
+    "Kürzer, bitte.",
+    "Erkläre es einfacher.",
+    "Gib mir ein Beispiel.",
+    "Sei kritischer.",
+    "Nenne deine Quellen.",
+    "Was fehlt noch?",
+    "Frag mich, wenn dir etwas unklar ist.",
+    "Mach daraus eine Tabelle."
+  ]
+}

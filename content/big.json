@@ -1,0 +1,32 @@
+{
+  "chain": [
+    [
+      "4",
+      "Apps",
+      "ChatGPT, Claude, Gemini und unzählige Apps, die KI für bestimmte Aufgaben nutzen."
+    ],
+    [
+      "3",
+      "Modelle",
+      "Die Labore, die Sprachmodelle trainieren: OpenAI, Anthropic, Google, Meta, Mistral, DeepSeek."
+    ],
+    [
+      "2",
+      "Rechenzentren",
+      "Vermieten Rechenleistung: Microsoft, Amazon, Google. Engpass ist zunehmend der Strom."
+    ],
+    [
+      "1",
+      "Chips",
+      "Nvidia (Grafikchips), AMD, TSMC (Fertigung), ASML (Maschinen für die Chipherstellung)."
+    ]
+  ],
+  "questions": [
+    "Was kann das System konkret, und wer hat es unabhängig getestet?",
+    "Wie oft liegt es falsch, und wer bemerkt die Fehler?",
+    "Woher stammen die Daten, mit denen es gelernt hat?",
+    "Braucht es dafür wirklich KI, oder ist es ein Schlagwort?",
+    "Was passiert mit meinen Daten?",
+    "Wer profitiert davon, dass ich diese Schlagzeile glaube?"
+  ]
+}

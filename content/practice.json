@@ -1,0 +1,44 @@
+[
+  {
+    "id": "e1",
+    "lvl": 1,
+    "title": "Erklär mir",
+    "text": "Lass dir etwas erklären und dich danach abfragen.",
+    "prompt": "Erkläre mir, wie ein KI-Assistent wie du funktioniert, so als hätte ich keine Technikkenntnisse. Nutze ein Beispiel aus dem Alltag. Stell mir danach drei Fragen, ob ich es verstanden habe."
+  },
+  {
+    "id": "e2",
+    "lvl": 1,
+    "title": "Eine Alltagsaufgabe abgeben",
+    "text": "Nimm etwas, das ohnehin ansteht: eine Mail, eine Reise, ein Geschenk. Probier einmal den Sprachmodus der App. Danach zweimal nachbessern.",
+    "prompt": "Hilf mir, [Aufgabe] zu erledigen. Wichtig ist mir: [was dir wichtig ist]. Stell mir zuerst die Fragen, die du für ein wirklich gutes Ergebnis brauchst."
+  },
+  {
+    "id": "e3",
+    "lvl": 2,
+    "title": "Halluzination testen",
+    "text": "Frag nach etwas, das du sehr gut kennst. Wo ist die Antwort falsch oder erfunden? Frag danach mit eingeschalteter Websuche und vergleiche.",
+    "prompt": "Was weisst du über [Thema, das ich sehr gut kenne]? Gib bei jeder Aussage an, wie sicher du dir bist."
+  },
+  {
+    "id": "e4",
+    "lvl": 3,
+    "title": "Ein Dokument auswerten lassen",
+    "text": "Lade ein langes PDF hoch, etwa eine Bedienungsanleitung oder einen Zeitungsartikel.",
+    "prompt": "Fasse dieses Dokument auf einer halben Seite zusammen. Was sind die drei wichtigsten Punkte für mich, und was steht nur im Kleingedruckten? Nenne die Seitenzahlen."
+  },
+  {
+    "id": "e5",
+    "lvl": 3,
+    "title": "Lass dich interviewen",
+    "text": "Für alles, was du planen willst: Ferien, ein Fest, eine Entscheidung. Die KI stellt Fragen, du antwortest, am Schluss steht ein Plan.",
+    "prompt": "Ich möchte [Vorhaben] planen. Interviewe mich: Stell mir eine Frage nach der anderen, bis du genug weisst. Fasse danach alles als klaren Plan zusammen."
+  },
+  {
+    "id": "e6",
+    "lvl": 4,
+    "title": "Zweite Meinung einholen",
+    "text": "Stell dieselbe Frage zwei verschiedenen Assistenten und lass den einen die Antwort des anderen prüfen.",
+    "prompt": "Hier ist die Antwort eines anderen KI-Assistenten auf meine Frage: [Antwort einfügen]. Prüfe sie kritisch. Was stimmt, was ist fraglich, was fehlt?"
+  }
+]

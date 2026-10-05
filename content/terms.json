@@ -1,0 +1,230 @@
+[
+  [
+    1,
+    "Künstliche Intelligenz (KI)",
+    "Computer, die Aufgaben lösen, für die man bisher menschliche Intelligenz brauchte.",
+    "Gesichtserkennung im Handy, Übersetzer, ChatGPT."
+  ],
+  [
+    1,
+    "Chatbot / KI-Assistent",
+    "Das Programm, mit dem du schreibst oder sprichst.",
+    "ChatGPT, Claude, Gemini, Copilot."
+  ],
+  [
+    1,
+    "Prompt",
+    "Deine Anweisung an die KI, geschrieben oder gesprochen.",
+    "«Schreib mir eine freundliche Absage für die Einladung am Samstag.»"
+  ],
+  [
+    1,
+    "Halluzination",
+    "Die KI erfindet überzeugend klingende, aber falsche Fakten.",
+    "Sie nennt ein Buch, das es gar nicht gibt."
+  ],
+  [
+    1,
+    "Sprachmodus",
+    "Mit der KI sprechen statt tippen.",
+    "Im Auto fragen: «Was kann ich mit Zucchetti kochen?»"
+  ],
+  [
+    2,
+    "Maschinelles Lernen",
+    "Der Computer lernt Muster aus Beispielen, statt Regeln programmiert zu bekommen.",
+    "Der Spamfilter lernt aus Mails, die du als Spam markierst."
+  ],
+  [
+    2,
+    "Generative KI",
+    "KI, die Neues erzeugt: Text, Bilder, Musik, Video.",
+    "Ein Bild von «einer Katze im Astronautenanzug» erzeugen."
+  ],
+  [
+    2,
+    "Sprachmodell (LLM)",
+    "Ein Programm, das aus riesigen Textmengen gelernt hat, Text fortzusetzen. Das Herz von ChatGPT.",
+    "«Der Himmel ist …» → «blau»."
+  ],
+  [
+    2,
+    "Trainingsdaten",
+    "Die Texte und Bilder, aus denen ein Modell gelernt hat.",
+    "Was nach dem Training passiert ist, weiss es nur mit Websuche."
+  ],
+  [
+    2,
+    "Multimodal",
+    "Versteht mehrere Formate, etwa Text, Bild und Sprache.",
+    "Foto vom Kühlschrank zeigen und nach einem Rezept fragen."
+  ],
+  [
+    3,
+    "Kontext",
+    "Alles, was die KI über deine Situation weiss.",
+    "«Wir sind zu zweit und mögen keine Städtereisen.»"
+  ],
+  [
+    3,
+    "Rolle",
+    "Eine Perspektive, die die KI einnehmen soll.",
+    "«Du bist ein kritischer Lektor.»"
+  ],
+  [
+    3,
+    "Websuche",
+    "Der Assistent sucht im Internet und nennt Quellen.",
+    "Für aktuelle Preise, News oder Öffnungszeiten."
+  ],
+  [
+    3,
+    "Deep Research",
+    "Die KI recherchiert mehrere Minuten selbständig und schreibt einen Bericht mit Quellen.",
+    "«Vergleiche E-Bikes bis 4000 Franken.»"
+  ],
+  [
+    3,
+    "Eigene Anweisungen / Projekte",
+    "Dauerhafte Vorgaben, die für alle Gespräche gelten.",
+    "«Antworte immer kurz, auf Deutsch, mit Du.»"
+  ],
+  [
+    4,
+    "Token",
+    "Die Einheit, in der ein Modell Text liest, etwa ein Wortteil.",
+    "«Gartenfest» besteht aus mehreren Tokens."
+  ],
+  [
+    4,
+    "Kontextfenster",
+    "Wie viel Text die KI in einem Gespräch auf einmal berücksichtigt.",
+    "Bei sehr langen Gesprächen vergisst sie den Anfang. Dann neu starten."
+  ],
+  [
+    4,
+    "Parameter",
+    "Die gelernten Zahlen im Modell, oft Hunderte Milliarden.",
+    "Wie die Regler eines riesigen Mischpults."
+  ],
+  [
+    4,
+    "Training",
+    "Die Lernphase des Modells. Sehr teuer, passiert einmal.",
+    "Wie eine Kochausbildung."
+  ],
+  [
+    4,
+    "Inferenz",
+    "Das Benutzen des fertigen Modells, also jede Antwort.",
+    "Wie ein Gericht kochen: bei jeder Bestellung neu."
+  ],
+  [
+    4,
+    "Transformer",
+    "Die Bauweise aller modernen Sprachmodelle, 2017 bei Google erfunden. Das «T» in ChatGPT.",
+    ""
+  ],
+  [
+    4,
+    "Reasoning-Modell",
+    "Denkt vor der Antwort in Zwischenschritten nach. Besser bei Logik und Planung, dafür langsamer.",
+    "Für knifflige Rechen- oder Planungsaufgaben."
+  ],
+  [
+    4,
+    "Agent",
+    "KI, die selbständig Werkzeuge nutzt und mehrere Schritte erledigt.",
+    "Recherchiert Hotels, vergleicht Preise und füllt das Formular aus."
+  ],
+  [
+    4,
+    "Open Source / Open-Weight",
+    "Modelle, die jeder herunterladen und selbst betreiben kann.",
+    "Llama, Mistral, Qwen, DeepSeek."
+  ],
+  [
+    4,
+    "GPU",
+    "Grafikchip, auf dem KI läuft. Marktführer ist Nvidia.",
+    "Darum ist Nvidia so oft in den News."
+  ],
+  [
+    4,
+    "Deepfake",
+    "Täuschend echtes, von KI gefälschtes Bild, Video oder Tonstück.",
+    "Ein Video, in dem ein Politiker etwas sagt, das er nie gesagt hat."
+  ],
+  [
+    4,
+    "AGI",
+    "KI, die die meisten geistigen Aufgaben so gut wie ein Mensch erledigt. Umstritten, ob und wann.",
+    ""
+  ],
+  [
+    5,
+    "Vibe Coding",
+    "Software bauen, indem man beschreibt, was man will, statt selbst zu programmieren.",
+    "«Baue mir eine Packliste mit Häkchen.»"
+  ],
+  [
+    5,
+    "Artefakt / Canvas",
+    "Das Fenster neben dem Chat, in dem Claude (Artefakt) oder ChatGPT und Gemini (Canvas) die gebaute App zeigen.",
+    ""
+  ],
+  [
+    5,
+    "Web-App",
+    "Ein Programm, das im Browser läuft. Kein Installieren nötig.",
+    "Deine Packliste, geöffnet über einen Link."
+  ],
+  [
+    5,
+    "HTML",
+    "Die Sprache, aus der Webseiten bestehen. Die KI schreibt sie für dich.",
+    "Eine .html-Datei öffnet sich im Browser."
+  ],
+  [
+    5,
+    "Version",
+    "Ein gespeicherter Zwischenstand deiner App.",
+    "«Geh zurück zur Version von vorhin.»"
+  ],
+  [
+    6,
+    "Veröffentlichen",
+    "Die App bekommt eine öffentliche Adresse, die jeder mit dem Link öffnen kann.",
+    "Link per WhatsApp an die Familie schicken."
+  ],
+  [
+    6,
+    "Hosting",
+    "Ein Dienst, der deine Seite rund um die Uhr im Internet bereitstellt.",
+    "Netlify, Lovable oder die Teilen-Funktion der KI-Werkzeuge."
+  ],
+  [
+    6,
+    "Domain / Adresse",
+    "Die Internetadresse deiner Seite.",
+    "gartenfest.netlify.app"
+  ],
+  [
+    6,
+    "Datenbank",
+    "Speicher, in dem eine App Einträge dauerhaft ablegt.",
+    "Alle Weine deiner Sammlung."
+  ],
+  [
+    6,
+    "Login / Anmeldung",
+    "Schützt Daten, damit nur Berechtigte sie sehen.",
+    "Nur du siehst deine Weinsammlung."
+  ],
+  [
+    6,
+    "No-Code",
+    "Werkzeuge, mit denen man ohne Programmierkenntnisse Software baut.",
+    "Lovable, Bolt."
+  ]
+]
