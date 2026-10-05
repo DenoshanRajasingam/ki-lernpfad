@@ -281,6 +281,7 @@ function renderStages(){
       <p class="why">${esc(s.why)}<br><b>Ziel:</b> ${esc(s.goal)}</p>
       <div class="example"><span class="eyebrow"><span class="ms">lightbulb</span>${esc(s.ex.title)}</span><p>${esc(s.ex.text)}</p>
        <div class="links">${s.ex.links.map(l=>`<button class="pill${l[2]?" rec":""}" data-go="${l[1]}"><span class="ms">${l[2]?"recommend":"explore"}</span>${esc(l[0])}</button>`).join("")}</div></div>
+      ${cardFor("stage:"+i)}
       <div class="sub"><span class="ms">task_alt</span>Das machst du <span class="xp">je 10 Punkte</span></div>${modeTasks(s).map(t=>stepRow(t)).join("")}
       ${dp.length?`<details class="deepbox"><summary class="sub"><span class="ms">explore</span>Vertiefung, freiwillig (${dp.length})<span class="ms tog">expand_more</span><span class="xp">je 15 Punkte</span></summary>${dp.map(t=>stepRow(t,"optional")).join("")}</details>`:""}
       <div class="mission"><span class="eyebrow"><span class="ms">flag</span>Praxis-Mission · 30 Punkte</span>${row(s.mission)}</div>
@@ -353,13 +354,35 @@ $("#resetYes").onclick=()=>{done=done._settings?{_settings:done._settings}:{};sa
 async function copyText(t,btn){const l=btn.lastElementChild;try{await navigator.clipboard.writeText(t);l.textContent="Kopiert"}catch(e){const r=document.createRange();r.selectNodeContents(btn.previousElementSibling);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);l.textContent="Markiert"}setTimeout(()=>l.textContent="Kopieren",1600)}
 const promptBox=p=>`<div class="prompt"><span>${esc(p)}</span><button class="copy"><span class="ms">content_copy</span><span>Kopieren</span></button></div>`;
 
+/* ===== «Probier's aus»: Don't, Do, Erwartung, Nachbessern (zusätzlich, ersetzt nichts) ===== */
+const CARDS=C.prompts.cards||[],DOSDONTS=C.prompts.dosdonts||[];
+const CHATGPT_URL="https://chatgpt.com/?q=";
+function tryCard(c){
+  return `<details class="tryit"><summary><span class="ms">science</span><span class="t">Probier's aus: ${esc(c.title)}</span><span class="ms tog">expand_more</span></summary>
+    <div class="trybody">
+      <div class="trydont"><span class="trylbl"><span class="ms">close</span>Don't</span><p class="tryp">«${esc(c.dont)}»</p><p class="meta">${esc(c.dontWhy)}</p></div>
+      <div class="trydo"><span class="trylbl"><span class="ms">check</span>Do</span><div class="prompt"><span>${esc(c.do)}</span><button class="copy trycopy"><span class="ms">content_copy</span><span>Kopieren</span></button></div>
+        <a class="textbtn tryopen" href="${CHATGPT_URL+encodeURIComponent(c.do)}" target="_blank" rel="noopener"><span class="ms">open_in_new</span>In ChatGPT öffnen</a></div>
+      <p class="tryexp"><span class="ms">visibility</span><span><b>Was du erwarten kannst:</b> ${esc(c.expect)}</span></p>
+      <div class="tryfixes"><span class="meta">Danach nachbessern:</span>${(c.fixes||[]).map(f=>`<button class="chip tryfix">${esc(f)}</button>`).join("")}</div>
+    </div></details>`;
+}
+const cardFor=key=>CARDS.filter(c=>c.for===key).map(tryCard).join("");
+/* Kopieren in den Karten per Delegation, weil die Stufen neu gerendert werden */
+document.addEventListener("click",async e=>{
+  const cp=e.target.closest(".trycopy");if(cp){e.preventDefault();copyText(cp.previousElementSibling.textContent,cp);return}
+  const fx=e.target.closest(".tryfix");if(fx){const t=fx.textContent;try{await navigator.clipboard.writeText(t);toast("Kopiert: "+t)}catch(err){toast(t)}}
+});
+
 /* ===== Prompten und Bauen ===== */
 $("#treppe").innerHTML=TREPPE.map((s,i)=>`<div class="step" style="${lc(i+1)}"><span class="sn">${i+1}</span><div><h3>${esc(s.t)}</h3><p class="meta" style="margin:0">${esc(s.d)}</p>${promptBox(s.p)}<div class="gain"><span class="ms">check_circle</span>${esc(s.g)}</div></div></div>`).join("");
 $("#fixes").innerHTML=FIXES.map(f=>`<button class="chip">${esc(f)}</button>`).join("");
 document.querySelectorAll("#fixes .chip").forEach(b=>b.onclick=async()=>{const t=b.textContent;try{await navigator.clipboard.writeText(t);toast("Kopiert: "+t)}catch(e){toast(t)}});
-$("#practice").innerHTML=PRACTICE.map(p=>`<div class="card" id="x-${p.id}">${dots(p.lvl)}<h3 style="margin-top:6px">${esc(p.title)}</h3><p style="margin:0">${esc(p.text)}</p>${promptBox(p.prompt)}</div>`).join("");
-$("#builds").innerHTML=BUILDS.map((b,i)=>`<div class="card" id="x-${b.id}">${dots(b.lvl)} <span class="tag">${esc(b.tool)}</span><h3 style="margin-top:6px">${b.id==="b0"?"Start-Projekt":"Bauprojekt "+b.id.slice(1)}: ${esc(b.title)}</h3><p style="margin:0">${esc(b.text)}</p>${promptBox(b.prompt)}</div>`).join("");
-document.querySelectorAll(".copy").forEach(b=>b.onclick=()=>copyText(b.previousElementSibling.textContent,b));
+$("#practice").innerHTML=PRACTICE.map(p=>`<div class="card" id="x-${p.id}">${dots(p.lvl)}<h3 style="margin-top:6px">${esc(p.title)}</h3><p style="margin:0">${esc(p.text)}</p>${promptBox(p.prompt)}${cardFor("practice:"+p.id)}</div>`).join("");
+$("#builds").innerHTML=BUILDS.map((b,i)=>`<div class="card" id="x-${b.id}">${dots(b.lvl)} <span class="tag">${esc(b.tool)}</span><h3 style="margin-top:6px">${b.id==="b0"?"Start-Projekt":"Bauprojekt "+b.id.slice(1)}: ${esc(b.title)}</h3><p style="margin:0">${esc(b.text)}</p>${promptBox(b.prompt)}${cardFor("build:"+b.id)}</div>`).join("");
+document.querySelectorAll(".copy:not(.trycopy)").forEach(b=>b.onclick=()=>copyText(b.previousElementSibling.textContent,b));
+/* Dos und Don'ts im Reiter Prompten (neue Karte nach den Nachbessern-Sätzen) */
+if(DOSDONTS.length)$("#fixes").closest(".card").insertAdjacentHTML("afterend",`<div class="card" id="dosdonts"><h3>Dos und Don'ts</h3><p class="meta">Die wichtigsten Regeln auf einen Blick.</p><div class="ddgrid">${DOSDONTS.map(d=>`<div class="ddrow"><span class="dd do"><span class="ms">check</span>${esc(d.do)}</span><span class="dd dont"><span class="ms">close</span>${esc(d.dont)}</span></div>`).join("")}</div></div>`);
 document.querySelectorAll(".stuck [data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
 
 /* ===== Begriffe ===== */
