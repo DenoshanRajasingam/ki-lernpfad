@@ -204,6 +204,7 @@
   <div id="media"></div>
 </section>
 </main>
+<footer class="appfooter"><span>Version <span id="appVersion">dev</span></span><span aria-hidden="true">·</span><button type="button" class="textbtn" id="whatsNewBtn">Was ist neu?</button></footer>
 </div>
 
 <nav class="tabs" id="tabs" aria-label="Navigation">
@@ -264,6 +265,13 @@
     <div class="prompt linkbox"><span id="shareLink"></span><button class="copy" id="shareCopy"><span class="ms">content_copy</span><span>Kopieren</span></button></div>
     <div class="privacy"><span class="ms">lock</span><span>Der Link enthält deinen Fortschritt verschlüsselt. Ohne deine PIN kann niemand etwas damit anfangen. Machst du hier weiter, erstell später einfach einen neuen Link.</span></div>
     <div class="dactions"><button type="button" class="filled" id="shareDone">Fertig</button></div>
+  </div>
+</div>
+<div class="scrim" id="whatsNewDlg" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="wnTitle">
+    <div class="dhead"><span class="mico"><span class="ms">auto_awesome</span></span><div><h2 id="wnTitle">Was ist neu</h2><span class="meta" id="wnDate"></span></div></div>
+    <ul class="wnlist" id="wnList"></ul>
+    <div class="dactions"><button type="button" class="filled" id="wnOk">Alles klar</button></div>
   </div>
 </div>
 <div class="lvlup" id="lvlup" hidden><div class="lvlcard" role="dialog" aria-modal="true" aria-labelledby="lvlTitle"><span class="avatar img" id="lvlAvatar"></span><span class="eyebrow">Level up!</span><h2 id="lvlTitle"></h2><p id="lvlText"></p><button class="filled" id="lvlOk">Weiter so</button></div></div>

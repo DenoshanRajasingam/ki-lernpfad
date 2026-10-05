@@ -1,14 +1,16 @@
 /* Inhalte laden: Texte und Daten liegen als JSON in content/ (Version aus version.json für Cache-Busting) */
 const CONTENT_FILES=["media","stages","missions","quiz","prompts","practice","builds","terms","big","challenges","game"];
 async function loadContent(){
-  let v="dev";
-  try{const r=await fetch("version.json",{cache:"no-store"});if(r.ok){const j=await r.json();if(j&&j.version)v=String(j.version)}}catch(e){}
+  let v="dev",info=null;
+  try{const r=await fetch("version.json",{cache:"no-store"});if(r.ok){const j=await r.json();if(j&&j.version){v=String(j.version);info={version:v,date:j.date||"",notes:Array.isArray(j.notes)?j.notes:[]}}}}catch(e){}
   const parts=await Promise.all(CONTENT_FILES.map(async name=>{
     const r=await fetch(`content/${name}.json?v=${encodeURIComponent(v)}`);
     if(!r.ok)throw new Error("content/"+name+".json: HTTP "+r.status);
     return r.json();
   }));
-  return Object.fromEntries(CONTENT_FILES.map((name,i)=>[name,parts[i]]));
+  const content=Object.fromEntries(CONTENT_FILES.map((name,i)=>[name,parts[i]]));
+  content.version=info;
+  return content;
 }
 function showLoadError(err){
   console.error(err);
@@ -415,7 +417,34 @@ function renderGate(){
 }
 let DEMO_DONE=null;
 function showGate(){if(DEMO&&Object.keys(done).length)DEMO_DONE=done;DEMO=false;renderGate();$("#gate").hidden=false;$("#demoBar").hidden=true;window.scrollTo({top:0})}
-function afterLogin(){window._xpShown=undefined;$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();show("lernpfad")}
+function afterLogin(){window._xpShown=undefined;$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();show("lernpfad");maybeShowWhatsNew()}
+/* ===== Version und «Was ist neu» ===== */
+const SEEN_KEY="ki-lernpfad-seen-version";
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function openWhatsNew(){
+  const v=C.version;if(!v)return;
+  $("#wnTitle").textContent="Was ist neu in Version "+v.version;
+  $("#wnDate").textContent=v.date;
+  $("#wnList").replaceChildren(...v.notes.map(t=>{const li=document.createElement("li");li.textContent=t;return li}));
+  $("#whatsNewDlg").hidden=false;$("#wnOk").focus();
+}
+function closeWhatsNew(){$("#whatsNewDlg").hidden=true}
+function maybeShowWhatsNew(){
+  const v=C.version;if(!v||$("#gate").hidden===false)return;
+  const seen=lsGet(SEEN_KEY);if(seen===v.version)return;
+  const firstVisit=seen===null&&!lsGet(PKEY);
+  lsSet(SEEN_KEY,v.version);
+  if(!firstVisit)openWhatsNew();
+}
+/* Erstbesuch ohne Profil: aktuelle Version gilt als gesehen, damit neue Nutzer keine Release-Notes bekommen */
+if(C.version&&lsGet(SEEN_KEY)===null&&!lsGet(PKEY))lsSet(SEEN_KEY,C.version.version);
+$("#appVersion").textContent=C.version?C.version.version:"dev";
+$("#whatsNewBtn").hidden=!C.version;
+$("#whatsNewBtn").onclick=openWhatsNew;
+$("#wnOk").onclick=closeWhatsNew;
+$("#whatsNewDlg").addEventListener("click",e=>{if(e.target.id==="whatsNewDlg")closeWhatsNew()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#whatsNewDlg").hidden)closeWhatsNew()});
 let MUST_SET_PIN=false;
 async function login(id,pin){
   const p=reg.profiles[id];if(!p)return false;

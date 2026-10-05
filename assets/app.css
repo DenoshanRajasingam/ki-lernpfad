@@ -426,3 +426,9 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 .hud b.count{font-weight:600;font-variant-numeric:tabular-nums}
 
 @media (min-width:700px){h1{font-size:2.75rem}.card,.hero{padding:24px}}
+/* Fusszeile mit Version und «Was ist neu» */
+.appfooter{display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;padding:24px 16px 112px;font:400 .75rem var(--font);color:var(--on-surface-variant)}
+.appfooter .textbtn{height:32px;padding:0 8px;font-size:.75rem;color:var(--on-surface-variant);text-decoration:underline}
+.wnlist{margin:0 0 8px;padding-left:20px;display:grid;gap:8px}
+@media (min-width:960px){.appfooter{padding-bottom:24px}}
+.appfooter [hidden]{display:none}
