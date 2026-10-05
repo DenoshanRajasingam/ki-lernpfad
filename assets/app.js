@@ -378,6 +378,86 @@ async function setPin(id,pin){
 
 function curProfile(){return DEMO?{user:"Demo-Gast",avatar:"demo"}:reg.profiles[reg.active]||null}
 function demoState(){return {}}
+/* ===== Lernweg-Assistent: speichert Tiefe, Medien und Ort in done._settings (wirkt noch nicht auf Stufen und Tagesplan) ===== */
+const MODE_LABEL={compact:"Kompakt",standard:"Standard",deep:"Tief"};
+const MEDIA_LABEL={video:"Videos",podcast:"Podcasts",read:"Lesen",course:"Kurse",practice:"Ausprobieren"};
+const PLACE_LABEL={mobile:"unterwegs",computer:"am Computer",any:"überall"};
+const MEDIA_KEYS=Object.keys(MEDIA_LABEL);
+const PATH_STEP_COUNT=3,PATH_ROUND_MIN=30,PATH_AUTO_DELAY_MS=900;
+const PATH_DONE_TOAST="Dein Lernweg steht. Die Affen haben die Bananen schon eingepackt.";
+/* Fehlende Einstellungen bedeuten: Standard, alle Medien, überall */
+function getSettings(){
+  const s=(done&&done._settings)||{};
+  return{
+    mode:Object.hasOwn(MODE_LABEL,s.mode)?s.mode:"standard",
+    media:Array.isArray(s.media)?MEDIA_KEYS.filter(k=>s.media.includes(k)):[],
+    place:Object.hasOwn(PLACE_LABEL,s.place)?s.place:"any"
+  };
+}
+function settingsLine(s=getSettings()){
+  const all=!s.media.length||s.media.length===MEDIA_KEYS.length;
+  return `Lernweg: ${MODE_LABEL[s.mode]} · ${all?"alle Medien":s.media.map(k=>MEDIA_LABEL[k]).join(", ")} · ${PLACE_LABEL[s.place]}`;
+}
+/* Dauer je Modus aus den Inhalten: Kompakt = Kern (mit Kurz-Ersatz), Standard = alle Schritte, Tief = Standard plus Vertiefungen */
+const stepMin=t=>Number.isFinite(t.min)?t.min:0;
+const sumMin=list=>list.reduce((n,t)=>n+stepMin(t),0);
+function pathMinutes(){
+  const tasks=STAGES.flatMap(s=>s.tasks),standard=sumMin(tasks);
+  return{
+    compact:tasks.filter(t=>t.depth==="core").reduce((n,t)=>n+(t.compact&&Number.isFinite(t.compact.min)?t.compact.min:stepMin(t)),0),
+    standard,
+    deep:standard+sumMin(STAGES.flatMap(s=>s.deep))
+  };
+}
+const hoursLabel=min=>`ca. ${String(Math.round(min/PATH_ROUND_MIN)*PATH_ROUND_MIN/60).replace(".",",")} Std.`;
+let pathStep=0,pathDraft=null,pathReturnFocus=null;
+const pathPanes=()=>[...document.querySelectorAll("#pathDlg .pathpane")];
+function pathRenderChoices(){
+  document.querySelectorAll("#pathDlg .pathopt").forEach(b=>{const on=pathDraft[b.dataset.key]===b.dataset.v;b.setAttribute("aria-pressed",on);b.classList.toggle("on",on)});
+  document.querySelectorAll("#pathDlg .chip").forEach(b=>{const on=pathDraft.media.includes(b.dataset.v);b.setAttribute("aria-pressed",on);b.classList.toggle("on",on)});
+}
+function pathShowStep(n){
+  const panes=pathPanes();pathStep=n;
+  panes.forEach((p,i)=>{p.hidden=i!==n});
+  $("#pathTitle").textContent=panes[n].dataset.title;
+  $("#pathStep").textContent=`Schritt ${n+1} von ${PATH_STEP_COUNT}`;
+  [...$("#pathDots").children].forEach((d,i)=>{d.classList.toggle("on",i<=n);d.classList.toggle("cur",i===n)});
+  $("#pathBack").hidden=n===0;
+  $("#pathNext").textContent=n===PATH_STEP_COUNT-1?"Fertig":"Weiter";
+  panes[n].querySelector("button").focus();
+}
+function openPath(){
+  if(DEMO||!reg.active)return;
+  const s=getSettings(),m=pathMinutes();
+  pathDraft={mode:s.mode,media:[...s.media],place:s.place};
+  document.querySelectorAll("#pathDlg [data-dur]").forEach(el=>{el.textContent=hoursLabel(m[el.dataset.dur])+(el.dataset.dur==="deep"?" · plus optionale Langkurse":"")});
+  pathReturnFocus=document.activeElement;
+  pathRenderChoices();$("#pathDlg").hidden=false;pathShowStep(0);
+}
+function closePath(){
+  $("#pathDlg").hidden=true;
+  if(pathReturnFocus&&pathReturnFocus.isConnected)pathReturnFocus.focus();
+  pathReturnFocus=null;
+}
+function finishPath(){
+  done._settings={mode:pathDraft.mode,media:MEDIA_KEYS.filter(k=>pathDraft.media.includes(k)),place:pathDraft.place};
+  save();closePath();renderStages();renderProfile();toast(PATH_DONE_TOAST);
+}
+document.querySelectorAll("#pathDlg .pathopt").forEach(b=>b.onclick=()=>{pathDraft[b.dataset.key]=b.dataset.v;pathRenderChoices()});
+document.querySelectorAll("#pathDlg .chip").forEach(b=>b.onclick=()=>{const m=pathDraft.media,i=m.indexOf(b.dataset.v);if(i<0)m.push(b.dataset.v);else m.splice(i,1);pathRenderChoices()});
+$("#pathNext").onclick=()=>pathStep<PATH_STEP_COUNT-1?pathShowStep(pathStep+1):finishPath();
+$("#pathBack").onclick=()=>pathShowStep(pathStep-1);
+$("#pathSkip").onclick=closePath;
+$("#pathDlg").addEventListener("click",e=>{if(e.target.id==="pathDlg")closePath()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#pathDlg").hidden)closePath()});
+/* Fokus bleibt im Dialog */
+$("#pathDlg").addEventListener("keydown",e=>{
+  if(e.key!=="Tab")return;
+  const f=[...$("#pathDlg").querySelectorAll("button")].filter(b=>b.offsetParent!==null),first=f[0],last=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+});
+$("#pPath").onclick=()=>{closeProfile();if($("#profileDlg").hidden)openPath()};
 function setErr(id,bad,msg,ok){const f=$("#"+id);if(!f)return;f.classList.toggle("err",bad);f.querySelector(".hint").textContent=bad?msg:ok}
 function validate(pre,user,pin,pin2,selfId,pinRequired){
   const taken=Object.entries(reg.profiles).some(([id,p])=>id!==selfId&&p.user.toLowerCase()===user.toLowerCase());
@@ -398,8 +478,9 @@ function renderProfile(){
   if(pr){pi.className="avatar img";pi.innerHTML=monkeySVG(avatarKey(pr));$("#profileBtn").title=DEMO?"Demo beenden":"@"+pr.user;$("#profileBtn").setAttribute("aria-label",DEMO?"Demo beenden":`Profil von ${pr.user}`)}
   else{pi.className="ms";pi.textContent="account_circle"}
   const hu=$("#heroUser");
-  hu.innerHTML=pr?`<span class="avatar lg img">${monkeySVG(avatarKey(pr))}</span><span class="t"><b>${DEMO?"Demo-Gast":"@"+esc(pr.user)}</b><span class="meta">${DEMO?"Demo · nur Stufe 1":"Fortschritt verschlüsselt gespeichert"}</span></span><button class="hbtn" id="heroEdit"><span class="ms">${DEMO?"person_add":"edit"}</span>${DEMO?"Eigenes Profil":"Profil bearbeiten"}</button>`:"";
+  hu.innerHTML=pr?`<span class="avatar lg img">${monkeySVG(avatarKey(pr))}</span><span class="t"><b>${DEMO?"Demo-Gast":"@"+esc(pr.user)}</b><span class="meta">${DEMO?"Demo · nur Stufe 1":"Fortschritt verschlüsselt gespeichert"}</span></span><button class="hbtn" id="heroEdit"><span class="ms">${DEMO?"person_add":"edit"}</span>${DEMO?"Eigenes Profil":"Profil bearbeiten"}</button>${DEMO?"":`<button type="button" class="pathline" id="pathLine" title="Lernweg anpassen"><span class="ms">tune</span><span>${esc(settingsLine())}</span></button>`}`:"";
   const he=$("#heroEdit");if(he)he.onclick=openProfile;
+  const pl=$("#pathLine");if(pl)pl.onclick=openPath;
   $("#demoBar").hidden=!DEMO;
 }
 function renderGate(){
@@ -477,6 +558,7 @@ $("#gateForm").onsubmit=async e=>{
   await setPin(id,pin);if(legacy)ST.del(LEGACY);
   sb.disabled=false;["gUser","gPin","gPin2"].forEach(f=>{$("#"+f).value=""});gExtra="";gPreview();
   afterLogin();confetti();toast(carried?`Willkommen an Bord, ${user}! Dein Fortschritt aus der Demo ist übernommen. Stufe 2 ist frei.`:`Willkommen an Bord, ${user}! Die Roboter haben dich jetzt auf dem Radar. Im guten Sinn.`);
+  setTimeout(()=>{if(!DEMO&&reg.active===id&&$("#gate").hidden)openPath()},PATH_AUTO_DELAY_MS);
 };
 $("#demoBtn").onclick=()=>{DEMO=true;SESSION_KEY=null;done=demoState();afterLogin();toast("Demo: Probier Stufe 1 aus. Für die Stufen 2 bis 6 brauchst du ein Profil.")};
 $("#demoCreate").onclick=()=>showGate();

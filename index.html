@@ -251,6 +251,7 @@
     <div class="field" id="f-pin"><label for="pPin">Neue PIN</label><input id="pPin" type="password" autocomplete="new-password" maxlength="64" placeholder="leer lassen = unverändert"><span class="hint">Mindestens 8 Zeichen, leer lassen = unverändert</span></div>
     <div class="dactions"><button type="button" class="textbtn" id="pCancel">Abbrechen</button><button type="submit" class="filled">Speichern</button></div>
     <div class="dsep"></div>
+    <div class="dactions" style="justify-content:flex-start;margin-top:0"><button type="button" class="textbtn" id="pPath"><span class="ms">tune</span>Lernweg anpassen</button></div>
     <div class="dactions" style="justify-content:space-between">
       <button type="button" class="textbtn" id="pTransfer"><span class="ms">devices</span>Auf anderem Gerät weitermachen</button>
       <button type="button" class="textbtn" id="pLogout"><span class="ms">logout</span>Abmelden oder Profil wechseln</button>
@@ -272,6 +273,38 @@
     <div class="dhead"><span class="mico"><span class="ms">auto_awesome</span></span><div><h2 id="wnTitle">Was ist neu</h2><span class="meta" id="wnDate"></span></div></div>
     <ul class="wnlist" id="wnList"></ul>
     <div class="dactions"><button type="button" class="filled" id="wnOk">Alles klar</button></div>
+  </div>
+</div>
+<div class="scrim" id="pathDlg" hidden>
+  <div class="dialog pathdlg" role="dialog" aria-modal="true" aria-labelledby="pathTitle">
+    <div class="pathprog"><span class="meta" id="pathStep">Schritt 1 von 3</span><span class="pathdots" id="pathDots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <h2 id="pathTitle">Wie tief willst du gehen?</h2>
+    <div class="pathpane" data-title="Wie tief willst du gehen?">
+      <div class="pathopts" role="group" aria-labelledby="pathTitle">
+        <button type="button" class="pathopt" data-key="mode" data-v="compact" aria-pressed="false"><span class="mico"><span class="ms">speed</span></span><span class="pathtxt"><b>Kompakt</b><span class="meta">Mitreden und loslegen</span><span class="pathdur" data-dur="compact"></span></span><span class="pathmark" aria-hidden="true"></span></button>
+        <button type="button" class="pathopt" data-key="mode" data-v="standard" aria-pressed="true"><span class="mico"><span class="ms">balance</span></span><span class="pathtxt"><b>Standard</b><span class="meta">Der ausgewogene Weg</span><span class="pathdur" data-dur="standard"></span></span><span class="pathmark" aria-hidden="true"></span></button>
+        <button type="button" class="pathopt" data-key="mode" data-v="deep" aria-pressed="false"><span class="mico"><span class="ms">psychology</span></span><span class="pathtxt"><b>Tief</b><span class="meta">Wirklich verstehen</span><span class="pathdur" data-dur="deep"></span></span><span class="pathmark" aria-hidden="true"></span></button>
+      </div>
+      <p class="meta pathhint">Am Ende baust du in jedem Modus deine eigene App.</p>
+    </div>
+    <div class="pathpane" data-title="Wie lernst du am liebsten?" hidden>
+      <div class="chiprow pathchips" role="group" aria-labelledby="pathTitle">
+        <button type="button" class="chip" data-v="video" aria-pressed="false"><span class="ms">movie</span>Videos</button>
+        <button type="button" class="chip" data-v="podcast" aria-pressed="false"><span class="ms">headphones</span>Podcasts</button>
+        <button type="button" class="chip" data-v="read" aria-pressed="false"><span class="ms">menu_book</span>Lesen</button>
+        <button type="button" class="chip" data-v="course" aria-pressed="false"><span class="ms">school</span>Kurse</button>
+        <button type="button" class="chip" data-v="practice" aria-pressed="false"><span class="ms">build</span>Ausprobieren</button>
+      </div>
+      <p class="meta pathhint">Nichts gewählt heisst: alles gemischt.</p>
+    </div>
+    <div class="pathpane" data-title="Wo lernst du meistens?" hidden>
+      <div class="pathopts" role="group" aria-labelledby="pathTitle">
+        <button type="button" class="pathopt" data-key="place" data-v="mobile" aria-pressed="false"><span class="mico"><span class="ms">smartphone</span></span><span class="pathtxt"><b>Unterwegs</b></span><span class="pathmark" aria-hidden="true"></span></button>
+        <button type="button" class="pathopt" data-key="place" data-v="computer" aria-pressed="false"><span class="mico"><span class="ms">computer</span></span><span class="pathtxt"><b>Am Computer</b></span><span class="pathmark" aria-hidden="true"></span></button>
+        <button type="button" class="pathopt" data-key="place" data-v="any" aria-pressed="true"><span class="mico"><span class="ms">devices</span></span><span class="pathtxt"><b>Beides</b></span><span class="pathmark" aria-hidden="true"></span></button>
+      </div>
+    </div>
+    <div class="dactions pathactions"><button type="button" class="textbtn pathskip" id="pathSkip">Überspringen</button><button type="button" class="textbtn" id="pathBack" hidden>Zurück</button><button type="button" class="filled" id="pathNext">Weiter</button></div>
   </div>
 </div>
 <div class="lvlup" id="lvlup" hidden><div class="lvlcard" role="dialog" aria-modal="true" aria-labelledby="lvlTitle"><span class="avatar img" id="lvlAvatar"></span><span class="eyebrow">Level up!</span><h2 id="lvlTitle"></h2><p id="lvlText"></p><button class="filled" id="lvlOk">Weiter so</button></div></div>
