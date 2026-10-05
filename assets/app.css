@@ -467,3 +467,25 @@ details.deepbox[open]>summary .tog{transform:rotate(180deg)}
 .pathline::before{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .15s;pointer-events:none}
 .pathline:hover::before{opacity:.08}
 @media (max-width:480px){.pathdlg{padding:20px}}
+/* Lernweg: Varianten, Modus-Hinweis, Tagesplan-Ergänzungen, Ziellinie */
+.steptag{display:inline-flex;align-items:center;height:20px;padding:0 6px;margin-left:6px;border-radius:6px;font:500 .75rem var(--font);background:var(--tertiary-container);color:var(--on-tertiary-container);vertical-align:middle;white-space:nowrap}
+.swapbtn{position:relative;overflow:hidden;flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;height:32px;padding:0 10px;border-radius:16px;border:0;background:transparent;color:var(--on-surface-variant);font:500 .8125rem var(--font);cursor:pointer}
+.swapbtn .ms{font-size:18px}
+.swapbtn::before,.varopt::before{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .15s;pointer-events:none}
+.swapbtn:hover::before,.varopt:hover::before{opacity:.08}
+.swapbtn[aria-expanded="true"]{color:var(--primary)}
+@media (max-width:520px){.swapbtn{padding:0 6px}.swapbtn .lbl{display:none}}
+.varpick{display:grid;gap:6px;padding:0 0 10px 36px}
+.varpick .meta{font-size:.8125rem}
+.varopt{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid var(--outline-variant);background:var(--surface-lowest);color:var(--on-surface);border-radius:var(--sh-s);padding:8px 12px;font:400 .875rem/1.35 var(--font);cursor:pointer}
+.varopt .ms{font-size:20px;color:var(--primary)}
+.varopt .t{flex:1;min-width:0}
+.varopt.on{border-color:transparent;background:var(--secondary-container);color:var(--on-secondary-container)}
+.plansub{display:flex;align-items:center;gap:6px;margin-top:12px;font:500 .875rem var(--font)}
+.plansub .ms{font-size:18px}
+.budgetedit{display:inline-flex;align-items:center;gap:6px}
+.budgetedit input{width:76px;height:32px;padding:0 8px;border:1px solid color-mix(in srgb,var(--on-primary-container) 40%,transparent);border-radius:8px;background:var(--surface-lowest);color:var(--on-surface);font:500 .875rem var(--font)}
+.goalline{display:flex;align-items:center;gap:8px;font:500 .875rem/1.35 var(--font);color:var(--on-primary-container)}
+.goalline .ms{font-size:20px;flex:0 0 auto}
+.goalline[hidden]{display:none}
+.varpick[hidden]{display:none}

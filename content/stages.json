@@ -194,10 +194,10 @@
         "parts": 3,
         "compact": {
           "media": "video",
-          "go": "dalwigk",
-          "txt": "Video: Florian Dalwigk erklärt ChatGPT (statt Kurs)",
-          "dur": "14 Min",
-          "min": 14
+          "go": "kern",
+          "txt": "Video: Sprachmodelle und LLMs einfach erklärt (statt Kurs)",
+          "dur": "4 Min",
+          "min": 4
         }
       },
       {

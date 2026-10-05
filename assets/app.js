@@ -79,7 +79,31 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const lc=n=>`--lc:var(--l${n});--lcc:var(--c${n})`;
 const dots=n=>`<span class="lvl" style="${lc(n)}">${[1,2,3,4,5,6].map(i=>`<i class="${i<=n?"f":""}"></i>`).join("")} Stufe ${n}</span>`;
-const items=s=>[...s.tasks,...(s.mission?[s.mission]:[]),...s.checks];
+/* ===== Lernweg: Modus (Kompakt/Standard/Tief) bestimmt die zählenden Schritte, Medienvorliebe die angezeigte Variante ===== */
+const hasMin=t=>Number.isFinite(t.min);
+function compactStep(t){const c=t.compact;return{...t,media:c.media,go:c.go,txt:c.txt,dur:c.dur,min:c.min,parts:undefined,variants:undefined}}
+function modeTasks(s){
+  const mode=getSettings().mode;
+  if(mode==="compact")return s.tasks.filter(t=>t.depth!=="standard").map(t=>t.compact?compactStep(t):t);
+  if(mode==="deep")return[...s.tasks,...s.deep.filter(hasMin).map(t=>({...t,fromDeep:true}))];
+  return s.tasks;
+}
+function modeDeep(s){return getSettings().mode==="deep"?s.deep.filter(t=>!hasMin(t)):s.deep}
+/* Keine Auswahl oder alle Medien gewählt = keine Vorliebe */
+function mediaPrefs(){const m=getSettings().media;return m.length&&m.length<MEDIA_KEYS.length?m:null}
+/* Index der angezeigten Variante: -1 = Original. Eigene Wahl («Lieber anders?») vor Medienvorliebe. */
+function variantIndex(t){
+  const v=t.variants||[],chosen=done._variant&&done._variant[t.id];
+  if(Number.isInteger(chosen)&&chosen>=-1&&chosen<v.length)return chosen;
+  const prefs=mediaPrefs();
+  if(!prefs||prefs.includes(t.media))return -1;
+  return v.findIndex(x=>prefs.includes(x.media));
+}
+function displayStep(t){
+  const k=variantIndex(t);if(k<0)return t;
+  const v=t.variants[k];return{...t,media:v.media,go:v.go,txt:v.txt,dur:v.dur,min:v.min,parts:undefined};
+}
+const items=s=>[...modeTasks(s),...(s.mission?[s.mission]:[]),...s.checks];
 const stageDone=s=>items(s).every(i=>done[i.id]);
 const REC=new Set(STAGES.flatMap(s=>s.tasks.map(t=>t.go)));
 const VIEWS=["lernpfad","prompten","bauen","wissen","medien"];
@@ -114,22 +138,62 @@ function go(t){
 let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),4500)}
 
 /* ===== Fortschritt ===== */
-function nextStep(){for(const[i,s]of STAGES.entries()){const t=s.tasks.find(x=>!done[x.id]);if(t)return{i,item:t,kind:"task"};const c=s.checks.find(x=>!done[x.id]);if(c)return{i,item:c,kind:"check"}}return null}
+function nextStep(){for(const[i,s]of STAGES.entries()){const t=modeTasks(s).find(x=>!done[x.id]);if(t)return{i,item:displayStep(t),kind:"task"};const c=s.checks.find(x=>!done[x.id]);if(c)return{i,item:c,kind:"check"}}return null}
 const MSG=C.game.msg;
+/* Jede ID zählt genau einmal mit ihrem ursprünglichen Typ (tasks, deep, checks, Mission), unabhängig vom Modus */
 function xpTotal(){let n=0;STAGES.forEach(s=>{s.tasks.forEach(t=>{if(done[t.id])n+=XPV.task});s.deep.forEach(t=>{if(done[t.id])n+=XPV.deep});s.checks.forEach(t=>{if(done[t.id])n+=XPV.check});if(s.mission&&done[s.mission.id])n+=XPV.mission});Object.keys(done).forEach(k=>{if(k.startsWith("_ch")&&done[k])n+=XPV.ch});return n}
+const challengeIndex=()=>Math.floor(new Date(today()+"T12:00:00").getTime()/864e5)%CHALLENGES.length;
 function earned(){return BADGES.filter(b=>b.t()).map(b=>b.id)}
 function streakNow(){if(!done._last)return 0;const y=new Date();y.setDate(y.getDate()-1);return(done._last===today()||done._last===dstr(y))?(done._streak||0):0}
 const mins=d=>{const m=/^(\d+)\s*Min$/.exec(d||"");return m?+m[1]:null};
+/* Tagesplan: Dauer aus min (Rückfall auf den Text in dur), Ort aus den Einstellungen */
+const BUDGET_PRESETS=[5,15,30,60],BUDGET_DEFAULT=15,BUDGET_MIN=5,BUDGET_MAX=240;
+const QUIZ_MIN=2,DAILY_MIN=5,EXTRA_MIN_REST=2;
+const PLACE_EXCLUDE={mobile:"computer",computer:"mobile"};
+const stepMinutes=t=>hasMin(t)?t.min:mins(t.dur);
+const placeOk=t=>t.place!==PLACE_EXCLUDE[getSettings().place];
+const planRow=(icon,go,txt,dur,attr="data-go")=>`<button class="planrow" ${attr}="${esc(go)}"><span class="ms">${icon}</span><span class="t">${esc(txt)}</span><span class="dur">${esc(dur)}</span></button>`;
+let budgetEdit=false;
+function renderBudget(budget){
+  const custom=!BUDGET_PRESETS.includes(budget);
+  $("#budget").innerHTML=BUDGET_PRESETS.map(m=>`<button class="chip${m===budget?" on":""}" data-m="${m}">${m} Min</button>`).join("")+`<button class="chip${custom?" on":""}" id="budgetCustom" aria-expanded="${budgetEdit}">${custom?budget+" Min":"Eigene"}</button>`+(budgetEdit?`<span class="budgetedit"><input type="number" id="budgetInput" min="${BUDGET_MIN}" max="${BUDGET_MAX}" step="5" value="${budget}" inputmode="numeric" aria-label="Eigene Zeit in Minuten (${BUDGET_MIN} bis ${BUDGET_MAX})"><button class="chip" id="budgetOk">OK</button></span>`:"");
+  document.querySelectorAll("#budget .chip[data-m]").forEach(b=>b.onclick=()=>{budgetEdit=false;done._budget=+b.dataset.m;save();renderPlan()});
+  $("#budgetCustom").onclick=()=>{budgetEdit=!budgetEdit;renderPlan();const i=$("#budgetInput");if(i){i.focus();i.select()}};
+  if(!budgetEdit)return;
+  const apply=()=>{const v=Math.round(+$("#budgetInput").value);if(!Number.isFinite(v)||v<=0){$("#budgetInput").focus();return}budgetEdit=false;done._budget=Math.min(BUDGET_MAX,Math.max(BUDGET_MIN,v));save();renderPlan()};
+  $("#budgetOk").onclick=apply;
+  $("#budgetInput").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();apply()}else if(e.key==="Escape"){budgetEdit=false;renderPlan()}};
+}
+/* Kurze Ergänzungen für die Restzeit: Teil eines langen Schritts, Quiz, Tages-Challenge, Begriffe */
+function planExtras(next,rest,planned){
+  const cand=[],nx=nextStep(),si=nx?nx.i:-1;
+  if(next&&next.parts>1){const m=Math.round(next.m/next.parts);cand.push({m,html:planRow("timelapse",next.go,`Teil 1 von ${next.parts}: ${next.txt}`,m+" Min")})}
+  if(si>=0&&!(DEMO&&si>0)){
+    const s=STAGES[si];
+    s.checks.filter(c=>!done[c.id]).forEach(c=>cand.push({m:QUIZ_MIN,html:planRow("quiz",String(si),"Quizfrage: "+QUIZ[c.id].q,QUIZ_MIN+" Min","data-stage")}));
+    if(!done["_ch"+today()])cand.push({m:DAILY_MIN,html:planRow("bolt","daily","Tages-Challenge: "+CHALLENGES[challengeIndex()][0],DAILY_MIN+" Min","data-flash")});
+    modeTasks(s).filter(t=>!done[t.id]&&!planned.has(t.id)&&String(t.go).startsWith("terms:")).forEach(t=>{const d=displayStep(t),m=stepMinutes(d);if(m!==null)cand.push({m,html:planRow("menu_book",d.go,d.txt,d.dur)})});
+  }
+  let left=rest;const out=[];
+  cand.forEach(c=>{if(c.m<=left){out.push(c.html);left-=c.m}});
+  return out;
+}
 function renderPlan(){
-  const budget=done._budget||15;
-  $("#budget").innerHTML=[5,15,30,60].map(m=>`<button class="chip${m===budget?" on":""}" data-m="${m}">${m} Min</button>`).join("");
-  document.querySelectorAll("#budget .chip").forEach(b=>b.onclick=()=>{done._budget=+b.dataset.m;save();renderPlan()});
-  const open=[];STAGES.forEach((s,i)=>{if(DEMO&&i>0)return;s.tasks.forEach(t=>{if(!done[t.id]&&mins(t.dur)!==null)open.push({...t,st:i+1})})});
+  const budget=done._budget||BUDGET_DEFAULT;
+  renderBudget(budget);
+  const open=[];STAGES.forEach((s,i)=>{if(DEMO&&i>0)return;modeTasks(s).forEach(t=>{if(done[t.id]||!placeOk(t))return;const d=displayStep(t),m=stepMinutes(d);if(m!==null)open.push({...d,st:i+1,m})})});
   let sum=0;const pl=[];
-  for(const t of open){const d=mins(t.dur);if(sum+d>budget)break;pl.push(t);sum+=d}
-  if(!pl.length&&open.length){pl.push(open[0]);sum=mins(open[0].dur)}
-  $("#plan").innerHTML=pl.length?pl.map(t=>`<button class="planrow" data-go="${esc(t.go)}"><span class="ms">play_circle</span><span class="t">${esc(t.txt)}</span><span class="dur">${esc(t.dur)}</span></button>`).join("")+`<div class="meta" style="margin-top:6px">Zusammen ca. ${sum} Minuten. Los geht's!</div>`:`<div class="meta">Alle Pflichtschritte erledigt. Zeit für die Missionen, das Quiz oder eine Vertiefung.</div>`;
+  for(const t of open){if(sum+t.m>budget)break;pl.push(t);sum+=t.m}
+  const forced=!pl.length&&open.length>0;
+  if(forced){pl.push(open[0]);sum=open[0].m}
+  /* Ist schon der erste Schritt zu lang, bleibt er oben stehen und die ganze Zeit steht für Ergänzungen bereit */
+  const rest=forced?budget:budget-sum,tooLong=forced?open[0]:open[pl.length];
+  const extras=rest>=EXTRA_MIN_REST?planExtras(tooLong,rest,new Set(pl.map(t=>t.id))):[];
+  $("#plan").innerHTML=(pl.length?pl.map(t=>planRow("play_circle",t.go,t.txt,t.dur)).join("")+`<div class="meta" style="margin-top:6px">Zusammen ca. ${sum} Minuten. Los geht's!</div>`:`<div class="meta">Alle Pflichtschritte erledigt. Zeit für die Missionen, das Quiz oder eine Vertiefung.</div>`)
+    +(extras.length?`<div class="plansub"><span class="ms">add_circle</span>Passt auch in deine Zeit</div>${extras.join("")}`:"");
   document.querySelectorAll("#plan [data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+  document.querySelectorAll("#plan [data-stage]").forEach(b=>b.onclick=()=>flash("stage-"+b.dataset.stage));
+  document.querySelectorAll("#plan [data-flash]").forEach(b=>b.onclick=()=>flash(b.dataset.flash));
 }
 function renderCert(xp){
   const all=STAGES.every(stageDone),c=$("#cert");c.hidden=!all;if(!all)return;
@@ -149,7 +213,7 @@ function renderGame(){
   $("#xpNext").textContent=nxt?`Noch ${nxt[0]-xp} Punkte bis Level ${li+2} «${nxt[1]}»`:"Höchstes Level erreicht!";
   const e=earned();
   $("#badges").innerHTML=BADGES.map(b=>`<div class="badge${e.includes(b.id)?" on":""}" data-b="${b.id}" style="--bc:var(${b.c});--bcc:var(${BCC[b.id]})"><span class="coin"><span class="ms">${BICON[b.id]}</span></span>${esc(b.n)}</div>`).join("");
-  const ci=Math.floor(new Date(today()+"T12:00:00").getTime()/864e5)%CHALLENGES.length,ch=CHALLENGES[ci],key="_ch"+today();
+  const ch=CHALLENGES[challengeIndex()],key="_ch"+today();
   $("#dailyTitle").textContent=ch[0];$("#dailyText").textContent=ch[1];
   const db=$("#dailyBtn");db.disabled=!!done[key];db.innerHTML=done[key]?'<span class="ms">check</span>Heute geschafft. Morgen gibt es Nachschub':'<span class="ms">add_task</span>Geschafft, +10 Punkte';
   db.onclick=()=>{if(done[key])return;floatXp(db,XPV.ch);mark(key,true)};
@@ -166,6 +230,7 @@ function renderHero(){
   $("#stairs").innerHTML=STAGES.map((s,i)=>{const it=items(s),c=it.filter(x=>done[x.id]).length;return`<button style="height:${28+i*14.4}%;${lc(i+1)}" data-s="${i}" aria-label="Stufe ${i+1}: ${esc(s.t)}"><i style="height:${c/it.length*100}%"></i></button>`}).join("");
   $("#stairlbl").innerHTML=STAGES.map((s,i)=>`<span>${i+1}</span>`).join("");
   document.querySelectorAll("#stairs button").forEach(b=>b.onclick=()=>flash("stage-"+b.dataset.s));
+  renderGoalLine();
   const btn=$("#nextBtn");
   if(DEMO&&(!nx||nx.i>0)){btn.className="next";btn.innerHTML=`<span><small>Stufe 1 geschafft, stark!</small>Profil erstellen und Stufe 2 freischalten</span><span class="arr ms">lock_open</span>`;btn.onclick=()=>showGate();return}
   if(!nx){btn.className="next finished";btn.innerHTML=`<span><small>Alles geschafft</small>Deine Urkunde ansehen</span><span class="arr ms">arrow_forward</span>`;btn.onclick=()=>flash("cert");return}
@@ -174,8 +239,32 @@ function renderHero(){
   btn.onclick=()=>nx.kind==="task"?go(nx.item.go):flash("stage-"+nx.i);
 }
 
+/* Ziellinie: Stufe 5 (Index 4) = eigene App, Stufe 6 (Index 5) = veröffentlichen */
+const APP_STAGE=4,PUBLISH_STAGE=5;
+function goalText(){
+  if(DEMO)return"Mit Profil geht es bis zur eigenen App";
+  if(!stageDone(STAGES[APP_STAGE])){const x=STAGES.slice(0,APP_STAGE+1).filter(s=>!stageDone(s)).length;return`Noch ${x} ${x===1?"Stufe":"Stufen"} bis zu deiner eigenen App`}
+  if(!stageDone(STAGES[PUBLISH_STAGE]))return"Nur noch veröffentlichen, dann ist deine App online";
+  return"";
+}
+function renderGoalLine(){
+  const el=$("#goalLine"),t=goalText();el.hidden=!t;
+  el.innerHTML=t?`<span class="ms">flag</span><span>${esc(t)}</span>`:"";
+}
+
 /* ===== Lernpfad ===== */
-const row=(i,cls="")=>`<div class="task ${cls}${done[i.id]?" checked":""}"><input type="checkbox" id="${i.id}"${done[i.id]?" checked":""}><label for="${i.id}">${esc(i.txt)}${i.dur?` <span class="dur">· ${esc(i.dur)}</span>`:""}</label>${i.go?`<button class="golink" data-go="${esc(i.go)}">Öffnen<span class="ms">chevron_right</span></button>`:""}</div>`;
+const row=(i,cls="",tag="",actions="")=>`<div class="task ${cls}${done[i.id]?" checked":""}"><input type="checkbox" id="${i.id}"${done[i.id]?" checked":""}><label for="${i.id}">${esc(i.txt)}${i.dur?` <span class="dur">· ${esc(i.dur)}</span>`:""}${tag}</label>${actions}${i.go?`<button class="golink" data-go="${esc(i.go)}">Öffnen<span class="ms">chevron_right</span></button>`:""}</div>`;
+const MEDIA_ICON={video:"movie",podcast:"headphones",read:"menu_book",course:"school",practice:"build"};
+/* Schritt mit Modus-Hinweis und Auswahl «Lieber anders?» für gleichwertige Varianten. Erledigt hängt immer an der Schritt-ID. */
+function stepRow(t,cls=""){
+  const d=displayStep(t),vars=t.variants||[];
+  const tag=t.fromDeep?` <span class="steptag">Vertiefung</span>`:"";
+  if(!vars.length)return row(d,cls,tag);
+  const cur=variantIndex(t);
+  const swap=`<button class="swapbtn" data-swap="${t.id}" aria-expanded="false" aria-controls="vp-${t.id}" title="Lieber anders?"><span class="ms">swap_horiz</span><span class="lbl">Lieber anders?</span></button>`;
+  const opts=[t,...vars].map((v,k)=>{const idx=k-1,on=idx===cur;return`<button class="varopt${on?" on":""}" data-var="${t.id}" data-idx="${idx}" aria-pressed="${on}"><span class="ms">${MEDIA_ICON[v.media]||"play_circle"}</span><span class="t">${esc(v.txt)}</span><span class="dur">${esc(v.dur)}</span></button>`}).join("");
+  return row(d,cls,tag,swap)+`<div class="varpick" id="vp-${t.id}" hidden><span class="meta">Wähle, was dir besser passt:</span>${opts}</div>`;
+}
 function quizRow(c){
   const z=QUIZ[c.id],ok=done[c.id];
   return `<div class="quiz${ok?" solved":""}" data-q="${c.id}"><div class="q">${esc(z.q)}</div><div class="opts">${z.o.map((o,k)=>`<button class="opt${ok&&k===z.a?" right":""}" data-k="${k}"${ok?" disabled":""}>${esc(o)}</button>`).join("")}</div><div class="fb">${ok?esc(z.x):""}</div></div>`;
@@ -185,15 +274,15 @@ function renderStages(){
   const open=[...document.querySelectorAll("details.stage")].map(d=>d.open),nx=nextStep();
   $("#stages").innerHTML=STAGES.map((s,i)=>{
     if(DEMO&&i>0)return lockedStage(s,i);
-    const it=items(s),c=it.filter(x=>done[x.id]).length,all=c===it.length,isOpen=open.length?open[i]:(nx?nx.i===i:false);
+    const it=items(s),dp=modeDeep(s),c=it.filter(x=>done[x.id]).length,all=c===it.length,isOpen=open.length?open[i]:(nx?nx.i===i:false);
     return`<details class="stage${all?" done":""}" id="stage-${i}" style="${lc(i+1)}"${isOpen?" open":""}>
      <summary><span class="num">${all?'<span class="ms">check</span>':i+1}</span><span class="sumtxt"><b>${esc(s.t)}</b><span class="meta">Stufe ${i+1} · ${esc(s.lvlName)} · ${esc(s.h)} · ${c}/${it.length}</span><span class="minibar"><i style="width:${c/it.length*100}%"></i></span></span><span class="chev ms">expand_more</span></summary>
      <div class="sbody">
       <p class="why">${esc(s.why)}<br><b>Ziel:</b> ${esc(s.goal)}</p>
       <div class="example"><span class="eyebrow"><span class="ms">lightbulb</span>${esc(s.ex.title)}</span><p>${esc(s.ex.text)}</p>
        <div class="links">${s.ex.links.map(l=>`<button class="pill${l[2]?" rec":""}" data-go="${l[1]}"><span class="ms">${l[2]?"recommend":"explore"}</span>${esc(l[0])}</button>`).join("")}</div></div>
-      <div class="sub"><span class="ms">task_alt</span>Das machst du <span class="xp">je 10 Punkte</span></div>${s.tasks.map(t=>row(t)).join("")}
-      <details class="deepbox"><summary class="sub"><span class="ms">explore</span>Vertiefung, freiwillig (${s.deep.length})<span class="ms tog">expand_more</span><span class="xp">je 15 Punkte</span></summary>${s.deep.map(t=>row(t,"optional")).join("")}</details>
+      <div class="sub"><span class="ms">task_alt</span>Das machst du <span class="xp">je 10 Punkte</span></div>${modeTasks(s).map(t=>stepRow(t)).join("")}
+      ${dp.length?`<details class="deepbox"><summary class="sub"><span class="ms">explore</span>Vertiefung, freiwillig (${dp.length})<span class="ms tog">expand_more</span><span class="xp">je 15 Punkte</span></summary>${dp.map(t=>stepRow(t,"optional")).join("")}</details>`:""}
       <div class="mission"><span class="eyebrow"><span class="ms">flag</span>Praxis-Mission · 30 Punkte</span>${row(s.mission)}</div>
       <div class="sub"><span class="ms">quiz</span>Mini-Quiz: Das verstehst du danach <span class="xp">je 20 Punkte</span></div>
       <p class="meta" style="margin:0 0 2px">Tippe auf die richtige Antwort.</p>
@@ -209,8 +298,14 @@ function renderStages(){
   });
 
   document.querySelectorAll("#stages [data-go]").forEach(b=>b.onclick=e=>{e.preventDefault();go(b.dataset.go)});
+  document.querySelectorAll("#stages [data-swap]").forEach(b=>b.onclick=e=>{e.preventDefault();const p=document.getElementById("vp-"+b.dataset.swap),show=p.hidden;p.hidden=!show;b.setAttribute("aria-expanded",show)});
+  document.querySelectorAll("#stages [data-var]").forEach(b=>b.onclick=()=>chooseVariant(b.dataset.var,+b.dataset.idx));
   document.querySelectorAll("#stages .deepbox>summary").forEach(sm=>sm.addEventListener("click",e=>e.stopPropagation()));
   renderHero();
+}
+function chooseVariant(id,idx){
+  done._variant={...(done._variant||{}),[id]:idx};save();renderStages();
+  const b=document.querySelector(`#stages [data-swap="${id}"]`);if(b)b.focus();
 }
 const CHEERS=C.game.cheers;
 const RIGHT=C.game.right;
@@ -252,7 +347,7 @@ function confetti(bananas){
 }
 $("#resetBtn").onclick=()=>{$("#resetConfirm").hidden=false};
 $("#resetNo").onclick=()=>{$("#resetConfirm").hidden=true};
-$("#resetYes").onclick=()=>{done={};save();$("#resetConfirm").hidden=true;$("#stages").innerHTML="";renderStages();toast("Alles zurückgesetzt. Neuer Anlauf, neues Glück.")};
+$("#resetYes").onclick=()=>{done=done._settings?{_settings:done._settings}:{};save();$("#resetConfirm").hidden=true;$("#stages").innerHTML="";renderStages();toast("Alles zurückgesetzt. Neuer Anlauf, neues Glück.")};
 
 /* ===== Kopieren ===== */
 async function copyText(t,btn){const l=btn.lastElementChild;try{await navigator.clipboard.writeText(t);l.textContent="Kopiert"}catch(e){const r=document.createRange();r.selectNodeContents(btn.previousElementSibling);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);l.textContent="Markiert"}setTimeout(()=>l.textContent="Kopieren",1600)}
@@ -282,10 +377,13 @@ $("#termSearch").oninput=renderTerms;
 let mediaFilter="Alle";
 const MT=["Alle","Video","Podcast","Kurs","Artikel","Buch"];
 const BL={Artikel:"Original lesen",Podcast:"Anhören",Kurs:"Zum Kurs",Video:"Ansehen",Buch:"Zum Buch"};
+const MEDIA_TYPE_KEY={Video:"video",Podcast:"podcast",Artikel:"read",Buch:"read",Kurs:"course"};
+/* Bevorzugte Medientypen innerhalb derselben Stufe zuerst, ohne Vorliebe unverändert */
+function mediaRank(m){const prefs=mediaPrefs();return prefs&&!prefs.includes(MEDIA_TYPE_KEY[m.type])?1:0}
 function renderMedia(){
   $("#mediaChips").innerHTML=MT.map(c=>`<button class="chip${c===mediaFilter?" on":""}" data-c="${c}">${c}</button>`).join("");
   document.querySelectorAll("#mediaChips .chip").forEach(b=>b.onclick=()=>{mediaFilter=b.dataset.c;renderMedia()});
-  const list=MEDIA.filter(m=>mediaFilter==="Alle"||m.type===mediaFilter).sort((a,b)=>a.lvl-b.lvl);
+  const list=MEDIA.filter(m=>mediaFilter==="Alle"||m.type===mediaFilter).sort((a,b)=>a.lvl-b.lvl||mediaRank(a)-mediaRank(b));
   $("#media").innerHTML=list.map(m=>{const rec=REC.has(m.id);return`<article class="card res" id="m-${m.id}">
    <div><span class="tag ${rec?"rec":"deep"}">${rec?"Empfohlen":"Vertiefung"}</span><span class="tag">${m.type}</span>${dots(m.lvl)}</div>
    <h3 style="margin-top:8px"><a href="${m.url}" target="_blank" rel="noopener">${esc(m.title)}</a></h3>
@@ -378,7 +476,7 @@ async function setPin(id,pin){
 
 function curProfile(){return DEMO?{user:"Demo-Gast",avatar:"demo"}:reg.profiles[reg.active]||null}
 function demoState(){return {}}
-/* ===== Lernweg-Assistent: speichert Tiefe, Medien und Ort in done._settings (wirkt noch nicht auf Stufen und Tagesplan) ===== */
+/* ===== Lernweg-Assistent: speichert Tiefe, Medien und Ort in done._settings (wirkt auf Stufen, Tagesplan und Medien, im Demo ignoriert) ===== */
 const MODE_LABEL={compact:"Kompakt",standard:"Standard",deep:"Tief"};
 const MEDIA_LABEL={video:"Videos",podcast:"Podcasts",read:"Lesen",course:"Kurse",practice:"Ausprobieren"};
 const PLACE_LABEL={mobile:"unterwegs",computer:"am Computer",any:"überall"};
@@ -387,7 +485,7 @@ const PATH_STEP_COUNT=3,PATH_ROUND_MIN=30,PATH_AUTO_DELAY_MS=900;
 const PATH_DONE_TOAST="Dein Lernweg steht. Die Affen haben die Bananen schon eingepackt.";
 /* Fehlende Einstellungen bedeuten: Standard, alle Medien, überall */
 function getSettings(){
-  const s=(done&&done._settings)||{};
+  const s=(!DEMO&&done&&done._settings)||{};
   return{
     mode:Object.hasOwn(MODE_LABEL,s.mode)?s.mode:"standard",
     media:Array.isArray(s.media)?MEDIA_KEYS.filter(k=>s.media.includes(k)):[],
@@ -441,7 +539,7 @@ function closePath(){
 }
 function finishPath(){
   done._settings={mode:pathDraft.mode,media:MEDIA_KEYS.filter(k=>pathDraft.media.includes(k)),place:pathDraft.place};
-  save();closePath();renderStages();renderProfile();toast(PATH_DONE_TOAST);
+  save();closePath();renderStages();renderProfile();renderMedia();toast(PATH_DONE_TOAST);
 }
 document.querySelectorAll("#pathDlg .pathopt").forEach(b=>b.onclick=()=>{pathDraft[b.dataset.key]=b.dataset.v;pathRenderChoices()});
 document.querySelectorAll("#pathDlg .chip").forEach(b=>b.onclick=()=>{const m=pathDraft.media,i=m.indexOf(b.dataset.v);if(i<0)m.push(b.dataset.v);else m.splice(i,1);pathRenderChoices()});
@@ -498,7 +596,7 @@ function renderGate(){
 }
 let DEMO_DONE=null;
 function showGate(){if(DEMO&&Object.keys(done).length)DEMO_DONE=done;DEMO=false;renderGate();$("#gate").hidden=false;$("#demoBar").hidden=true;window.scrollTo({top:0})}
-function afterLogin(){window._xpShown=undefined;$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();show("lernpfad");maybeShowWhatsNew()}
+function afterLogin(){window._xpShown=undefined;budgetEdit=false;$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();renderMedia();show("lernpfad");maybeShowWhatsNew()}
 /* ===== Version und «Was ist neu» ===== */
 const SEEN_KEY="ki-lernpfad-seen-version";
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
