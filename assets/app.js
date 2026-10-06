@@ -1,5 +1,5 @@
 /* Inhalte laden: Texte und Daten liegen als JSON in content/ (Version aus version.json für Cache-Busting) */
-const CONTENT_FILES=["media","stages","missions","quiz","prompts","practice","builds","terms","big","challenges","game"];
+const CONTENT_FILES=["media","stages","missions","quiz","prompts","practice","builds","terms","big","challenges","game","starter"];
 async function loadContent(){
   let v="dev",info=null;
   try{const r=await fetch("version.json",{cache:"no-store"});if(r.ok){const j=await r.json();if(j&&j.version){v=String(j.version);info={version:v,date:j.date||"",notes:Array.isArray(j.notes)?j.notes:[]}}}}catch(e){}
@@ -35,6 +35,8 @@ const FIXES=C.prompts.fixes;
 const PRACTICE=C.practice;
 
 const BUILDS=C.builds;
+/* Karten des Modus «Ganz neu» (go: "start:<id>") */
+const STARTER=C.starter;
 
 /* [Stufe, Begriff, Erklärung, Beispiel] */
 const TERMS=C.terms;
@@ -82,8 +84,17 @@ const dots=n=>`<span class="lvl" style="${lc(n)}">${[1,2,3,4,5,6].map(i=>`<i cla
 /* ===== Lernweg: Modus (Kompakt/Standard/Tief) bestimmt die zählenden Schritte, Medienvorliebe die angezeigte Variante ===== */
 const hasMin=t=>Number.isFinite(t.min);
 function compactStep(t){const c=t.compact;return{...t,media:c.media,go:c.go,txt:c.txt,dur:c.dur,min:c.min,parts:undefined,variants:undefined}}
+/* «Ganz neu»: Kompakt-Logik, dazu Zusatzschritte vorne (stages[].starter) und Anpassungen je Schritt (tasks[].starter: false = ausblenden, Objekt = überschreiben) */
+function starterStep(t){
+  const base=t.compact?compactStep(t):t,o=t.starter;
+  if(!o||typeof o!=="object")return base;
+  const own=o.go!==undefined||o.media!==undefined;
+  return{...base,...o,...(own?{parts:undefined,variants:undefined}:{})};
+}
+const starterTasks=s=>[...(s.starter||[]),...s.tasks.filter(t=>t.depth!=="standard"&&t.starter!==false).map(starterStep)];
 function modeTasks(s){
   const mode=getSettings().mode;
+  if(mode==="starter")return starterTasks(s);
   if(mode==="compact")return s.tasks.filter(t=>t.depth!=="standard").map(t=>t.compact?compactStep(t):t);
   if(mode==="deep")return[...s.tasks,...s.deep.filter(hasMin).map(t=>({...t,fromDeep:true}))];
   return s.tasks;
@@ -105,6 +116,8 @@ function displayStep(t){
 }
 const items=s=>[...modeTasks(s),...(s.mission?[s.mission]:[]),...s.checks];
 const stageDone=s=>items(s).every(i=>done[i.id]);
+/* Ruhige Startseite im Modus «Ganz neu», solange Stufe 1 offen ist: keine Punkte, Abzeichen und Tages-Challenge */
+const calmHome=()=>getSettings().mode==="starter"&&!stageDone(STAGES[0])&&!done._starterUnlocked&&!STAGES.slice(1).some(s=>items(s).some(i=>done[i.id]));
 const REC=new Set(STAGES.flatMap(s=>s.tasks.map(t=>t.go)));
 const VIEWS=["lernpfad","prompten","bauen","wissen","medien"];
 
@@ -127,6 +140,7 @@ document.querySelectorAll("#wTabs .chip").forEach(c=>c.onclick=()=>setWissen(c.d
 function go(t){
   if(t==="mindset"){show("lernpfad");flash("mindset");return}
   if(t.startsWith("terms:")){termLvl=+t.split(":")[1];$("#termSearch").value="";renderTerms();setWissen("terms");show("wissen");return}
+  if(t.startsWith("start:")){openStarter(t.slice(6));return}
   if(t==="big"){setWissen("big");show("wissen");return}
   if(t==="ablauf"||t==="werkzeuge"||t==="erste"||t==="hilfe"){show("bauen");flash("a-"+t);return}
   if(VIEWS.includes(t)){show(t);return}
@@ -141,7 +155,7 @@ let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("sh
 function nextStep(){for(const[i,s]of STAGES.entries()){const t=modeTasks(s).find(x=>!done[x.id]);if(t)return{i,item:displayStep(t),kind:"task"};const c=s.checks.find(x=>!done[x.id]);if(c)return{i,item:c,kind:"check"}}return null}
 const MSG=C.game.msg;
 /* Jede ID zählt genau einmal mit ihrem ursprünglichen Typ (tasks, deep, checks, Mission), unabhängig vom Modus */
-function xpTotal(){let n=0;STAGES.forEach(s=>{s.tasks.forEach(t=>{if(done[t.id])n+=XPV.task});s.deep.forEach(t=>{if(done[t.id])n+=XPV.deep});s.checks.forEach(t=>{if(done[t.id])n+=XPV.check});if(s.mission&&done[s.mission.id])n+=XPV.mission});Object.keys(done).forEach(k=>{if(k.startsWith("_ch")&&done[k])n+=XPV.ch});return n}
+function xpTotal(){let n=0;STAGES.forEach(s=>{s.tasks.forEach(t=>{if(done[t.id])n+=XPV.task});(s.starter||[]).forEach(t=>{if(done[t.id])n+=XPV.task});s.deep.forEach(t=>{if(done[t.id])n+=XPV.deep});s.checks.forEach(t=>{if(done[t.id])n+=XPV.check});if(s.mission&&done[s.mission.id])n+=XPV.mission});Object.keys(done).forEach(k=>{if(k.startsWith("_ch")&&done[k])n+=XPV.ch});return n}
 const challengeIndex=()=>Math.floor(new Date(today()+"T12:00:00").getTime()/864e5)%CHALLENGES.length;
 function earned(){return BADGES.filter(b=>b.t()).map(b=>b.id)}
 function streakNow(){if(!done._last)return 0;const y=new Date();y.setDate(y.getDate()-1);return(done._last===today()||done._last===dstr(y))?(done._streak||0):0}
@@ -152,6 +166,7 @@ const QUIZ_MIN=2,DAILY_MIN=5,EXTRA_MIN_REST=2;
 const PLACE_EXCLUDE={mobile:"computer",computer:"mobile"};
 const stepMinutes=t=>hasMin(t)?t.min:mins(t.dur);
 const placeOk=t=>t.place!==PLACE_EXCLUDE[getSettings().place];
+const stepIcon=go=>String(go).startsWith("start:")?"lightbulb":"play_circle";
 const planRow=(icon,go,txt,dur,attr="data-go")=>`<button class="planrow" ${attr}="${esc(go)}"><span class="ms">${icon}</span><span class="t">${esc(txt)}</span><span class="dur">${esc(dur)}</span></button>`;
 let budgetEdit=false;
 function renderBudget(budget){
@@ -189,7 +204,7 @@ function renderPlan(){
   /* Ist schon der erste Schritt zu lang, bleibt er oben stehen und die ganze Zeit steht für Ergänzungen bereit */
   const rest=forced?budget:budget-sum,tooLong=forced?open[0]:open[pl.length];
   const extras=rest>=EXTRA_MIN_REST?planExtras(tooLong,rest,new Set(pl.map(t=>t.id))):[];
-  $("#plan").innerHTML=(pl.length?pl.map(t=>planRow("play_circle",t.go,t.txt,t.dur)).join("")+`<div class="meta" style="margin-top:6px">Zusammen ca. ${sum} Minuten. Los geht's!</div>`:`<div class="meta">Alle Pflichtschritte erledigt. Zeit für die Missionen, das Quiz oder eine Vertiefung.</div>`)
+  $("#plan").innerHTML=(pl.length?pl.map(t=>planRow(stepIcon(t.go),t.go,t.txt,t.dur)).join("")+`<div class="meta" style="margin-top:6px">Zusammen ca. ${sum} Minuten. Los geht's!</div>`:`<div class="meta">Alle Pflichtschritte erledigt. Zeit für die Missionen, das Quiz oder eine Vertiefung.</div>`)
     +(extras.length?`<div class="plansub"><span class="ms">add_circle</span>Passt auch in deine Zeit</div>${extras.join("")}`:"");
   document.querySelectorAll("#plan [data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
   document.querySelectorAll("#plan [data-stage]").forEach(b=>b.onclick=()=>flash("stage-"+b.dataset.stage));
@@ -204,6 +219,7 @@ function renderCert(xp){
 }
 function countUp(to){const el=document.querySelector("#hudXp .count");const from=window._xpShown??to;window._xpShown=to;if(!el||from===to){if(el)el.textContent=to;return}const t0=performance.now(),d=700;(function f(t){const k=Math.min(1,(t-t0)/d),v=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));el.textContent=v;if(k<1)requestAnimationFrame(f)})(t0)}
 function renderGame(){
+  $("#v-lernpfad").classList.toggle("calm",calmHome());
   const xp=xpTotal();let li=0;LEVELS.forEach((l,i)=>{if(xp>=l[0])li=i});
   const cur=LEVELS[li],nxt=LEVELS[li+1],st=streakNow();
   $("#hudLevel").innerHTML=`<span class="ms fill">military_tech</span>Level ${li+1} · ${esc(cur[1])}`;
@@ -226,13 +242,13 @@ function renderHero(){
   const sd=STAGES.filter(stageDone).length,nx=nextStep();
   $("#ring").style.setProperty("--p",pct);$("#ringTxt").textContent=pct+"%";
   $("#heroTitle").textContent=n===0?"Bereit? Der erste Schritt dauert zwei Minuten. Kürzer als ein Kaffee.":!nx?"Offiziell KI-Macher! Das Zertifikat baust du dir selbst, mit KI natürlich.":MSG[nx.i];
-  $("#heroSub").textContent=`${n} von ${all.length} Punkten · ${sd} von ${STAGES.length} Stufen geschafft`;
+  $("#heroSub").textContent=`${calmHome()?"":`${n} von ${all.length} Punkten · `}${sd} von ${STAGES.length} Stufen geschafft`;
   $("#stairs").innerHTML=STAGES.map((s,i)=>{const it=items(s),c=it.filter(x=>done[x.id]).length;return`<button style="height:${28+i*14.4}%;${lc(i+1)}" data-s="${i}" aria-label="Stufe ${i+1}: ${esc(s.t)}"><i style="height:${c/it.length*100}%"></i></button>`}).join("");
   $("#stairlbl").innerHTML=STAGES.map((s,i)=>`<span>${i+1}</span>`).join("");
   document.querySelectorAll("#stairs button").forEach(b=>b.onclick=()=>flash("stage-"+b.dataset.s));
   renderGoalLine();
   const btn=$("#nextBtn");
-  if(DEMO&&(!nx||nx.i>0)){btn.className="next";btn.innerHTML=`<span><small>Stufe 1 geschafft, stark!</small>Profil erstellen und Stufe 2 freischalten</span><span class="arr ms">lock_open</span>`;btn.onclick=()=>showGate();return}
+  if(DEMO&&(!nx||nx.i>0)){btn.className="next";btn.innerHTML=`<span><small>Stufe 1 geschafft, stark!</small>Profil erstellen und Stufe 2 freischalten</span><span class="arr ms">lock_open</span>`;btn.onclick=()=>showGate(true);return}
   if(!nx){btn.className="next finished";btn.innerHTML=`<span><small>Alles geschafft</small>Deine Urkunde ansehen</span><span class="arr ms">arrow_forward</span>`;btn.onclick=()=>flash("cert");return}
   btn.className="next";
   btn.innerHTML=nx.kind==="task"?`<span><small>Nächster Schritt · Stufe ${nx.i+1} · ${esc(nx.item.dur)}</small>${esc(nx.item.txt)}</span><span class="arr ms">arrow_forward</span>`:`<span><small>Selbstcheck · Stufe ${nx.i+1}</small>Prüfe kurz, ob du es verstanden hast</span><span class="arr ms">arrow_forward</span>`;
@@ -265,6 +281,7 @@ function stepRow(t,cls=""){
   const opts=[t,...vars].map((v,k)=>{const idx=k-1,on=idx===cur;return`<button class="varopt${on?" on":""}" data-var="${t.id}" data-idx="${idx}" aria-pressed="${on}"><span class="ms">${MEDIA_ICON[v.media]||"play_circle"}</span><span class="t">${esc(v.txt)}</span><span class="dur">${esc(v.dur)}</span></button>`}).join("");
   return row(d,cls,tag,swap)+`<div class="varpick" id="vp-${t.id}" hidden><span class="meta">Wähle, was dir besser passt:</span>${opts}</div>`;
 }
+const gistLine=s=>getSettings().mode==="starter"&&s.gist?`<p class="gist"><span class="ms">tips_and_updates</span><span><b>Das Wichtigste in einem Satz:</b> ${esc(s.gist)}</span></p>`:"";
 function quizRow(c){
   const z=QUIZ[c.id],ok=done[c.id];
   return `<div class="quiz${ok?" solved":""}" data-q="${c.id}"><div class="q">${esc(z.q)}</div><div class="opts">${z.o.map((o,k)=>`<button class="opt${ok&&k===z.a?" right":""}" data-k="${k}"${ok?" disabled":""}>${esc(o)}</button>`).join("")}</div><div class="fb">${ok?esc(z.x):""}</div></div>`;
@@ -278,19 +295,19 @@ function renderStages(){
     return`<details class="stage${all?" done":""}" id="stage-${i}" style="${lc(i+1)}"${isOpen?" open":""}>
      <summary><span class="num">${all?'<span class="ms">check</span>':i+1}</span><span class="sumtxt"><b>${esc(s.t)}</b><span class="meta">Stufe ${i+1} · ${esc(s.lvlName)} · ${esc(s.h)} · ${c}/${it.length}</span><span class="minibar"><i style="width:${c/it.length*100}%"></i></span></span><span class="chev ms">expand_more</span></summary>
      <div class="sbody">
-      <p class="why">${esc(s.why)}<br><b>Ziel:</b> ${esc(s.goal)}</p>
+      ${gistLine(s)}<p class="why">${esc(s.why)}<br><b>Ziel:</b> ${esc(s.goal)}</p>
       <div class="example"><span class="eyebrow"><span class="ms">lightbulb</span>${esc(s.ex.title)}</span><p>${esc(s.ex.text)}</p>
        <div class="links">${s.ex.links.map(l=>`<button class="pill${l[2]?" rec":""}" data-go="${l[1]}"><span class="ms">${l[2]?"recommend":"explore"}</span>${esc(l[0])}</button>`).join("")}</div></div>
       ${cardFor("stage:"+i)}
       <div class="sub"><span class="ms">task_alt</span>Das machst du <span class="xp">je 10 Punkte</span></div>${modeTasks(s).map(t=>stepRow(t)).join("")}
       ${dp.length?`<details class="deepbox"><summary class="sub"><span class="ms">explore</span>Vertiefung, freiwillig (${dp.length})<span class="ms tog">expand_more</span><span class="xp">je 15 Punkte</span></summary>${dp.map(t=>stepRow(t,"optional")).join("")}</details>`:""}
-      <div class="mission"><span class="eyebrow"><span class="ms">flag</span>Praxis-Mission · 30 Punkte</span>${row(s.mission)}</div>
+      <div class="mission"><span class="eyebrow"><span class="ms">flag</span>Praxis-Mission${calmHome()?"":" · 30 Punkte"}</span>${row(s.mission)}</div>
       <div class="sub"><span class="ms">quiz</span>Mini-Quiz: Das verstehst du danach <span class="xp">je 20 Punkte</span></div>
       <p class="meta" style="margin:0 0 2px">Tippe auf die richtige Antwort.</p>
       ${s.checks.map(quizRow).join("")}
       <div class="donebox"><span class="ms fill">celebration</span><span>${esc(s.done)}</span></div>
      </div></details>`}).join("");
-  document.querySelectorAll("#stages .unlock").forEach(b=>b.onclick=()=>showGate());
+  document.querySelectorAll("#stages .unlock").forEach(b=>b.onclick=()=>showGate(true));
   document.querySelectorAll("#stages input").forEach(cb=>cb.onchange=()=>onCheck(cb));
   document.querySelectorAll("#stages .quiz:not(.solved) .opt").forEach(b=>b.onclick=()=>{
     const box=b.closest(".quiz"),id=box.dataset.q,z=QUIZ[id];
@@ -323,21 +340,27 @@ function levelUp(li){
   const pr=curProfile();$("#lvlAvatar").innerHTML=monkeySVG(pr?avatarKey(pr):"gast");$("#lvlTitle").textContent=`Level ${li+1}: ${LEVELS[li][1]}`;$("#lvlText").textContent=LVL_LINES[(li-1)%LVL_LINES.length];
   $("#lvlup").hidden=false;confetti(true);clearTimeout(window._lvlT);window._lvlT=setTimeout(()=>{$("#lvlup").hidden=true},5000);
 }
+/* Einmalig beim Abschluss von Stufe 1 im Modus «Ganz neu»: Hinweis auf die jetzt sichtbaren Spielelemente */
+const STARTER_UNLOCK_NOTE=" Neu freigeschaltet: Punkte, Abzeichen und Tages-Challenge.";
+function claimStarterUnlock(s){
+  if(s!==STAGES[0]||getSettings().mode!=="starter"||done._starterUnlocked)return"";
+  done._starterUnlocked=true;save();return STARTER_UNLOCK_NOTE;
+}
 function mark(id,val){
   const s=STAGES.find(s=>items(s).some(i=>i.id===id)),was=s&&stageDone(s),before=earned(),lvBefore=levelOf(xpTotal());
   done[id]=val;if(val)bumpStreak();save();
   const newB=earned().filter(b=>!before.includes(b));
   const lvAfter=levelOf(xpTotal());
-  if(val&&lvAfter>lvBefore)setTimeout(()=>levelUp(lvAfter),500);
-  if(s&&!was&&stageDone(s)){toast(s.done);confetti(true)}
+  if(val&&lvAfter>lvBefore&&!calmHome())setTimeout(()=>levelUp(lvAfter),500);
+  if(s&&!was&&stageDone(s)){toast(s.done+claimStarterUnlock(s));confetti(true)}
   else if(newB.length){toast("Neues Abzeichen: "+BADGES.find(b=>b.id===newB[0]).n+". Glänzt fast so schön wie du.");confetti()}
-  else if(val)toast(id.startsWith("d")?"Vertiefung erledigt. Streber! Aber von der guten Sorte.":id.startsWith("c")?pick(RIGHT):id.startsWith("_ch")?"Tages-Challenge geschafft. Heute bist du der Boss.":id.startsWith("m")?"Mission erfüllt! +30 Punkte. James Bond wäre stolz.":pick(CHEERS));
+  else if(val)toast(id.startsWith("d")?"Vertiefung erledigt. Streber! Aber von der guten Sorte.":id.startsWith("c")?pick(calmHome()?RIGHT.filter(r=>!r.includes("Punkte")):RIGHT):id.startsWith("_ch")?"Tages-Challenge geschafft. Heute bist du der Boss.":id.startsWith("m")?calmHome()?"Mission erfüllt! James Bond wäre stolz.":"Mission erfüllt! +30 Punkte. James Bond wäre stolz.":pick(CHEERS));
   renderStages();
   newB.forEach(b=>{const el=document.querySelector(`.badge[data-b="${b}"]`);if(el)el.classList.add("new")});
 }
 function onCheck(cb){if(cb.checked)floatXp(cb,cb.id.startsWith("d")?XPV.deep:cb.id.startsWith("m")?XPV.mission:XPV.task);mark(cb.id,cb.checked)}
 function hop(){const a=document.querySelector("#heroUser .avatar");if(!a)return;a.classList.remove("jump");void a.offsetWidth;a.classList.add("jump")}
-function floatXp(el,n){hop();const r=el.getBoundingClientRect(),f=document.createElement("div");f.className="floatxp";f.textContent="+"+n;f.style.left=(r.left+r.width/2-14)+"px";f.style.top=(r.top-8)+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),1000)}
+function floatXp(el,n){if(calmHome())return;hop();const r=el.getBoundingClientRect(),f=document.createElement("div");f.className="floatxp";f.textContent="+"+n;f.style.left=(r.left+r.width/2-14)+"px";f.style.top=(r.top-8)+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),1000)}
 function confetti(bananas){
   const c=$("#confetti"),x=c.getContext("2d");c.width=innerWidth;c.height=innerHeight;
   const cs=getComputedStyle(document.documentElement),cols=["--l1","--l2","--l3","--l4","--l5","--l6","--primary"].map(v=>cs.getPropertyValue(v).trim());
@@ -498,9 +521,9 @@ async function setPin(id,pin){
 }
 
 function curProfile(){return DEMO?{user:"Demo-Gast",avatar:"demo"}:reg.profiles[reg.active]||null}
-function demoState(){return {}}
-/* ===== Lernweg-Assistent: speichert Tiefe, Medien und Ort in done._settings (wirkt auf Stufen, Tagesplan und Medien, im Demo ignoriert) ===== */
-const MODE_LABEL={compact:"Kompakt",standard:"Standard",deep:"Tief"};
+function demoState(){return{_settings:{mode:"starter",media:[],place:"any"}}}
+/* ===== Lernweg-Assistent: speichert Tiefe, Medien und Ort in done._settings (wirkt auf Stufen, Tagesplan und Medien; die Demo startet in «Ganz neu») ===== */
+const MODE_LABEL={starter:"Ganz neu",compact:"Kompakt",standard:"Standard",deep:"Tief"};
 const MEDIA_LABEL={video:"Videos",podcast:"Podcasts",read:"Lesen",course:"Kurse",practice:"Ausprobieren"};
 const PLACE_LABEL={mobile:"unterwegs",computer:"am Computer",any:"überall"};
 const MEDIA_KEYS=Object.keys(MEDIA_LABEL);
@@ -508,7 +531,7 @@ const PATH_STEP_COUNT=3,PATH_ROUND_MIN=30,PATH_AUTO_DELAY_MS=900;
 const PATH_DONE_TOAST="Dein Lernweg steht. Die Affen haben die Bananen schon eingepackt.";
 /* Fehlende Einstellungen bedeuten: Standard, alle Medien, überall */
 function getSettings(){
-  const s=(!DEMO&&done&&done._settings)||{};
+  const s=(done&&done._settings)||{};
   return{
     mode:Object.hasOwn(MODE_LABEL,s.mode)?s.mode:"standard",
     media:Array.isArray(s.media)?MEDIA_KEYS.filter(k=>s.media.includes(k)):[],
@@ -519,12 +542,13 @@ function settingsLine(s=getSettings()){
   const all=!s.media.length||s.media.length===MEDIA_KEYS.length;
   return `Lernweg: ${MODE_LABEL[s.mode]} · ${all?"alle Medien":s.media.map(k=>MEDIA_LABEL[k]).join(", ")} · ${PLACE_LABEL[s.place]}`;
 }
-/* Dauer je Modus aus den Inhalten: Kompakt = Kern (mit Kurz-Ersatz), Standard = alle Schritte, Tief = Standard plus Vertiefungen */
+/* Dauer je Modus aus den Inhalten: Ganz neu = Kompakt mit Zusatzschritten, Kompakt = Kern (mit Kurz-Ersatz), Standard = alle Schritte, Tief = Standard plus Vertiefungen */
 const stepMin=t=>Number.isFinite(t.min)?t.min:0;
 const sumMin=list=>list.reduce((n,t)=>n+stepMin(t),0);
 function pathMinutes(){
   const tasks=STAGES.flatMap(s=>s.tasks),standard=sumMin(tasks);
   return{
+    starter:sumMin(STAGES.flatMap(starterTasks)),
     compact:tasks.filter(t=>t.depth==="core").reduce((n,t)=>n+(t.compact&&Number.isFinite(t.compact.min)?t.compact.min:stepMin(t)),0),
     standard,
     deep:standard+sumMin(STAGES.flatMap(s=>s.deep))
@@ -604,22 +628,20 @@ function renderProfile(){
   const pl=$("#pathLine");if(pl)pl.onclick=openPath;
   $("#demoBar").hidden=!DEMO;
 }
-function renderGate(){
-  const ids=Object.keys(reg.profiles);
-  $("#gateLogin").hidden=!ids.length;
-  $("#gateFormTitle").textContent=ids.length?"Neues Profil erstellen":"Profil erstellen";
-  $("#gateList").innerHTML=ids.map(id=>{const p=reg.profiles[id];
-    return `<div class="pitem" data-id="${id}"><button class="pbtn" type="button"><span class="avatar lg img">${monkeySVG(avatarKey(p))}</span><span class="t"><b>@${esc(p.user)}</b><span class="meta">${p.salt?"Verschlüsselt, PIN nötig":"Ältere Version, PIN nötig"}</span></span><span class="ms">lock</span></button><div class="pinrow" hidden><input type="password" maxlength="64" placeholder="PIN" autocomplete="current-password" aria-label="PIN für ${esc(p.user)}"><button type="button" class="filled">Anmelden</button></div></div>`}).join("");
-  document.querySelectorAll("#gateList .pitem").forEach(it=>{
-    const id=it.dataset.id,row=it.querySelector(".pinrow"),inp=row.querySelector("input"),btn=row.querySelector("button");
-    const tryLogin=async()=>{btn.disabled=true;btn.textContent="Prüfe…";const ok=await login(id,inp.value);btn.disabled=false;btn.textContent="Anmelden";if(!ok){inp.value="";inp.focus();toast("Falsche PIN. Tief durchatmen und nochmals.")}};
-    it.querySelector(".pbtn").onclick=()=>{row.hidden=false;inp.focus()};
-    btn.onclick=tryLogin;inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();tryLogin()}};
-  });
-}
+function setGateForm(open){const f=$("#gateForm");f.hidden=!open;$("#gateToggle").setAttribute("aria-expanded",String(open));if(open)$("#gUser").focus()}
+$("#gateToggle").onclick=()=>setGateForm($("#gateForm").hidden);
+const tryGateLogin=async()=>{
+  const name=$("#lUser").value.trim(),btn=$("#lBtn"),inp=$("#lPin");
+  const id=Object.keys(reg.profiles).find(k=>reg.profiles[k].user.toLowerCase()===name.toLowerCase());
+  if(!id){toast("Kein Profil mit diesem Namen auf diesem Gerät.");return}
+  btn.disabled=true;btn.textContent="Prüfe…";const ok=await login(id,inp.value);btn.disabled=false;btn.textContent="Anmelden";
+  if(!ok){inp.value="";inp.focus();toast("Falsche PIN. Tief durchatmen und nochmals.")}else{$("#lUser").value="";inp.value=""}
+};
+$("#lBtn").onclick=tryGateLogin;
+$("#lPin").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();tryGateLogin()}};
 let DEMO_DONE=null;
-function showGate(){if(DEMO&&Object.keys(done).length)DEMO_DONE=done;DEMO=false;renderGate();$("#gate").hidden=false;$("#demoBar").hidden=true;window.scrollTo({top:0})}
-function afterLogin(){window._xpShown=undefined;budgetEdit=false;$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();renderMedia();show("lernpfad");maybeShowWhatsNew()}
+function showGate(openForm){if(DEMO&&Object.keys(done).length)DEMO_DONE=done;DEMO=false;$("#gate").hidden=false;$("#demoBar").hidden=true;window.scrollTo({top:0});setGateForm(!!openForm)}
+function afterLogin(){if(!DEMO)DEMO_DONE=null;window._xpShown=undefined;budgetEdit=false;$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();renderMedia();show("lernpfad");maybeShowWhatsNew()}
 /* ===== Version und «Was ist neu» ===== */
 const SEEN_KEY="ki-lernpfad-seen-version";
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
@@ -645,6 +667,24 @@ $("#appVersion").textContent=C.version?C.version.version:"dev";
 $("#whatsNewBtn").hidden=!C.version;
 $("#whatsNewBtn").onclick=openWhatsNew;
 $("#wnOk").onclick=closeWhatsNew;
+/* ===== Karten für «Ganz neu»: Erklärung oder Anleitung als Dialog, optional mit Prompt zum Kopieren ===== */
+let starterReturnFocus=null;
+function openStarter(id){
+  const c=STARTER.find(x=>x.id===id);if(!c)return;
+  $("#stTitle").textContent=c.title;
+  $("#stBody").innerHTML=c.body.map(p=>`<p>${esc(p)}</p>`).join("")+(c.prompt?promptBox(c.prompt):"");
+  const cp=$("#stBody .copy");if(cp)cp.onclick=()=>copyText(cp.previousElementSibling.textContent,cp);
+  starterReturnFocus=document.activeElement;
+  $("#starterDlg").hidden=false;$("#starterDlg .dialog").scrollTop=0;$("#stOk").focus();
+}
+function closeStarter(){
+  $("#starterDlg").hidden=true;
+  if(starterReturnFocus&&starterReturnFocus.isConnected)starterReturnFocus.focus();
+  starterReturnFocus=null;
+}
+$("#stOk").onclick=closeStarter;
+$("#starterDlg").addEventListener("click",e=>{if(e.target.id==="starterDlg")closeStarter()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#starterDlg").hidden)closeStarter()});
 $("#whatsNewDlg").addEventListener("click",e=>{if(e.target.id==="whatsNewDlg")closeWhatsNew()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#whatsNewDlg").hidden)closeWhatsNew()});
 let MUST_SET_PIN=false;
@@ -675,18 +715,21 @@ $("#gateForm").onsubmit=async e=>{
   const id="p"+Date.now().toString(36);
   const legacy=Object.keys(reg.profiles).length===0?ST.get(LEGACY):null;
   reg.profiles[id]={user,avatar:gKey(),created:today()};
-  reg.active=id;DEMO=false;done=DEMO_DONE||legacy||{};const carried=!!DEMO_DONE;DEMO_DONE=null;
+  reg.active=id;DEMO=false;
+  /* Demo ohne Fortschritt: nur die Lernweg-Einstellungen («Ganz neu») mitnehmen */
+  const carried=!!DEMO_DONE&&Object.keys(DEMO_DONE).some(k=>k!=="_settings");
+  done=carried?DEMO_DONE:legacy||(DEMO_DONE?{_settings:DEMO_DONE._settings}:{});DEMO_DONE=null;
   await setPin(id,pin);if(legacy)ST.del(LEGACY);
   sb.disabled=false;["gUser","gPin","gPin2"].forEach(f=>{$("#"+f).value=""});gExtra="";gPreview();
   afterLogin();confetti();toast(carried?`Willkommen an Bord, ${user}! Dein Fortschritt aus der Demo ist übernommen. Stufe 2 ist frei.`:`Willkommen an Bord, ${user}! Die Roboter haben dich jetzt auf dem Radar. Im guten Sinn.`);
   setTimeout(()=>{if(!DEMO&&reg.active===id&&$("#gate").hidden)openPath()},PATH_AUTO_DELAY_MS);
 };
 $("#demoBtn").onclick=()=>{DEMO=true;SESSION_KEY=null;done=demoState();afterLogin();toast("Demo: Probier Stufe 1 aus. Für die Stufen 2 bis 6 brauchst du ein Profil.")};
-$("#demoCreate").onclick=()=>showGate();
+$("#demoCreate").onclick=()=>showGate(true);
 let dlgKey="";
 function openProfile(){
-  if(DEMO)return showGate();
-  const pr=curProfile();if(!pr)return showGate();
+  if(DEMO)return showGate(true);
+  const pr=curProfile();if(!pr)return showGate(true);
   $("#pUser").value=pr.user;$("#pPin").value="";
   ["f-user","f-pin"].forEach(id=>$("#"+id).classList.remove("err"));
   $("#f-pin .hint").textContent=MUST_SET_PIN?"Bitte lege eine neue PIN mit mindestens 8 Zeichen fest":"Mindestens 8 Zeichen, leer lassen = unverändert";

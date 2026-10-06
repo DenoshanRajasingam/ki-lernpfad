@@ -2,6 +2,16 @@
 
 Die neueste Version steht oben. Daten im Format TT.MM.JJJJ.
 
+## 2.1.0 (06.10.2026)
+
+- Neu: Lernweg «Ganz neu» für alle, die noch nie mit KI gearbeitet haben
+- Erste Schritte Klick für Klick: Was ist KI, drei Grundregeln, Konto anlegen, erste Frage
+- Ruhige Startseite: Punkte, Abzeichen und Tages-Challenge kommen nach Stufe 1 dazu
+- In jeder Stufe «Das Wichtigste in einem Satz» und Fachwörter mit Erklärung
+- Neuer Startbildschirm: Einfach ausprobieren, Anmelden mit Benutzername und PIN, Profil erstellen auf Klick
+- Kompakt, Standard und Tief bleiben unverändert, dein Fortschritt ist übernommen
+- Technik: neue Datei content/starter.json, neue Felder starter und gist in content/stages.json, Validierung erweitert
+
 ## 2.0.0 (05.10.2026)
 
 - Dein Lernweg: Wähle Kompakt, Standard oder Tief, dazu deine Lieblingsmedien und wo du meistens lernst

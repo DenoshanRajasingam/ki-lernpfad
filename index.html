@@ -35,7 +35,7 @@
       <div class="ring" id="ring"><span id="ringTxt">0%</span></div>
       <div class="hero-msg"><b id="heroTitle"></b><span class="meta" id="heroSub"></span></div>
     </div>
-    <div><div class="xpbar"><i id="xpFill"></i></div><span class="meta" id="xpNext"></span></div>
+    <div class="xpwrap"><div class="xpbar"><i id="xpFill"></i></div><span class="meta" id="xpNext"></span></div>
     <div class="planner">
       <span class="meta">Heute habe ich Zeit für:</span>
       <div class="chiprow" id="budget"></div>
@@ -220,19 +220,24 @@
     <div class="gatelogo logo" id="gateLogo"></div>
     <h1>Willkommen beim KI-Lernpfad</h1>
     <p class="tamil"><span lang="ta">கற்போம்!</span> <span>(Tamilisch für «Lass uns lernen!»)</span></p>
-    <p class="lead">Sechs Stufen vom ersten Prompt bis zur eigenen App, spielerisch und auf Deutsch. Erstell zuerst dein Profil mit Benutzername und PIN. Dein Fortschritt wird darin automatisch gespeichert.</p>
+    <p class="lead">Sechs Stufen von deiner ersten Frage an eine KI bis zur eigenen App, spielerisch und auf Deutsch.</p>
     <div class="gatecard importcard" id="importCard" hidden>
       <h3>Fortschritt übernehmen</h3>
       <div class="pbtn" style="margin:8px 0 12px"><span class="avatar lg img" id="impAvatar"></span><span class="t"><b id="impUser"></b><span class="meta" id="impInfo">Gib deine PIN ein, um hier weiterzumachen.</span></span></div>
       <div class="pinrow"><input type="password" id="impPin" maxlength="64" placeholder="PIN" autocomplete="current-password" aria-label="PIN"><button type="button" class="filled" id="impBtn">Übernehmen</button></div>
       <button type="button" class="textbtn" id="impCancel" style="margin-top:8px">Abbrechen</button>
     </div>
-    <div id="gateLogin" hidden>
+    <button class="filled wide" id="demoBtn"><span class="ms">rocket_launch</span>Neu hier? Einfach ausprobieren</button>
+    <p class="hint gatehint" style="text-align:center;margin:8px 0 0">Ohne Anmeldung, Stufe 1. Ein Profil kannst du später anlegen.</p>
+    <div class="gatecard" id="gateLogin">
       <h3>Anmelden</h3>
-      <div class="plist" id="gateList"></div>
-      <div class="orline">oder</div>
+      <div class="field" id="l-user"><label for="lUser">Benutzername</label><input id="lUser" autocomplete="username" maxlength="20"></div>
+      <div class="field" id="l-pin"><label for="lPin">PIN</label><input id="lPin" type="password" autocomplete="current-password" maxlength="64"></div>
+      <button type="button" class="filled wide" id="lBtn">Anmelden</button>
+      <span class="hint" style="display:block;margin-top:10px;padding-left:0">Profil auf einem anderen Gerät? Öffne es dort und wähle «Auf anderem Gerät weitermachen».</span>
     </div>
-    <form class="gatecard" id="gateForm" novalidate>
+    <button type="button" class="tonal wide" id="gateToggle" aria-expanded="false" aria-controls="gateForm"><span class="ms">person_add</span>Neues Profil erstellen</button>
+    <form class="gatecard" id="gateForm" novalidate hidden>
       <h3 id="gateFormTitle">Profil erstellen</h3>
       <div class="gprev"><span class="avatar xl img" id="gAvatar"></span><div><b>Dein Affe</b><span class="meta">Entsteht automatisch aus deinem Benutzernamen.</span><br><button type="button" class="textbtn" id="gReroll"><span class="ms">casino</span>Neu würfeln</button></div></div>
       <div class="field" id="g-user"><label for="gUser">Benutzername</label><input id="gUser" autocomplete="username" maxlength="20" placeholder="z. B. ki_entdecker"><span class="hint">3 bis 20 Zeichen: Buchstaben, Zahlen, Punkt, Strich oder Unterstrich</span></div>
@@ -240,8 +245,7 @@
       <div class="field" id="g-pin2"><label for="gPin2">PIN bestätigen</label><input id="gPin2" type="password" autocomplete="new-password" maxlength="64"><span class="hint">Zur Sicherheit nochmals eingeben</span></div>
       <button type="submit" class="filled wide"><span class="ms">rocket_launch</span>Profil erstellen und loslegen</button>
     </form>
-    <button class="tonal wide" id="demoBtn" style="width:100%"><span class="ms">visibility</span>Ohne Profil Stufe 1 ausprobieren</button>
-    <div class="privacy"><span class="ms">lock</span><span>Dein Fortschritt wird mit deiner PIN verschlüsselt (AES-256) und bleibt nur auf diesem Gerät. Ohne PIN kann ihn niemand lesen. PIN vergessen heisst Fortschritt weg. Teilst du den Link, legt jede Person ihr eigenes Profil an. Schon ein Profil in einem anderen Browser? Öffne dort dein Profil und wähle «Auf anderem Gerät weitermachen».</span></div>
+    <div class="privacy"><span class="ms">lock</span><span>Alles bleibt auf diesem Gerät, verschlüsselt mit deiner PIN. PIN vergessen heisst Fortschritt weg.</span></div>
   </div>
 </div>
 <div class="scrim" id="profileDlg" hidden>
@@ -276,12 +280,20 @@
     <div class="dactions"><button type="button" class="filled" id="wnOk">Alles klar</button></div>
   </div>
 </div>
+<div class="scrim" id="starterDlg" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="stTitle">
+    <div class="dhead"><span class="mico"><span class="ms">lightbulb</span></span><h2 id="stTitle"></h2></div>
+    <div id="stBody"></div>
+    <div class="dactions"><button type="button" class="filled" id="stOk">Alles klar</button></div>
+  </div>
+</div>
 <div class="scrim" id="pathDlg" hidden>
   <div class="dialog pathdlg" role="dialog" aria-modal="true" aria-labelledby="pathTitle">
     <div class="pathprog"><span class="meta" id="pathStep">Schritt 1 von 3</span><span class="pathdots" id="pathDots" aria-hidden="true"><i></i><i></i><i></i></span></div>
     <h2 id="pathTitle">Wie tief willst du gehen?</h2>
     <div class="pathpane" data-title="Wie tief willst du gehen?">
       <div class="pathopts" role="group" aria-labelledby="pathTitle">
+        <button type="button" class="pathopt" data-key="mode" data-v="starter" aria-pressed="false"><span class="mico"><span class="ms">waving_hand</span></span><span class="pathtxt"><b>Ganz neu</b><span class="meta">Noch nie mit KI gearbeitet</span><span class="pathdur" data-dur="starter"></span></span><span class="pathmark" aria-hidden="true"></span></button>
         <button type="button" class="pathopt" data-key="mode" data-v="compact" aria-pressed="false"><span class="mico"><span class="ms">speed</span></span><span class="pathtxt"><b>Kompakt</b><span class="meta">Mitreden und loslegen</span><span class="pathdur" data-dur="compact"></span></span><span class="pathmark" aria-hidden="true"></span></button>
         <button type="button" class="pathopt" data-key="mode" data-v="standard" aria-pressed="true"><span class="mico"><span class="ms">balance</span></span><span class="pathtxt"><b>Standard</b><span class="meta">Der ausgewogene Weg</span><span class="pathdur" data-dur="standard"></span></span><span class="pathmark" aria-hidden="true"></span></button>
         <button type="button" class="pathopt" data-key="mode" data-v="deep" aria-pressed="false"><span class="mico"><span class="ms">psychology</span></span><span class="pathtxt"><b>Tief</b><span class="meta">Wirklich verstehen</span><span class="pathdur" data-dur="deep"></span></span><span class="pathmark" aria-hidden="true"></span></button>

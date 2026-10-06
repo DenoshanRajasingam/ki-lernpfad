@@ -1,0 +1,60 @@
+[
+  {
+    "id": "was",
+    "title": "Was ist KI?",
+    "body": [
+      "Ein KI-Assistent wie ChatGPT ist ein Programm, dem du schreibst oder sprichst wie einer Person. Es antwortet in ganzen Sätzen.",
+      "Es hat aus riesigen Textmengen gelernt, wie Sprache funktioniert. Darum kann es erklären, zusammenfassen, übersetzen und Ideen liefern.",
+      "Es klingt dabei immer sicher, irrt sich aber manchmal. Wie ein sehr belesener Kollege, der nie «Keine Ahnung» sagt."
+    ]
+  },
+  {
+    "id": "regeln",
+    "title": "Drei Grundregeln vor dem ersten Mal",
+    "body": [
+      "1. Gib nichts Vertrauliches ein: keine Passwörter, keine Gesundheitsdaten und keine Daten anderer Personen.",
+      "2. Prüfe Fakten und Zahlen. Die KI klingt überzeugend, auch wenn sie falsch liegt.",
+      "3. Du entscheidest, die KI schlägt nur vor. Was du davon brauchst, bestimmst du.",
+      "Und die gute Nachricht: Du kannst nichts kaputt machen. Wenn eine Antwort nichts taugt, fragst du einfach nochmals."
+    ]
+  },
+  {
+    "id": "konto",
+    "title": "ChatGPT öffnen und Gratiskonto anlegen",
+    "body": [
+      "Wenn du unsicher bist, nimm ChatGPT: am bekanntesten, gute Handy-App, Sprachmodus. Gleichwertige Alternativen sind Claude (claude.ai) und Gemini (gemini.google.com). Gemini ist praktisch, wenn du schon ein Google-Konto hast.",
+      "So geht es, Klick für Klick:",
+      "1. Öffne die App «ChatGPT» von OpenAI im App Store oder bei Google Play. Achte auf den echten Anbieter, es gibt viele Nachahmer. Oder öffne im Browser chatgpt.com.",
+      "2. Tippe auf «Registrieren».",
+      "3. Melde dich mit deiner E-Mail-Adresse oder mit einem Google- oder Apple-Konto an.",
+      "Die Gratisversion reicht völlig. Du brauchst kein Abo und gibst keine Zahlungsdaten ein. Nimm am besten ein privates Konto statt eines Firmenkontos.",
+      "Wo tippe ich? Unten steht das Eingabefeld. Dort schreibst du hinein und sendest mit dem Pfeil ab."
+    ]
+  },
+  {
+    "id": "frage",
+    "title": "Deine erste Frage stellen",
+    "body": [
+      "Kopiere die Frage unten, füge sie ins Eingabefeld ein und sende sie mit dem Pfeil ab. Dann liest du die Antwort in Ruhe.",
+      "Was du eintippst, nennt man «Prompt». Das ist einfach deine Anweisung an die KI. Je genauer du bist, desto besser die Antwort."
+    ],
+    "prompt": "Ich habe Reis, Zucchetti und Feta und 20 Minuten Zeit. Schlag mir zwei einfache Rezepte vor."
+  },
+  {
+    "id": "nachbessern",
+    "title": "Einmal nachbessern",
+    "body": [
+      "Die erste Antwort ist ein Entwurf, kein Urteil. Schreib einfach im selben Chat weiter und sag, was besser sein soll.",
+      "Typische Wünsche: «kürzer», «mit Beispiel» oder «einfacher erklärt». Die KI merkt sich, worum es im Chat geht."
+    ],
+    "prompt": "Bitte kürzer und mit einer Einkaufsliste."
+  },
+  {
+    "id": "sprechen",
+    "title": "Einmal sprechen statt tippen",
+    "body": [
+      "Tippe in der App auf das Mikrofon- oder Sprach-Symbol und sag deine Frage laut. Die KI hört zu und antwortet.",
+      "Ideal unterwegs, wenn du die Hände nicht frei hast oder Tippen nervt. Probier es mit derselben Frage wie vorhin."
+    ]
+  }
+]

@@ -5,6 +5,69 @@
     "h": "ca. 1 h",
     "why": "Nur loslegen und erleben. Danach weisst du, wie sich KI anfühlt.",
     "goal": "Du hast selbst mit einer KI geschrieben und gesprochen.",
+    "starter": [
+      {
+        "id": "n1a",
+        "txt": "Was ist KI? In drei Sätzen",
+        "dur": "2 Min",
+        "go": "start:was",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 2
+      },
+      {
+        "id": "n1b",
+        "txt": "Drei Grundregeln vor dem ersten Mal",
+        "dur": "2 Min",
+        "go": "start:regeln",
+        "depth": "core",
+        "place": "any",
+        "media": "read",
+        "min": 2
+      },
+      {
+        "id": "n1c",
+        "txt": "ChatGPT öffnen und Gratiskonto anlegen, Klick für Klick",
+        "dur": "10 Min",
+        "go": "start:konto",
+        "depth": "core",
+        "place": "any",
+        "media": "practice",
+        "min": 10
+      },
+      {
+        "id": "n1d",
+        "txt": "Deine erste Frage stellen",
+        "dur": "5 Min",
+        "go": "start:frage",
+        "depth": "core",
+        "place": "any",
+        "media": "practice",
+        "min": 5
+      },
+      {
+        "id": "n1e",
+        "txt": "Einmal nachbessern",
+        "dur": "3 Min",
+        "go": "start:nachbessern",
+        "depth": "core",
+        "place": "any",
+        "media": "practice",
+        "min": 3
+      },
+      {
+        "id": "n1f",
+        "txt": "Einmal sprechen statt tippen",
+        "dur": "5 Min",
+        "go": "start:sprechen",
+        "depth": "core",
+        "place": "mobile",
+        "media": "practice",
+        "min": 5
+      }
+    ],
+    "gist": "Du stellst einer KI deine erste Frage und merkst: Das ist wie ein Gespräch, nur mit einem sehr schnellen Helfer.",
     "ex": {
       "title": "Beispiel: der Unterschied, den ein Satz macht",
       "text": "«Was soll ich heute kochen?» ergibt eine allgemeine Liste. «Ich habe Reis, Zucchetti und Feta und 20 Minuten Zeit. Schlag mir zwei Rezepte vor.» ergibt genau das, was du brauchst.",
@@ -50,7 +113,10 @@
         "depth": "core",
         "place": "any",
         "media": "practice",
-        "min": 15
+        "min": 15,
+        "starter": {
+          "txt": "Übung «Erklär mir»: Lass dir KI erklären und dich danach abfragen"
+        }
       },
       {
         "id": "s1g",
@@ -60,7 +126,8 @@
         "depth": "core",
         "place": "any",
         "media": "practice",
-        "min": 10
+        "min": 10,
+        "starter": false
       },
       {
         "id": "s1d",
@@ -70,7 +137,8 @@
         "depth": "standard",
         "place": "mobile",
         "media": "practice",
-        "min": 15
+        "min": 15,
+        "starter": false
       },
       {
         "id": "s1e",
@@ -127,6 +195,7 @@
     "h": "ca. 1.5 h",
     "why": "Ein Blick unter die Motorhaube, ganz ohne Technik. Danach verstehst du, warum KI so gut klingt und trotzdem Fehler macht.",
     "goal": "Du kannst erklären, wie ein Sprachmodell grob funktioniert.",
+    "gist": "Eine KI rät Wort für Wort, was als Nächstes passt. Darum klingt sie flüssig, hat aber nicht immer recht.",
     "ex": {
       "title": "Beispiel: «Der Himmel ist …»",
       "text": "Die KI schätzt, welches Wort folgt: «blau» sehr wahrscheinlich, «grau» möglich, «Käse» kaum. Sie wählt Wort für Wort. Darum klingt alles flüssig, ist aber nicht immer wahr.",
@@ -185,6 +254,9 @@
       {
         "id": "s2b",
         "txt": "Kurs Elements of AI, Kapitel 1",
+        "starter": {
+          "txt": "Video: Sprachmodelle (die Technik hinter ChatGPT) einfach erklärt"
+        },
         "dur": "60 Min",
         "go": "elements",
         "depth": "core",
@@ -213,6 +285,9 @@
       {
         "id": "s2d",
         "txt": "Übung: Halluzination testen",
+        "starter": {
+          "txt": "Übung: Halluzination testen (die KI erfindet etwas und klingt dabei sicher)"
+        },
         "dur": "10 Min",
         "go": "e3",
         "depth": "core",
@@ -276,6 +351,7 @@
     "h": "ca. 1.5 h",
     "why": "Diese Stufe zahlt sich sofort aus. Mit ein paar Zutaten bekommst du verlässlich gute Ergebnisse.",
     "goal": "Du gibst der KI klare Anweisungen und holst durch Nachbessern das Beste heraus.",
+    "gist": "Sag der KI klar, was du willst, und verbessere ihre Antwort mit Nachfragen, bis sie passt.",
     "ex": {
       "title": "Beispiel: von der Frage zum Auftrag",
       "text": "Aus «Plane mir Lissabon» wird: «Du bist ein erfahrener Reiseplaner. Plane drei Tage Lissabon für zwei Personen, die gutes Essen und Architektur mögen und nicht hetzen wollen. Als Tabelle pro Tag.» Danach: «Weniger Museen, dafür ein Ausflug ans Meer.»",
@@ -301,6 +377,9 @@
       {
         "id": "s3a",
         "txt": "Die Prompt-Treppe durchgehen und jede Stufe einmal ausprobieren",
+        "starter": {
+          "txt": "Die Prompt-Treppe (Anweisungen Schritt für Schritt besser formulieren) ausprobieren"
+        },
         "dur": "20 Min",
         "go": "prompten",
         "depth": "core",
@@ -422,6 +501,7 @@
     "h": "ca. 1.5 h",
     "why": "Jetzt kommen die Begriffe aus Fachgesprächen und das grosse Bild. Danach redest du bei KI-Themen mit.",
     "goal": "Du verstehst Training, Kosten und Agenten und kannst Chancen und Risiken einordnen.",
+    "gist": "Du weisst, wie eine KI lernt und wie sie danach benutzt wird, was das kostet und wo Chancen und Risiken liegen.",
     "ex": {
       "title": "Beispiel: Training und Inferenz",
       "text": "Training ist wie die Kochausbildung: jahrelang, teuer, einmal. Inferenz ist wie das Kochen eines Gerichts: passiert bei jeder Bestellung und kostet jedes Mal Zeit und Strom. Jede Antwort der KI ist so ein Gericht.",
@@ -457,6 +537,9 @@
       {
         "id": "s4b",
         "txt": "Zusammenfassung: Fraunhofer «Wie funktionieren LLMs?»",
+        "starter": {
+          "txt": "Zusammenfassung: Wie funktionieren Sprachmodelle (LLMs)? Vom Fraunhofer-Institut"
+        },
         "dur": "3 Min",
         "go": "fraunhofer",
         "depth": "core",
@@ -582,6 +665,7 @@
     "h": "ca. 1.5 h",
     "why": "Jetzt wirst du vom Nutzer zum Macher. Du beschreibst, die KI baut, du siehst sofort das Ergebnis.",
     "goal": "Du hast drei kleine Apps gebaut, ganz ohne Programmieren.",
+    "gist": "Du lässt dir von der KI eine kleine App bauen, ganz ohne Programmieren, nur mit Anweisungen in normaler Sprache.",
     "ex": {
       "title": "Beispiel: Packliste in drei Sätzen",
       "text": "«Baue mir eine Packliste für Ferien als kleine App, mit Kategorien und Häkchen.» Die App erscheint neben dem Chat. Dann: «Füge die Kategorie Elektronik hinzu und mach die Häkchen grösser.» Fertig.",
@@ -622,6 +706,9 @@
       {
         "id": "s5b",
         "txt": "Bauprojekt 1: Packliste",
+        "starter": {
+          "txt": "Bauprojekt 1: Packliste (die KI baut dir eine kleine App)"
+        },
         "dur": "15 Min",
         "go": "b1",
         "depth": "core",
@@ -694,6 +781,7 @@
     "h": "ca. 2 h",
     "why": "Zum Schluss stellst du deine Lösung online und setzt ein eigenes Vorhaben um. Alles Gelernte kommt zusammen.",
     "goal": "Du hast eine eigene Lösung gebaut, veröffentlicht und per Link geteilt.",
+    "gist": "Du stellst deine App ins Internet, damit andere sie per Link öffnen können, und startest dein eigenes Projekt.",
     "ex": {
       "title": "Beispiel: vom Fest zur Webseite",
       "text": "«Baue eine einfache, schöne Webseite für mein Gartenfest am 12. Juni: Programm, Anfahrt, Kontakt. Gut lesbar auf dem Handy.» Auf «Teilen» oder «Veröffentlichen» tippen und den Link per WhatsApp an die Gäste schicken.",
@@ -714,6 +802,9 @@
       {
         "id": "s6a",
         "txt": "Bauen: Werkzeuge A bis D lesen",
+        "starter": {
+          "txt": "Bauen: Die Werkzeuge A bis D lesen (die Programme, mit denen du baust)"
+        },
         "dur": "5 Min",
         "go": "werkzeuge",
         "depth": "core",
@@ -724,6 +815,9 @@
       {
         "id": "s6b",
         "txt": "Bauprojekt 4: Eine Webseite bauen und veröffentlichen",
+        "starter": {
+          "txt": "Bauprojekt 4: Eine Webseite bauen und veröffentlichen (für alle per Link erreichbar)"
+        },
         "dur": "30 Min",
         "go": "b4",
         "depth": "core",
@@ -744,6 +838,9 @@
       {
         "id": "s6d",
         "txt": "Bauprojekt 6: Dein eigenes Projekt",
+        "starter": {
+          "txt": "Bauprojekt 6: Dein eigenes Projekt (eine App nach deiner eigenen Idee)"
+        },
         "dur": "60 Min",
         "go": "b6",
         "depth": "core",

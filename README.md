@@ -24,12 +24,15 @@ Alle Texte und Daten liegen in `content/`:
 | Datei | Inhalt |
 | --- | --- |
 | `stages.json` | Die sechs Stufen mit Aufgaben (`tasks`), freiwilliger Vertiefung (`deep`) und Selbstchecks (`checks`) |
+| `starter.json` | Karten für den Lernweg «Ganz neu» (`id`, `title`, `body`, optional `prompt`), Sprungziel `start:<id>` |
 | `media.json` | Videos, Podcasts, Kurse und Artikel (`id`, `lvl`, `type`, `title`, `by`, `len`, `url`) |
 | `missions.json` | Eine Mission pro Stufe |
 | `quiz.json` | Quizfragen je Selbstcheck (`q` Frage, `o` Antworten, `a` Index der richtigen Antwort, `x` Erklärung) |
 | `practice.json` | Übungen mit Prompt |
 | `builds.json` | Mini-App-Projekte |
 | `prompts.json`, `terms.json`, `big.json`, `challenges.json`, `game.json` | Prompt-Treppe, Begriffe, Gesamtbild, Tages-Challenges, Spielregeln |
+
+Für den Lernweg «Ganz neu» gibt es in `stages.json` drei optionale Felder: `starter` auf Stufenebene (zusätzliche Schritte vorne), `starter` auf Schrittebene (`false` blendet aus, ein Objekt überschreibt `txt`, `dur`, `min`, `go` oder `media`) und `gist` (das Wichtigste in einem Satz).
 
 Ein Verweis `go` in einer Aufgabe zeigt auf eine Medien-, Übungs- oder Bau-ID oder auf einen festen Bereich (zum Beispiel `mindset` oder `terms:1`).
 
