@@ -1,0 +1,777 @@
+[
+  {
+    "id": "q3-001",
+    "type": "mc",
+    "topic": "Prompten",
+    "q": "Welche vier Zutaten machen einen guten Prompt aus?",
+    "o": [
+      "Gruss, Dank, Smiley, Unterschrift",
+      "Rolle, Aufgabe, Kontext, Format",
+      "Frage, Frage, Frage, Frage",
+      "Name, Adresse, Alter, Beruf"
+    ],
+    "a": 1,
+    "x": "Rolle, Aufgabe, Kontext, Format. Der Smiley ist nett, hilft der KI aber nur beim Gemüt."
+  },
+  {
+    "id": "q3-002",
+    "type": "mc",
+    "topic": "Prompten",
+    "q": "Wozu dient die Rolle in einem Prompt?",
+    "o": [
+      "Die KI nimmt eine passende Perspektive ein, etwa «kritischer Lektor»",
+      "Du meldest dich als Benutzer an",
+      "Die KI bekommt einen Titel im Lebenslauf",
+      "Sie schaltet die Websuche ein"
+    ],
+    "a": 0,
+    "x": "Mit Rolle stimmen Ton und Tiefe besser. Ein Lektor liest eben anders als ein Werbetexter."
+  },
+  {
+    "id": "q3-003",
+    "type": "mc",
+    "topic": "Prompten",
+    "q": "Was gehört zum Kontext?",
+    "o": [
+      "Der Name des Programms",
+      "Wer du bist, wofür du die Antwort brauchst und was die KI wissen muss",
+      "Die Uhrzeit",
+      "Ein möglichst langer Text, egal wozu"
+    ],
+    "a": 1,
+    "x": "Kontext ist alles, was die KI über deine Situation wissen muss. Sie kann nämlich nicht hellsehen."
+  },
+  {
+    "id": "q3-004",
+    "type": "mc",
+    "topic": "Prompten",
+    "q": "Was bringt die Angabe des Formats, etwa «als Tabelle» oder «in fünf Punkten»?",
+    "o": [
+      "Die Antwort kommt sofort brauchbar und übersichtlich",
+      "Die KI wird schneller müde",
+      "Es spart Strom auf deinem Handy",
+      "Nichts, sie macht eh, was sie will"
+    ],
+    "a": 0,
+    "x": "Wer das Format nennt, muss nicht umbauen. Sonst bekommst du den Aufsatz, obwohl du eine Liste wolltest."
+  },
+  {
+    "id": "q3-005",
+    "type": "mc",
+    "topic": "Nachbessern",
+    "q": "Die erste Antwort ist zu lang. Was tust du am besten?",
+    "o": [
+      "Ein neues Gespräch beginnen",
+      "«Kürzer, bitte» im selben Gespräch schreiben",
+      "Die KI beschimpfen",
+      "Alles selbst kürzen"
+    ],
+    "a": 1,
+    "x": "Nachbessern im selben Gespräch ist der Normalfall. Die KI kennt ja schon den Zusammenhang."
+  },
+  {
+    "id": "q3-006",
+    "type": "mc",
+    "topic": "Nachbessern",
+    "q": "Welcher Satz eignet sich, um eine Antwort kritisch prüfen zu lassen?",
+    "o": [
+      "«Sei kritischer. Was fehlt noch?»",
+      "«Danke, super!»",
+      "«Nochmals dasselbe.»",
+      "«Wiederhole alles wortgleich.»"
+    ],
+    "a": 0,
+    "x": "Mit «Sei kritischer» oder «Was fehlt noch?» holst du Lücken ans Licht, statt nur Applaus zu bekommen."
+  },
+  {
+    "id": "q3-007",
+    "type": "mc",
+    "topic": "Interview",
+    "q": "Du planst ein grosses Fest und weisst nicht, was die KI alles wissen muss. Was hilft?",
+    "o": [
+      "Ihr alles in einem einzigen Riesensatz schreiben",
+      "Die KI Fragen stellen lassen, eine nach der anderen",
+      "Raten, was sie braucht",
+      "Ohne Angaben starten"
+    ],
+    "a": 1,
+    "x": "Lass dich interviewen. Die KI fragt nach, bis sie genug weiss, und fasst am Schluss alles zusammen."
+  },
+  {
+    "id": "q3-008",
+    "type": "mc",
+    "topic": "Dokumente",
+    "q": "Du lädst ein langes PDF hoch. Welche Anweisung ist am nützlichsten?",
+    "o": [
+      "«Lies das.»",
+      "«Fasse es zusammen: drei wichtigste Punkte, Kleingedrucktes, mit Seitenzahlen.»",
+      "«Ist das gut?»",
+      "«Mach was draus.»"
+    ],
+    "a": 1,
+    "x": "Mit Seitenzahlen kannst du die Aussagen nachprüfen. Vertrauen ist gut, Blättern ist besser."
+  },
+  {
+    "id": "q3-009",
+    "type": "mc",
+    "topic": "Sicherheit",
+    "q": "Was darfst du in einen KI-Assistenten besser nicht eingeben?",
+    "o": [
+      "Eine Frage zu Reisezielen",
+      "Passwörter, Gesundheitsdaten oder Kundendaten",
+      "Ein Rezept für Zucchettisuppe",
+      "Einen Text, den du verbessern willst und der öffentlich ist"
+    ],
+    "a": 1,
+    "x": "Vertrauliches bleibt draussen, oder du ersetzt Namen und Zahlen durch Platzhalter."
+  },
+  {
+    "id": "q3-010",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Was macht «Deep Research»?",
+    "o": [
+      "Die KI recherchiert mehrere Minuten selbständig und liefert einen Bericht mit Quellen",
+      "Sie tauscht deine Frage gegen eine tiefere Frage",
+      "Sie speichert dein Passwort",
+      "Sie ist nur ein anderes Wort für Websuche"
+    ],
+    "a": 0,
+    "x": "Deep Research ist der Fleissarbeiter unter den Funktionen. Du holst dir einen Kaffee, sie schreibt den Bericht."
+  },
+  {
+    "id": "q3-011",
+    "type": "tf",
+    "topic": "Prompten",
+    "q": "Eine Frage ohne Hintergrund bringt in der Regel gleich gute Antworten wie eine mit Kontext.",
+    "a": false,
+    "x": "Ohne Kontext antwortet die KI allgemein. Mit Kontext antwortet sie dir."
+  },
+  {
+    "id": "q3-012",
+    "type": "tf",
+    "topic": "Nachbessern",
+    "q": "Man darf in einem laufenden Gespräch jederzeit sagen, was an der Antwort nicht passt.",
+    "a": true,
+    "x": "Genau dafür ist das Gespräch da. Kein Prompt muss auf Anhieb sitzen."
+  },
+  {
+    "id": "q3-013",
+    "type": "tf",
+    "topic": "Kritisch denken",
+    "q": "Wenn die KI Zahlen und Quellen nennt, sind sie automatisch korrekt.",
+    "a": false,
+    "x": "Auch erfundene Quellen klingen überzeugend. Zahlen und Quellen immer kurz prüfen."
+  },
+  {
+    "id": "q3-014",
+    "type": "tf",
+    "topic": "Prompten",
+    "q": "Bei grossen Aufgaben ist es sinnvoll, die Aufgabe in Schritte zu zerlegen.",
+    "a": true,
+    "x": "Schritt für Schritt gibt weniger Fehler, und du behältst den Überblick."
+  },
+  {
+    "id": "q3-015",
+    "type": "tf",
+    "topic": "Prompten",
+    "q": "Wenn du die KI duzt, versteht sie dich schlechter.",
+    "a": false,
+    "x": "Ob du, Sie oder Hochdeutsch: Sie versteht dich. Klar gesagt ist wichtiger als höflich gesiezt."
+  },
+  {
+    "id": "q3-016",
+    "type": "tf",
+    "topic": "Sicherheit",
+    "q": "Gespräche mit einer KI sind automatisch privat, darum darf man auch Kundendaten eingeben.",
+    "a": false,
+    "x": "Was du eingibst, verlässt deinen Rechner. Vertrauliches gehört nicht hinein."
+  },
+  {
+    "id": "q3-017",
+    "type": "gap",
+    "topic": "Prompten",
+    "q": "Eine gute Anweisung besteht aus Rolle, Aufgabe, Kontext und ___.",
+    "o": [
+      "Format",
+      "Wetterbericht",
+      "Glück",
+      "Briefmarke"
+    ],
+    "a": 0,
+    "x": "Das Format sagt, wie das Ergebnis aussehen soll: Liste, Tabelle, Mail."
+  },
+  {
+    "id": "q3-018",
+    "type": "gap",
+    "topic": "Nachbessern",
+    "q": "Wenn die Antwort nicht passt, ___ du sie im selben Gespräch nach.",
+    "o": [
+      "bessert",
+      "vergisst",
+      "druckst",
+      "löschst"
+    ],
+    "a": 0,
+    "x": "Nachbessern statt neu anfangen. Spart Zeit und Nerven."
+  },
+  {
+    "id": "q3-019",
+    "type": "gap",
+    "topic": "Dokumente",
+    "q": "Wer ein Dokument auswerten lässt, bittet am besten um ___, damit sich die Aussagen prüfen lassen.",
+    "o": [
+      "Seitenzahlen",
+      "ein Gedicht",
+      "Musik",
+      "ein Foto"
+    ],
+    "a": 0,
+    "x": "Seitenzahlen machen die Antwort überprüfbar."
+  },
+  {
+    "id": "q3-020",
+    "type": "gap",
+    "topic": "Interview",
+    "q": "Bei grossen Aufgaben lässt du die KI zuerst ___ stellen.",
+    "o": [
+      "Fragen",
+      "Rechnungen",
+      "Bedingungen",
+      "Strafzettel"
+    ],
+    "a": 0,
+    "x": "Erst fragen, dann bauen. Sonst baut die KI, was sie rät."
+  },
+  {
+    "id": "q3-021",
+    "type": "gap",
+    "topic": "Sicherheit",
+    "q": "Persönliche Namen und vertrauliche Zahlen lässt du weg oder ___ sie.",
+    "o": [
+      "ersetzt",
+      "verdoppelst",
+      "vergrösserst",
+      "druckst"
+    ],
+    "a": 0,
+    "x": "Aus «Frau Meier, CHF 48 200» wird «Kundin X, Betrag Y». Die Aufgabe bleibt lösbar."
+  },
+  {
+    "id": "q3-022",
+    "type": "order",
+    "topic": "Prompt-Treppe",
+    "q": "Bringe die Prompt-Treppe in die Reihenfolge von einfach zu anspruchsvoll.",
+    "items": [
+      "Einfach fragen",
+      "Kontext geben",
+      "Ziel und Format festlegen",
+      "Rolle geben"
+    ],
+    "x": "Jede Stufe macht die Antwort besser. Du musst nicht alle nehmen, aber die Treppe hilft."
+  },
+  {
+    "id": "q3-023",
+    "type": "order",
+    "topic": "Interview",
+    "q": "Wie läuft ein Interview mit der KI ab?",
+    "items": [
+      "Vorhaben nennen",
+      "KI stellt eine Frage nach der anderen",
+      "Du antwortest",
+      "KI fasst alles als Plan zusammen"
+    ],
+    "x": "Hin und her, bis der Plan steht. Wie beim guten Beratungsgespräch, nur ohne Kaffee."
+  },
+  {
+    "id": "q3-024",
+    "type": "order",
+    "topic": "Fakten prüfen",
+    "q": "Wie gehst du mit einer Antwort vor, die du weiterverwenden willst?",
+    "items": [
+      "Antwort lesen",
+      "Zahlen und Fakten markieren",
+      "Quelle nachfragen oder selbst nachschlagen",
+      "Erst dann weiterverwenden"
+    ],
+    "x": "Prüfen kostet zwei Minuten. Eine peinliche Falschmeldung kostet länger."
+  },
+  {
+    "id": "q3-025",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne den Begriff der Beschreibung zu.",
+    "pairs": [
+      [
+        "Kontext",
+        "Alles, was die KI über deine Situation weiss"
+      ],
+      [
+        "Rolle",
+        "Eine Perspektive, die die KI einnehmen soll"
+      ],
+      [
+        "Websuche",
+        "Die KI sucht im Internet und nennt Quellen"
+      ],
+      [
+        "Deep Research",
+        "Mehrminütige Recherche mit Bericht und Quellen"
+      ]
+    ],
+    "x": "Vier Wörter, die dir in Gesprächen über KI oft begegnen."
+  },
+  {
+    "id": "q3-026",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Welcher Begriff passt zu diesem Beispiel?",
+    "pairs": [
+      [
+        "«Du bist ein kritischer Lektor.»",
+        "Rolle"
+      ],
+      [
+        "«Wir sind zu zweit und mögen keine Städtereisen.»",
+        "Kontext"
+      ],
+      [
+        "Aktuelle Öffnungszeiten nachschlagen",
+        "Websuche"
+      ],
+      [
+        "«Antworte immer kurz, auf Deutsch, mit Du.»",
+        "Eigene Anweisungen"
+      ]
+    ],
+    "x": "Beispiele machen Begriffe greifbar."
+  },
+  {
+    "id": "q3-027",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Wofür brauchst du was?",
+    "pairs": [
+      [
+        "Aktuelle Preise und News",
+        "Websuche"
+      ],
+      [
+        "Dauerhafte Vorgaben für alle Gespräche",
+        "Eigene Anweisungen / Projekte"
+      ],
+      [
+        "Ausführlicher Vergleich mit Bericht",
+        "Deep Research"
+      ],
+      [
+        "Passenden Ton und Tiefe",
+        "Rolle"
+      ]
+    ],
+    "x": "Die richtige Funktion zur richtigen Aufgabe. Wie Werkzeug im Keller."
+  },
+  {
+    "id": "q3-028",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne zu.",
+    "pairs": [
+      [
+        "«Vergleiche E-Bikes bis 4000 Franken.»",
+        "Deep Research"
+      ],
+      [
+        "Hintergrund zu dir und deinem Anliegen",
+        "Kontext"
+      ],
+      [
+        "Vorgaben, die immer gelten sollen",
+        "Eigene Anweisungen"
+      ],
+      [
+        "Suche im Netz mit Quellenangabe",
+        "Websuche"
+      ]
+    ],
+    "x": "Wer die Begriffe kennt, versteht die Einstellungen im Assistenten viel besser."
+  },
+  {
+    "id": "q3-029",
+    "type": "prompt",
+    "topic": "Prompten",
+    "q": "Welcher Prompt ist besser?",
+    "o": [
+      "«Schreib eine Mail an den Vermieter.»",
+      "«Du bist eine höfliche Schreibhilfe. Schreib eine kurze Mail an meinen Vermieter: Der Wasserhahn in der Küche tropft seit einer Woche. Bitte um Reparatur bis Ende Monat. Ton freundlich, höchstens fünf Sätze.»"
+    ],
+    "a": 1,
+    "x": "Rolle, Aufgabe, Kontext, Format: alles drin. So wird die Mail beim ersten Versuch brauchbar."
+  },
+  {
+    "id": "q3-030",
+    "type": "prompt",
+    "topic": "Prompten",
+    "q": "Welcher Prompt holt mehr aus der KI heraus?",
+    "o": [
+      "«Wie war das nochmals mit dem Sparen?»",
+      "«Ich bin 35, habe ein kleines Budget und möchte ein Notfallpolster aufbauen. Erkläre mir in drei Schritten, wie ich anfange, und nenne ein Beispiel.»"
+    ],
+    "a": 1,
+    "x": "Die zweite Version sagt, wer fragt, was gebraucht wird und wie die Antwort aussehen soll."
+  },
+  {
+    "id": "q3-031",
+    "type": "prompt",
+    "topic": "Interview",
+    "q": "Welcher Prompt eignet sich für eine grosse Aufgabe wie ein Fest?",
+    "o": [
+      "«Plane mir ein Fest.»",
+      "«Ich möchte ein Fest planen. Stell mir eine Frage nach der anderen, bis du genug weisst, und fasse am Schluss alles als Plan zusammen.»"
+    ],
+    "a": 1,
+    "x": "Die KI fragt, statt zu raten. Den Plan bekommst du erst, wenn sie dich wirklich kennt."
+  },
+  {
+    "id": "q3-032",
+    "type": "prompt",
+    "topic": "Dokumente",
+    "q": "Welcher Prompt eignet sich besser für ein hochgeladenes Dokument?",
+    "o": [
+      "«Fasse dieses Dokument auf einer halben Seite zusammen. Nenne die drei wichtigsten Punkte und das Kleingedruckte, jeweils mit Seitenzahl.»",
+      "«Was steht da?»"
+    ],
+    "a": 0,
+    "x": "Konkrete Vorgaben und Seitenzahlen machen die Antwort nutzbar und prüfbar."
+  },
+  {
+    "id": "q3-033",
+    "type": "spot",
+    "topic": "Kritisch denken",
+    "q": "Die KI beantwortet eine Frage zum Prompten. Welcher Satz ist falsch?",
+    "lines": [
+      "Eine Rolle hilft der KI, Ton und Tiefe zu treffen.",
+      "Ein Format wie «als Tabelle» spart dir das Umbauen.",
+      "Kontext sollte man weglassen, damit die Antwort neutral bleibt.",
+      "Nachbessern im selben Gespräch ist völlig normal."
+    ],
+    "a": 2,
+    "x": "Kontext weglassen macht die Antwort allgemein, nicht neutral. Er ist die wichtigste Zutat."
+  },
+  {
+    "id": "q3-034",
+    "type": "spot",
+    "topic": "Kritisch denken",
+    "q": "Die KI erklärt, wie man Dokumente auswertet. Welcher Satz ist falsch?",
+    "lines": [
+      "Lade ein PDF hoch und bitte um eine Zusammenfassung mit Seitenzahlen.",
+      "Die Seitenzahlen helfen dir, die Aussagen nachzuprüfen.",
+      "Was die KI über ein Dokument sagt, stimmt immer, weil sie es gelesen hat.",
+      "Du kannst auch fragen, was nur im Kleingedruckten steht."
+    ],
+    "a": 2,
+    "x": "Auch bei Dokumenten kann sie sich irren oder etwas überlesen. Stichproben schaden nie."
+  },
+  {
+    "id": "q3-035",
+    "type": "spot",
+    "topic": "Sicherheit",
+    "q": "Die KI gibt Tipps zum Datenschutz. Welcher Satz ist falsch?",
+    "lines": [
+      "Passwörter gehören nie in ein Gespräch.",
+      "Namen und Beträge kannst du durch Platzhalter ersetzen.",
+      "Kundendaten darfst du hochladen, solange du höflich fragst.",
+      "Gesundheitsdaten sind besonders heikel."
+    ],
+    "a": 2,
+    "x": "Höflichkeit ersetzt keinen Datenschutz. Kundendaten gehören nicht in einen öffentlichen Assistenten."
+  },
+  {
+    "id": "q3-036",
+    "type": "mc",
+    "topic": "Prompten",
+    "q": "Warum lohnt sich ein Beispiel im Prompt?",
+    "o": [
+      "Die KI wird dadurch schneller",
+      "Es ersetzt die Aufgabe",
+      "Die KI sieht, wie das Ergebnis aussehen soll",
+      "Beispiele sind in Prompts nicht erlaubt"
+    ],
+    "a": 2,
+    "x": "Ein Beispiel zeigt mehr als drei Sätze Beschreibung. «So ungefähr, nur für mein Thema» versteht die KI erstaunlich gut."
+  },
+  {
+    "id": "q3-037",
+    "type": "mc",
+    "topic": "Nachbessern",
+    "q": "Die KI schweift beim Thema ständig ab. Was hilft?",
+    "o": [
+      "Ein engerer Auftrag mit klarer Grenze, etwa «nur zu Punkt 2, höchstens zehn Zeilen»",
+      "Den Prompt in Grossbuchstaben schreiben",
+      "Das Gespräch löschen und nie wieder fragen",
+      "Mehr Smileys einbauen"
+    ],
+    "a": 0,
+    "x": "Grenzen helfen: Thema, Umfang, Format. Je enger der Auftrag, desto weniger Ausflüge."
+  },
+  {
+    "id": "q3-038",
+    "type": "mc",
+    "topic": "Fakten prüfen",
+    "q": "Die KI nennt dir eine Gesetzesregel. Was tust du, bevor du dich darauf verlässt?",
+    "o": [
+      "Nichts, Gesetze kennt sie auswendig",
+      "Die Regel bei einer offiziellen Quelle nachschlagen",
+      "Die Frage zehnmal stellen und die häufigste Antwort nehmen",
+      "Nach einer netteren Formulierung fragen"
+    ],
+    "a": 1,
+    "x": "Bei Gesetzen, Zahlen und Quellen gilt: kurz nachschlagen. Zehnmal fragen macht eine falsche Antwort nur häufiger."
+  },
+  {
+    "id": "q3-039",
+    "type": "tf",
+    "topic": "Prompten",
+    "q": "Ein längerer Prompt ist immer besser als ein kurzer.",
+    "a": false,
+    "x": "Entscheidend ist, was drinsteht. Drei klare Sätze schlagen einen Roman voller Nebensachen."
+  },
+  {
+    "id": "q3-040",
+    "type": "tf",
+    "topic": "Prompten",
+    "q": "Bei Denk- und Rechenaufgaben kann der Zusatz «Geh Schritt für Schritt vor» helfen.",
+    "a": true,
+    "x": "Wer in Schritten vorgeht, macht weniger Flüchtigkeitsfehler. Bei der KI ist das nicht anders als bei dir."
+  },
+  {
+    "id": "q3-041",
+    "type": "gap",
+    "topic": "Prompten",
+    "q": "Wer der KI eine ___ gibt, etwa «erfahrene Reiseplanerin», bekommt passenderen Ton und Tiefe.",
+    "o": [
+      "Waschmaschine",
+      "Lizenz",
+      "Rolle",
+      "Passwort"
+    ],
+    "a": 2,
+    "x": "Die Rolle gibt die Perspektive vor. Eine Reiseplanerin denkt eben anders als ein Buchhalter."
+  },
+  {
+    "id": "q3-042",
+    "type": "gap",
+    "topic": "Begriffe",
+    "q": "Aktuelle Preise und Öffnungszeiten findest du am besten mit der ___, weil die KI dann im Netz nachschaut.",
+    "o": [
+      "Zufallstaste",
+      "Websuche",
+      "Rechtschreibprüfung",
+      "Lautstärkeregelung"
+    ],
+    "a": 1,
+    "x": "Ohne Websuche kennt die KI nur, was sie beim Lernen gesehen hat. Mit Websuche schaut sie nach."
+  },
+  {
+    "id": "q3-043",
+    "type": "gap",
+    "topic": "Fakten prüfen",
+    "q": "Zahlen, Namen und Quellen aus einer KI-Antwort solltest du ___, bevor du sie weitergibst.",
+    "o": [
+      "glauben",
+      "kopieren",
+      "raten",
+      "prüfen"
+    ],
+    "a": 3,
+    "x": "Prüfen dauert zwei Minuten. Eine erfundene Quelle weiterzugeben dauert länger zu erklären."
+  },
+  {
+    "id": "q3-044",
+    "type": "order",
+    "topic": "Nachbessern",
+    "q": "Wie bessert man eine Antwort im Gespräch nach?",
+    "items": [
+      "Erste Antwort lesen",
+      "Benennen, was nicht passt",
+      "Nachbesserung im selben Gespräch verlangen",
+      "Neue Antwort prüfen"
+    ],
+    "x": "Lesen, benennen, nachbessern, prüfen. Kein Prompt muss beim ersten Versuch sitzen."
+  },
+  {
+    "id": "q3-045",
+    "type": "order",
+    "topic": "Dokumente",
+    "q": "Wie lässt du ein Dokument sinnvoll auswerten?",
+    "items": [
+      "Dokument hochladen",
+      "Auftrag mit Format und Seitenzahlen formulieren",
+      "Antwort lesen",
+      "Stichproben anhand der Seitenzahlen nachprüfen"
+    ],
+    "x": "Mit Seitenzahlen kannst du kontrollieren, ob die KI richtig gelesen hat."
+  },
+  {
+    "id": "q3-046",
+    "type": "order",
+    "topic": "Sicherheit",
+    "q": "Wie gibst du eine vertrauliche Aufgabe sicher an die KI?",
+    "items": [
+      "Vertrauliche Angaben erkennen",
+      "Namen und Zahlen durch Platzhalter ersetzen",
+      "Aufgabe mit den Platzhaltern stellen",
+      "Echte Werte im Ergebnis selbst wieder einsetzen"
+    ],
+    "x": "Die KI löst die Aufgabe auch mit «Kundin X» und «Betrag Y». Die echten Werte bleiben bei dir."
+  },
+  {
+    "id": "q3-047",
+    "type": "match",
+    "topic": "Prompten",
+    "q": "Welche Zutat steckt in diesem Satz?",
+    "pairs": [
+      [
+        "«Du bist eine Steuerberaterin.»",
+        "Rolle"
+      ],
+      [
+        "«Ich bin Mieterin in Zürich, die Heizung fällt aus.»",
+        "Kontext"
+      ],
+      [
+        "«Antworte als Tabelle mit drei Spalten.»",
+        "Format"
+      ],
+      [
+        "«Verfasse eine Mahnung.»",
+        "Aufgabe"
+      ]
+    ],
+    "x": "Rolle, Aufgabe, Kontext, Format: Wer alle vier mitgibt, muss selten nachbessern."
+  },
+  {
+    "id": "q3-048",
+    "type": "match",
+    "topic": "Nachbessern",
+    "q": "Welcher Kniff hilft bei welchem Problem?",
+    "pairs": [
+      [
+        "Antwort ist viel zu lang",
+        "«Kürzer, höchstens fünf Sätze.»"
+      ],
+      [
+        "Wichtiges fehlt",
+        "«Was fehlt noch?»"
+      ],
+      [
+        "Du weisst nicht, was die KI braucht",
+        "Die KI interviewt dich"
+      ],
+      [
+        "Du willst Aussagen belegen",
+        "Quellen und Seitenzahlen verlangen"
+      ]
+    ],
+    "x": "Für fast jedes Problem gibt es einen kurzen Satz, der es löst."
+  },
+  {
+    "id": "q3-049",
+    "type": "match",
+    "topic": "Sicherheit",
+    "q": "Darf das in den Chat?",
+    "pairs": [
+      [
+        "Öffentlicher Text, den du verbessern willst",
+        "Darf hinein"
+      ],
+      [
+        "Passwort",
+        "Bleibt draussen"
+      ],
+      [
+        "Kundenliste mit Namen",
+        "Erst anonymisieren"
+      ]
+    ],
+    "x": "Im Zweifel gilt: weglassen oder ersetzen."
+  },
+  {
+    "id": "q3-050",
+    "type": "prompt",
+    "topic": "Prompten",
+    "q": "Welcher Prompt liefert bessere Geschenkideen?",
+    "o": [
+      "«Gib mir Ideen für Geburtstagsgeschenke.»",
+      "«Ich suche ein Geschenk für meinen Vater (65, wandert gern, Budget 80 Franken). Nenne fünf Ideen als Liste, je mit einem Satz Begründung.»"
+    ],
+    "a": 1,
+    "x": "Wer, wofür, wie viel, in welcher Form: Dann kommen Ideen, die zum Vater passen und nicht zu allen Vätern."
+  },
+  {
+    "id": "q3-051",
+    "type": "prompt",
+    "topic": "Nachbessern",
+    "q": "Du willst einen Text überarbeiten lassen. Welcher Prompt ist besser?",
+    "o": [
+      "«Überarbeite den Text: Mein Ton bleibt, kürze auf die Hälfte und markiere, was du gestrichen hast.»",
+      "«Mach besser.»"
+    ],
+    "a": 0,
+    "x": "«Besser» kann alles heissen. Mit Vorgaben weiss die KI, was sie tun soll, und du siehst, was sie getan hat."
+  },
+  {
+    "id": "q3-052",
+    "type": "prompt",
+    "topic": "Fakten prüfen",
+    "q": "Du vergleichst Produkte. Welcher Prompt ist hilfreicher?",
+    "o": [
+      "«Welches Handy ist gut?»",
+      "«Vergleiche drei Handys bis 500 Franken in einer Tabelle nach Akku, Kamera und Preis. Sag dazu, worauf du dich stützt und wo du unsicher bist.»"
+    ],
+    "a": 1,
+    "x": "Wer nach Quellen und Unsicherheit fragt, bekommt ehrlichere Antworten."
+  },
+  {
+    "id": "q3-053",
+    "type": "spot",
+    "topic": "Prompten",
+    "q": "Die KI erklärt, wie man gut prompt. Welcher Satz ist falsch?",
+    "lines": [
+      "Eine klare Aufgabe spart Nachfragen.",
+      "Beispiele im Prompt zeigen, wie das Ergebnis aussehen soll.",
+      "Je vager der Auftrag, desto genauer wird die Antwort.",
+      "Mit einer Rolle passt der Ton besser."
+    ],
+    "a": 2,
+    "x": "Genau umgekehrt: Je vager der Auftrag, desto allgemeiner die Antwort."
+  },
+  {
+    "id": "q3-054",
+    "type": "spot",
+    "topic": "Interview",
+    "q": "Die KI erklärt das Interview-Prinzip. Welcher Satz ist falsch?",
+    "lines": [
+      "Du kannst die KI bitten, dir Fragen zu stellen.",
+      "Am besten fragt sie eine Frage nach der anderen.",
+      "Am Schluss kann sie alles als Plan zusammenfassen.",
+      "Das funktioniert nur, wenn du vorher schon alles aufgeschrieben hast."
+    ],
+    "a": 3,
+    "x": "Das Interview ist ja gerade dafür da, dass du nicht alles vorher wissen musst."
+  },
+  {
+    "id": "q3-055",
+    "type": "spot",
+    "topic": "Begriffe",
+    "q": "Die KI erklärt Websuche und Deep Research. Welcher Satz ist falsch?",
+    "lines": [
+      "Mit Websuche kann die KI aktuelle Informationen nachschlagen.",
+      "Deep Research ist meist in Sekunden fertig.",
+      "Deep Research liefert einen Bericht mit Quellen.",
+      "Quellenangaben solltest du trotzdem prüfen."
+    ],
+    "a": 1,
+    "x": "Deep Research arbeitet mehrere Minuten. Dafür ist der Bericht gründlicher."
+  }
+]

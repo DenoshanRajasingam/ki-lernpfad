@@ -2,6 +2,17 @@
 
 Die neueste Version steht oben. Daten im Format TT.MM.JJJJ.
 
+## 2.2.0 (07.10.2026)
+
+- Neu: Tab «Quiz» mit über 340 Rätseln und Aufgaben zu allen sechs Stufen
+- Sieben Fragearten: Quizfrage, Wahr oder falsch, Lückentext, Reihenfolge, Zuordnen, Prompt-Duell und Fehler finden
+- Solo mit drei Bananen-Leben, Combos, Highscore und lustigen Animationen
+- Duell mit 2 bis 4 Personen am gleichen Gerät
+- Meine Statistik im Profil: Quiz und Lernpfad auf einen Blick, dazu Quiz-Abzeichen
+- Alle Versionen: die ganze Versionshistorie bei «Was ist neu»
+- Copyright: © 2026 Denoshan Rajasingam
+- Technik: assets/quiz.js, Fragen in content/play/s1–s6.json und lines.json, Validierung erweitert, .nojekyll für die Versionshistorie
+
 ## 2.1.0 (06.10.2026)
 
 - Neu: Lernweg «Ganz neu» für alle, die noch nie mit KI gearbeitet haben

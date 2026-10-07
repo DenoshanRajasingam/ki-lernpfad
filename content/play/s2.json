@@ -1,0 +1,867 @@
+[
+  {
+    "id": "q2-001",
+    "type": "mc",
+    "topic": "Sprachmodelle",
+    "q": "Was ist ein Sprachmodell?",
+    "o": [
+      "Ein Programm, das aus riesigen Textmengen gelernt hat, Text fortzusetzen",
+      "Ein Lexikon auf Papier",
+      "Ein Lehrer, der Sprachen unterrichtet",
+      "Ein Übersetzungsbüro mit vielen Angestellten"
+    ],
+    "a": 0,
+    "x": "Ein Sprachmodell hat Muster in sehr vielen Texten gelernt und setzt Text passend fort. Es ist das Herz von ChatGPT und Co."
+  },
+  {
+    "id": "q2-002",
+    "type": "mc",
+    "topic": "Sprachmodelle",
+    "q": "Wie erzeugt ein Sprachmodell seine Antwort?",
+    "o": [
+      "Es schlägt in einem Lexikon nach",
+      "Es wählt Wort für Wort, was wahrscheinlich als Nächstes passt",
+      "Es fragt im Hintergrund einen Menschen",
+      "Es kopiert die erste Suchtreffer-Seite"
+    ],
+    "a": 1,
+    "x": "Wort für Wort die wahrscheinliche Fortsetzung. Darum klingt alles flüssig, auch wenn es nicht stimmt."
+  },
+  {
+    "id": "q2-003",
+    "type": "mc",
+    "topic": "Sprachmodelle",
+    "q": "Bei «Der Himmel ist …» wählt das Modell wahrscheinlich «blau». Warum?",
+    "o": [
+      "Weil das Wort in den Trainingstexten dort sehr häufig vorkam",
+      "Weil die KI aus dem Fenster schaut",
+      "Weil jemand «blau» fest einprogrammiert hat",
+      "Weil Blau die Lieblingsfarbe der KI ist"
+    ],
+    "a": 0,
+    "x": "Es geht um Wahrscheinlichkeit, nicht um Aussicht. Die KI schaut nicht aus dem Fenster, sie hat nur viel gelesen."
+  },
+  {
+    "id": "q2-004",
+    "type": "mc",
+    "topic": "Trainingsdaten",
+    "q": "Was sind Trainingsdaten?",
+    "o": [
+      "Die Texte und Bilder, aus denen ein Modell gelernt hat",
+      "Die Fragen, die du heute stellst",
+      "Die Stromrechnung des Rechenzentrums",
+      "Die Anleitung für den Nutzer"
+    ],
+    "a": 0,
+    "x": "Aus diesem Material lernt das Modell seine Muster. Was darin fehlt, kennt es nicht."
+  },
+  {
+    "id": "q2-005",
+    "type": "mc",
+    "topic": "Trainingsdaten",
+    "q": "Warum kennt ein Sprachmodell ohne Websuche neueste Ereignisse oft nicht?",
+    "o": [
+      "Das Training endete irgendwann, danach hat es nichts mehr dazugelernt",
+      "Es ist zu müde",
+      "Neuigkeiten sind verboten",
+      "Es versteht keine Zahlen"
+    ],
+    "a": 0,
+    "x": "Nach dem Training gibt es einen Wissensstand. Alles Neuere kennt es nur, wenn es nachschlagen darf."
+  },
+  {
+    "id": "q2-006",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Was beschreibt «maschinelles Lernen» am besten?",
+    "o": [
+      "Der Computer erkennt Muster in Beispielen, statt feste Regeln zu bekommen",
+      "Ein Mensch tippt jede Regel von Hand ein",
+      "Ein Computer lernt Schulstoff auswendig",
+      "Eine Maschine, die Lernkarten druckt"
+    ],
+    "a": 0,
+    "x": "Beispiele statt Regeln: So lernt zum Beispiel der Spamfilter aus Mails, die du als Spam markierst."
+  },
+  {
+    "id": "q2-007",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Was macht generative KI?",
+    "o": [
+      "Sie erzeugt Neues wie Text, Bilder, Musik oder Video",
+      "Sie sortiert nur bestehende Ordner",
+      "Sie repariert Computer",
+      "Sie überwacht das Netzwerk"
+    ],
+    "a": 0,
+    "x": "Generativ heisst: etwas erzeugen. Ein Bild von einer Katze im Astronautenanzug zum Beispiel."
+  },
+  {
+    "id": "q2-008",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Wie verhalten sich KI, maschinelles Lernen und generative KI zueinander?",
+    "o": [
+      "Generative KI ist ein Teil des maschinellen Lernens, und dieses ein Teil der KI",
+      "Alle drei sind genau dasselbe",
+      "KI ist ein Teil der generativen KI",
+      "Maschinelles Lernen gehört nicht zur KI"
+    ],
+    "a": 0,
+    "x": "Wie russische Puppen: KI umfasst maschinelles Lernen, und darin steckt die generative KI."
+  },
+  {
+    "id": "q2-009",
+    "type": "mc",
+    "topic": "Multimodal",
+    "q": "Was bedeutet «multimodal»?",
+    "o": [
+      "Die KI versteht mehrere Formate, etwa Text, Bild und Sprache",
+      "Die KI läuft auf mehreren Computern gleichzeitig",
+      "Die KI hat mehrere Besitzer",
+      "Die KI kostet mehrfach"
+    ],
+    "a": 0,
+    "x": "Du kannst ein Foto zeigen und dazu Fragen stellen. Das geht nur, wenn die KI mehr als Text kann."
+  },
+  {
+    "id": "q2-010",
+    "type": "mc",
+    "topic": "Halluzination",
+    "q": "Warum erfindet ein Sprachmodell manchmal Fakten?",
+    "o": [
+      "Es ist auf plausibel klingende Fortsetzung getrimmt, nicht auf Wahrheit",
+      "Es will uns ärgern",
+      "Es hat keinen Strom mehr",
+      "Es liest heimlich Märchenbücher"
+    ],
+    "a": 0,
+    "x": "Das Modell erzeugt, was passend klingt. Ob es wahr ist, prüft es nicht von selbst."
+  },
+  {
+    "id": "q2-011",
+    "type": "mc",
+    "topic": "Halluzination",
+    "q": "Woran erkennst du am ehesten eine erfundene Quelle?",
+    "o": [
+      "Du findest sie bei der Nachsuche nicht",
+      "Sie ist sehr lang",
+      "Sie klingt wissenschaftlich",
+      "Sie enthält eine Jahreszahl"
+    ],
+    "a": 0,
+    "x": "Ein Quellenverweis ist erst dann gut, wenn du ihn selbst auffinden kannst. Klang allein beweist nichts."
+  },
+  {
+    "id": "q2-012",
+    "type": "mc",
+    "topic": "Websuche",
+    "q": "Was bringt die Websuche bei einem KI-Assistenten?",
+    "o": [
+      "Die KI kann aktuelle Informationen nachschlagen und Quellen nennen",
+      "Die KI wird dadurch langsamer denken",
+      "Die KI kann dadurch nie mehr irren",
+      "Die KI speichert deinen Browserverlauf"
+    ],
+    "a": 0,
+    "x": "Sie sucht im Netz und fasst zusammen. Irren kann sie trotzdem, darum die Quellen kurz öffnen."
+  },
+  {
+    "id": "q2-013",
+    "type": "tf",
+    "topic": "Sprachmodelle",
+    "q": "Ein Sprachmodell «weiss» Dinge wie ein Mensch und denkt dabei nach.",
+    "a": false,
+    "x": "Es erkennt Muster in Sprache und führt sie fort. Das wirkt wie Denken, ist aber etwas anderes."
+  },
+  {
+    "id": "q2-014",
+    "type": "tf",
+    "topic": "Halluzination",
+    "q": "Eine KI kann Fakten erfinden, obwohl sie sehr überzeugend klingt.",
+    "a": true,
+    "x": "Genau das nennt man Halluzination. Klingt gut, stimmt nicht immer."
+  },
+  {
+    "id": "q2-015",
+    "type": "tf",
+    "topic": "Trainingsdaten",
+    "q": "Ein Sprachmodell hat sein Wissen aus riesigen Mengen an Texten gelernt.",
+    "a": true,
+    "x": "Das ist die Grundlage. Fehlt etwas in den Daten, fehlt es auch im Modell."
+  },
+  {
+    "id": "q2-016",
+    "type": "tf",
+    "topic": "Websuche",
+    "q": "Mit aktivierter Websuche kann eine KI keine Fehler mehr machen.",
+    "a": false,
+    "x": "Sie findet zwar Aktuelles, kann aber falsch zusammenfassen oder unzuverlässige Seiten verwenden."
+  },
+  {
+    "id": "q2-017",
+    "type": "tf",
+    "topic": "Begriffe",
+    "q": "Generative KI kann nur Text erzeugen, aber keine Bilder.",
+    "a": false,
+    "x": "Sie kann auch Bilder, Musik und Video erzeugen. Je nach Modell."
+  },
+  {
+    "id": "q2-018",
+    "type": "tf",
+    "topic": "Multimodal",
+    "q": "Ein multimodales Modell kann zum Beispiel ein Foto ansehen und dazu eine Frage beantworten.",
+    "a": true,
+    "x": "Bild plus Text zusammen: Das ist genau der Witz von multimodal."
+  },
+  {
+    "id": "q2-019",
+    "type": "gap",
+    "topic": "Sprachmodelle",
+    "q": "Ein Sprachmodell setzt Text fort, und zwar ___ für Wort.",
+    "o": [
+      "Satz",
+      "Seite",
+      "Wort",
+      "Kapitel"
+    ],
+    "a": 2,
+    "x": "Wort für Wort, mit enormer Geschwindigkeit. Von Hand wäre das ein langer Nachmittag."
+  },
+  {
+    "id": "q2-020",
+    "type": "gap",
+    "topic": "Trainingsdaten",
+    "q": "Die Texte, aus denen ein Modell gelernt hat, heissen ___.",
+    "o": [
+      "Trainingsdaten",
+      "Zugangsdaten",
+      "Rechnungsdaten",
+      "Kontaktdaten"
+    ],
+    "a": 0,
+    "x": "Trainingsdaten sind die Lernbasis eines Modells."
+  },
+  {
+    "id": "q2-021",
+    "type": "gap",
+    "topic": "Begriffe",
+    "q": "Ein Spamfilter, der aus markierten Mails lernt, ist ein Beispiel für ___ Lernen.",
+    "o": [
+      "manuelles",
+      "maschinelles",
+      "musikalisches",
+      "mündliches"
+    ],
+    "a": 1,
+    "x": "Maschinelles Lernen: Muster aus Beispielen, ohne dass jemand jede Regel schreibt."
+  },
+  {
+    "id": "q2-022",
+    "type": "gap",
+    "topic": "Multimodal",
+    "q": "Versteht eine KI Text, Bild und Sprache, nennt man sie ___.",
+    "o": [
+      "multimodal",
+      "multifunktional",
+      "monoton",
+      "modular"
+    ],
+    "a": 0,
+    "x": "Multimodal: mehrere Formen von Eingaben, ein Modell."
+  },
+  {
+    "id": "q2-023",
+    "type": "gap",
+    "topic": "Halluzination",
+    "q": "Wichtige Angaben einer KI sollte man immer ___, bevor man sie weitergibt.",
+    "o": [
+      "abheften",
+      "gegenprüfen",
+      "ausdrucken",
+      "übersetzen"
+    ],
+    "a": 1,
+    "x": "Gegenprüfen schützt vor erfundenen Fakten. Zwei Minuten Aufwand ersparen eine Blamage."
+  },
+  {
+    "id": "q2-024",
+    "type": "order",
+    "topic": "Sprachmodelle",
+    "q": "Bring die Schritte in die richtige Reihenfolge: So entsteht eine Antwort.",
+    "items": [
+      "Du schreibst deinen Prompt",
+      "Das Modell schätzt das wahrscheinlichste nächste Wort",
+      "Es hängt das Wort an und schätzt das nächste",
+      "Der fertige Text erscheint auf deinem Bildschirm"
+    ],
+    "x": "Wort für Wort entsteht der Text. Du siehst nur das Ergebnis und keinen Affen beim Tippen."
+  },
+  {
+    "id": "q2-025",
+    "type": "order",
+    "topic": "Halluzination",
+    "q": "Bring die Schritte in die richtige Reihenfolge: eine KI-Aussage prüfen.",
+    "items": [
+      "Aussage markieren, die wichtig ist",
+      "Nach einer Quelle fragen oder selbst suchen",
+      "Quelle öffnen und vergleichen",
+      "Erst dann verwenden"
+    ],
+    "x": "Erst prüfen, dann nutzen. So bleibt dein Ruf unversehrt."
+  },
+  {
+    "id": "q2-026",
+    "type": "order",
+    "topic": "Websuche",
+    "q": "Bring die Schritte in die richtige Reihenfolge: aktuelle Frage mit Websuche.",
+    "items": [
+      "Websuche in der App einschalten",
+      "Aktuelle Frage stellen",
+      "Angegebene Quellen kurz anschauen",
+      "Antwort verwenden"
+    ],
+    "x": "Einschalten, fragen, Quellen ansehen, nutzen. Ohne den dritten Schritt wäre es blindes Vertrauen."
+  },
+  {
+    "id": "q2-027",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "Maschinelles Lernen",
+        "Computer lernt Muster aus Beispielen"
+      ],
+      [
+        "Generative KI",
+        "Erzeugt Neues: Text, Bild, Musik"
+      ],
+      [
+        "Sprachmodell",
+        "Setzt Text wahrscheinlich fort"
+      ],
+      [
+        "Trainingsdaten",
+        "Material, aus dem ein Modell lernt"
+      ]
+    ],
+    "x": "Vier Begriffe, die das Innenleben der KI beschreiben."
+  },
+  {
+    "id": "q2-028",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "Multimodal",
+        "Versteht Text, Bild und Sprache"
+      ],
+      [
+        "Sprachmodell (LLM)",
+        "Herz von ChatGPT und Co."
+      ],
+      [
+        "Generative KI",
+        "KI, die Neues erzeugt"
+      ],
+      [
+        "Maschinelles Lernen",
+        "Lernen aus Beispielen statt Regeln"
+      ]
+    ],
+    "x": "Alle vier gehören zusammen, wie Zahnräder in einer Uhr."
+  },
+  {
+    "id": "q2-029",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "Trainingsdaten",
+        "Texte und Bilder zum Lernen"
+      ],
+      [
+        "Multimodal",
+        "Mehrere Formate gleichzeitig"
+      ],
+      [
+        "Maschinelles Lernen",
+        "Muster aus Beispielen erkennen"
+      ],
+      [
+        "Sprachmodell",
+        "Programm für Textfortsetzung"
+      ]
+    ],
+    "x": "Mit diesen Begriffen erklärst du am Familientisch, wie KI tickt."
+  },
+  {
+    "id": "q2-030",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "Generative KI",
+        "Bild von einer Katze im Astronautenanzug"
+      ],
+      [
+        "Maschinelles Lernen",
+        "Spamfilter lernt aus markierten Mails"
+      ],
+      [
+        "Multimodal",
+        "Foto zeigen und dazu fragen"
+      ],
+      [
+        "Sprachmodell",
+        "«Der Himmel ist …» wird «blau»"
+      ]
+    ],
+    "x": "Jeder Begriff hat sein klassisches Beispiel. Das hilft beim Merken."
+  },
+  {
+    "id": "q2-031",
+    "type": "prompt",
+    "topic": "Halluzination",
+    "q": "Welcher Prompt hilft besser, Erfundenes zu erkennen?",
+    "o": [
+      "Gib mir bitte die Quelle dazu und sag mir, wenn du dir bei einem Punkt nicht sicher bist.",
+      "Stimmt das so? Sag einfach ja."
+    ],
+    "a": 0,
+    "x": "Wer Quellen und Unsicherheit anfragt, bekommt ehrlichere Antworten. Ein bestelltes «Ja» ist wertlos."
+  },
+  {
+    "id": "q2-032",
+    "type": "prompt",
+    "topic": "Websuche",
+    "q": "Welcher Prompt bringt das bessere Ergebnis?",
+    "o": [
+      "Wann hat das Bad offen?",
+      "Suche im Web die aktuellen Öffnungszeiten des Hallenbads Baden und nenne die Quelle."
+    ],
+    "a": 1,
+    "x": "Der Auftrag zur Websuche plus Quelle liefert aktuelle, prüfbare Angaben."
+  },
+  {
+    "id": "q2-033",
+    "type": "prompt",
+    "topic": "Sprachmodelle",
+    "q": "Welcher Prompt erklärt besser?",
+    "o": [
+      "Erkläre mir ein Sprachmodell in drei Sätzen, so, dass es ein Kind versteht.",
+      "Sprachmodell."
+    ],
+    "a": 0,
+    "x": "Zielgruppe und Länge nennen macht die Antwort passend. Ein einzelnes Wort lässt die KI raten."
+  },
+  {
+    "id": "q2-034",
+    "type": "spot",
+    "topic": "Halluzination",
+    "q": "Eine KI hat das über sich selbst geantwortet. Welcher Satz ist falsch?",
+    "lines": [
+      "Ein Sprachmodell lernt aus grossen Textmengen.",
+      "Es setzt Text Wort für Wort fort.",
+      "Es kann sich dabei irren oder Fakten erfinden.",
+      "Es prüft jede Aussage automatisch in einer Datenbank und kann deshalb nie falsch liegen."
+    ],
+    "a": 3,
+    "x": "Ein Sprachmodell prüft nicht automatisch, ob etwas stimmt. Der letzte Satz ist erfunden."
+  },
+  {
+    "id": "q2-035",
+    "type": "spot",
+    "topic": "Halluzination",
+    "q": "Eine KI hat das geantwortet. Welcher Satz ist erfunden?",
+    "lines": [
+      "Die Schweiz hat 26 Kantone.",
+      "Genf liegt am Genfersee.",
+      "Der Gotthardpass verbindet das Tessin mit der Innerschweiz.",
+      "Der Bodensee liegt vollständig auf Schweizer Gebiet."
+    ],
+    "a": 3,
+    "x": "Der Bodensee grenzt an Deutschland, Österreich und die Schweiz. Er liegt nicht ganz in der Schweiz."
+  },
+  {
+    "id": "q2-036",
+    "type": "spot",
+    "topic": "Halluzination",
+    "q": "Eine KI hat das geantwortet. Welcher Satz ist erfunden?",
+    "lines": [
+      "Albert Einstein arbeitete 1905 in Bern am Patentamt.",
+      "Er veröffentlichte dort seine Arbeit zur speziellen Relativitätstheorie.",
+      "Später erhielt er den Nobelpreis für Physik.",
+      "Den Nobelpreis erhielt er für die Erfindung des Computers."
+    ],
+    "a": 3,
+    "x": "Den Nobelpreis bekam Einstein für die Erklärung des photoelektrischen Effekts. Der Computer war nicht seine Idee."
+  },
+  {
+    "id": "q2-037",
+    "type": "mc",
+    "topic": "Trainingsdaten",
+    "q": "Eine KI beschreibt ein Ereignis von letzter Woche nicht. Was ist die wahrscheinlichste Ursache?",
+    "o": [
+      "Der Wissensstand endet vor dem Ereignis und es gibt keine Websuche",
+      "Das Ereignis war zu wichtig",
+      "Die KI liest keine Zeitungen aus Prinzip",
+      "Der Akku der KI ist leer"
+    ],
+    "a": 0,
+    "x": "Ohne Websuche kennt die KI nur ihren Trainingsstand. Aktuelles fehlt dann einfach."
+  },
+  {
+    "id": "q2-038",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Welches Beispiel zeigt generative KI?",
+    "o": [
+      "Ein Programm schreibt aus drei Stichworten einen Geburtstagsgruss",
+      "Ein Taschenrechner addiert zwei Zahlen",
+      "Ein Backup kopiert Dateien",
+      "Eine Uhr zeigt die Zeit"
+    ],
+    "a": 0,
+    "x": "Neuer Text entsteht aus Stichworten: typisch generativ. Taschenrechner kennen nur Zahlen."
+  },
+  {
+    "id": "q2-039",
+    "type": "mc",
+    "topic": "Halluzination",
+    "q": "Welche Gegenprüfung ist am zuverlässigsten?",
+    "o": [
+      "Die Aussage bei einer unabhängigen, seriösen Quelle nachschlagen",
+      "Dieselbe KI fragen, ob sie recht hat",
+      "Die Antwort einfach noch einmal lesen",
+      "Die Antwort einer Kollegin schicken, ohne nachzusehen"
+    ],
+    "a": 0,
+    "x": "Die KI sich selbst bestätigen zu lassen, hilft wenig. Eine unabhängige Quelle schon."
+  },
+  {
+    "id": "q2-040",
+    "type": "mc",
+    "topic": "Sprachmodelle",
+    "q": "Was meint die Abkürzung LLM?",
+    "o": [
+      "Large Language Model, ein grosses Sprachmodell",
+      "Lokale Lern-Maschine",
+      "Lange Liste der Medien",
+      "Lernen mit Lust und Methode"
+    ],
+    "a": 0,
+    "x": "LLM steht für Large Language Model. Gross wegen der riesigen Menge an Trainingstexten."
+  },
+  {
+    "id": "q2-041",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Welches Beispiel zeigt maschinelles Lernen?",
+    "o": [
+      "Ein Wecker, der jeden Tag um 6 Uhr klingelt",
+      "Eine Ampel mit fixem Takt",
+      "Ein Rechner, der Plus und Minus rechnet",
+      "Ein Vorschlagssystem, das aus vielen Beispielen lernt, was Leuten gefällt"
+    ],
+    "a": 3,
+    "x": "Beim maschinellen Lernen findet der Computer Muster in Beispielen. Wecker und Ampel folgen festen Regeln."
+  },
+  {
+    "id": "q2-042",
+    "type": "mc",
+    "topic": "Trainingsdaten",
+    "q": "Was kann passieren, wenn in den Trainingsdaten viele Fehler oder einseitige Aussagen stecken?",
+    "o": [
+      "Das Modell filtert sie automatisch alle heraus",
+      "Das Modell kann diese Fehler oder Schieflagen übernehmen",
+      "Das Modell wird dadurch schneller",
+      "Nichts, Trainingsdaten haben keinen Einfluss"
+    ],
+    "a": 1,
+    "x": "Ein Modell lernt, was es zu lesen bekommt. Wer nur Unsinn liest, redet irgendwann Unsinn."
+  },
+  {
+    "id": "q2-043",
+    "type": "mc",
+    "topic": "Multimodal",
+    "q": "Bei welcher Aufgabe zeigt sich ein multimodales Modell?",
+    "o": [
+      "Ein Wort buchstabieren",
+      "Eine Zahl addieren",
+      "Ein Foto einer Speisekarte ansehen und übersetzen",
+      "Einen reinen Text kürzen"
+    ],
+    "a": 2,
+    "x": "Foto und Text zusammen: Das ist das Markenzeichen von multimodal."
+  },
+  {
+    "id": "q2-044",
+    "type": "mc",
+    "topic": "Websuche",
+    "q": "Was solltest du trotz Websuche weiterhin tun?",
+    "o": [
+      "Nichts mehr prüfen",
+      "Die Quellen ausblenden",
+      "Bei wichtigen Dingen die genannten Quellen selbst ansehen",
+      "Die Frage nie wiederholen"
+    ],
+    "a": 2,
+    "x": "Websuche macht Antworten aktueller, aber nicht unfehlbar. Ein Blick in die Quelle lohnt sich."
+  },
+  {
+    "id": "q2-045",
+    "type": "tf",
+    "topic": "Sprachmodelle",
+    "q": "Ein Sprachmodell schlägt Antworten in einer Datenbank mit fertigen Sätzen nach.",
+    "a": false,
+    "x": "Es setzt Text Wort für Wort neu zusammen. Fertige Sätze im Regal gibt es nicht."
+  },
+  {
+    "id": "q2-046",
+    "type": "tf",
+    "topic": "Trainingsdaten",
+    "q": "Das Wissen eines Modells endet ungefähr dort, wo seine Trainingsdaten enden.",
+    "a": true,
+    "x": "Was danach geschah, kennt es nur mit Websuche. Es ist ein bisschen wie ein Reisender nach langem Urlaub."
+  },
+  {
+    "id": "q2-047",
+    "type": "order",
+    "topic": "Multimodal",
+    "q": "Bring die Schritte in die richtige Reihenfolge: eine Frage zu einem Foto stellen.",
+    "items": [
+      "Foto hochladen",
+      "Frage zum Foto schreiben",
+      "Absenden",
+      "Antwort lesen und bei Bedarf nachfragen"
+    ],
+    "x": "Erst das Foto, dann die Frage. Ohne Foto rät auch die klügste KI nur."
+  },
+  {
+    "id": "q2-048",
+    "type": "order",
+    "topic": "Trainingsdaten",
+    "q": "Bring die Schritte in die richtige Reihenfolge: vom Text zur Antwort.",
+    "items": [
+      "Riesige Textmengen werden gesammelt",
+      "Das Modell lernt daraus Muster",
+      "Das fertige Modell steht bereit",
+      "Du stellst eine Frage, das Modell setzt Text fort"
+    ],
+    "x": "Zuerst lernen, dann antworten. Das Lernen ist einmal aufwendig, das Antworten geht dann im Nu."
+  },
+  {
+    "id": "q2-049",
+    "type": "order",
+    "topic": "Begriffe",
+    "q": "Bring die Begriffe in die richtige Reihenfolge: vom weitesten Oberbegriff zum engsten.",
+    "items": [
+      "Künstliche Intelligenz",
+      "Maschinelles Lernen",
+      "Generative KI",
+      "Sprachmodell"
+    ],
+    "x": "Wie russische Puppen: Jede Stufe steckt in der vorherigen. Das Sprachmodell ist die kleinste Puppe."
+  },
+  {
+    "id": "q2-050",
+    "type": "match",
+    "topic": "Halluzination",
+    "q": "Ordne Ursache und Folge zu",
+    "pairs": [
+      [
+        "Wissenslücke bei neuen Ereignissen",
+        "Trainingsdaten enden früher"
+      ],
+      [
+        "Erfundene Fakten",
+        "Halluzination"
+      ],
+      [
+        "Flüssiger, aber nicht immer wahrer Text",
+        "Wort für Wort geschätzt"
+      ],
+      [
+        "Aktuelle Infos",
+        "Websuche einschalten"
+      ]
+    ],
+    "x": "Flüssig klingt nicht gleich wahr. Das ist die wichtigste Lektion der ganzen Stufe."
+  },
+  {
+    "id": "q2-051",
+    "type": "match",
+    "topic": "Halluzination",
+    "q": "Was hilft gegen welches Problem?",
+    "pairs": [
+      [
+        "Veraltetes Wissen",
+        "Websuche einschalten"
+      ],
+      [
+        "Erfundene Quelle",
+        "Quelle selbst öffnen und prüfen"
+      ],
+      [
+        "Zu vage Frage",
+        "Mehr Kontext im Prompt nennen"
+      ],
+      [
+        "Wichtige Entscheidung",
+        "Antwort gegenprüfen"
+      ]
+    ],
+    "x": "Zu jedem Problem gibt es einen einfachen Handgriff. Du brauchst nur ihn zu kennen."
+  },
+  {
+    "id": "q2-052",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "Künstliche Intelligenz",
+        "Oberbegriff für schlaue Computerprogramme"
+      ],
+      [
+        "Maschinelles Lernen",
+        "Teilgebiet: Lernen aus Daten"
+      ],
+      [
+        "Generative KI",
+        "Teilgebiet: erzeugt Neues"
+      ],
+      [
+        "Sprachmodell",
+        "Erzeugt Text, Wort für Wort"
+      ]
+    ],
+    "x": "Vom Grossen zum Kleinen. Wer das sortieren kann, ist am Apéro schon fast Expertin."
+  },
+  {
+    "id": "q2-053",
+    "type": "spot",
+    "topic": "Sprachmodelle",
+    "q": "Eine KI hat das über Sprachmodelle geantwortet. Welcher Satz ist falsch?",
+    "lines": [
+      "Ein Sprachmodell wird mit riesigen Textmengen trainiert.",
+      "Es setzt Text Wort für Wort fort.",
+      "Es besitzt eine Datenbank mit lauter garantiert wahren Antworten.",
+      "Es kann trotz flüssiger Sprache Fehler machen."
+    ],
+    "a": 2,
+    "x": "Garantiert wahre Antworten gibt es nicht. Genau darum gehört die Prüfung zum guten Umgang."
+  },
+  {
+    "id": "q2-054",
+    "type": "spot",
+    "topic": "Begriffe",
+    "q": "Eine KI hat das über generative KI geantwortet. Welcher Satz ist falsch?",
+    "lines": [
+      "Generative KI erzeugt ausschliesslich Zahlentabellen.",
+      "Generative KI kann Texte schreiben.",
+      "Generative KI kann Bilder erzeugen.",
+      "Generative KI kann auch Musik erzeugen."
+    ],
+    "a": 0,
+    "x": "Text, Bild, Musik und mehr: Generative KI ist breiter als nur Zahlentabellen."
+  },
+  {
+    "id": "q2-055",
+    "type": "spot",
+    "topic": "Halluzination",
+    "q": "Eine KI hat dir das erzählt. Welcher Satz ist erfunden?",
+    "lines": [
+      "Der Mount Everest ist der höchste Berg der Erde.",
+      "Der Atlantik liegt zwischen Europa und Amerika.",
+      "Der Pazifik ist der kleinste Ozean der Erde.",
+      "Die Donau fliesst durch mehrere Länder."
+    ],
+    "a": 2,
+    "x": "Der Pazifik ist der grösste Ozean. Kleiner Satz, grosser Irrtum."
+  },
+  {
+    "id": "q2-056",
+    "type": "gap",
+    "topic": "Sprachmodelle",
+    "q": "Ein Sprachmodell wählt das Wort, das mit hoher ___ als Nächstes passt.",
+    "o": [
+      "Lautstärke",
+      "Wahrscheinlichkeit",
+      "Verspätung",
+      "Farbe"
+    ],
+    "a": 1,
+    "x": "Wahrscheinlichkeit ist der Kern: Das Modell schätzt, was am ehesten folgt."
+  },
+  {
+    "id": "q2-057",
+    "type": "gap",
+    "topic": "Websuche",
+    "q": "Für tagesaktuelle Informationen schaltest du die ___ ein.",
+    "o": [
+      "Websuche",
+      "Taschenlampe",
+      "Bildschirmsperre",
+      "Lautstärke"
+    ],
+    "a": 0,
+    "x": "Mit Websuche holt der Assistent aktuelle Infos aus dem Internet und nennt Quellen."
+  },
+  {
+    "id": "q2-058",
+    "type": "gap",
+    "topic": "Begriffe",
+    "q": "Erzeugt eine KI neue Bilder oder Texte, nennt man sie ___ KI.",
+    "o": [
+      "destruktive",
+      "passive",
+      "analoge",
+      "generative"
+    ],
+    "a": 3,
+    "x": "Generativ heisst: Sie erzeugt Neues, statt nur Vorhandenes zu sortieren."
+  },
+  {
+    "id": "q2-059",
+    "type": "prompt",
+    "topic": "Halluzination",
+    "q": "Welcher Prompt entlarvt Halluzinationen besser?",
+    "o": [
+      "Gib mir drei Bücher zum Thema mit Autor und Jahr. Sag dazu, wenn du dir nicht sicher bist, ob es sie gibt.",
+      "Nenne Bücher zum Thema."
+    ],
+    "a": 0,
+    "x": "Wer Unsicherheit ausdrücklich erlaubt, bekommt ehrlichere Antworten. Prüfen musst du trotzdem."
+  },
+  {
+    "id": "q2-060",
+    "type": "prompt",
+    "topic": "Websuche",
+    "q": "Welcher Prompt bringt das bessere Ergebnis?",
+    "o": [
+      "Wie ist das Wetter?",
+      "Suche im Web die heutige Wetterprognose für Baden und nenne die Quelle."
+    ],
+    "a": 1,
+    "x": "Ort, Aktualität und Quelle sind klar. So muss die KI nicht raten, wo du wohnst."
+  },
+  {
+    "id": "q2-061",
+    "type": "prompt",
+    "topic": "Sprachmodelle",
+    "q": "Welcher Prompt erklärt besser?",
+    "o": [
+      "Erkläre mir ein Sprachmodell wie einem Neunjährigen, mit einem Beispiel aus dem Alltag.",
+      "LLM."
+    ],
+    "a": 0,
+    "x": "Zielgruppe und Beispiel steuern die Erklärung. Das Kind darf auch erwachsen sein."
+  }
+]

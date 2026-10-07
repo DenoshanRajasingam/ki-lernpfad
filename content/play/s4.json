@@ -1,0 +1,753 @@
+[
+  {
+    "id": "q4-001",
+    "type": "mc",
+    "topic": "Training",
+    "q": "Was passiert beim Training eines Sprachmodells?",
+    "o": [
+      "Das Modell lernt aus riesigen Textmengen, sehr aufwendig und teuer",
+      "Das Modell beantwortet deine Frage",
+      "Ein Mensch tippt alle Antworten von Hand ein",
+      "Das Modell wird auf deinem Handy installiert"
+    ],
+    "a": 0,
+    "x": "Training ist die Kochausbildung: jahrelang, teuer, einmal."
+  },
+  {
+    "id": "q4-002",
+    "type": "mc",
+    "topic": "Training",
+    "q": "Was ist Inferenz?",
+    "o": [
+      "Die Lernphase des Modells",
+      "Das Benutzen des fertigen Modells, also jede Antwort",
+      "Eine Sicherheitslücke",
+      "Ein Vertrag mit dem Anbieter"
+    ],
+    "a": 1,
+    "x": "Inferenz ist das Kochen eines Gerichts: bei jeder Bestellung neu, mit Zeit und Strom."
+  },
+  {
+    "id": "q4-003",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Was ist ein Token?",
+    "o": [
+      "Ein Passwort für die KI",
+      "Die Einheit, in der ein Modell Text liest, etwa ein Wortteil",
+      "Ein Bezahlsystem",
+      "Ein Bild, das die KI malt"
+    ],
+    "a": 1,
+    "x": "Lange Wörter wie «Gartenfest» bestehen aus mehreren Tokens. Deutsch ist da etwas wortreich."
+  },
+  {
+    "id": "q4-004",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Was beschreibt das Kontextfenster?",
+    "o": [
+      "Das Fenster, in dem die App geöffnet wird",
+      "Wie viel Text die KI in einem Gespräch auf einmal berücksichtigt",
+      "Wie viele Nutzer gleichzeitig fragen dürfen",
+      "Die Bildschirmgrösse"
+    ],
+    "a": 1,
+    "x": "Ist das Gespräch sehr lang, vergisst sie den Anfang. Dann hilft ein Neustart mit kurzer Zusammenfassung."
+  },
+  {
+    "id": "q4-005",
+    "type": "mc",
+    "topic": "Agenten",
+    "q": "Was zeichnet einen KI-Agenten aus?",
+    "o": [
+      "Er antwortet nur mit einem Satz",
+      "Er nutzt selbständig Werkzeuge und erledigt mehrere Schritte",
+      "Er arbeitet nur offline",
+      "Er ersetzt den Strom"
+    ],
+    "a": 1,
+    "x": "Ein Agent recherchiert, vergleicht und füllt das Formular gleich aus. Darum prüfst du sein Ergebnis besonders genau."
+  },
+  {
+    "id": "q4-006",
+    "type": "mc",
+    "topic": "Gesamtbild",
+    "q": "Welche Reihenfolge der Wertschöpfungskette stimmt, von unten nach oben?",
+    "o": [
+      "Apps, Modelle, Rechenzentren, Chips",
+      "Chips, Rechenzentren, Modelle, Apps",
+      "Modelle, Chips, Apps, Rechenzentren",
+      "Rechenzentren, Apps, Chips, Modelle"
+    ],
+    "a": 1,
+    "x": "Ohne Chips keine Rechenzentren, ohne Rechenzentren keine Modelle, ohne Modelle keine Apps."
+  },
+  {
+    "id": "q4-007",
+    "type": "mc",
+    "topic": "Gesamtbild",
+    "q": "Was wird beim Betrieb grosser KI-Rechenzentren zunehmend zum Engpass?",
+    "o": [
+      "Der Strom",
+      "Das Papier",
+      "Die Schriftarten",
+      "Die Postleitzahlen"
+    ],
+    "a": 0,
+    "x": "Rechenleistung braucht Energie, und zwar viel. Auch Cloud-Wolken haben eine Steckdose."
+  },
+  {
+    "id": "q4-008",
+    "type": "mc",
+    "topic": "Kritisch denken",
+    "q": "Welche Frage hilft bei einer KI-Schlagzeile am meisten?",
+    "o": [
+      "Wie viele Likes hat der Beitrag?",
+      "Wer hat das System unabhängig getestet?",
+      "Wie schön ist das Bild dazu?",
+      "Wie lang ist die Überschrift?"
+    ],
+    "a": 1,
+    "x": "Unabhängige Tests trennen Fakten vom Marketing."
+  },
+  {
+    "id": "q4-009",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Wofür steht das «T» in ChatGPT?",
+    "o": [
+      "Transformer",
+      "Tabelle",
+      "Token",
+      "Training"
+    ],
+    "a": 0,
+    "x": "Transformer ist die Bauweise aller modernen Sprachmodelle, 2017 bei Google erfunden."
+  },
+  {
+    "id": "q4-010",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Wofür sind Grafikchips (GPUs) in der KI wichtig?",
+    "o": [
+      "Sie verschönern die Antworten",
+      "Auf ihnen läuft die enorme Rechenarbeit von Training und Inferenz",
+      "Sie ersetzen den Bildschirm",
+      "Sie speichern deine Passwörter"
+    ],
+    "a": 1,
+    "x": "Darum steht ein Chipkonzern so oft in den News, auch wenn er nie ein Chatfenster gebaut hat."
+  },
+  {
+    "id": "q4-011",
+    "type": "mc",
+    "topic": "Deepfakes",
+    "q": "Was ist ein Deepfake?",
+    "o": [
+      "Ein besonders tiefer Algorithmus",
+      "Ein täuschend echtes, von KI gefälschtes Bild, Video oder Tonstück",
+      "Ein Fehler in der App",
+      "Ein Verschlüsselungsverfahren"
+    ],
+    "a": 1,
+    "x": "Ein Video, in dem jemand etwas sagt, das er nie gesagt hat. Bei Überraschendem erst prüfen, dann teilen."
+  },
+  {
+    "id": "q4-012",
+    "type": "tf",
+    "topic": "Training",
+    "q": "Training passiert bei jeder einzelnen Antwort neu.",
+    "a": false,
+    "x": "Das wäre die Inferenz. Training ist die einmalige, teure Lernphase."
+  },
+  {
+    "id": "q4-013",
+    "type": "tf",
+    "topic": "Training",
+    "q": "Jede Antwort der KI verbraucht Rechenleistung und damit Strom.",
+    "a": true,
+    "x": "Eine einzelne Antwort ist klein, aber Millionen davon läppern sich."
+  },
+  {
+    "id": "q4-014",
+    "type": "tf",
+    "topic": "Begriffe",
+    "q": "Open-Weight-Modelle kann man herunterladen und selbst betreiben.",
+    "a": true,
+    "x": "Genau, das unterscheidet sie von Angeboten, die nur über einen Anbieter laufen."
+  },
+  {
+    "id": "q4-015",
+    "type": "tf",
+    "topic": "Begriffe",
+    "q": "Ein Reasoning-Modell denkt vor der Antwort in Zwischenschritten nach.",
+    "a": true,
+    "x": "Besser bei Logik und Planung, dafür etwas langsamer. Wie ein Mensch, der beim Kopfrechnen kurz die Stirn runzelt."
+  },
+  {
+    "id": "q4-016",
+    "type": "tf",
+    "topic": "Deepfakes",
+    "q": "Man erkennt jeden Deepfake auf den ersten Blick.",
+    "a": false,
+    "x": "Gute Fälschungen sind kaum zu erkennen. Quelle prüfen schlägt Bauchgefühl."
+  },
+  {
+    "id": "q4-017",
+    "type": "tf",
+    "topic": "Gesamtbild",
+    "q": "Hinter jeder KI-Schlagzeile steckt zwingend echte KI.",
+    "a": false,
+    "x": "Manchmal ist «KI» nur ein Schlagwort. Darum fragt man: Braucht es dafür wirklich KI?"
+  },
+  {
+    "id": "q4-018",
+    "type": "tf",
+    "topic": "Gesamtbild",
+    "q": "Dass ich eine Schlagzeile glaube, kann jemandem nützen. Darum frage ich auch, wer davon profitiert.",
+    "a": true,
+    "x": "Eine gute Prüffrage: Wer profitiert davon, dass ich das glaube?"
+  },
+  {
+    "id": "q4-019",
+    "type": "gap",
+    "topic": "Training",
+    "q": "Die Lernphase eines Modells heisst ___.",
+    "o": [
+      "Training",
+      "Inferenz",
+      "Update",
+      "Fenster"
+    ],
+    "a": 0,
+    "x": "Training ist teuer und passiert einmal. Danach wird das Modell nur noch benutzt."
+  },
+  {
+    "id": "q4-020",
+    "type": "gap",
+    "topic": "Begriffe",
+    "q": "Das Benutzen des fertigen Modells nennt man ___.",
+    "o": [
+      "Inferenz",
+      "Training",
+      "Transformer",
+      "Token"
+    ],
+    "a": 0,
+    "x": "Jede Antwort ist Inferenz, also ein frisch gekochtes Gericht."
+  },
+  {
+    "id": "q4-021",
+    "type": "gap",
+    "topic": "Begriffe",
+    "q": "Wie viel Text die KI in einem Gespräch gleichzeitig berücksichtigt, bestimmt das ___.",
+    "o": [
+      "Kontextfenster",
+      "Tokenfenster",
+      "Parameterbild",
+      "Modellblatt"
+    ],
+    "a": 0,
+    "x": "Ist das Fenster voll, rutscht der Anfang des Gesprächs hinaus."
+  },
+  {
+    "id": "q4-022",
+    "type": "gap",
+    "topic": "Agenten",
+    "q": "KI, die selbständig Werkzeuge nutzt und mehrere Schritte erledigt, heisst ___.",
+    "o": [
+      "Agent",
+      "Token",
+      "Transformer",
+      "Parameter"
+    ],
+    "a": 0,
+    "x": "Agenten handeln statt nur zu antworten."
+  },
+  {
+    "id": "q4-023",
+    "type": "gap",
+    "topic": "Gesamtbild",
+    "q": "Die Labore, die Sprachmodelle trainieren, bilden die Ebene der ___ in der Wertschöpfungskette.",
+    "o": [
+      "Modelle",
+      "Chips",
+      "Apps",
+      "Steckdosen"
+    ],
+    "a": 0,
+    "x": "Die Labore bauen Modelle. Apps machen daraus etwas Nützliches."
+  },
+  {
+    "id": "q4-024",
+    "type": "order",
+    "topic": "Gesamtbild",
+    "q": "Ordne die Wertschöpfungskette von der Grundlage bis zur Anwendung.",
+    "items": [
+      "Chips",
+      "Rechenzentren",
+      "Modelle",
+      "Apps"
+    ],
+    "x": "Jede Ebene baut auf der vorherigen auf. Wer weiss, wo er in der Kette steht, versteht die News besser."
+  },
+  {
+    "id": "q4-025",
+    "type": "order",
+    "topic": "Training",
+    "q": "Wie entsteht aus Daten eine Antwort?",
+    "items": [
+      "Riesige Textmengen sammeln",
+      "Modell trainieren",
+      "Fertiges Modell betreiben",
+      "Frage stellen und Antwort erhalten"
+    ],
+    "x": "Erst die teure Lernphase, dann jedes Mal die Inferenz."
+  },
+  {
+    "id": "q4-026",
+    "type": "order",
+    "topic": "Kritisch denken",
+    "q": "Wie prüfst du eine überraschende KI-Schlagzeile?",
+    "items": [
+      "Schlagzeile genau lesen",
+      "Quelle und Urheber suchen",
+      "Unabhängige Tests oder zweite Quelle finden",
+      "Erst dann weitererzählen"
+    ],
+    "x": "Erst prüfen, dann teilen. Das ist anstrengend, aber sehr schweizerisch."
+  },
+  {
+    "id": "q4-027",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne den Begriff der Beschreibung zu.",
+    "pairs": [
+      [
+        "Token",
+        "Einheit, in der ein Modell Text liest"
+      ],
+      [
+        "Kontextfenster",
+        "Wie viel Text auf einmal berücksichtigt wird"
+      ],
+      [
+        "Parameter",
+        "Die gelernten Zahlen im Modell"
+      ],
+      [
+        "Agent",
+        "KI, die selbständig mehrere Schritte erledigt"
+      ]
+    ],
+    "x": "Vier Wörter für dein nächstes Fachgespräch."
+  },
+  {
+    "id": "q4-028",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Welcher Begriff passt zu dieser Beschreibung?",
+    "pairs": [
+      [
+        "Training",
+        "Teure Lernphase, einmal"
+      ],
+      [
+        "Inferenz",
+        "Jede einzelne Antwort"
+      ],
+      [
+        "Transformer",
+        "Bauweise moderner Sprachmodelle"
+      ],
+      [
+        "GPU",
+        "Grafikchip, auf dem KI läuft"
+      ]
+    ],
+    "x": "Lernen, Benutzen, Bauweise, Hardware: das Grundvokabular."
+  },
+  {
+    "id": "q4-029",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne zu.",
+    "pairs": [
+      [
+        "Reasoning-Modell",
+        "Denkt in Zwischenschritten vor der Antwort"
+      ],
+      [
+        "Open-Weight",
+        "Herunterladbar und selbst betreibbar"
+      ],
+      [
+        "Deepfake",
+        "Täuschend echte KI-Fälschung"
+      ],
+      [
+        "AGI",
+        "KI, die fast alles Geistige wie ein Mensch kann"
+      ]
+    ],
+    "x": "Bei AGI streiten selbst Fachleute, ob und wann es kommt."
+  },
+  {
+    "id": "q4-030",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Welches Beispiel gehört zu welchem Begriff?",
+    "pairs": [
+      [
+        "Kochausbildung",
+        "Training"
+      ],
+      [
+        "Gericht pro Bestellung",
+        "Inferenz"
+      ],
+      [
+        "Recherchiert Hotels und füllt Formular aus",
+        "Agent"
+      ],
+      [
+        "«Gartenfest» in mehreren Teilen",
+        "Token"
+      ]
+    ],
+    "x": "Mit Bildern bleibt es im Kopf hängen."
+  },
+  {
+    "id": "q4-031",
+    "type": "prompt",
+    "topic": "Kritisch denken",
+    "q": "Du willst eine KI-Antwort prüfen. Welcher Prompt ist besser?",
+    "o": [
+      "«Stimmt das?»",
+      "«Hier ist eine Antwort eines anderen Assistenten: [Text]. Prüfe sie kritisch. Was stimmt, was ist fraglich, was fehlt?»"
+    ],
+    "a": 1,
+    "x": "Die zweite Version gibt Material und eine klare Prüfaufgabe. Eine zweite Meinung ist Gold wert."
+  },
+  {
+    "id": "q4-032",
+    "type": "prompt",
+    "topic": "Begriffe",
+    "q": "Du willst den Unterschied von Training und Inferenz verstehen. Welcher Prompt ist besser?",
+    "o": [
+      "«Erkläre mir Training und Inferenz mit einem Alltagsvergleich, in fünf Sätzen, ohne Fachjargon. Ich habe keine Technikkenntnisse.»",
+      "«Training Inferenz?»"
+    ],
+    "a": 0,
+    "x": "Mit Zielgruppe, Länge und Vergleich bekommst du eine Antwort, die hängen bleibt."
+  },
+  {
+    "id": "q4-033",
+    "type": "prompt",
+    "topic": "Gesamtbild",
+    "q": "Du willst eine Schlagzeile einordnen. Welcher Prompt ist besser?",
+    "o": [
+      "«Ist KI gefährlich?»",
+      "«Hier die Schlagzeile: [Text]. Stelle mir sechs kritische Prüffragen: Wer hat es getestet, woher stammen die Daten, wer profitiert? Gib keine Antwort, ich recherchiere selbst.»"
+    ],
+    "a": 1,
+    "x": "So trainierst du deinen Blick, statt dir den Gedanken abnehmen zu lassen."
+  },
+  {
+    "id": "q4-034",
+    "type": "spot",
+    "topic": "Training",
+    "q": "Die KI erklärt, wie ein Sprachmodell lernt. Welcher Satz ist falsch?",
+    "lines": [
+      "Beim Training lernt das Modell aus riesigen Textmengen.",
+      "Training ist sehr aufwendig und passiert einmal.",
+      "Bei jeder deiner Fragen wird das Modell komplett neu trainiert.",
+      "Danach wird das fertige Modell benutzt, das nennt man Inferenz."
+    ],
+    "a": 2,
+    "x": "Bei deiner Frage läuft nur die Inferenz. Das Modell lernt nicht nebenbei neu."
+  },
+  {
+    "id": "q4-035",
+    "type": "spot",
+    "topic": "Gesamtbild",
+    "q": "Die KI erklärt die Wertschöpfungskette. Welcher Satz ist falsch?",
+    "lines": [
+      "Chips liefern die Rechenleistung.",
+      "In Rechenzentren läuft diese Rechenleistung.",
+      "Apps trainieren die Modelle und stellen die Chips her.",
+      "Modelle werden in Laboren trainiert."
+    ],
+    "a": 2,
+    "x": "Apps nutzen Modelle. Trainiert werden sie in Laboren, hergestellt werden Chips in Chipfabriken."
+  },
+  {
+    "id": "q4-036",
+    "type": "spot",
+    "topic": "Begriffe",
+    "q": "Die KI erklärt Fachbegriffe. Welcher Satz ist falsch?",
+    "lines": [
+      "Ein Token ist die Einheit, in der ein Modell Text liest.",
+      "Das Kontextfenster bestimmt, wie viel Text auf einmal berücksichtigt wird.",
+      "Ein Agent kann Werkzeuge nutzen und mehrere Schritte erledigen.",
+      "Ein Deepfake ist immer ein harmloser Scherz und nie täuschend echt."
+    ],
+    "a": 3,
+    "x": "Gerade weil Deepfakes täuschend echt sein können, sind sie ein Thema. Nicht jeder Scherz bleibt einer."
+  },
+  {
+    "id": "q4-037",
+    "type": "mc",
+    "topic": "Gesamtbild",
+    "q": "Was gilt im KI-Gesetz der EU für Bereiche wie Bildung oder Personalentscheide?",
+    "o": [
+      "Sie sind komplett verboten",
+      "Sie dürfen ohne Regeln eingesetzt werden",
+      "Sie gelten als Hochrisiko-Bereiche und bekommen strenge Auflagen",
+      "Das Gesetz erwähnt sie nicht"
+    ],
+    "a": 2,
+    "x": "Das Gesetz teilt Anwendungen nach Risiko ein. Wo viel auf dem Spiel steht, etwa bei Noten oder Bewerbungen, gelten strenge Auflagen."
+  },
+  {
+    "id": "q4-038",
+    "type": "mc",
+    "topic": "Gesamtbild",
+    "q": "Was stimmt zur Frage «Ist das eine Blase?»",
+    "o": [
+      "Sicher ist: Die Blase platzt nächstes Jahr",
+      "Die Investitionen sind riesig und ob die Einnahmen sie zurückzahlen, ist offen; gleichzeitig wird KI-Leistung günstiger",
+      "Sicher ist: Es gibt gar keine Blase",
+      "Nur kleine Firmen investieren in Rechenzentren"
+    ],
+    "a": 1,
+    "x": "Beide Seiten haben Argumente. Wer «sicher» sagt, weiss mehr als alle anderen oder tut nur so."
+  },
+  {
+    "id": "q4-039",
+    "type": "mc",
+    "topic": "Gesamtbild",
+    "q": "Welches ist ein Risiko von KI, das im grossen Bild genannt wird?",
+    "o": [
+      "Abhängigkeit von wenigen Anbietern",
+      "Zu viele freie Parkplätze",
+      "Zu günstiges Wissen",
+      "Zu viele Sprachen"
+    ],
+    "a": 0,
+    "x": "Genannt werden etwa erfundene Fakten, täuschend echte Fälschungen, Datenschutz und die Abhängigkeit von wenigen Anbietern."
+  },
+  {
+    "id": "q4-040",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Warum antwortet ein Reasoning-Modell oft langsamer als ein normales?",
+    "o": [
+      "Es hat weniger Chips",
+      "Es sucht zuerst im Internet",
+      "Es wartet auf deine Bestätigung",
+      "Es denkt in Zwischenschritten, bevor es antwortet"
+    ],
+    "a": 3,
+    "x": "Denken kostet Zeit, auch bei der KI. Dafür werden die Antworten bei kniffligen Aufgaben oft besser."
+  },
+  {
+    "id": "q4-041",
+    "type": "mc",
+    "topic": "Begriffe",
+    "q": "Wann lohnt sich ein Open-Weight-Modell?",
+    "o": [
+      "Wenn du nie wieder etwas prüfen willst",
+      "Wenn du keinen Strom brauchen willst",
+      "Wenn du ein Modell herunterladen und selbst betreiben möchtest",
+      "Wenn du ohne Chips rechnen willst"
+    ],
+    "a": 2,
+    "x": "Open-Weight heisst: Die Modelldateien sind frei verfügbar. Strom und Chips brauchst du trotzdem."
+  },
+  {
+    "id": "q4-042",
+    "type": "tf",
+    "topic": "Begriffe",
+    "q": "Ein Token entspricht immer genau einem Wort.",
+    "a": false,
+    "x": "Tokens sind oft Wortteile oder einzelne Zeichen. «Gartenfest» wird gern in mehrere Tokens zerlegt."
+  },
+  {
+    "id": "q4-043",
+    "type": "tf",
+    "topic": "Begriffe",
+    "q": "Ein grösseres Kontextfenster heisst, dass das Modell mehr Text auf einmal berücksichtigen kann.",
+    "a": true,
+    "x": "Das Kontextfenster ist das Kurzzeitgedächtnis des Modells. Grösser heisst: mehr Platz."
+  },
+  {
+    "id": "q4-044",
+    "type": "tf",
+    "topic": "Gesamtbild",
+    "q": "Weil KI jedes Jahr günstiger wird, ist bewiesen, dass sich die grossen Investitionen auszahlen.",
+    "a": false,
+    "x": "Günstiger wird die Leistung pro Anfrage. Ob die Einnahmen die Investitionen decken, ist eine andere Frage."
+  },
+  {
+    "id": "q4-045",
+    "type": "tf",
+    "topic": "Kritisch denken",
+    "q": "Bei einer KI-Schlagzeile lohnt sich auch die Frage, was mit meinen Daten passiert.",
+    "a": true,
+    "x": "Das ist eine der sechs Prüffragen. Wer Daten eingibt, sollte wissen, wohin sie gehen."
+  },
+  {
+    "id": "q4-046",
+    "type": "gap",
+    "topic": "Gesamtbild",
+    "q": "Das KI-Gesetz der EU teilt Anwendungen nach ___ ein.",
+    "o": [
+      "Preis",
+      "Farbe",
+      "Risiko",
+      "Alphabet"
+    ],
+    "a": 2,
+    "x": "Je höher das Risiko, desto strenger die Regeln. Manches ist sogar ganz verboten."
+  },
+  {
+    "id": "q4-047",
+    "type": "gap",
+    "topic": "Gesamtbild",
+    "q": "Ob die Einnahmen die Milliarden für Rechenzentren je zurückzahlen, ist offen. Darum fragt man, ob KI eine ___ ist.",
+    "o": [
+      "Brücke",
+      "Bibliothek",
+      "Batterie",
+      "Blase"
+    ],
+    "a": 3,
+    "x": "Die Frage ist offen. Ein klares Ja oder Nein wäre Kaffeesatzlesen."
+  },
+  {
+    "id": "q4-048",
+    "type": "order",
+    "topic": "Gesamtbild",
+    "q": "Der Weg einer Anfrage: Wer arbeitet in welcher Reihenfolge?",
+    "items": [
+      "Du tippst in der App",
+      "Die App schickt die Anfrage ans Modell",
+      "Das Modell rechnet im Rechenzentrum auf Chips",
+      "Die Antwort kommt in der App zurück"
+    ],
+    "x": "Alle vier Ebenen der Kette arbeiten bei jeder einzelnen Antwort mit."
+  },
+  {
+    "id": "q4-049",
+    "type": "order",
+    "topic": "Agenten",
+    "q": "Ein Agent soll ein Hotel finden und buchen. Ordne die Schritte.",
+    "items": [
+      "Ziel verstehen",
+      "Hotels mit Werkzeug recherchieren",
+      "Formular ausfüllen",
+      "Ergebnis melden"
+    ],
+    "x": "Ein Agent erledigt mehrere Schritte selbständig. Die Buchung bestätigst du besser selbst."
+  },
+  {
+    "id": "q4-050",
+    "type": "match",
+    "topic": "Gesamtbild",
+    "q": "Was gilt laut KI-Gesetz und Bundesrat?",
+    "pairs": [
+      [
+        "Verhaltensmanipulation",
+        "Nach EU-KI-Gesetz verboten"
+      ],
+      [
+        "Bildung und Personalentscheide",
+        "Hochrisiko mit strengen Auflagen"
+      ],
+      [
+        "Bundesrat",
+        "Will die KI-Konvention des Europarats übernehmen"
+      ]
+    ],
+    "x": "Die EU regelt nach Risiko, die Schweiz übernimmt die Konvention und passt Gesetze nur an, wo nötig."
+  },
+  {
+    "id": "q4-051",
+    "type": "match",
+    "topic": "Gesamtbild",
+    "q": "Welche Ebene der Wertschöpfungskette ist gemeint?",
+    "pairs": [
+      [
+        "Grafikchips und deren Fertigung",
+        "Chips"
+      ],
+      [
+        "Vermieten Rechenleistung",
+        "Rechenzentren"
+      ],
+      [
+        "Labore trainieren Sprachmodelle",
+        "Modelle"
+      ],
+      [
+        "Nutzen KI für bestimmte Aufgaben",
+        "Apps"
+      ]
+    ],
+    "x": "Von unten nach oben: Chips, Rechenzentren, Modelle, Apps."
+  },
+  {
+    "id": "q4-052",
+    "type": "prompt",
+    "topic": "Gesamtbild",
+    "q": "Du willst das KI-Gesetz der EU verstehen. Welcher Prompt ist besser?",
+    "o": [
+      "«Erkläre mir das KI-Gesetz der EU in fünf Sätzen. Sag, was verboten ist und was streng geregelt wird, und wo du dir nicht sicher bist.»",
+      "«Was darf ich?»"
+    ],
+    "a": 0,
+    "x": "Wer nach Unsicherheit fragt, sieht, wo er nachlesen muss. Bei Gesetzen ist das die halbe Miete."
+  },
+  {
+    "id": "q4-053",
+    "type": "prompt",
+    "topic": "Gesamtbild",
+    "q": "Du willst dir eine Meinung zur Blasen-Frage bilden. Welcher Prompt ist besser?",
+    "o": [
+      "«Ist KI eine Blase?»",
+      "«Nenne je drei Argumente dafür und dagegen, dass KI eine Blase ist, mit Quelle. Sag mir, welche Zahlen sich schnell ändern.»"
+    ],
+    "a": 1,
+    "x": "Beide Seiten anzuhören ist besser als ein einzelnes Urteil, vor allem bei offenen Fragen."
+  },
+  {
+    "id": "q4-054",
+    "type": "spot",
+    "topic": "Gesamtbild",
+    "q": "Die KI fasst zusammen, was die Schweiz plant. Welcher Satz ist falsch?",
+    "lines": [
+      "Der Bundesrat will die KI-Konvention des Europarats übernehmen.",
+      "Gesetze sollen nur dort angepasst werden, wo es nötig ist.",
+      "Ein Beispiel für eine solche Anpassung ist der Datenschutz.",
+      "Die Schweiz will dafür alle Rechtsregeln von Grund auf neu schreiben."
+    ],
+    "a": 3,
+    "x": "Der Plan lautet: Konvention übernehmen und gezielt anpassen, nicht alles neu schreiben."
+  },
+  {
+    "id": "q4-055",
+    "type": "spot",
+    "topic": "Begriffe",
+    "q": "Die KI erklärt Fachbegriffe. Welcher Satz ist falsch?",
+    "lines": [
+      "Ein Token ist eine Einheit, in der ein Modell Text liest.",
+      "Ein Agent beantwortet nur einen einzigen Satz und nutzt nie Werkzeuge.",
+      "Ein Reasoning-Modell denkt vor der Antwort in Zwischenschritten.",
+      "Open-Weight-Modelle lassen sich herunterladen und selbst betreiben."
+    ],
+    "a": 1,
+    "x": "Ein Agent nutzt Werkzeuge und erledigt mehrere Schritte selbständig."
+  }
+]

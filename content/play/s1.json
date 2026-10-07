@@ -1,0 +1,855 @@
+[
+  {
+    "id": "q1-001",
+    "type": "mc",
+    "topic": "Grundlagen",
+    "q": "Was ist ein KI-Assistent wie ChatGPT, Claude oder Gemini?",
+    "o": [
+      "Ein Programm, mit dem du schreibst oder sprichst und das dir antwortet",
+      "Ein Mensch, der im Hintergrund blitzschnell tippt",
+      "Ein Virenschutz für dein Handy",
+      "Eine Suchmaschine, die nur Bilder findet"
+    ],
+    "a": 0,
+    "x": "Es ist ein Programm, das Sprache versteht und beantwortet. Im Hintergrund tippt kein Mensch, auch kein sehr schneller Affe."
+  },
+  {
+    "id": "q1-002",
+    "type": "mc",
+    "topic": "Grundlagen",
+    "q": "Was bedeutet das Kürzel «KI»?",
+    "o": [
+      "Kluge Internetseite",
+      "Künstliche Intelligenz",
+      "Kurze Information",
+      "Kontrollierte Instanz"
+    ],
+    "a": 1,
+    "x": "Künstliche Intelligenz: Computer lösen Aufgaben, für die man früher menschliches Denken brauchte."
+  },
+  {
+    "id": "q1-003",
+    "type": "mc",
+    "topic": "Prompten",
+    "q": "Was ist ein Prompt?",
+    "o": [
+      "Eine Fehlermeldung der KI",
+      "Dein Passwort für das Konto",
+      "Deine Anweisung oder Frage an die KI",
+      "Die Antwort der KI"
+    ],
+    "a": 2,
+    "x": "Der Prompt ist das, was du der KI sagst oder schreibst. Die Antwort kommt danach."
+  },
+  {
+    "id": "q1-004",
+    "type": "mc",
+    "topic": "Konto",
+    "q": "Was brauchst du in der Regel, um einen KI-Assistenten zu nutzen?",
+    "o": [
+      "Ein Konto, das du kostenlos anlegen kannst",
+      "Einen speziellen Computer für KI",
+      "Eine Ausbildung in Informatik",
+      "Ein Abo für mindestens ein Jahr"
+    ],
+    "a": 0,
+    "x": "Für den Einstieg reicht ein Gratiskonto bei einem der Anbieter. Informatik-Diplom nicht nötig."
+  },
+  {
+    "id": "q1-005",
+    "type": "mc",
+    "topic": "Prompten",
+    "q": "Du bist mit der ersten Antwort nur halb zufrieden. Was ist am sinnvollsten?",
+    "o": [
+      "Das Gespräch löschen und aufgeben",
+      "Im selben Gespräch sagen, was anders sein soll",
+      "Dieselbe Frage zehnmal gleich wiederholen",
+      "Den Computer neu starten"
+    ],
+    "a": 1,
+    "x": "Nachbessern gehört dazu. Sag einfach «kürzer», «freundlicher» oder «mit Beispiel»."
+  },
+  {
+    "id": "q1-006",
+    "type": "mc",
+    "topic": "Sprachmodus",
+    "q": "Wofür eignet sich der Sprachmodus besonders?",
+    "o": [
+      "Nur für Bildbearbeitung",
+      "Um das Konto zu löschen",
+      "Um mit der KI zu sprechen, statt zu tippen, zum Beispiel unterwegs",
+      "Um die Akkulaufzeit zu verlängern"
+    ],
+    "a": 2,
+    "x": "Du sprichst, die KI antwortet. Praktisch beim Spazieren, Kochen oder wenn die Finger vom Teig kleben."
+  },
+  {
+    "id": "q1-007",
+    "type": "mc",
+    "topic": "Sicherheit",
+    "q": "Welche Angabe gehört NICHT in eine Frage an eine KI?",
+    "o": [
+      "Dein Lieblingsessen",
+      "Ein allgemeines Rezept für Rösti",
+      "Das Passwort für dein E-Banking",
+      "Eine Frage zur Rechtschreibung"
+    ],
+    "a": 2,
+    "x": "Passwörter bleiben bei dir. Die KI braucht sie nie, und ein Geheimnis ist nur eines, solange es nicht eingetippt ist."
+  },
+  {
+    "id": "q1-008",
+    "type": "mc",
+    "topic": "Sicherheit",
+    "q": "Du möchtest einen internen Vertrag zusammenfassen lassen. Was ist die sinnvolle Grundregel?",
+    "o": [
+      "Vertrauliches nur eingeben, wenn es erlaubt ist, sonst anonymisieren oder weglassen",
+      "Immer alles eingeben, die KI schweigt sicher",
+      "Den Vertrag in mehrere Teile zerschneiden und alle eingeben",
+      "Nur nachts eingeben, dann schaut niemand hin"
+    ],
+    "a": 0,
+    "x": "Frag nach, ob du es darfst, und lass Namen und Zahlen weg, wenn es nicht nötig ist. Die Tageszeit spielt keine Rolle."
+  },
+  {
+    "id": "q1-009",
+    "type": "mc",
+    "topic": "Halluzination",
+    "q": "Was meint man mit «Halluzination» bei einer KI?",
+    "o": [
+      "Die KI antwortet sehr langsam",
+      "Die KI erfindet überzeugend klingende, aber falsche Angaben",
+      "Die KI zeigt bunte Muster auf dem Bildschirm",
+      "Die KI hat Kopfschmerzen"
+    ],
+    "a": 1,
+    "x": "Sie klingt sicher und liegt trotzdem daneben. Darum prüfst du wichtige Fakten nach."
+  },
+  {
+    "id": "q1-010",
+    "type": "mc",
+    "topic": "Werkzeuge",
+    "q": "Welche dieser Namen sind KI-Assistenten?",
+    "o": [
+      "Excel, Word und Outlook",
+      "ChatGPT, Claude und Gemini",
+      "Chrome, Edge und Safari",
+      "WhatsApp, Signal und Threema"
+    ],
+    "a": 1,
+    "x": "ChatGPT, Claude und Gemini sind Assistenten, die du anschreiben kannst. Die anderen sind andere Programme."
+  },
+  {
+    "id": "q1-011",
+    "type": "mc",
+    "topic": "Grundlagen",
+    "q": "Welche Aufgabe kann ein KI-Assistent gut übernehmen?",
+    "o": [
+      "Ein Entwurf für eine freundliche Absage-Mail",
+      "Dein Mittagessen kochen",
+      "Dein Velo reparieren",
+      "Den Briefkasten leeren"
+    ],
+    "a": 0,
+    "x": "Texte entwerfen, erklären und Ideen sammeln: darin sind KI-Assistenten stark. Beim Kochen bleibst du selbst gefragt."
+  },
+  {
+    "id": "q1-012",
+    "type": "mc",
+    "topic": "Prompten",
+    "q": "Was macht einen Prompt besser?",
+    "o": [
+      "Möglichst wenige Wörter",
+      "Klar sagen, was du willst, und kurz den Zusammenhang nennen",
+      "Nur Grossbuchstaben verwenden",
+      "Möglichst viele Fachbegriffe"
+    ],
+    "a": 1,
+    "x": "Je klarer dein Wunsch, desto besser passt die Antwort. Schreien bringt nichts, auch nicht bei Maschinen."
+  },
+  {
+    "id": "q1-013",
+    "type": "tf",
+    "topic": "Grundlagen",
+    "q": "Ein KI-Assistent versteht normale Alltagssprache. Du musst keine Spezialsprache lernen.",
+    "a": true,
+    "x": "Genau, du schreibst oder sprichst, wie du es gewohnt bist. Ganze Sätze reichen."
+  },
+  {
+    "id": "q1-014",
+    "type": "tf",
+    "topic": "Halluzination",
+    "q": "Wenn eine KI sehr selbstsicher antwortet, ist die Antwort immer richtig.",
+    "a": false,
+    "x": "Selbstsicherer Ton ist kein Beweis. Auch erfundene Antworten klingen oft prima."
+  },
+  {
+    "id": "q1-015",
+    "type": "tf",
+    "topic": "Prompten",
+    "q": "Du darfst der KI im selben Gespräch Folgefragen stellen und Wünsche ergänzen.",
+    "a": true,
+    "x": "Das ist der Sinn des Gesprächs. Die KI merkt sich, was bisher gesagt wurde."
+  },
+  {
+    "id": "q1-016",
+    "type": "tf",
+    "topic": "Sicherheit",
+    "q": "Kundendaten und Passwörter darfst du bedenkenlos in jeden KI-Assistenten eingeben.",
+    "a": false,
+    "x": "Vertrauliches gehört nicht ungeprüft in eine KI. Frag zuerst, was bei euch erlaubt ist."
+  },
+  {
+    "id": "q1-017",
+    "type": "tf",
+    "topic": "Sprachmodus",
+    "q": "Du kannst mit einem KI-Assistenten auch sprechen, ohne etwas zu tippen.",
+    "a": true,
+    "x": "Viele Assistenten haben einen Sprachmodus, besonders in der App auf dem Handy."
+  },
+  {
+    "id": "q1-018",
+    "type": "tf",
+    "topic": "Konto",
+    "q": "Man muss für den ersten Versuch mit einem KI-Assistenten zwingend bezahlen.",
+    "a": false,
+    "x": "Die bekannten Anbieter haben Gratisvarianten, mit denen du loslegen kannst."
+  },
+  {
+    "id": "q1-019",
+    "type": "tf",
+    "topic": "Grundlagen",
+    "q": "Ein KI-Assistent ist ein Mensch, der sehr schnell tippen kann.",
+    "a": false,
+    "x": "Es ist ein Computerprogramm. Der Affe an der Tastatur ist leider nur ein Gerücht."
+  },
+  {
+    "id": "q1-020",
+    "type": "gap",
+    "topic": "Prompten",
+    "q": "Deine Anweisung an die KI nennt man ___.",
+    "o": [
+      "Passwort",
+      "Prompt",
+      "Browser",
+      "Download"
+    ],
+    "a": 1,
+    "x": "Prompt heisst Eingabeaufforderung: Du sagst der KI, was sie tun soll."
+  },
+  {
+    "id": "q1-021",
+    "type": "gap",
+    "topic": "Halluzination",
+    "q": "Erfindet eine KI überzeugend klingende falsche Fakten, nennt man das eine ___.",
+    "o": [
+      "Halluzination",
+      "Aktualisierung",
+      "Verbindung",
+      "Sicherung"
+    ],
+    "a": 0,
+    "x": "Halluzination: klingt gut, stimmt aber nicht. Darum Wichtiges immer gegenprüfen."
+  },
+  {
+    "id": "q1-022",
+    "type": "gap",
+    "topic": "Sprachmodus",
+    "q": "Mit dem ___ sprichst du mit der KI, statt zu tippen.",
+    "o": [
+      "Flugmodus",
+      "Dunkelmodus",
+      "Sprachmodus",
+      "Sparmodus"
+    ],
+    "a": 2,
+    "x": "Der Sprachmodus macht das Gespräch mit der KI fast so einfach wie ein Telefonat."
+  },
+  {
+    "id": "q1-023",
+    "type": "gap",
+    "topic": "Grundlagen",
+    "q": "Programme wie ChatGPT, Claude oder Gemini nennt man KI-___.",
+    "o": [
+      "Drucker",
+      "Assistenten",
+      "Kabel",
+      "Bildschirme"
+    ],
+    "a": 1,
+    "x": "KI-Assistenten oder Chatbots: Programme, mit denen du schreibst oder sprichst."
+  },
+  {
+    "id": "q1-024",
+    "type": "order",
+    "topic": "Konto",
+    "q": "Bring die Schritte in die richtige Reihenfolge: Gratiskonto bei einem KI-Assistenten anlegen.",
+    "items": [
+      "Webseite oder App des Anbieters öffnen",
+      "Auf «Registrieren» oder «Konto erstellen» tippen",
+      "E-Mail-Adresse oder bestehendes Konto angeben und bestätigen",
+      "Erste Frage ins Eingabefeld schreiben"
+    ],
+    "x": "Erst Konto, dann Frage. Umgekehrt wäre die KI etwas ratlos."
+  },
+  {
+    "id": "q1-025",
+    "type": "order",
+    "topic": "Prompten",
+    "q": "Bring die Schritte in die richtige Reihenfolge: eine gute Antwort erarbeiten.",
+    "items": [
+      "Erste Frage mit klarem Wunsch stellen",
+      "Antwort lesen",
+      "Nachbessern: «Kürzer und freundlicher»",
+      "Fertige Antwort prüfen und verwenden"
+    ],
+    "x": "Fragen, lesen, nachbessern, prüfen. So kommst du Schritt für Schritt ans Ziel."
+  },
+  {
+    "id": "q1-026",
+    "type": "order",
+    "topic": "Sprachmodus",
+    "q": "Bring die Schritte in die richtige Reihenfolge: einmal per Sprache fragen.",
+    "items": [
+      "App des KI-Assistenten öffnen",
+      "Sprachmodus antippen",
+      "Frage laut aussprechen",
+      "Antwort anhören"
+    ],
+    "x": "Öffnen, aktivieren, sprechen, zuhören. Wie ein Telefonat, nur ohne Warteschleife."
+  },
+  {
+    "id": "q1-027",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "Prompt",
+        "Deine Anweisung an die KI"
+      ],
+      [
+        "Halluzination",
+        "Die KI erfindet falsche Fakten"
+      ],
+      [
+        "Sprachmodus",
+        "Mit der KI sprechen statt tippen"
+      ],
+      [
+        "KI-Assistent",
+        "Programm, mit dem du schreibst oder sprichst"
+      ]
+    ],
+    "x": "Vier Begriffe, die du im Alltag mit KI ständig brauchst."
+  },
+  {
+    "id": "q1-028",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "KI",
+        "Computer lösen Aufgaben, die Denken brauchen"
+      ],
+      [
+        "Chatbot",
+        "Das Programm, mit dem du schreibst"
+      ],
+      [
+        "Prompt",
+        "Das, was du der KI sagst"
+      ],
+      [
+        "Halluzination",
+        "Überzeugend klingende, aber falsche Antwort"
+      ]
+    ],
+    "x": "Mit diesen vier Begriffen bist du im Gespräch gut gerüstet."
+  },
+  {
+    "id": "q1-029",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "Sprachmodus",
+        "Gespräch per Stimme"
+      ],
+      [
+        "Prompt",
+        "Deine Frage oder dein Auftrag"
+      ],
+      [
+        "Chatbot",
+        "Programm für das Gespräch mit der KI"
+      ],
+      [
+        "KI",
+        "Künstliche Intelligenz"
+      ]
+    ],
+    "x": "Wer diese Begriffe kennt, versteht schon die Hälfte jedes KI-Artikels."
+  },
+  {
+    "id": "q1-030",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "Halluzination",
+        "Erfundene Fakten, sicher vorgetragen"
+      ],
+      [
+        "Sprachmodus",
+        "Sprechen statt tippen"
+      ],
+      [
+        "KI-Assistent",
+        "ChatGPT, Claude oder Gemini"
+      ],
+      [
+        "Prompt",
+        "Anweisung an die KI"
+      ]
+    ],
+    "x": "Begriffe sind wie Werkzeug: Wer sie kennt, findet schneller, was er braucht."
+  },
+  {
+    "id": "q1-031",
+    "type": "prompt",
+    "topic": "Prompten",
+    "q": "Welcher Prompt bringt das bessere Ergebnis?",
+    "o": [
+      "Was soll ich kochen?",
+      "Ich habe Reis, Zucchetti und Feta und 20 Minuten Zeit. Schlag mir zwei Rezepte vor."
+    ],
+    "a": 1,
+    "x": "Zutaten und Zeit nennen: Schon passt die Antwort. Die Zucchetti freuen sich."
+  },
+  {
+    "id": "q1-032",
+    "type": "prompt",
+    "topic": "Prompten",
+    "q": "Welcher Prompt bringt das bessere Ergebnis?",
+    "o": [
+      "Schreib eine kurze, freundliche Absage für die Einladung am Samstag. Ich habe leider schon etwas vor.",
+      "Schreib was für Samstag."
+    ],
+    "a": 0,
+    "x": "Wer sagt, was gewünscht ist, bekommt, was er braucht."
+  },
+  {
+    "id": "q1-033",
+    "type": "prompt",
+    "topic": "Prompten",
+    "q": "Welcher Prompt bringt das bessere Ergebnis?",
+    "o": [
+      "Hilf mir.",
+      "Ich muss meiner Nachbarin für das Päckli danken. Schlag mir drei kurze Dankessätze vor, persönlich im Ton."
+    ],
+    "a": 1,
+    "x": "Konkret schlägt vage. Drei Sätze, Anlass, Ton: Das reicht schon."
+  },
+  {
+    "id": "q1-034",
+    "type": "prompt",
+    "topic": "Nachbessern",
+    "q": "Welche Rückmeldung hilft der KI beim Nachbessern mehr?",
+    "o": [
+      "Mach den Text kürzer, auf höchstens fünf Sätze, und etwas lockerer im Ton.",
+      "Das ist nichts. Nochmals."
+    ],
+    "a": 0,
+    "x": "Wer sagt, was anders sein soll, bekommt bessere Treffer. «Nichts» hilft der KI nicht weiter."
+  },
+  {
+    "id": "q1-035",
+    "type": "spot",
+    "topic": "Halluzination",
+    "q": "Eine KI hat das geantwortet. Welcher Satz ist erfunden?",
+    "lines": [
+      "Bern ist die Hauptstadt der Schweiz.",
+      "Der Rhein fliesst durch Basel.",
+      "Das Matterhorn steht im Kanton Wallis.",
+      "Der Zürichsee liegt im Kanton Bern."
+    ],
+    "a": 3,
+    "x": "Der Zürichsee liegt natürlich in Zürich, und teils in St. Gallen und Schwyz. Wer genau hinschaut, entlarvt die Banane im Text."
+  },
+  {
+    "id": "q1-036",
+    "type": "spot",
+    "topic": "Halluzination",
+    "q": "Eine KI hat das geantwortet. Welcher Satz ist erfunden?",
+    "lines": [
+      "Die Schweiz hat vier Landessprachen.",
+      "Dazu gehören Deutsch, Französisch und Italienisch.",
+      "Die vierte Landessprache ist Rätoromanisch.",
+      "Auch Englisch ist eine offizielle Landessprache der Schweiz."
+    ],
+    "a": 3,
+    "x": "Englisch ist keine Landessprache der Schweiz. Die vierte ist Rätoromanisch."
+  },
+  {
+    "id": "q1-037",
+    "type": "spot",
+    "topic": "Halluzination",
+    "q": "Eine KI hat das geantwortet. Welcher Satz ist erfunden?",
+    "lines": [
+      "Die Aare ist ein Fluss in der Schweiz.",
+      "Sie fliesst unter anderem durch Bern.",
+      "Sie mündet in den Rhein.",
+      "Die Aare entspringt im Bodensee."
+    ],
+    "a": 3,
+    "x": "Die Aare entspringt in den Berner Alpen und nicht im Bodensee. Der Rest stimmt."
+  },
+  {
+    "id": "q1-038",
+    "type": "mc",
+    "topic": "Werkzeuge",
+    "q": "Du merkst, dass der eine Assistent bei deiner Frage nicht weiterkommt. Was ist eine gute Idee?",
+    "o": [
+      "Es mit einem anderen Assistenten oder anders formuliert nochmals versuchen",
+      "Den Computer ausschalten und nie wieder probieren",
+      "Nur noch Grossbuchstaben verwenden",
+      "Das Konto löschen"
+    ],
+    "a": 0,
+    "x": "Die Werkzeuge sind verschieden und reagieren unterschiedlich auf Formulierungen. Ausprobieren gehört dazu."
+  },
+  {
+    "id": "q1-039",
+    "type": "mc",
+    "topic": "Halluzination",
+    "q": "Eine KI nennt dir ein Buch zum Thema. Was ist der beste nächste Schritt?",
+    "o": [
+      "Prüfen, ob es das Buch wirklich gibt, zum Beispiel in einer Bibliothekssuche",
+      "Das Buch sofort bestellen",
+      "Dem Autor ein Dankesschreiben senden",
+      "Nichts tun, die KI hat sicher recht"
+    ],
+    "a": 0,
+    "x": "Erfundene Bücher sind ein Klassiker. Ein kurzer Blick in den Bibliothekskatalog schafft Klarheit."
+  },
+  {
+    "id": "q1-040",
+    "type": "mc",
+    "topic": "Sicherheit",
+    "q": "Welche Frage ist unbedenklich?",
+    "o": [
+      "Erkläre mir den Unterschied zwischen Brutto und Netto.",
+      "Hier ist mein Passwort, prüfe bitte die Sicherheit.",
+      "Hier die Kundenliste mit Namen und Adressen: Sortiere sie.",
+      "Hier meine Kreditkartennummer: Bestelle für mich."
+    ],
+    "a": 0,
+    "x": "Allgemeine Wissensfragen sind unkritisch. Persönliche Daten und Zugänge gehören nicht in den Chat."
+  },
+  {
+    "id": "q1-041",
+    "type": "mc",
+    "topic": "Konto",
+    "q": "Wie wählst du ein gutes Passwort für dein KI-Konto?",
+    "o": [
+      "Dein Geburtsdatum, damit du es nie vergisst",
+      "Ein langes Passwort, das du nur dafür verwendest",
+      "Dasselbe Passwort wie bei allen anderen Konten",
+      "«passwort123», das klappt immer"
+    ],
+    "a": 1,
+    "x": "Lang, einzigartig und nur für dieses Konto: So bleibt ein Datenleck bei einem Dienst ein Einzelfall. Ein Passwortmanager merkt es sich für dich."
+  },
+  {
+    "id": "q1-042",
+    "type": "mc",
+    "topic": "Prompten",
+    "q": "Die KI antwortet viel zu ausführlich. Was hilft?",
+    "o": [
+      "Sie bitten, sich kürzer zu fassen, etwa «in drei Sätzen»",
+      "Den Computer neu starten",
+      "Alles in Grossbuchstaben schreiben",
+      "Nichts, die Länge lässt sich nicht beeinflussen"
+    ],
+    "a": 0,
+    "x": "Länge, Ton und Form darfst du im Prompt festlegen. Die KI hat dazu keine Meinung, nur Geduld."
+  },
+  {
+    "id": "q1-043",
+    "type": "mc",
+    "topic": "Werkzeuge",
+    "q": "Wofür ist ein KI-Assistent eher ungeeignet?",
+    "o": [
+      "Eine Mail freundlicher umformulieren",
+      "Ein Thema in einfachen Worten erklären",
+      "Als einzige Quelle für eine medizinische Diagnose",
+      "Ideen für eine Geburtstagsfeier sammeln"
+    ],
+    "a": 2,
+    "x": "Bei Gesundheit gehört die Entscheidung zu Fachleuten. Die KI darf höchstens helfen, Fragen für den Arzttermin vorzubereiten."
+  },
+  {
+    "id": "q1-044",
+    "type": "mc",
+    "topic": "Sprachmodus",
+    "q": "Was solltest du beim Sprachmodus unterwegs bedenken?",
+    "o": [
+      "Er funktioniert nur mit einem speziellen Headset",
+      "Andere können mithören, wenn du Vertrauliches sagst",
+      "Er versteht nur Hochdeutsch in Zeitlupe",
+      "Er ist nur nachts verfügbar"
+    ],
+    "a": 1,
+    "x": "Was du laut sagst, hört auch die Sitznachbarin im Zug. Vertrauliches also lieber tippen oder später klären."
+  },
+  {
+    "id": "q1-045",
+    "type": "tf",
+    "topic": "Nachbessern",
+    "q": "Du kannst die KI bitten, ihre Antwort kürzer, einfacher oder in anderem Ton neu zu schreiben.",
+    "a": true,
+    "x": "Genau dafür ist das Gespräch da. Nachbessern kostet nur einen Satz."
+  },
+  {
+    "id": "q1-046",
+    "type": "tf",
+    "topic": "Sicherheit",
+    "q": "Was du in einen KI-Assistenten eingibst, ist automatisch geheim, egal bei welchem Anbieter.",
+    "a": false,
+    "x": "Das hängt vom Anbieter und von den Einstellungen ab. Vertrauliches gehört deshalb gar nicht erst hinein."
+  },
+  {
+    "id": "q1-047",
+    "type": "order",
+    "topic": "Prompten",
+    "q": "Bring die Schritte in die richtige Reihenfolge: einen guten Prompt formulieren.",
+    "items": [
+      "Überlegen, was du am Ende brauchst",
+      "Die Situation in einem Satz schildern",
+      "Die gewünschte Form nennen, etwa «in drei Stichpunkten»",
+      "Den Prompt abschicken"
+    ],
+    "x": "Erst das Ziel, dann der Prompt. Wer losschreibt, ohne zu wissen, was er will, bekommt es meist auch."
+  },
+  {
+    "id": "q1-048",
+    "type": "order",
+    "topic": "Halluzination",
+    "q": "Bring die Schritte in die richtige Reihenfolge: eine KI-Antwort sinnvoll nutzen.",
+    "items": [
+      "Antwort in Ruhe lesen",
+      "Wichtige Angabe herausgreifen",
+      "In einer verlässlichen Quelle nachschlagen",
+      "Erst dann weiterverwenden"
+    ],
+    "x": "Lesen, prüfen, nutzen. Die Prüfung ist der Schritt, den man gerne überspringt und später bereut."
+  },
+  {
+    "id": "q1-049",
+    "type": "order",
+    "topic": "Nachbessern",
+    "q": "Bring die Schritte in die richtige Reihenfolge: eine Antwort verbessern.",
+    "items": [
+      "Erste Antwort lesen",
+      "Genau benennen, was nicht passt",
+      "Die Rückmeldung abschicken",
+      "Neue Antwort mit der alten vergleichen"
+    ],
+    "x": "Konkrete Rückmeldung schlägt «Mach besser». Die KI ist gut, aber keine Gedankenleserin."
+  },
+  {
+    "id": "q1-050",
+    "type": "match",
+    "topic": "Begriffe",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "Gratiskonto",
+        "Reicht für den Einstieg"
+      ],
+      [
+        "Folgefrage",
+        "Weiterer Wunsch im selben Gespräch"
+      ],
+      [
+        "Eingabefeld",
+        "Hier tippst du deinen Prompt"
+      ],
+      [
+        "Antwort",
+        "Das, was die KI zurückgibt"
+      ]
+    ],
+    "x": "Die Alltagsbegriffe rund um den ersten Chat. Danach kann dir am Apéro keiner mehr was vormachen."
+  },
+  {
+    "id": "q1-051",
+    "type": "match",
+    "topic": "Sicherheit",
+    "q": "Was gehört in den Prompt, was nicht? Ordne zu",
+    "pairs": [
+      [
+        "Passwort",
+        "Gehört nie in einen Prompt"
+      ],
+      [
+        "Öffentliche Information",
+        "Unbedenklich zu fragen"
+      ],
+      [
+        "Kundenliste",
+        "Vertraulich, nicht einfügen"
+      ],
+      [
+        "Namen weglassen",
+        "Hilft beim Anonymisieren"
+      ]
+    ],
+    "x": "Im Zweifel gilt: Was nicht auf eine Postkarte gehört, gehört nicht in den Prompt."
+  },
+  {
+    "id": "q1-052",
+    "type": "match",
+    "topic": "Grundlagen",
+    "q": "Ordne die Begriffe zu",
+    "pairs": [
+      [
+        "Künstliche Intelligenz",
+        "Computer lösen Aufgaben, die früher Denken brauchten"
+      ],
+      [
+        "Prompt",
+        "Deine Anweisung oder Frage"
+      ],
+      [
+        "Halluzination",
+        "Überzeugend klingender, aber falscher Inhalt"
+      ]
+    ],
+    "x": "Drei Begriffe, die du nach dieser Stufe sicher auseinanderhältst."
+  },
+  {
+    "id": "q1-053",
+    "type": "spot",
+    "topic": "Halluzination",
+    "q": "Eine KI hat dir das über Tiere erzählt. Welcher Satz ist erfunden?",
+    "lines": [
+      "Katzen sind Säugetiere.",
+      "Delfine atmen mit Lungen.",
+      "Spinnen haben acht Beine.",
+      "Pinguine sind Säugetiere."
+    ],
+    "a": 3,
+    "x": "Pinguine sind Vögel, auch wenn sie im Frack herumwatscheln."
+  },
+  {
+    "id": "q1-054",
+    "type": "spot",
+    "topic": "Halluzination",
+    "q": "Eine KI hat dir das über die Schweiz erzählt. Welcher Satz ist erfunden?",
+    "lines": [
+      "Die Schweiz hat vier Landessprachen.",
+      "Genf liegt am Genfersee.",
+      "Luzern liegt am Vierwaldstättersee.",
+      "Der Bodensee liegt vollständig in der Schweiz."
+    ],
+    "a": 3,
+    "x": "Der Bodensee grenzt an die Schweiz, Deutschland und Österreich. Er gehört also nicht uns allein."
+  },
+  {
+    "id": "q1-055",
+    "type": "spot",
+    "topic": "Halluzination",
+    "q": "Eine KI hat dir das erklärt. Welcher Satz ist erfunden?",
+    "lines": [
+      "Ein Jahr hat zwölf Monate.",
+      "Die Sonne kreist um die Erde.",
+      "Wasser kocht auf Meereshöhe bei 100 Grad Celsius.",
+      "Die Erde ist ein Planet."
+    ],
+    "a": 1,
+    "x": "Die Erde kreist um die Sonne, nicht umgekehrt. Selbst bekannte Dinge solltest du bei KI mit einem Auge prüfen."
+  },
+  {
+    "id": "q1-056",
+    "type": "gap",
+    "topic": "Sicherheit",
+    "q": "Persönliche Daten wie Passwörter gehören nicht in den ___.",
+    "o": [
+      "Spam-Ordner",
+      "Prompt",
+      "Papierkorb",
+      "Kalender"
+    ],
+    "a": 1,
+    "x": "Was du in den Prompt schreibst, verlässt dein Gerät. Passwörter bleiben deshalb bei dir."
+  },
+  {
+    "id": "q1-057",
+    "type": "gap",
+    "topic": "Nachbessern",
+    "q": "Passt die erste Antwort nicht, stellst du eine ___ oder bittest um eine Änderung.",
+    "o": [
+      "Folgefrage",
+      "Strafe",
+      "Rechnung",
+      "Kopie"
+    ],
+    "a": 0,
+    "x": "Das Gespräch geht einfach weiter. Eine Strafe braucht die KI nicht, Fragen schon."
+  },
+  {
+    "id": "q1-058",
+    "type": "gap",
+    "topic": "Konto",
+    "q": "Für den Einstieg reicht meist ein ___ beim Anbieter.",
+    "o": [
+      "Rechenzentrum",
+      "Doktortitel",
+      "Spezialcomputer",
+      "Gratiskonto"
+    ],
+    "a": 3,
+    "x": "Anmelden, losfragen, staunen. Das Rechenzentrum steht bereits irgendwo anders."
+  },
+  {
+    "id": "q1-059",
+    "type": "prompt",
+    "topic": "Prompten",
+    "q": "Welcher Prompt bringt das bessere Ergebnis?",
+    "o": [
+      "Schreib eine freundliche, aber bestimmte Mail an meinen Vermieter: Die Heizung ist seit drei Tagen kaputt. Höchstens fünf Sätze.",
+      "Mail Vermieter."
+    ],
+    "a": 0,
+    "x": "Anlass, Ton und Länge sind genannt. Der Vermieter wird es merken, die Heizung hoffentlich auch."
+  },
+  {
+    "id": "q1-060",
+    "type": "prompt",
+    "topic": "Prompten",
+    "q": "Welcher Prompt bringt das bessere Ergebnis?",
+    "o": [
+      "Erkläre Budget.",
+      "Erkläre mir in einfachen Worten, was ein Haushaltsbudget ist. Ich bin Anfänger, bitte mit einem Beispiel."
+    ],
+    "a": 1,
+    "x": "Wer sagt, was er schon weiss, bekommt eine Antwort auf dem passenden Niveau."
+  },
+  {
+    "id": "q1-061",
+    "type": "prompt",
+    "topic": "Nachbessern",
+    "q": "Welche Rückmeldung hilft der KI beim Nachbessern mehr?",
+    "o": [
+      "Der Ton ist zu förmlich. Schreib es bitte lockerer und kürzer.",
+      "Nochmal."
+    ],
+    "a": 0,
+    "x": "Konkret sagen, was stört: Dann trifft die zweite Antwort besser. «Nochmal» ist ein Würfelwurf."
+  }
+]

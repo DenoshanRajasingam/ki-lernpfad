@@ -11,6 +11,8 @@ index.html            Markup der Seite
 assets/app.css        Gestaltung (Material 3)
 assets/app.js         Logik
 content/*.json        Alle Inhalte
+assets/quiz.js        Quiz-Tab
+content/play/         Quizfragen je Stufe
 version.json          Aktuelle Version mit Datum und Neuigkeiten
 CHANGELOG.md          Änderungsprotokoll
 scripts/validate.mjs  Prüfskript für Inhalte und Version
@@ -26,6 +28,7 @@ Alle Texte und Daten liegen in `content/`:
 | `stages.json` | Die sechs Stufen mit Aufgaben (`tasks`), freiwilliger Vertiefung (`deep`) und Selbstchecks (`checks`) |
 | `starter.json` | Karten für den Lernweg «Ganz neu» (`id`, `title`, `body`, optional `prompt`), Sprungziel `start:<id>` |
 | `media.json` | Videos, Podcasts, Kurse und Artikel (`id`, `lvl`, `type`, `title`, `by`, `len`, `url`) |
+| `play/s1.json` … `play/s6.json`, `play/lines.json` | Quizfragen je Stufe (mindestens 50) und lustige Sprüche |
 | `missions.json` | Eine Mission pro Stufe |
 | `quiz.json` | Quizfragen je Selbstcheck (`q` Frage, `o` Antworten, `a` Index der richtigen Antwort, `x` Erklärung) |
 | `practice.json` | Übungen mit Prompt |
@@ -37,6 +40,28 @@ Für den Lernweg «Ganz neu» gibt es in `stages.json` drei optionale Felder: `s
 Ein Verweis `go` in einer Aufgabe zeigt auf eine Medien-, Übungs- oder Bau-ID oder auf einen festen Bereich (zum Beispiel `mindset` oder `terms:1`).
 
 **IDs nie ändern.** Die Fortschritte der Nutzer hängen an den IDs. Wird eine ID umbenannt, gehen die erledigten Schritte verloren.
+
+## Quizfragen
+
+Jede Quizfrage hat eine eindeutige ID nach dem Schema `q<stufe>-<nnn>` (zum Beispiel `q1-042`). Die gemeinsamen Felder sind:
+
+- `id`: Eindeutige ID, nie ändern
+- `type`: Fragetyp (siehe unten)
+- `topic`: Thema oder Stichwort (zum Beispiel `Prompt-Tipps`)
+- `q`: Die Frage oder Aufgabe (für `gap`: mit `___` als Lücke)
+- `x`: Erklärung oder Hilfe bei falscher Antwort
+
+Die sieben Fragetypen:
+
+- `mc`: Multiple Choice; Felder `o` (Array von Antworten) und `a` (Index der richtigen)
+- `tf`: Wahr oder falsch; Feld `a` ist `true` oder `false`
+- `gap`: Lückentext; Felder `o` (Array von Alternativen) und `a` (Index der richtigen)
+- `order`: Reihenfolge; Feld `items` (Array in richtiger Reihenfolge), `a` ist Index 0
+- `match`: Zuordnung; Feld `pairs` (Array von [links, rechts]) und `a` ist Index 0
+- `prompt`: Prompt-Duell; Felder `o` (Array mit 2 Prompts) und `a` (Index des besseren)
+- `spot`: Fehler finden; Feld `lines` (Array von Sätzen), `a` ist Index des falschen Satzes
+
+Neue Fragen einfach am Ende der Datei anhängen. **Niemals IDs ändern** — der Nutzer-Fortschritt hängt daran!
 
 ## Lokal testen
 
@@ -69,3 +94,7 @@ Es gilt SemVer (X.Y.Z):
 ## Datenschutz
 
 Alles bleibt lokal im Browser. Es gibt keinen Server und kein Tracking. Der Fortschritt wird mit der PIN verschlüsselt (AES-256) gespeichert.
+
+## Copyright
+
+© 2026 Denoshan Rajasingam. Alle Rechte vorbehalten.

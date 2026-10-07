@@ -1,12 +1,12 @@
 {
-  "version": "2.1.0",
-  "date": "06.10.2026",
+  "version": "2.2.0",
+  "date": "07.10.2026",
   "notes": [
-    "Neu: Lernweg «Ganz neu» für alle, die noch nie mit KI gearbeitet haben",
-    "Erste Schritte Klick für Klick: Was ist KI, drei Grundregeln, Konto anlegen, erste Frage",
-    "Ruhige Startseite: Punkte, Abzeichen und Tages-Challenge kommen nach Stufe 1 dazu",
-    "In jeder Stufe «Das Wichtigste in einem Satz» und Fachwörter mit Erklärung",
-    "Neuer Startbildschirm: Einfach ausprobieren, Anmelden mit Benutzername und PIN, Profil erstellen auf Klick",
-    "Kompakt, Standard und Tief bleiben unverändert, dein Fortschritt ist übernommen"
+    "Neu: Tab «Quiz» mit über 340 Rätseln und Aufgaben zu allen sechs Stufen",
+    "Sieben Fragearten: Quizfrage, Wahr oder falsch, Lückentext, Reihenfolge, Zuordnen, Prompt-Duell und Fehler finden",
+    "Solo mit drei Bananen-Leben, Combos, Highscore und lustigen Animationen",
+    "Duell mit 2 bis 4 Personen am gleichen Gerät",
+    "Meine Statistik im Profil: Quiz und Lernpfad auf einen Blick, dazu Quiz-Abzeichen",
+    "Alle Versionen: die ganze Versionshistorie bei «Was ist neu»"
   ]
 }

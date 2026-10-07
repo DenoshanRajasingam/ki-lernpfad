@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Spielerischer KI-Lernpfad: verstehen, prompten und eigene kleine Apps bauen.">
+<meta name="author" content="Denoshan Rajasingam">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2096%2096%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20role%3D%22img%22%20aria-label%3D%22Logo%20KI-Lernpfad%3A%20lachender%20Affe%20mit%20Doktorhut%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22lgf%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%234355b9%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23b0457f%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20rx%3D%2226%22%20fill%3D%22url%28%23lgf%29%22/%3E%3Ccircle%20cx%3D%2219%22%20cy%3D%2256%22%20r%3D%2211%22%20fill%3D%22%238d5524%22/%3E%3Ccircle%20cx%3D%2277%22%20cy%3D%2256%22%20r%3D%2211%22%20fill%3D%22%238d5524%22/%3E%3Ccircle%20cx%3D%2219%22%20cy%3D%2256%22%20r%3D%226%22%20fill%3D%22%23f3c89b%22/%3E%3Ccircle%20cx%3D%2277%22%20cy%3D%2256%22%20r%3D%226%22%20fill%3D%22%23f3c89b%22/%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2257%22%20r%3D%2227%22%20fill%3D%22%238d5524%22/%3E%3Cpath%20d%3D%22M48%2048%20C41%2037%2025%2042%2029%2056%20C31%2064%2036%2066%2039%2068%20C32%2075%2037%2086%2048%2086%20C59%2086%2064%2075%2057%2068%20C60%2066%2065%2064%2067%2056%20C71%2042%2055%2037%2048%2048%20Z%22%20fill%3D%22%23f3c89b%22/%3E%3Cpath%20d%3D%22M35%2055%20q5%20-6%2010%200%20M51%2055%20q5%20-6%2010%200%22%20fill%3D%22none%22%20stroke%3D%22%232b1b17%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2233%22%20cy%3D%2264%22%20r%3D%223.5%22%20fill%3D%22%23ff8a80%22%20opacity%3D%22.8%22/%3E%3Ccircle%20cx%3D%2263%22%20cy%3D%2264%22%20r%3D%223.5%22%20fill%3D%22%23ff8a80%22%20opacity%3D%22.8%22/%3E%3Cellipse%20cx%3D%2245%22%20cy%3D%2264%22%20rx%3D%221.6%22%20ry%3D%221.2%22%20fill%3D%22%232b1b17%22/%3E%3Cellipse%20cx%3D%2251%22%20cy%3D%2264%22%20rx%3D%221.6%22%20ry%3D%221.2%22%20fill%3D%22%232b1b17%22/%3E%3Cpath%20d%3D%22M38%2070%20q10%2012%2020%200%20z%22%20fill%3D%22%232b1b17%22/%3E%3Cpath%20d%3D%22M44%2075%20q4%204%208%200%22%20fill%3D%22%23ff6e8a%22/%3E%3Cpath%20d%3D%22M48%2012%20L82%2025%20L48%2038%20L14%2025%20Z%22%20fill%3D%22%231b1b21%22/%3E%3Cpath%20d%3D%22M33%2030%20v8%20q15%207%2030%200%20v-8%20l-15%206%20z%22%20fill%3D%22%232c2c34%22/%3E%3Cpath%20d%3D%22M48%2025%20L74%2030%20V42%22%20fill%3D%22none%22%20stroke%3D%22%23ffb21e%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2274%22%20cy%3D%2244%22%20r%3D%223.5%22%20fill%3D%22%23ffb21e%22/%3E%3C/svg%3E">
 <style>[hidden]{display:none!important}img{max-width:100%}</style>
 <title>KI-Lernpfad</title>
@@ -204,8 +205,13 @@
   <div class="chiprow" id="mediaChips"></div>
   <div id="media"></div>
 </section>
+
+<section class="view" id="v-quiz">
+  <div class="qz" id="qzRoot"></div>
+  <p class="qz-sr" id="qzLive" aria-live="polite"></p>
+</section>
 </main>
-<footer class="appfooter"><span>Version <span id="appVersion">dev</span></span><span aria-hidden="true">·</span><button type="button" class="textbtn" id="whatsNewBtn">Was ist neu?</button></footer>
+<footer class="appfooter"><span>© 2026 Denoshan Rajasingam</span><span aria-hidden="true">·</span><span>Version <span id="appVersion">dev</span></span><span aria-hidden="true">·</span><button type="button" class="textbtn" id="whatsNewBtn">Was ist neu?</button><span aria-hidden="true">·</span><button type="button" class="textbtn" id="versionsBtn">Versionen</button></footer>
 </div>
 
 <nav class="tabs" id="tabs" aria-label="Navigation">
@@ -214,6 +220,7 @@
   <button data-v="bauen"><span class="ind"><span class="ms">construction</span></span>Bauen</button>
   <button data-v="wissen"><span class="ind"><span class="ms">menu_book</span></span>Wissen</button>
   <button data-v="medien"><span class="ind"><span class="ms">play_circle</span></span>Medien</button>
+  <button data-v="quiz"><span class="ind"><span class="ms">sports_esports</span></span>Quiz</button>
 </nav>
 <div class="gate" id="gate">
   <div class="gatebox">
@@ -246,6 +253,7 @@
       <button type="submit" class="filled wide"><span class="ms">rocket_launch</span>Profil erstellen und loslegen</button>
     </form>
     <div class="privacy"><span class="ms">lock</span><span>Alles bleibt auf diesem Gerät, verschlüsselt mit deiner PIN. PIN vergessen heisst Fortschritt weg.</span></div>
+    <p class="legal">© 2026 Denoshan Rajasingam</p>
   </div>
 </div>
 <div class="scrim" id="profileDlg" hidden>
@@ -256,7 +264,7 @@
     <div class="field" id="f-pin"><label for="pPin">Neue PIN</label><input id="pPin" type="password" autocomplete="new-password" maxlength="64" placeholder="leer lassen = unverändert"><span class="hint">Mindestens 8 Zeichen, leer lassen = unverändert</span></div>
     <div class="dactions"><button type="button" class="textbtn" id="pCancel">Abbrechen</button><button type="submit" class="filled">Speichern</button></div>
     <div class="dsep"></div>
-    <div class="dactions" style="justify-content:flex-start;margin-top:0"><button type="button" class="textbtn" id="pPath"><span class="ms">tune</span>Lernweg anpassen</button></div>
+    <div class="dactions" style="justify-content:flex-start;margin-top:0"><button type="button" class="textbtn" id="pPath"><span class="ms">tune</span>Lernweg anpassen</button><button type="button" class="textbtn" id="pStats"><span class="ms">insights</span>Meine Statistik</button></div>
     <div class="dactions" style="justify-content:space-between">
       <button type="button" class="textbtn" id="pTransfer"><span class="ms">devices</span>Auf anderem Gerät weitermachen</button>
       <button type="button" class="textbtn" id="pLogout"><span class="ms">logout</span>Abmelden oder Profil wechseln</button>
@@ -277,7 +285,15 @@
   <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="wnTitle">
     <div class="dhead"><span class="mico"><span class="ms">auto_awesome</span></span><div><h2 id="wnTitle">Was ist neu</h2><span class="meta" id="wnDate"></span></div></div>
     <ul class="wnlist" id="wnList"></ul>
-    <div class="dactions"><button type="button" class="filled" id="wnOk">Alles klar</button></div>
+    <div class="wnhist" id="wnHistory" hidden></div>
+    <div class="dactions"><button type="button" class="textbtn wnall" id="wnAll"><span class="ms" id="wnAllIcon">history</span><span id="wnAllText">Alle Versionen</span></button><button type="button" class="filled" id="wnOk">Alles klar</button></div>
+  </div>
+</div>
+<div class="scrim" id="statsDlg" hidden>
+  <div class="dialog statsdlg" role="dialog" aria-modal="true" aria-labelledby="statsTitle">
+    <div class="dhead"><span class="mico"><span class="ms">insights</span></span><div><h2 id="statsTitle">Meine Statistik</h2><span class="meta" id="statsSub"></span></div></div>
+    <div id="statsBody"></div>
+    <div class="dactions"><button type="button" class="filled" id="statsClose">Schliessen</button></div>
   </div>
 </div>
 <div class="scrim" id="starterDlg" hidden>
@@ -324,6 +340,7 @@
 <div class="toast" id="toast" role="status"></div>
 <canvas id="confetti" aria-hidden="true"></canvas>
 
+<script src="assets/quiz.js" defer></script>
 <script src="assets/app.js" defer></script>
 
 

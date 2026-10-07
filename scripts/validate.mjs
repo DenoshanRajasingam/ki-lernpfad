@@ -160,6 +160,66 @@ media.forEach((m, i) => {
   if (typeof m.url === "string" && !m.url.startsWith("https://")) fail(`media.json «${m.id}»: URL muss mit https:// beginnen`);
 });
 
+// Quiz-Tab: Fragen je Stufe (content/play/s1.json bis s6.json) und Sprüche (content/play/lines.json)
+const PLAY_STAGES = 6;
+const PLAY_MIN_QUESTIONS = 50;
+const PLAY_LINE_KEYS = ["right", "wrong", "combo", "gameover", "duel", "tie", "highscore"];
+const isText = (v) => typeof v === "string" && v.trim() !== "";
+const isTextList = (v, min, max) => Array.isArray(v) && v.length >= min && v.length <= max && v.every(isText);
+const isIndex = (v, length) => Number.isInteger(v) && v >= 0 && v < length;
+
+function checkPlayOptions(q) {
+  if (!isTextList(q.o, 3, 4)) return ["«o» braucht 3 bis 4 Texte"];
+  return isIndex(q.a, q.o.length) ? [] : ["«a» ist kein gültiger Index in «o»"];
+}
+// Je Fragetyp eine Liste der Fehlermeldungen (leer = in Ordnung)
+const PLAY_TYPE_CHECKS = {
+  mc: (q) => checkPlayOptions(q),
+  gap: (q) => [...checkPlayOptions(q), ...(String(q.q ?? "").split("___").length === 2 ? [] : ["«q» braucht genau eine Lücke «___»"])],
+  tf: (q) => (typeof q.a === "boolean" ? [] : ["«a» muss true oder false sein"]),
+  order: (q) => (isTextList(q.items, 3, 5) ? [] : ["«items» braucht 3 bis 5 Texte"]),
+  match: (q) =>
+    Array.isArray(q.pairs) && q.pairs.length >= 3 && q.pairs.length <= 4 && q.pairs.every((p) => isTextList(p, 2, 2))
+      ? []
+      : ["«pairs» braucht 3 bis 4 Paare aus je 2 Texten"],
+  prompt: (q) => (isTextList(q.o, 2, 2) && (q.a === 0 || q.a === 1) ? [] : ["«o» braucht genau 2 Texte und «a» muss 0 oder 1 sein"]),
+  spot: (q) => {
+    if (!isTextList(q.lines, 3, 5)) return ["«lines» braucht 3 bis 5 Texte"];
+    return isIndex(q.a, q.lines.length) ? [] : ["«a» ist kein gültiger Index in «lines»"];
+  },
+};
+
+const playIds = [];
+for (let n = 1; n <= PLAY_STAGES; n++) {
+  const rel = `content/play/s${n}.json`;
+  const list = readJson(rel);
+  if (list === null) continue;
+  if (!Array.isArray(list)) {
+    fail(`${rel}: muss ein Array sein`);
+    continue;
+  }
+  if (list.length < PLAY_MIN_QUESTIONS) fail(`${rel}: ${list.length} Fragen, mindestens ${PLAY_MIN_QUESTIONS} nötig`);
+  list.forEach((q, i) => {
+    const where = `${rel}[${i}] «${q?.id ?? "?"}»`;
+    if (!isObj(q)) return fail(`${where}: muss ein Objekt sein`);
+    if (typeof q.id !== "string" || !new RegExp(`^q${n}-.+`).test(q.id)) fail(`${where}: «id» muss mit «q${n}-» beginnen`);
+    playIds.push(q.id);
+    for (const key of ["topic", "q", "x"]) if (!isText(q[key])) fail(`${where}: «${key}» fehlt`);
+    if (!Object.hasOwn(PLAY_TYPE_CHECKS, q.type)) return fail(`${where}: «type» ist ungültig («${q.type}»)`);
+    PLAY_TYPE_CHECKS[q.type](q).forEach((msg) => fail(`${where}: ${msg}`));
+  });
+}
+checkUnique(playIds, "content/play (Quiz-Fragen)");
+
+const playLines = readJson("content/play/lines.json");
+if (playLines !== null) {
+  if (!isObj(playLines)) fail("content/play/lines.json: muss ein Objekt sein");
+  else
+    for (const key of PLAY_LINE_KEYS) {
+      if (!isTextList(playLines[key], 1, Infinity)) fail(`content/play/lines.json: «${key}» muss ein nichtleeres Array aus Texten sein`);
+    }
+}
+
 if (errors.length === 0) {
   console.log("OK: Alle Prüfungen bestanden");
 } else {

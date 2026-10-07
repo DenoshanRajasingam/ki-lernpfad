@@ -119,13 +119,14 @@ const stageDone=s=>items(s).every(i=>done[i.id]);
 /* Ruhige Startseite im Modus «Ganz neu», solange Stufe 1 offen ist: keine Punkte, Abzeichen und Tages-Challenge */
 const calmHome=()=>getSettings().mode==="starter"&&!stageDone(STAGES[0])&&!done._starterUnlocked&&!STAGES.slice(1).some(s=>items(s).some(i=>done[i.id]));
 const REC=new Set(STAGES.flatMap(s=>s.tasks.map(t=>t.go)));
-const VIEWS=["lernpfad","prompten","bauen","wissen","medien"];
+const VIEWS=["lernpfad","prompten","bauen","wissen","medien","quiz"];
 
 function show(view,push=true){
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id==="v-"+view));
   document.querySelectorAll("#tabs button").forEach(b=>{const on=b.dataset.v===view;b.classList.toggle("on",on);b.setAttribute("aria-current",on?"page":"false")});
   if(push){try{history.replaceState(null,"","#"+view)}catch(e){}}
   window.scrollTo({top:0});
+  if(view==="quiz"&&window.QuizGame)QuizGame.onShow();
 }
 function flash(id){
   const el=document.getElementById(id);if(!el)return;
@@ -623,8 +624,9 @@ function renderProfile(){
   if(pr){pi.className="avatar img";pi.innerHTML=monkeySVG(avatarKey(pr));$("#profileBtn").title=DEMO?"Demo beenden":"@"+pr.user;$("#profileBtn").setAttribute("aria-label",DEMO?"Demo beenden":`Profil von ${pr.user}`)}
   else{pi.className="ms";pi.textContent="account_circle"}
   const hu=$("#heroUser");
-  hu.innerHTML=pr?`<span class="avatar lg img">${monkeySVG(avatarKey(pr))}</span><span class="t"><b>${DEMO?"Demo-Gast":"@"+esc(pr.user)}</b><span class="meta">${DEMO?"Demo · nur Stufe 1":"Fortschritt verschlüsselt gespeichert"}</span></span><button class="hbtn" id="heroEdit"><span class="ms">${DEMO?"person_add":"edit"}</span>${DEMO?"Eigenes Profil":"Profil bearbeiten"}</button>${DEMO?"":`<button type="button" class="pathline" id="pathLine" title="Lernweg anpassen"><span class="ms">tune</span><span>${esc(settingsLine())}</span></button>`}`:"";
+  hu.innerHTML=pr?`<span class="avatar lg img">${monkeySVG(avatarKey(pr))}</span><span class="t"><b>${DEMO?"Demo-Gast":"@"+esc(pr.user)}</b><span class="meta">${DEMO?"Demo · nur Stufe 1":"Fortschritt verschlüsselt gespeichert"}</span></span><button class="hbtn" id="heroEdit"><span class="ms">${DEMO?"person_add":"edit"}</span>${DEMO?"Eigenes Profil":"Profil bearbeiten"}</button>${DEMO?`<button type="button" class="hbtn" id="heroStats"><span class="ms">insights</span>Meine Statistik</button>`:`<button type="button" class="pathline" id="pathLine" title="Lernweg anpassen"><span class="ms">tune</span><span>${esc(settingsLine())}</span></button>`}`:"";
   const he=$("#heroEdit");if(he)he.onclick=openProfile;
+  const hs=$("#heroStats");if(hs)hs.onclick=openStats;
   const pl=$("#pathLine");if(pl)pl.onclick=openPath;
   $("#demoBar").hidden=!DEMO;
 }
@@ -641,17 +643,60 @@ $("#lBtn").onclick=tryGateLogin;
 $("#lPin").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();tryGateLogin()}};
 let DEMO_DONE=null;
 function showGate(openForm){if(DEMO&&Object.keys(done).length)DEMO_DONE=done;DEMO=false;$("#gate").hidden=false;$("#demoBar").hidden=true;window.scrollTo({top:0});setGateForm(!!openForm)}
-function afterLogin(){if(!DEMO)DEMO_DONE=null;window._xpShown=undefined;budgetEdit=false;$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();renderMedia();show("lernpfad");maybeShowWhatsNew()}
+function afterLogin(){if(!DEMO)DEMO_DONE=null;window._xpShown=undefined;budgetEdit=false;$("#gate").hidden=true;$("#stages").innerHTML="";renderStages();renderProfile();renderMedia();if(window.QuizGame)QuizGame.reset();show("lernpfad");maybeShowWhatsNew()}
 /* ===== Version und «Was ist neu» ===== */
 const SEEN_KEY="ki-lernpfad-seen-version";
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
-function openWhatsNew(){
+function openWhatsNew(history=false){
   const v=C.version;if(!v)return;
-  $("#wnTitle").textContent="Was ist neu in Version "+v.version;
-  $("#wnDate").textContent=v.date;
   $("#wnList").replaceChildren(...v.notes.map(t=>{const li=document.createElement("li");li.textContent=t;return li}));
+  setWnView(history);
   $("#whatsNewDlg").hidden=false;$("#wnOk").focus();
+}
+/* Ansicht im Dialog: aktuelle Neuigkeiten oder alle Versionen aus CHANGELOG.md */
+function setWnView(history){
+  $("#wnList").hidden=history;$("#wnHistory").hidden=!history;
+  $("#wnTitle").textContent=history?"Alle Versionen":"Was ist neu in Version "+C.version.version;
+  $("#wnDate").textContent=history?"":C.version.date;
+  $("#wnAllIcon").textContent=history?"auto_awesome":"history";
+  $("#wnAllText").textContent=history?"Neuigkeiten":"Alle Versionen";
+  $("#wnAll").dataset.history=history?"1":"";
+  if(history)showHistory();
+}
+/* CHANGELOG.md: Abschnitte «## X.Y.Z (TT.MM.JJJJ)» mit «- »-Punkten */
+const CHANGELOG_HEAD=/^##\s+\[?(\d+\.\d+\.\d+)\]?\s*(?:\((\d{2}\.\d{2}\.\d{4})\))?\s*$/,CHANGELOG_ITEM=/^\s*-\s+/;
+function parseChangelog(text){
+  const list=[];let cur=null;
+  text.split(/\r?\n/).forEach(l=>{
+    const m=CHANGELOG_HEAD.exec(l);
+    if(m){cur={version:m[1],date:m[2]||"",notes:[]};list.push(cur)}
+    else if(cur&&CHANGELOG_ITEM.test(l))cur.notes.push(l.replace(CHANGELOG_ITEM,"").trim());
+  });
+  return list;
+}
+async function loadHistory(){
+  const r=await fetch(`CHANGELOG.md?v=${encodeURIComponent(C.version?C.version.version:"dev")}`,{cache:"no-store"});
+  if(!r.ok)throw new Error("CHANGELOG.md: HTTP "+r.status);
+  const list=parseChangelog(await r.text());
+  if(!list.length)throw new Error("CHANGELOG.md: keine Versionen gefunden");
+  return list;
+}
+const historyMsg=(text,alert)=>{const p=document.createElement("p");p.className="meta";if(alert)p.setAttribute("role","alert");p.textContent=text;return p};
+function renderHistory(list){
+  $("#wnHistory").replaceChildren(...list.map((v,i)=>{
+    const d=document.createElement("details"),s=document.createElement("summary"),ul=document.createElement("ul");
+    d.open=i===0;s.textContent=v.date?`${v.version} (${v.date})`:v.version;
+    ul.append(...v.notes.map(t=>{const li=document.createElement("li");li.textContent=t;return li}));
+    d.append(s,ul);return d;
+  }));
+}
+async function showHistory(){
+  const box=$("#wnHistory");
+  if(box.dataset.state==="loading"||box.dataset.state==="ok")return;
+  box.dataset.state="loading";box.replaceChildren(historyMsg("Lädt …"));
+  try{renderHistory(await loadHistory());box.dataset.state="ok"}
+  catch(e){box.dataset.state="error";box.replaceChildren(historyMsg("Versionshistorie konnte nicht geladen werden.",true))}
 }
 function closeWhatsNew(){$("#whatsNewDlg").hidden=true}
 function maybeShowWhatsNew(){
@@ -664,8 +709,10 @@ function maybeShowWhatsNew(){
 /* Erstbesuch ohne Profil: aktuelle Version gilt als gesehen, damit neue Nutzer keine Release-Notes bekommen */
 if(C.version&&lsGet(SEEN_KEY)===null&&!lsGet(PKEY))lsSet(SEEN_KEY,C.version.version);
 $("#appVersion").textContent=C.version?C.version.version:"dev";
-$("#whatsNewBtn").hidden=!C.version;
-$("#whatsNewBtn").onclick=openWhatsNew;
+$("#whatsNewBtn").hidden=!C.version;$("#versionsBtn").hidden=!C.version;
+$("#whatsNewBtn").onclick=()=>openWhatsNew();
+$("#versionsBtn").onclick=()=>openWhatsNew(true);
+$("#wnAll").onclick=()=>setWnView($("#wnAll").dataset.history!=="1");
 $("#wnOk").onclick=closeWhatsNew;
 /* ===== Karten für «Ganz neu»: Erklärung oder Anleitung als Dialog, optional mit Prompt zum Kopieren ===== */
 let starterReturnFocus=null;
@@ -687,6 +734,72 @@ $("#starterDlg").addEventListener("click",e=>{if(e.target.id==="starterDlg")clos
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#starterDlg").hidden)closeStarter()});
 $("#whatsNewDlg").addEventListener("click",e=>{if(e.target.id==="whatsNewDlg")closeWhatsNew()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#whatsNewDlg").hidden)closeWhatsNew()});
+/* ===== «Meine Statistik»: Auswertung aus done (Lernpfad) und done._quiz (Quiz), nur mit Profil ===== */
+const STATS_DAYS=14,STATS_TOPICS=3,STATS_TOPIC_MIN_ANSWERS=3,STATS_MIN_BAR_PCT=6,WEEKDAYS=["So","Mo","Di","Mi","Do","Fr","Sa"];
+const MIN_PER_HOUR=60;
+const asObj=v=>v&&typeof v==="object"&&!Array.isArray(v)?v:{};
+const asNum=v=>Number.isFinite(v)&&v>0?v:0;
+/* Zähler {a: beantwortet, c: richtig} aus gespeicherten Daten, defekte Werte werden zu 0 */
+const counter=e=>{const o=asObj(e),a=asNum(o.a);return{a,c:Math.min(asNum(o.c),a)}};
+const pctOf=(c,a)=>a?Math.round(c/a*100):0;
+const rateText=e=>`${pctOf(e.c,e.a)} % (${e.c}/${e.a})`;
+const minutesText=m=>m<MIN_PER_HOUR?`${m} Min`:`${Math.floor(m/MIN_PER_HOUR)} Std.${m%MIN_PER_HOUR?` ${m%MIN_PER_HOUR} Min`:""}`;
+const statTile=(value,label)=>`<div class="stile"><b>${esc(value)}</b><span>${esc(label)}</span></div>`;
+const barRow=(label,valueText,pct,color)=>`<div class="sbar" style="--bc:${color}"><div class="shead"><span>${esc(label)}</span><b>${esc(valueText)}</b></div><div class="strack" aria-hidden="true"><i style="width:${pct}%"></i></div></div>`;
+const barNone=label=>`<div class="sbar none"><div class="shead"><span>${esc(label)}</span><span>noch nicht gespielt</span></div><div class="strack" aria-hidden="true"></div></div>`;
+const rateBar=(label,e,color)=>e.a?barRow(label,rateText(e),pctOf(e.c,e.a),color):barNone(label);
+const statSection=(title,inner)=>`<section class="ssec"><h3>${title}</h3>${inner}</section>`;
+const statSub=t=>`<h4 class="ssub">${t}</h4>`;
+
+/* Säulen der letzten Tage: Höhe = beantwortet, dunkler Teil = richtig, heute fett */
+function daysChartHtml(days){
+  const now=new Date(),cols=[];
+  for(let i=STATS_DAYS-1;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);cols.push({e:counter(days[dstr(d)]),wd:WEEKDAYS[d.getDay()],today:i===0})}
+  const max=Math.max(...cols.map(c=>c.e.a));
+  if(!max)return`<p class="meta">In den letzten ${STATS_DAYS} Tagen hast du keine Quiz-Fragen beantwortet.</p>`;
+  const col=({e,wd,today})=>`<div class="sday${today?" today":""}" role="listitem" aria-label="${wd}${today?" (heute)":""}: ${e.a} beantwortet, ${e.c} richtig"><span class="sn" aria-hidden="true">${e.a||""}</span><span class="sbarcol" aria-hidden="true"><i class="t" style="height:${e.a?Math.max(STATS_MIN_BAR_PCT,e.a/max*100):0}%"><i class="c" style="height:${pctOf(e.c,e.a)}%"></i></i></span><span class="sl" aria-hidden="true">${wd}</span></div>`;
+  return`<div class="sdays" role="list">${cols.map(col).join("")}</div><p class="meta slegend">Höhe: beantwortete Fragen. Dunkler Teil: richtig. Heute ist fett.</p>`;
+}
+function quizStatsHtml(){
+  const q=asObj(done._quiz),answered=asNum(q.answered),games=asNum(q.games);
+  if(!answered&&!games)return statSection("Quiz",`<p class="meta">Noch keine Quiz-Runde. Ab in den Quiz-Tab!</p><button type="button" class="tonal" id="statsToQuiz"><span class="ms">sports_esports</span>Zum Quiz</button>`);
+  const QG=window.QuizGame||{},typeLabel=QG.TYPE_LABEL||{},badges=QG.BADGES||[],got=Array.isArray(q.badges)?q.badges:[];
+  const duels=asNum(q.duels),stageStats=asObj(q.byStage),typeStats=asObj(q.byType);
+  const weak=Object.entries(asObj(q.byTopic)).map(([topic,e])=>({topic,...counter(e)})).filter(x=>x.a>=STATS_TOPIC_MIN_ANSWERS&&x.c<x.a).sort((x,y)=>x.c/x.a-y.c/y.a||y.a-x.a).slice(0,STATS_TOPICS);
+  return statSection("Quiz",
+    `<div class="stiles">${[[asNum(q.hs),"Highscore"],[games,"Runden"],[answered,"Fragen beantwortet"],[pctOf(asNum(q.correct),answered)+" %","Trefferquote"],[asNum(q.bestStreak),"Längste Serie"],[`${Math.min(asNum(q.duelWins),duels)}/${duels}`,"Duelle gewonnen"]].map(t=>statTile(...t)).join("")}</div>`
+    +statSub("Trefferquote je Stufe")+STAGES.map((s,i)=>rateBar(`Stufe ${i+1}`,counter(stageStats[i+1]),`var(--l${i+1})`)).join("")
+    +statSub("Trefferquote je Fragetyp")+Object.keys(typeLabel).map(k=>rateBar(typeLabel[k],counter(typeStats[k]),"var(--primary)")).join("")
+    +statSub(`Letzte ${STATS_DAYS} Tage`)+daysChartHtml(asObj(q.days))
+    +(weak.length?statSub("Übe noch")+weak.map(x=>rateBar(x.topic,x,"var(--tertiary)")).join(""):"")
+    +(badges.length?statSub("Quiz-Abzeichen")+`<ul class="qbadges">${badges.map(b=>{const on=got.includes(b.id);return`<li class="qbadge${on?" on":""}"><span class="ms${on?" fill":""}" role="img" aria-label="${on?"erreicht":"noch offen"}">${on?"check_circle":"lock"}</span><span><b>${esc(b.name)}</b><span class="meta">${esc(b.desc)}</span></span></li>`}).join("")}</ul>`:""));
+}
+function pathStatsHtml(){
+  const bars=STAGES.map((s,i)=>{const it=items(s),c=it.filter(x=>done[x.id]).length;return barRow(`Stufe ${i+1}`,`${c}/${it.length}`,c/it.length*100,`var(--l${i+1})`)}).join("");
+  const learned=sumMin(STAGES.flatMap(s=>[...s.tasks,...s.deep,...(s.starter||[])]).filter(t=>done[t.id]));
+  /* Punkte und Abzeichen erscheinen im Modus «Ganz neu» erst nach Stufe 1, auch hier */
+  const game=calmHome()?[]:[[xpTotal(),"Lernpfad-Punkte"],[`${earned().length}/${BADGES.length}`,"Abzeichen"]];
+  const tiles=[[`${STAGES.filter(stageDone).length}/${STAGES.length}`,"Stufen geschafft"],[streakNow(),"Tage in Folge"],...game,[minutesText(learned),"Lernzeit"]];
+  return statSection("Lernpfad",`<div class="stiles">${tiles.map(t=>statTile(...t)).join("")}</div>`+statSub("Erledigte Schritte je Stufe")+bars);
+}
+function renderStats(){
+  const pr=curProfile();
+  $("#statsSub").textContent=DEMO||!pr?"Demo":"@"+pr.user;
+  $("#statsBody").innerHTML=DEMO||!pr
+    ?`<div class="privacy"><span class="ms">insights</span><span>Mit Profil wird deine Statistik gespeichert.</span></div><button type="button" class="filled" id="statsCreate"><span class="ms">person_add</span>Profil erstellen</button>`
+    :quizStatsHtml()+pathStatsHtml();
+  const create=$("#statsCreate");if(create)create.onclick=()=>{closeStats();showGate(true)};
+  const toQuiz=$("#statsToQuiz");if(toQuiz)toQuiz.onclick=()=>{closeStats();show("quiz")};
+}
+function openStats(){
+  renderStats();
+  $("#statsDlg").hidden=false;$("#statsDlg .dialog").scrollTop=0;$("#statsClose").focus();
+}
+function closeStats(){$("#statsDlg").hidden=true}
+$("#statsClose").onclick=closeStats;
+$("#statsDlg").addEventListener("click",e=>{if(e.target.id==="statsDlg")closeStats()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#statsDlg").hidden)closeStats()});
+$("#pStats").onclick=()=>{closeProfile();if($("#profileDlg").hidden)openStats()};
 let MUST_SET_PIN=false;
 async function login(id,pin){
   const p=reg.profiles[id];if(!p)return false;
@@ -761,6 +874,8 @@ const LOGO_SVG='<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" role
 const FAV_SVG='<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo KI-Lernpfad: lachender Affe mit Doktorhut"><defs><linearGradient id="lgf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4355b9"/><stop offset="1" stop-color="#b0457f"/></linearGradient></defs><rect width="96" height="96" rx="26" fill="url(#lgf)"/><circle cx="19" cy="56" r="11" fill="#8d5524"/><circle cx="77" cy="56" r="11" fill="#8d5524"/><circle cx="19" cy="56" r="6" fill="#f3c89b"/><circle cx="77" cy="56" r="6" fill="#f3c89b"/><circle cx="48" cy="57" r="27" fill="#8d5524"/><path d="M48 48 C41 37 25 42 29 56 C31 64 36 66 39 68 C32 75 37 86 48 86 C59 86 64 75 57 68 C60 66 65 64 67 56 C71 42 55 37 48 48 Z" fill="#f3c89b"/><path d="M35 55 q5 -6 10 0 M51 55 q5 -6 10 0" fill="none" stroke="#2b1b17" stroke-width="3" stroke-linecap="round"/><circle cx="33" cy="64" r="3.5" fill="#ff8a80" opacity=".8"/><circle cx="63" cy="64" r="3.5" fill="#ff8a80" opacity=".8"/><ellipse cx="45" cy="64" rx="1.6" ry="1.2" fill="#2b1b17"/><ellipse cx="51" cy="64" rx="1.6" ry="1.2" fill="#2b1b17"/><path d="M38 70 q10 12 20 0 z" fill="#2b1b17"/><path d="M44 75 q4 4 8 0" fill="#ff6e8a"/><path d="M48 12 L82 25 L48 38 L14 25 Z" fill="#1b1b21"/><path d="M33 30 v8 q15 7 30 0 v-8 l-15 6 z" fill="#2c2c34"/><path d="M48 25 L74 30 V42" fill="none" stroke="#ffb21e" stroke-width="2.5" stroke-linecap="round"/><circle cx="74" cy="44" r="3.5" fill="#ffb21e"/></svg>';
 $("#brandLogo").innerHTML=LOGO_SVG.replace(/lgb/g,"lgb1");$("#gateLogo").innerHTML=LOGO_SVG.replace(/lgb/g,"lgb2");
 (()=>{try{document.querySelectorAll('link[rel~="icon"]').forEach(l=>l.remove());const l=document.createElement("link");l.rel="icon";l.type="image/svg+xml";l.href="data:image/svg+xml,"+encodeURIComponent(FAV_SVG);document.head.appendChild(l)}catch(e){}})();
+/* ===== Quiz-Tab (assets/quiz.js): Fragen werden erst beim ersten Öffnen geladen ===== */
+if(window.QuizGame)QuizGame.init({C,$,esc,toast,confetti,monkeySVG,avatarKey,getDone:()=>done,save,isDemo:()=>DEMO,profile:curProfile,stageDone,STAGES});
 renderTerms();renderMedia();renderStages();renderProfile();
 /* ===== Mitnahme-Link: verschlüsselter Fortschritt für einen anderen Browser ===== */
 const PUBLIC_URL="https://denoshanrajasingam.github.io/ki-lernpfad/";
